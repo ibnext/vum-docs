@@ -6,7 +6,7 @@ info:
     name: Helpdesk
     url: https://www.twi-programma.nl
     email: beheer@twi-programma.nl
-  version: '0.99.1'
+  version: '0.99.2'
 servers:
 - url: https://api.example.com/v1
 paths:
@@ -40,7 +40,7 @@ paths:
           name: X-VUM-SUWIparty
           schema:
             type: boolean
-          required: false
+          required: true
       requestBody:
         $ref: '#/components/requestBodies/VacatureMatchesRequest'
       responses:
@@ -134,7 +134,7 @@ paths:
           name: X-VUM-SUWIparty
           schema:
             type: boolean
-          required: false      
+          required: true      
       responses:
         '200':
           description: 'OK'
@@ -184,7 +184,7 @@ paths:
 components:
   schemas:
     VumID:
-      $ref: '#/components/schemas/Integer14'
+      $ref: '#/components/schemas/String500'
     IDVacature:
       $ref: '#/components/schemas/Integer14'
     VacatureMatchingProfielen:
