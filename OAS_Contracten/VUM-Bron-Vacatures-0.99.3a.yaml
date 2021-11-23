@@ -184,7 +184,7 @@ paths:
 components:
   schemas:
     IDVacature:
-      $ref: '#/components/schemas/Integer14'
+      $ref: '#/components/schemas/String200'
     VacatureMatchingProfielen:
       type: array
       items:
@@ -600,9 +600,6 @@ components:
       type: integer
     Integer10:
       maxLength: 10
-      type: integer
-    Integer14:
-      maxLength: 14
       type: integer
     StringCode:
       maxLength: 10
