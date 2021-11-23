@@ -1,20 +1,23 @@
 openapi: 3.0.0
 info:
-  title: VUM API WerkzoekendeProfielen tussen VUM-UV en bronnen
-  description: Contract tbv interactie van bronnen met VUM uitwisselingsvoorziening voor WerkzoekendeProfielen
+  title: VUM API werkzoekendeProfielen tussen VUM-UV en bemiddelaar
+  description: Contract tbv interactie van bemiddelaars met VUM uitwisselingsvoorziening voor werkzoekendeProfielen
   contact:
     name: Helpdesk
     url: https://www.twi-programma.nl
     email: beheer@twi-programma.nl
-  version: '0.99.3'
+  version: '0.99.4'
 servers:
-- url: https://api.example.com/v1
+- url: https://jobsearch.vum.vum.n-id.network/v1
+  description: staging/test server
+- url: https://jobsearch.vum.vum-acct.n-id.network/v1
+  description: acceptatie server
 paths:
   /werkzoekendeProfielen/matches:
     post:
-      summary: Zoekopdracht voor MatchingProfielen Werkzoekende
+      summary: Zoekopdracht voor MatchingProfielen werkzoekende
       description: Zoekopdracht om matches voor Werkzoekende MatchingProfielen op te vragen
-      operationId: MatchesWerkzoekendeProfielen
+      operationId: MatcheswerkzoekendeProfielen
       parameters:
         - in: header
           name: X-VUM-berichtVersie
@@ -36,11 +39,6 @@ paths:
           schema:
             type: string
           required: false
-        - in: header
-          name: X-VUM-SUWIparty
-          schema:
-            type: boolean
-          required: true
       requestBody:
         $ref: '#/components/requestBodies/WerkzoekendeProfielMatchesRequest'
       responses:
@@ -62,15 +60,7 @@ paths:
           content:
             application/json:
               schema:
-                required:
-                  - maximumAantalResultatenBereikt
-                  - matches
-                type: object
-                properties:
-                  maximumAantalResultatenBereikt:
-                    type: boolean
-                  matches:
-                    $ref: '#/components/schemas/WerkzoekendeMatchingProfielen'
+                $ref: '#/components/schemas/inline_response_200'
         '400':
           description: 'Bad request'
           content:
@@ -97,19 +87,60 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-  /werkzoekendeProfielen/{idWerkzoekende}:
+      callbacks:
+        bronMatch:
+          '{$request.body#/callbackUrl}':
+            post:
+              parameters:
+              - in: header
+                name: X-VUM-berichtVersie
+                schema:
+                  type: string
+                required: true
+              - in: header
+                name: X-VUM-toParty
+                schema:
+                  type: string
+                required: true
+              - in: header
+                name: X-VUM-viaParty
+                schema:
+                  type: string
+                required: false
+              - in: header
+                name: X-VUM-vraagID
+                schema:
+                  $ref: '#/components/schemas/VraagID'
+                required: true
+              requestBody:
+                $ref: '#/components/requestBodies/WerkzoekendeProfielMatchesCallbackRequest'
+              responses:
+                '200':
+                  description: 'bevestiging aan de uitwisselingsvoorziening'
+                '400':
+                  description: 'Bad request'
+                  content:
+                    application/json:
+                      schema:
+                        $ref: '#/components/schemas/Error'
+                '500':
+                  description: 'Internal Server Error'
+                  content:
+                    application/json:
+                      schema:
+                        $ref: '#/components/schemas/Error'
+                '503':
+                  description: 'Service Unavailable'
+                  content:
+                    application/json:
+                      schema:
+                        $ref: '#/components/schemas/Error'
+  /werkzoekendeProfielen/{vumID}:
     get:
-      summary: Vraag detailprofielen op bij opgegeven idWerkzoekende
-      description: Vraag detailprofielen op bij een opgegeven idWerkzoekende
+      summary: Vraag detailprofielen op bij opgegeven vumID
+      description: Vraag detailprofielen op bij een opgegeven vumID
       operationId: getWerkzoekendeProfiel
       parameters:
-        - name: idWerkzoekende
-          in: path
-          required: true
-          style: simple
-          explode: false
-          schema:
-            $ref: '#/components/schemas/IDWerkzoekende'
         - in: header
           name: X-VUM-berichtVersie
           schema:
@@ -130,11 +161,13 @@ paths:
           schema:
             type: string
           required: false
-        - in: header
-          name: X-VUM-SUWIparty
+        - in: path
+          name: vumID
+          required: true
+          style: simple
+          explode: false
           schema:
-            type: boolean
-          required: true      
+            $ref: '#/components/schemas/VumID'
       responses:
         '200':
           description: 'OK'
@@ -154,7 +187,12 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Werkzoekende'
+                type: object
+                properties:
+                  bronID:
+                    $ref: '#/components/schemas/String200'
+                  werkzoekende:
+                    $ref: '#/components/schemas/Werkzoekende'
         '400':
           description: 'Bad request'
           content:
@@ -164,7 +202,7 @@ paths:
         '401':
           description: 'not authorized'
         '429':
-          description: 'Too Many Requests, limiet is overschreden voor deze uitvraag'
+          description: 'Too Many Requests, limiet is overschreden voor deze vraagID'
           content:
             application/json:
               schema:
@@ -181,8 +219,45 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+  /callbackExample:
+    post:
+      summary: Voorbeeld voor de callback methode
+      description: Voorbeeld voor de callback methode, alleen om te laten zien hoe de echte Callback er uit ziet!
+      parameters:
+        - in: header
+          name: X-VUM-berichtVersie
+          schema:
+            type: string
+          required: true
+        - in: header
+          name: X-VUM-toParty
+          schema:
+            type: string
+          required: true
+        - in: header
+          name: X-VUM-viaParty
+          schema:
+            type: string
+          required: false
+        - in: header
+          name: X-VUM-vraagID
+          schema:
+            $ref: '#/components/schemas/VraagID'
+          required: true
+      operationId: callbackExample
+      requestBody:
+        $ref: '#/components/requestBodies/WerkzoekendeProfielMatchesCallbackRequest'
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Fout bij uitvoeren van zoekvraag
+        '401':
+          description: 'not authorized'
 components:
   schemas:
+    VumID:
+      $ref: '#/components/schemas/String500'
     WerkzoekendeMatchingProfielen:
       type: array
       items:
@@ -191,16 +266,14 @@ components:
       allOf:
       - type: object
         properties:
-          idWerkzoekende:
-            $ref: '#/components/schemas/IDWerkzoekende'
-      - $ref: '#/components/schemas/Werkzoekende'
-    IDWerkzoekende:
-      $ref: '#/components/schemas/String200'
+          vumID:
+            $ref: '#/components/schemas/VumID'
+      - $ref: '#/components/schemas/MPWerkzoekende'
     Werkzoekende:
       type: object
       properties:
         idWerkzoekende:
-          $ref: '#/components/schemas/IDWerkzoekende'
+          $ref: '#/components/schemas/String200'
         indicatieLdrRegistratie:
           $ref: '#/components/schemas/Indicatie'
         indicatieBeschikbaarheidContactgegevens:
@@ -228,7 +301,7 @@ components:
           items:
             $ref: '#/components/schemas/Contractvorm'
         arbeidsmarktkwalificatie:
-          $ref: '#/components/schemas/Arbeidsmarktkwalificatie'
+            $ref: '#/components/schemas/Arbeidsmarktkwalificatie'
         emailadres:
           type: array
           items:
@@ -644,6 +717,14 @@ components:
     Postcode:
       pattern: ^[0-9]{4}[a-zA-Z]{2}$
       type: string
+    VraagID:
+      maxLength: 100
+      type: string
+    inline_response_200:
+      type: object
+      properties:
+        vraagID:
+          $ref: '#/components/schemas/VraagID'
     Error:
       type: object
       properties:
@@ -656,17 +737,42 @@ components:
       required:
         - code
         - message
-
-  
   requestBodies:
     WerkzoekendeProfielMatchesRequest:
       content:
         application/json:
           schema:
             required:
+            - callbackURL
+            - postcode
+            - straal
             - vraagObject
             type: object
             properties:
+              callbackURL:
+                type: string
+                format: uri
+              postcode:
+                $ref: '#/components/schemas/Postcode'
+              straal:
+                $ref: '#/components/schemas/Integer1000'
               vraagObject:
                 $ref: '#/components/schemas/MPWerkzoekende'
+      required: true
+    WerkzoekendeProfielMatchesCallbackRequest:
+      content:
+        application/json:
+          schema:
+            required:
+            - vraagID
+            - matches
+            - maximumAantalResultatenBereikt
+            type: object
+            properties:
+              vraagID:
+                $ref: '#/components/schemas/VraagID'
+              maximumAantalResultatenBereikt:
+                type: boolean
+              matches:
+                $ref: '#/components/schemas/WerkzoekendeMatchingProfielen'
       required: true

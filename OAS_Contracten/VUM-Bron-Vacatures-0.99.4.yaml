@@ -1,12 +1,12 @@
 openapi: 3.0.0
 info:
-  title: VUM API Vacatures tussen VUM-UV en bemiddelaar
-  description: Contract tbv interactie van bemiddelaars met VUM uitwisselingsvoorziening voor Vacatures
+  title: VUM API Vacatures tussen VUM-UV en bronnen
+  description: Contract tbv interactie van bronnen met VUM uitwisselingsvoorziening voor Vacatures
   contact:
     name: Helpdesk
     url: https://www.twi-programma.nl
     email: beheer@twi-programma.nl
-  version: '0.99.3'
+  version: '0.99.4'
 servers:
 - url: https://api.example.com/v1
 paths:
@@ -36,6 +36,11 @@ paths:
           schema:
             type: string
           required: false
+        - in: header
+          name: X-VUM-SUWIparty
+          schema:
+            type: boolean
+          required: true
       requestBody:
         $ref: '#/components/requestBodies/VacatureMatchesRequest'
       responses:
@@ -57,7 +62,15 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200'
+                required:
+                  - maximumAantalResultatenBereikt
+                  - matches
+                type: object
+                properties:
+                  maximumAantalResultatenBereikt:
+                    type: boolean
+                  matches:
+                    $ref: '#/components/schemas/VacatureMatchingProfielen'
         '400':
           description: 'Bad request'
           content:
@@ -84,67 +97,44 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-      callbacks:
-        bronMatch:
-          '{$request.body#/callbackUrl}':
-            post:
-              parameters:
-              - in: header
-                name: X-VUM-berichtVersie
-                schema:
-                  type: string
-                required: true
-              - in: header
-                name: X-VUM-toParty
-                schema:
-                  type: string
-                required: true
-              - in: header
-                name: X-VUM-viaParty
-                schema:
-                  type: string
-                required: false
-              - in: header
-                name: X-VUM-vraagID
-                schema:
-                  type: string
-                required: true
-              requestBody:
-                $ref: '#/components/requestBodies/VacatureMatchesCallbackRequest'
-              responses:
-                '200':
-                  description: 'bevestiging aan de uitwisselingsvoorziening'
-                '400':
-                  description: 'Bad request'
-                  content:
-                    application/json:
-                      schema:
-                        $ref: '#/components/schemas/Error'
-                '500':
-                  description: 'Internal Server Error'
-                  content:
-                    application/json:
-                      schema:
-                        $ref: '#/components/schemas/Error'
-                '503':
-                  description: 'Service Unavailable'
-                  content:
-                    application/json:
-                      schema:
-                        $ref: '#/components/schemas/Error'
-  /vacatures/{vumID}:
+  /vacatures/{idVacature}:
     get:
-      summary: Vraag volledige vacature op bij opgegeven vumID
-      description: Vraag volledige vacature op bij een opgegeven vumID
+      summary: Vraag volledige vacature op bij opgegeven idVacature
+      description: Vraag volledige vacature op bij een opgegeven idVacature
       operationId: getVacature
       parameters:
-      - name: vumID
-        in: path
-        required: true
-        style: simple
-        explode: false
-        schema:
-          $ref: '#/components/schemas/VumID'
+        - name: idVacature
+          in: path
+          required: true
+          style: simple
+          explode: false
+          schema:
+            $ref: '#/components/schemas/IDVacature'
+        - in: header
+          name: X-VUM-berichtVersie
+          schema:
+            type: string
+          required: true
+        - in: header
+          name: X-VUM-fromParty
+          schema:
+            type: string
+          required: true
+        - in: header
+          name: X-VUM-toParty
+          schema:
+            type: string
+          required: true
+        - in: header
+          name: X-VUM-viaParty
+          schema:
+            type: string
+          required: false
+        - in: header
+          name: X-VUM-SUWIparty
+          schema:
+            type: boolean
+          required: true      
       responses:
         '200':
           description: 'OK'
@@ -164,12 +154,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  bronID:
-                    $ref: '#/components/schemas/StringCode'
-                  vacature:
-                    $ref: '#/components/schemas/Vacature'
+                $ref: '#/components/schemas/Vacature'
         '400':
           description: 'Bad request'
           content:
@@ -179,7 +164,7 @@ paths:
         '401':
           description: 'not authorized'
         '429':
-          description: 'Too Many Requests, limiet is overschreden voor deze vraagID'
+          description: 'Too Many Requests, limiet is overschreden voor deze uitvraag'
           content:
             application/json:
               schema:
@@ -196,45 +181,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-  /callbackExample:
-    post:
-      summary: Voorbeeld voor de callback methode
-      description: Voorbeeld voor de callback methode, alleen om te laten zien hoe de echte Callback er uit ziet!
-      parameters:
-        - in: header
-          name: X-VUM-berichtVersie
-          schema:
-            type: string
-          required: true
-        - in: header
-          name: X-VUM-toParty
-          schema:
-            type: string
-          required: true
-        - in: header
-          name: X-VUM-viaParty
-          schema:
-            type: string
-          required: false
-        - in: header
-          name: X-VUM-vraagID
-          schema:
-            type: string
-          required: true
-      operationId: callbackExample
-      requestBody:
-        $ref: '#/components/requestBodies/VacatureMatchesCallbackRequest'
-      responses:
-        '200':
-          description: OK
-        '400':
-          description: Fout bij uitvoeren van zoekvraag
-        '401':
-          description: 'not authorized'
 components:
   schemas:
-    VumID:
-      $ref: '#/components/schemas/String500'
     IDVacature:
       $ref: '#/components/schemas/String200'
     VacatureMatchingProfielen:
@@ -245,8 +193,8 @@ components:
       allOf:
       - type: object
         properties:
-          vumID:
-            $ref: '#/components/schemas/VumID'
+          idVacature:
+            $ref: '#/components/schemas/IDVacature'
       - $ref: '#/components/schemas/MPVacature'
     Vacature:
       type: object
@@ -624,14 +572,132 @@ components:
           $ref: '#/components/schemas/Date'
         datumEindeAdres:
           $ref: '#/components/schemas/Date'
+        adres:
+          oneOf:
+          -  $ref: '#/components/schemas/AdresNederland'
+          -  $ref: '#/components/schemas/AdresBuitenland'
+    AdresNederland:
+      type: object
+      properties:
+        adresNederland:
+          type: object
+          properties:
+            codeGemeente:
+              $ref: '#/components/schemas/StringCode4'
+            district:
+              $ref: '#/components/schemas/String24'
+            gemeentedeel:
+              $ref: '#/components/schemas/String24'
+            gemeentenaam:
+              $ref: '#/components/schemas/String40'
+            identificatiecodeNummeraanduiding:
+              $ref: '#/components/schemas/String16'
+            identificatiecodeVerblijfplaats:
+              $ref: '#/components/schemas/String16'
+            locatieomschrijving:
+              $ref: '#/components/schemas/String70'
+            postcode:
+              $ref: '#/components/schemas/Postcode'
+            woonplaatsnaam:
+              $ref: '#/components/schemas/String80'
+            adresDetails:
+              oneOf:
+              -  $ref: '#/components/schemas/Straatadres'
+              -  $ref: '#/components/schemas/Postbusadres'
+              -  $ref: '#/components/schemas/Antwoordnummeradres'
+    Straatadres:
+      type: object
+      properties:
+        straatadres:
+          type: object
+          properties:
+            aanduidingBijHuisnummer:
+              $ref: '#/components/schemas/StringCode2'
+            huisletter:
+              $ref: '#/components/schemas/StringCode1'
+            huisnummer:
+              $ref: '#/components/schemas/Integer5'
+            huisnummertoevoeging:
+              $ref: '#/components/schemas/String6'
+            naamOpenbareRuimte:
+              $ref: '#/components/schemas/String80'
+            straatnaam:
+              $ref: '#/components/schemas/String24'
+            woonbootverwijzing:
+              $ref: '#/components/schemas/StringCode2'
+            woonwagenverwijzing:
+              $ref: '#/components/schemas/StringCode2'
+    Postbusadres:
+      type: object
+      properties:
+        postbusadres:
+          type: object
+          properties:
+            postbusnummer:
+              $ref: '#/components/schemas/Integer5'
+    Antwoordnummeradres:
+      type: object
+      properties:
+        antwoordnummeradres:
+          type: object
+          properties:
+              antwoordnummer:
+          $ref: '#/components/schemas/Integer5'
+    AdresBuitenland:
+      type: object
+      properties:
+        adresBuitenland:
+          type: object
+          properties:
+            landencodeIso:
+              $ref: '#/components/schemas/StringCode2'
+            landsnaam:
+              $ref: '#/components/schemas/String40'
+            locatieomschrijvingBuitenland:
+              $ref: '#/components/schemas/String70'
+            postcodeBuitenland:
+              $ref: '#/components/schemas/String9'
+            regionaamBuitenland:
+              $ref: '#/components/schemas/String24'
+            woonplaatsnaamBuitenland:
+              $ref: '#/components/schemas/String40'
+            adresDetailsBuitenland:
+              oneOf:
+              -  $ref: '#/components/schemas/StraatadresBuitenland'
+              -  $ref: '#/components/schemas/PostbusadresBuitenland'
+    StraatadresBuitenland:
+      type: object
+      properties:
+        straatadresbuitenland:
+          type: object
+          properties:
+            huisnummerBuitenland:
+              $ref: '#/components/schemas/String9'
+            straatnaamBuitenland:
+              $ref: '#/components/schemas/String24'
+    PostbusadresBuitenland:
+      type: object
+      properties:
+        postbusadresbuitenland:
+          type: object
+          properties:
+            postbusnummerBuitenland:
+              $ref: '#/components/schemas/String7'
     MPAdresHouding:
       type: object
       properties:
         codeFunctieAdres:
           $ref: '#/components/schemas/StringCode1'
-    String200:
-      maxLength: 200
-      type: string
+        adres:
+          $ref: '#/components/schemas/MPAdresBuitenland'
+    MPAdresBuitenland:
+      type: object
+      properties:
+        adresBuitenland:
+          type: object
+          properties:
+            landencodeIso:
+              $ref: '#/components/schemas/StringCode2'
     String320:
       maxLength: 320
       type: string
@@ -671,11 +737,41 @@ components:
     StringCode3:
       maxLength: 3
       type: string
+    StringCode4:
+      maxLength: 4
+      type: string
     URL:
       type: string
       format: URL
+    String6:
+      maxLength: 6
+      type: string
+    String7:
+      maxLength: 9
+      type: string
+    String9:
+      maxLength: 9
+      type: string
+    String16:
+      maxLength: 16
+      type: string
+    String24:
+      maxLength: 24
+      type: string
+    String40:
+      maxLength: 40
+      type: string
+    String70:
+      maxLength: 70
+      type: string
+    String80:
+      maxLength: 80
+      type: string
     String100:
       maxLength: 100
+      type: string
+    String200:
+      maxLength: 200
       type: string
     String120:
       maxLength: 120
@@ -701,14 +797,6 @@ components:
     Postcode:
       pattern: ^[0-9]{4}[a-zA-Z]{2}$
       type: string
-    VraagID:
-      maxLength: 100
-      type: string
-    inline_response_200:
-      type: object
-      properties:
-        vraagID:
-          $ref: '#/components/schemas/VraagID'
     Error:
       type: object
       properties:
@@ -727,36 +815,9 @@ components:
         application/json:
           schema:
             required:
-            - callbackURL
-            - postcode
-            - straal
             - vraagObject
             type: object
             properties:
-              callbackURL:
-                type: string
-                format: uri
-              postcode:
-                $ref: '#/components/schemas/Postcode'
-              straal:
-                $ref: '#/components/schemas/Integer1000'
               vraagObject:
                 $ref: '#/components/schemas/MPVacature'
-      required: true
-    VacatureMatchesCallbackRequest:
-      content:
-        application/json:
-          schema:
-            required:
-            - vraagID
-            - matches
-            - maximumAantalResultatenBereikt
-            type: object
-            properties:
-              vraagID:
-                $ref: '#/components/schemas/VraagID'
-              maximumAantalResultatenBereikt:
-                type: boolean
-              matches:
-                $ref: '#/components/schemas/VacatureMatchingProfielen'
       required: true
