@@ -1,20 +1,20 @@
 openapi: 3.0.0
 info:
-  title: VUM API werkzoekendeProfielen tussen VUM-UV en bemiddelaar
-  description: Contract tbv interactie van bemiddelaars met VUM uitwisselingsvoorziening voor werkzoekendeProfielen
+  title: VUM API Vacatures tussen VUM-UV en bemiddelaar
+  description: Contract tbv interactie van bemiddelaars met VUM uitwisselingsvoorziening voor Vacatures
   contact:
     name: Helpdesk
     url: https://www.twi-programma.nl
     email: beheer@twi-programma.nl
-  version: '0.99.2'
+  version: '0.99.3'
 servers:
 - url: https://api.example.com/v1
 paths:
-  /werkzoekendeProfielen/matches:
+  /vacatures/matches:
     post:
-      summary: Zoekopdracht voor MatchingProfielen werkzoekende
-      description: Zoekopdracht om matches voor Werkzoekende MatchingProfielen op te vragen
-      operationId: MatcheswerkzoekendeProfielen
+      summary: Zoekopdracht voor Vacatures
+      description: Zoekopdracht om Vacature matches op te vragen
+      operationId: MatchesVacatures
       parameters:
         - in: header
           name: X-VUM-berichtVersie
@@ -37,7 +37,7 @@ paths:
             type: string
           required: false
       requestBody:
-        $ref: '#/components/requestBodies/WerkzoekendeProfielMatchesRequest'
+        $ref: '#/components/requestBodies/VacatureMatchesRequest'
       responses:
         '200':
           description: 'OK'
@@ -110,7 +110,7 @@ paths:
                   type: string
                 required: true
               requestBody:
-                $ref: '#/components/requestBodies/WerkzoekendeProfielMatchesCallbackRequest'
+                $ref: '#/components/requestBodies/VacatureMatchesCallbackRequest'
               responses:
                 '200':
                   description: 'bevestiging aan de uitwisselingsvoorziening'
@@ -132,11 +132,11 @@ paths:
                     application/json:
                       schema:
                         $ref: '#/components/schemas/Error'
-  /werkzoekendeProfielen/{vumID}:
+  /vacatures/{vumID}:
     get:
-      summary: Vraag detailprofielen op bij opgegeven vumID
-      description: Vraag detailprofielen op bij een opgegeven vumID
-      operationId: getWerkzoekendeProfiel
+      summary: Vraag volledige vacature op bij opgegeven vumID
+      description: Vraag volledige vacature op bij een opgegeven vumID
+      operationId: getVacature
       parameters:
       - name: vumID
         in: path
@@ -168,8 +168,8 @@ paths:
                 properties:
                   bronID:
                     $ref: '#/components/schemas/StringCode'
-                  werkzoekende:
-                    $ref: '#/components/schemas/Werkzoekende'
+                  vacature:
+                    $ref: '#/components/schemas/Vacature'
         '400':
           description: 'Bad request'
           content:
@@ -223,7 +223,7 @@ paths:
           required: true
       operationId: callbackExample
       requestBody:
-        $ref: '#/components/requestBodies/WerkzoekendeProfielMatchesCallbackRequest'
+        $ref: '#/components/requestBodies/VacatureMatchesCallbackRequest'
       responses:
         '200':
           description: OK
@@ -235,134 +235,68 @@ components:
   schemas:
     VumID:
       $ref: '#/components/schemas/String500'
-    WerkzoekendeMatchingProfielen:
+    IDVacature:
+      $ref: '#/components/schemas/Integer14'
+    VacatureMatchingProfielen:
       type: array
       items:
-        $ref: '#/components/schemas/MPWerkzoekendeMatch'
-    MPWerkzoekendeMatch:
+        $ref: '#/components/schemas/MPVacatureMatch'
+    MPVacatureMatch:
       allOf:
       - type: object
         properties:
           vumID:
             $ref: '#/components/schemas/VumID'
-      - $ref: '#/components/schemas/MPWerkzoekende'
-    Werkzoekende:
+      - $ref: '#/components/schemas/MPVacature'
+    Vacature:
       type: object
       properties:
-        idWerkzoekende:
-          $ref: '#/components/schemas/String200'
-        indicatieLdrRegistratie:
-          $ref: '#/components/schemas/Indicatie'
-        indicatieBeschikbaarheidContactgegevens:
-          $ref: '#/components/schemas/Indicatie'
-        persoonlijkePresentatie:
+        idVacature:
+          $ref: '#/components/schemas/IDVacature'
+        naamVacature:
+          $ref: '#/components/schemas/String120'
+        nummerVacature:
+          $ref: '#/components/schemas/String11'
+        omschrijvingVacature:
           $ref: '#/components/schemas/String2000'
-        voorkeursland:
-          type: array
-          items:
-            $ref: '#/components/schemas/Voorkeursland'
-        eisAanWerk:
-          $ref: '#/components/schemas/EisAanWerk'
-        vervoermiddel:
-          type: array
-          items:
-            $ref: '#/components/schemas/Vervoermiddel'
-        mobiliteit:
-          $ref: '#/components/schemas/Mobiliteit'
-        flexibiliteit:
-          $ref: '#/components/schemas/Flexibiliteit'
-        werktijden:
-          $ref: '#/components/schemas/Werktijden'
-        contractvorm:
-          type: array
-          items:
-            $ref: '#/components/schemas/Contractvorm'
-        arbeidsmarktkwalificatie:
-            $ref: '#/components/schemas/Arbeidsmarktkwalificatie'
-        emailadres:
-          type: array
-          items:
-            $ref: '#/components/schemas/Emailadres'
-        webadres:
-          type: array
-          items:
-            $ref: '#/components/schemas/Webadres'
-        telefoonnummer:
-          type: array
-          items:
-            $ref: '#/components/schemas/Telefoonummer'
-        contactpersoon:
-          type: array
-          items:
-            $ref: '#/components/schemas/ContactpersoonAfdeling'
-        sector:
-          type: array
-          items:
-            $ref: '#/components/schemas/SectorBeroepsEnBedrijfsleven'
-        bemiddelingsberoep:
-          type: array
-          items:
-            $ref: '#/components/schemas/Beroepsnaam'
-    MPWerkzoekende:
-      type: object
-      properties:
+        codeWerkEnDenkniveauMinimaal:
+          $ref: '#/components/schemas/StringCode1'
         indicatieLdrRegistratie:
           $ref: '#/components/schemas/Indicatie'
-        indicatieBeschikbaarheidContactgegevens:
-          $ref: '#/components/schemas/Indicatie'
-        voorkeursland:
+        sluitingsDatumVacature:
+            $ref: '#/components/schemas/Date'
+        sollicitatiewijze:
           type: array
           items:
-            $ref: '#/components/schemas/Voorkeursland'
-        vervoermiddel:
-          type: array
-          items:
-            $ref: '#/components/schemas/MPVervoermiddel'
-        mobiliteit:
-          $ref: '#/components/schemas/Mobiliteit'
-        flexibiliteit:
-          $ref: '#/components/schemas/Flexibiliteit'
-        werktijden:
-          $ref: '#/components/schemas/Werktijden'
+            $ref: '#/components/schemas/Sollicitatiewijze'
+        werkgever:
+            $ref: '#/components/schemas/Werkgever'
+        sector:
+          $ref: '#/components/schemas/SectorBeroepsEnBedrijfsleven'
+        arbeidsVoorwaarden:
+          $ref: '#/components/schemas/ArbeidsVoorwaarden'
         contractvorm:
           type: array
           items:
             $ref: '#/components/schemas/Contractvorm'
-        arbeidsmarktkwalificatie:
-          $ref: '#/components/schemas/MPArbeidsmarktkwalificatie'
-        sector:
+        beroep:
+          $ref: '#/components/schemas/Beroepsnaam'
+        werkervaring:
           type: array
           items:
-            $ref: '#/components/schemas/SectorBeroepsEnBedrijfsleven'
-        bemiddelingsberoep:
-          type: array
-          items:
-            $ref: '#/components/schemas/Beroepsnaam'
-    Arbeidsmarktkwalificatie:
-      type: object
-      properties:
-        codeWerkEnDenkniveauWerkzoekende:
-          $ref: '#/components/schemas/Integer1'
-        vakvaardigheid:
-          type: array
-          items:
-            $ref: '#/components/schemas/Vakvaardigheid'
-        taalbeheersing:
-          type: array
-          items:
-            $ref: '#/components/schemas/Taalbeheersing'
-        gedragscompetentie:
-          type: array
-          items:
-            $ref: '#/components/schemas/Gedragscompetentie'
-        interesse:
-          type: array
-          items:
-            $ref: '#/components/schemas/Interesse'
+            $ref: '#/components/schemas/Werkervaring'
         rijbewijs:
           type: array
           items:
             $ref: '#/components/schemas/Rijbewijs'
+        vervoermiddel:
+          type: array
+          items:
+            $ref: '#/components/schemas/Vervoermiddel'
+        flexibiliteit:
+          $ref: '#/components/schemas/Flexibiliteit'
+        werktijden:
+          $ref: '#/components/schemas/Werktijden'
         cursus:
           type: array
           items:
@@ -371,15 +305,10 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Opleiding'
-        werkervaring:
+        gedragscompetentie:
           type: array
           items:
-            $ref: '#/components/schemas/Werkervaring'
-    MPArbeidsmarktkwalificatie:
-      type: object
-      properties:
-        codeWerkEnDenkniveauWerkzoekende:
-          $ref: '#/components/schemas/Integer1'
+            $ref: '#/components/schemas/Gedragscompetentie'
         vakvaardigheid:
           type: array
           items:
@@ -388,34 +317,84 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Taalbeheersing'
-        gedragscompetentie:
+    MPVacature:
+      type: object
+      properties:
+        codeWerkEnDenkniveauMinimaal:
+          $ref: '#/components/schemas/StringCode1'
+        indicatieLdrRegistratie:
+          $ref: '#/components/schemas/Indicatie'
+        sluitingsDatumVacature:
+            $ref: '#/components/schemas/Date'
+        sollicitatiewijze:
           type: array
           items:
-            $ref: '#/components/schemas/Gedragscompetentie'
+            $ref: '#/components/schemas/MPSollicitatiewijze'
+        werkgever:
+            $ref: '#/components/schemas/MPWerkgever'
+        sector:
+          $ref: '#/components/schemas/SectorBeroepsEnBedrijfsleven'
+        arbeidsVoorwaarden:
+          $ref: '#/components/schemas/MPArbeidsVoorwaarden'
+        contractvorm:
+          type: array
+          items:
+            $ref: '#/components/schemas/Contractvorm'
+        beroep:
+          $ref: '#/components/schemas/Beroepsnaam'
+        werkervaring:
+          type: array
+          items:
+            $ref: '#/components/schemas/Werkervaring'
         rijbewijs:
           type: array
           items:
             $ref: '#/components/schemas/Rijbewijs'
+        vervoermiddel:
+          type: array
+          items:
+            $ref: '#/components/schemas/MPVervoermiddel'
+        flexibiliteit:
+          $ref: '#/components/schemas/Flexibiliteit'
+        werktijden:
+          $ref: '#/components/schemas/Werktijden'
         cursus:
           type: array
           items:
-            $ref: '#/components/schemas/MPCursus'
+            $ref: '#/components/schemas/Cursus'
         opleiding:
           type: array
           items:
             $ref: '#/components/schemas/MPOpleiding'
-        werkervaring:
+        gedragscompetentie:
           type: array
           items:
-            $ref: '#/components/schemas/MPWerkervaring'
+            $ref: '#/components/schemas/Gedragscompetentie'
+        vakvaardigheid:
+          type: array
+          items:
+            $ref: '#/components/schemas/Vakvaardigheid'
+        taalbeheersing:
+          type: array
+          items:
+            $ref: '#/components/schemas/Taalbeheersing'
     Beroepsnaam:
       oneOf:
       - $ref: '#/components/schemas/BeroepsnaamGecodeerd'
       - $ref: '#/components/schemas/BeroepsnaamOngecodeerd'
+    Werkervaring:
+      type: object
+      properties:
+        aantalJarenWerkzaamInBeroep:
+          $ref: '#/components/schemas/Integer2'
     Opleidingsnaam:
       oneOf:
       - $ref: '#/components/schemas/OpleidingsnaamGecodeerd'
       - $ref: '#/components/schemas/OpleidingsnaamOngecodeerd'
+    MPOpleidingsnaam:
+      oneOf:
+      - $ref: '#/components/schemas/OpleidingsnaamGecodeerd'
+      - $ref: '#/components/schemas/MPOpleidingsnaamOngecodeerd'
     BeroepsnaamGecodeerd:
       type: object
       properties:
@@ -442,6 +421,11 @@ components:
           $ref: '#/components/schemas/String120'
         omschrijvingOpleiding:
           $ref: '#/components/schemas/String2000'
+    MPOpleidingsnaamOngecodeerd:
+      type: object
+      properties:
+        naamOpleidingOngecodeerd:
+          $ref: '#/components/schemas/String120'
     Gedragscompetentie:
       type: object
       properties:
@@ -471,51 +455,20 @@ components:
           $ref: '#/components/schemas/Date'
         datumEindeBeschikbaarVoorWerk:
           $ref: '#/components/schemas/Date'
-    Mobiliteit:
-      type: object
-      properties:
-        bemiddelingspostcode:
-          $ref: '#/components/schemas/Postcode'
-        maximaleReisafstand:
-          $ref: '#/components/schemas/Integer1000'
-        maximaleReistijd:
-          $ref: '#/components/schemas/Integer1000'
-    Werkervaring:
-      allOf:
-        - $ref: '#/components/schemas/MPWerkervaring'
-        - type: object
-          properties:
-            toelichtingWerkervaring:
-              $ref: '#/components/schemas/String2000'
-    MPWerkervaring:
-      type: object
-      properties:
-        datumAanvangWerkzaamheden:
-          $ref: '#/components/schemas/Date'
-        datumEindeWerkzaamheden:
-          $ref: '#/components/schemas/Date'
-        naamOrganisatie:
-          $ref: '#/components/schemas/String70'
-        beroep:
-          $ref: '#/components/schemas/Beroepsnaam'
     Rijbewijs:
       type: object
       properties:
         codeSoortRijbewijs:
           $ref: '#/components/schemas/StringCode3'
     Opleiding:
-      allOf:
-        - $ref: '#/components/schemas/MPOpleiding'
-        - type: object
-          properties:
-            datumAanvangVolgenOpleiding:
-              $ref: '#/components/schemas/Date'
-            datumEindeVolgenOpleiding:
-              $ref: '#/components/schemas/Date'
-            codeStatusOpleiding:
-              $ref: '#/components/schemas/Integer1'
-            naamOpleidingsinstituut:
-              $ref: '#/components/schemas/String500'
+      type: object
+      properties:
+        codeNiveauOpleiding:
+          $ref: '#/components/schemas/Integer1'
+        indicatieDiploma:
+          $ref: '#/components/schemas/Indicatie'
+        opleidingsnaam:
+          $ref: '#/components/schemas/Opleidingsnaam'
     MPOpleiding:
       type: object
       properties:
@@ -523,42 +476,18 @@ components:
           $ref: '#/components/schemas/Integer1'
         indicatieDiploma:
           $ref: '#/components/schemas/Indicatie'
-        datumDiploma:
-          $ref: '#/components/schemas/Date'
         opleidingsnaam:
-          $ref: '#/components/schemas/Opleidingsnaam'
+          $ref: '#/components/schemas/MPOpleidingsnaam'
     Cursus:
-      allOf:
-        - $ref: '#/components/schemas/MPCursus'
-        - type: object
-          properties:
-            datumAanvangVolgenCursus:
-              $ref: '#/components/schemas/Date'
-            datumEindeVolgenCursus:
-              $ref: '#/components/schemas/Date'
-            naamOpleidingsinstituut:
-              $ref: '#/components/schemas/String500'
-    MPCursus:
       type: object
       properties:
         naamCursus:
           $ref: '#/components/schemas/String120'
-        datumCertificaat:
-          $ref: '#/components/schemas/Date'
     SectorBeroepsEnBedrijfsleven:
       type: object
       properties:
         codeSbi:
           $ref: '#/components/schemas/Integer5'
-    EisAanWerk:
-      type: object
-      properties:
-        indicatieAanpassingWerkomgeving:
-          $ref: '#/components/schemas/Indicatie'
-        indicatieBegeleiding:
-          $ref: '#/components/schemas/Indicatie'
-        indicatieWerkvariatie:
-          $ref: '#/components/schemas/Indicatie'
     Vakvaardigheid:
       type: object
       properties:
@@ -601,9 +530,13 @@ components:
         naamContactpersoonAfdeling:
           $ref: '#/components/schemas/String35'
         telefoonnummer:
-          $ref: '#/components/schemas/Telefoonummer'
+          type: array
+          items:
+            $ref: '#/components/schemas/Telefoonummer'
         emailadres:
-          $ref: '#/components/schemas/Emailadres'
+          type: array
+          items:
+            $ref: '#/components/schemas/Emailadres'
     Webadres:
       type: object
       properties:
@@ -618,16 +551,84 @@ components:
           $ref: '#/components/schemas/StringCode1'
         codeTypeOvereenkomst:
           $ref: '#/components/schemas/StringCode2'
-    Interesse:
+    Sollicitatiewijze:
       type: object
       properties:
-        naamInteresse:
-          $ref: '#/components/schemas/String120'
-    Voorkeursland:
+        codeSollicitatiewijze:
+          $ref: '#/components/schemas/StringCode1'
+        webadres:
+          $ref: '#/components/schemas/Webadres'
+    MPSollicitatiewijze:
       type: object
       properties:
-        landencodeIso:
-          $ref: '#/components/schemas/StringCode2'
+        codeSollicitatiewijze:
+          $ref: '#/components/schemas/StringCode1'
+    Werkgever:
+      type: object
+      properties:
+        handelsnaamOrganisatie:
+          $ref: '#/components/schemas/String500'
+        webadres:
+          type: array
+          items:
+            $ref: '#/components/schemas/Webadres'
+        adresHouding:
+          type: array
+          items:
+            $ref: '#/components/schemas/AdresHouding'
+        contactpersoon:
+          type: array
+          items:
+            $ref: '#/components/schemas/ContactpersoonAfdeling'
+        sector:
+          type: array
+          items:
+            $ref: '#/components/schemas/SectorBeroepsEnBedrijfsleven'
+    MPWerkgever:
+      type: object
+      properties:
+        adresHouding:
+          type: array
+          items:
+            $ref: '#/components/schemas/MPAdresHouding'
+        sector:
+          type: array
+          items:
+            $ref: '#/components/schemas/SectorBeroepsEnBedrijfsleven'
+    ArbeidsVoorwaarden:
+      type: object
+      properties:
+        datumAanvangWerkzaamheden:
+          $ref: '#/components/schemas/Date'
+        datumEindeWerkzaamheden:
+          $ref: '#/components/schemas/Date'
+        omschrijvingArbeidsvoorwaarden:
+          $ref: '#/components/schemas/String2000'
+        salarisIndicatie:
+          $ref: '#/components/schemas/String100'
+    MPArbeidsVoorwaarden:
+      type: object
+      properties:
+        datumAanvangWerkzaamheden:
+          $ref: '#/components/schemas/Date'
+        datumEindeWerkzaamheden:
+          $ref: '#/components/schemas/Date'
+        salarisIndicatie:
+          $ref: '#/components/schemas/String100'
+    AdresHouding:
+      type: object
+      properties:
+        codeFunctieAdres:
+          $ref: '#/components/schemas/StringCode1'
+        datumAanvangAdres:
+          $ref: '#/components/schemas/Date'
+        datumEindeAdres:
+          $ref: '#/components/schemas/Date'
+    MPAdresHouding:
+      type: object
+      properties:
+        codeFunctieAdres:
+          $ref: '#/components/schemas/StringCode1'
     String200:
       maxLength: 200
       type: string
@@ -673,6 +674,9 @@ components:
     URL:
       type: string
       format: URL
+    String100:
+      maxLength: 100
+      type: string
     String120:
       maxLength: 120
       type: string
@@ -682,14 +686,14 @@ components:
     String2000:
       maxLength: 2000
       type: string
+    String11:
+      maxLength: 11
+      type: string
     String14:
       maxLength: 14
       type: string
     String35:
       maxLength: 35
-      type: string
-    String70:
-      maxLength: 70
       type: string
     Date:
       type: string
@@ -718,7 +722,7 @@ components:
         - code
         - message
   requestBodies:
-    WerkzoekendeProfielMatchesRequest:
+    VacatureMatchesRequest:
       content:
         application/json:
           schema:
@@ -737,9 +741,9 @@ components:
               straal:
                 $ref: '#/components/schemas/Integer1000'
               vraagObject:
-                $ref: '#/components/schemas/MPWerkzoekende'
+                $ref: '#/components/schemas/MPVacature'
       required: true
-    WerkzoekendeProfielMatchesCallbackRequest:
+    VacatureMatchesCallbackRequest:
       content:
         application/json:
           schema:
@@ -754,5 +758,5 @@ components:
               maximumAantalResultatenBereikt:
                 type: boolean
               matches:
-                $ref: '#/components/schemas/WerkzoekendeMatchingProfielen'
+                $ref: '#/components/schemas/VacatureMatchingProfielen'
       required: true

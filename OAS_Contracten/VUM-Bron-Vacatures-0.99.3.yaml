@@ -6,7 +6,7 @@ info:
     name: Helpdesk
     url: https://www.twi-programma.nl
     email: beheer@twi-programma.nl
-  version: '0.99.2'
+  version: '0.99.3'
 servers:
 - url: https://api.example.com/v1
 paths:
@@ -183,8 +183,6 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    VumID:
-      $ref: '#/components/schemas/String500'
     IDVacature:
       $ref: '#/components/schemas/Integer14'
     VacatureMatchingProfielen:
@@ -195,8 +193,8 @@ components:
       allOf:
       - type: object
         properties:
-          vumID:
-            $ref: '#/components/schemas/VumID'
+          idVacature:
+            $ref: '#/components/schemas/IDVacature'
       - $ref: '#/components/schemas/MPVacature'
     Vacature:
       type: object
