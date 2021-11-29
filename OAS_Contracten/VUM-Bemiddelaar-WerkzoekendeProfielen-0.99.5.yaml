@@ -6,7 +6,7 @@ info:
     name: Helpdesk
     url: https://www.twi-programma.nl
     email: beheer@twi-programma.nl
-  version: '0.99.4'
+  version: '0.99.5'
 servers:
 - url: https://jobsearch.vum.vum.n-id.network/v1
   description: staging/test server
