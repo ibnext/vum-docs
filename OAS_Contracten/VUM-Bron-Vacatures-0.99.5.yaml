@@ -641,8 +641,8 @@ components:
         antwoordnummeradres:
           type: object
           properties:
-              antwoordnummer:
-          $ref: '#/components/schemas/Integer5'
+            antwoordnummer:
+              $ref: '#/components/schemas/Integer5'
     AdresBuitenland:
       type: object
       properties:
@@ -701,12 +701,9 @@ components:
     String320:
       maxLength: 320
       type: string
-    Integer1000:
-      maximum: 999
-      minimum: 0
-      type: integer
     Indicatie:
-      maxLength: 1
+      maximum: 9
+      minimum: 0
       type: integer
     Integer1:
       maximum: 9
@@ -717,13 +714,12 @@ components:
       minimum: 0
       type: integer
     Integer5:
-      maxLength: 5
+      maximum: 99999
+      minimum: 0
       type: integer
     Integer10:
-      maxLength: 10
-      type: integer
-    Integer14:
-      maxLength: 14
+      maximum: 9999999999
+      minimum: 0
       type: integer
     StringCode:
       maxLength: 10
