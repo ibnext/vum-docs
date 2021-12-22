@@ -809,6 +809,7 @@ components:
     Postcode:
       pattern: ^[0-9]{4}[a-zA-Z]{2}$
       type: string
+      example: '1234AB'
     Error:
       type: object
       properties:
