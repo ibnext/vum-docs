@@ -6,7 +6,7 @@ info:
     name: Helpdesk
     url: https://www.twi-programma.nl
     email: beheer@twi-programma.nl
-  version: '0.99.5'
+  version: '0.99.6'
 servers:
 - url: https://jobsearch.vum.vum.n-id.network/v1
   description: staging/test server
@@ -421,39 +421,54 @@ components:
     BeroepsnaamGecodeerd:
       type: object
       properties:
-        codeBeroepsnaam:
-          $ref: '#/components/schemas/StringCode'
-        omschrijvingBeroepsnaam:
-          $ref: '#/components/schemas/String120'
+        beroepsnaamGecodeerd:
+          type: object
+          properties:
+            codeBeroepsnaam:
+              $ref: '#/components/schemas/StringCode'
+            omschrijvingBeroepsnaam:
+              $ref: '#/components/schemas/String120'
     BeroepsnaamOngecodeerd:
       type: object
       properties:
-        naamBeroepOngecodeerd:
-          $ref: '#/components/schemas/String120'
+        beroepsnaamOngecodeerd:
+          type: object
+          properties:
+            naamBeroepOngecodeerd:
+              $ref: '#/components/schemas/String120'
     OpleidingsnaamGecodeerd:
       type: object
       properties:
-        codeOpleidingsnaam:
-          $ref: '#/components/schemas/Integer10'
-        omschrijvingOpleidingsnaam:
-          $ref: '#/components/schemas/String120'
+        opleidingsnaamGecodeerd:
+          type: object
+          properties:
+            codeOpleidingsnaam:
+              $ref: '#/components/schemas/Integer10AsString'
+            omschrijvingOpleidingsnaam:
+              $ref: '#/components/schemas/String120'
     OpleidingsnaamOngecodeerd:
       type: object
       properties:
-        naamOpleidingOngecodeerd:
-          $ref: '#/components/schemas/String120'
-        omschrijvingOpleiding:
-          $ref: '#/components/schemas/String2000'
+        opleidingsnaamOngecodeerd:
+          type: object
+          properties:
+            naamOpleidingOngecodeerd:
+              $ref: '#/components/schemas/String120'
+            omschrijvingOpleiding:
+              $ref: '#/components/schemas/String2000'
     MPOpleidingsnaamOngecodeerd:
       type: object
       properties:
-        naamOpleidingOngecodeerd:
-          $ref: '#/components/schemas/String120'
+        mpOpleidingsnaamOngecodeerd:
+          type: object
+          properties:
+            naamOpleidingOngecodeerd:
+              $ref: '#/components/schemas/String120'
     Gedragscompetentie:
       type: object
       properties:
         codeGedragscompetentie:
-          $ref: '#/components/schemas/Integer10'
+          $ref: '#/components/schemas/Integer10AsString'
         omschrijvingGedragscompetentie:
           $ref: '#/components/schemas/String120'
         codeBeheersingGedragscompetentie:
@@ -783,6 +798,10 @@ components:
       maximum: 999
       minimum: 0
       type: integer
+    Integer1000000:
+      maximum: 1000000
+      minimum: 0
+      type: integer
     Indicatie:
       maximum: 9
       minimum: 0
@@ -797,10 +816,6 @@ components:
       type: integer
     Integer5:
       maximum: 99999
-      minimum: 0
-      type: integer
-    Integer10:
-      maximum: 9999999999
       minimum: 0
       type: integer
     StringCode:
@@ -827,6 +842,11 @@ components:
     String7:
       maxLength: 9
       type: string
+    Integer10AsString:
+      maxLength: 10
+      type: string
+      pattern: '^[0-9]+$'
+      example: '9999999999'
     String9:
       maxLength: 9
       type: string
@@ -872,6 +892,7 @@ components:
     Postcode:
       pattern: ^[0-9]{4}[a-zA-Z]{2}$
       type: string
+      example: '1234AB'
     VraagID:
       maxLength: 100
       type: string
@@ -910,7 +931,7 @@ components:
               postcode:
                 $ref: '#/components/schemas/Postcode'
               straal:
-                $ref: '#/components/schemas/Integer1000'
+                $ref: '#/components/schemas/Integer1000000'
               vraagObject:
                 $ref: '#/components/schemas/MPVacature'
       required: true
