@@ -893,6 +893,10 @@ components:
       pattern: ^[0-9]{4}[a-zA-Z]{2}$
       type: string
       example: '1234AB'
+    PostcodeWithoutLetters:
+      pattern: ^[0-9]{4}$
+      type: string
+      example: '2552'
     VraagID:
       maxLength: 100
       type: string
@@ -929,7 +933,7 @@ components:
                 type: string
                 format: uri
               postcode:
-                $ref: '#/components/schemas/Postcode'
+                $ref: '#/components/schemas/PostcodeWithoutLetters'
               straal:
                 $ref: '#/components/schemas/Integer1000000'
               vraagObject:
