@@ -69,6 +69,7 @@ paths:
                 properties:
                   maximumAantalResultatenBereikt:
                     type: boolean
+                    description: "Geeft aan of bron meer matches zou kunnen leveren dan de teruggeleverde set. Bronnen mogen per zoekvraag een maximum aantal (standaard 100) resultaten leveren"
                   matches:
                     $ref: '#/components/schemas/VacatureMatchingProfielen'
         '400':
