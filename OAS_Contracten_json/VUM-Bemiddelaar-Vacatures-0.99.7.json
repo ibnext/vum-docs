@@ -8,7 +8,7 @@
       "url": "https://www.twi-programma.nl",
       "email": "beheer@twi-programma.nl"
     },
-    "version": "0.99.6"
+    "version": "0.99.7"
   },
   "servers": [
     {
@@ -1287,11 +1287,6 @@
         "minimum": 0,
         "type": "integer"
       },
-      "Integer1000000": {
-        "maximum": 1000000,
-        "minimum": 0,
-        "type": "integer"
-      },
       "Indicatie": {
         "maximum": 9,
         "minimum": 0,
@@ -1449,8 +1444,6 @@
             "schema": {
               "required": [
                 "callbackURL",
-                "postcode",
-                "straal",
                 "vraagObject"
               ],
               "type": "object",
@@ -1458,12 +1451,6 @@
                 "callbackURL": {
                   "type": "string",
                   "format": "uri"
-                },
-                "postcode": {
-                  "$ref": "#/components/schemas/Postcode"
-                },
-                "straal": {
-                  "$ref": "#/components/schemas/Integer1000000"
                 },
                 "vraagObject": {
                   "$ref": "#/components/schemas/MPVacature"
