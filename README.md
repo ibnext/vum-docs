@@ -2,8 +2,15 @@ Versie: 0.99.7
 
 Datum: 15 februari 2022
 
-<img src="./media/image1.jpg"
-style="width:4.81107in;height:3.70833in" />
+**Naast dit bestand kunt u ook de [releasenotes](./releasenotes.md) en [workflow](workflow.md) bestanden vinden.<br>**
+Releasenotes beschrijft wat de veranderingen zijn voor elke versie dat uitgebracht is, hierbij wordt ook de uitleg beschreven.<br>
+De workflow bestand heeft een beschrijving over hoe er in dit repository gewerkt wordt.
+
+
+<table align="center"><tr><td align="center" width="9999">
+<img src="./media/image1.jpg" align="center"  alt="Project icon">
+
+</td></tr></table>
 
 **Inhoud**
 
