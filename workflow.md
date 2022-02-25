@@ -1,15 +1,14 @@
 # Workflow
 
-## Branches
-De repository kent meerdere branches. Dit zijn dev, staging, testing en master.<br>
-Elke branch naam is gekozen voor elke omgeving dat op het moment bestaat en gebruikt wordt. Dus elke omgeving heeft een andere versie van de koppelvlak specificatie.
+## Branches 
+Deze repository kent meerdere branches, dit zijn `dev`, `test`, `accept` en `main`.<br>
+Elke branch naam heeft een corresponderende omgeving waarbinnen de applicatie draait met die versie van de koppelvlakspecificatie. Dus elke omgeving kan een andere versie van de koppelvlakspecificatie afdwingen aan de gebruikers.
 
-In de dev branch worden er nieuwe commits gemaakt en vervolgens, als het kan of nodig is, kan de staging branch de nieuwe wijzigingen overnemen. Hetzelfde geld voor testing en master op chronologische volgorde.
+Nieuwe wijzigingen in de koppelvlakspecificatie worden in eerste instantie in de `dev` branch gecommit. Nadat de wijzigingen uit de dev omgeving uitgerold worden in een opvolgende omgeving, kunnen de koppelvlakspecificatie in de corresponderende branch bijgewerkt worden vanuit de branch die voor de betreffende branch komt binnen de OTAP straat. <br>
+dev (O) -> test (T) -> accept (A) -> main (P)
 
-In dit geval is het master branch voor developers die gebruik maken van het product het belangrijkste. Want dit koppelvlak is hetgene wat uiteindelijk gebruikt wordt op productie.<br>
-Hierdoor is er ook rekening gehouden met bezoekers van dit repository, dat zij het master branch het eerste zien, zodat er geen verwarringen ontstaan voor non-developers.
+Voor ontwikkelaars die willen aansluiten op VUM is de `main` branch het belangrijkste. De productieomgeving van VUM gebruikt ten alle tijde de main branch van deze repository.
 
 ## Tags
-Er is ook gekozen voor om tags te gebruiken. De tag is een referentie naar een commit op de branch.<br>
-Het doel van de tag is om het makkelijker te maken om een oudere versie te vinden van de koppelvlak specificaties. <br>
-Anders zou het een developer of zelfs een non-developer moeite hebben om een oudere versie te vinden tussen al de commits dat plaats heeft gevonden tijdens de development van de specificaties. 
+Nieuwe (productie) releases van de koppelvlakspecificatie worden uitgebracht door middel van `tags`<br>
+Elke release versie krijgt een corresponderende tag binnen de repository zodat oudere releases eenvoudig terug te vinden zijn. 
