@@ -698,7 +698,7 @@ components:
           type: object
           properties:
             postbusnummerBuitenland:
-              $ref: '#/components/schemas/String7'
+              $ref: '#/components/schemas/String9'
     MPAdresHouding:
       type: object
       properties:
@@ -758,9 +758,6 @@ components:
       format: URL
     String6:
       maxLength: 6
-      type: string
-    String7:
-      maxLength: 9
       type: string
     String9:
       maxLength: 9
