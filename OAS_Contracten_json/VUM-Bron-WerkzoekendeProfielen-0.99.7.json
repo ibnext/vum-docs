@@ -1,4 +1,4 @@
-{
+﻿{
   "openapi": "3.0.0",
   "info": {
     "title": "VUM API WerkzoekendeProfielen tussen VUM-UV en bronnen",
@@ -101,7 +101,8 @@
                   "type": "object",
                   "properties": {
                     "maximumAantalResultatenBereikt": {
-                      "type": "boolean"
+                      "type": "boolean",
+                      "description": "Geeft aan of bron meer matches zou kunnen leveren dan de teruggeleverde set. Bronnen mogen per zoekvraag een maximum aantal (standaard 100) resultaten leveren"
                     },
                     "matches": {
                       "$ref": "#/components/schemas/WerkzoekendeMatchingProfielen"
