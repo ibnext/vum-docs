@@ -1,3 +1,16 @@
+.go-cache:
+  variables:
+    GOPATH: $CI_PROJECT_DIR/.go
+  before_script:
+    - mkdir -p .go
+    - go install github.com/mbrukman/yaml2json/cmd/yaml2json@latest
+    - export PATH=.go/bin/:$PATH
+  cache:
+    paths:
+      - .go/pkg/mod/
+      - .go/src/github.com/
+      -
+
 # You can override the included template(s) by including variable overrides
 # SAST customization: https://docs.gitlab.com/ee/user/application_security/sast/#customizing-the-sast-settings
 # Secret Detection customization: https://docs.gitlab.com/ee/user/application_security/secret_detection/#customizing-settings
@@ -5,8 +18,34 @@
 # Note that environment variables can be set in several places
 # See https://docs.gitlab.com/ee/ci/variables/#cicd-variable-precedence
 stages:
-- test
+  - test
+  - release
+  -
 sast:
   stage: test
 include:
 - template: Security/SAST.gitlab-ci.yml
+
+job-that-succeeds:
+  stage: release
+  script:
+    - 'echo "It succeeded!"'
+    - 'echo "Could make a job here to validate lint of yaml"'
+
+tag:
+  stage: release
+  image: golang:1.17
+  extends: .go-cache
+  script:
+    - 'mkdir ./JSON_OAS_Contracten;'
+    - '
+      for F in ./OAS_Contracten/*.yaml; do
+        json_file_name=$(echo $F | sed "s/.yaml/.json/");
+        yaml2json $F > $json_file_name;
+        mv $json_file_name ./JSON_OAS_Contracten; 
+      done;
+      '
+    - 'tar -cvf JSON_OAS_Contracten.tar ./JSON_OAS_Contracten;'
+    - 'curl --header "JOB-TOKEN: $CI_JOB_TOKEN" --upload-file JSON_OAS_Contracten.tar "${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/generic/json_oas_contracten/${CI_COMMIT_TAG}/JSON_OAS_Contracten.tar"'
+  rules:
+    - if: '$CI_COMMIT_TAG =~ /\d+\.\d+\.\d+.*/'
