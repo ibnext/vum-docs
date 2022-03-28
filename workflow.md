@@ -12,3 +12,7 @@ Voor ontwikkelaars die willen aansluiten op VUM is de `main` branch het belangri
 ## Tags
 Nieuwe (productie) releases van de koppelvlakspecificatie worden uitgebracht door middel van `tags`<br>
 Elke release versie krijgt een corresponderende tag binnen de repository zodat oudere releases eenvoudig terug te vinden zijn. 
+
+## JSON OAS Contracten
+Voor elke [tag](https://gitlab.com/inlichtingenbureau/vum/koppelvlak/-/tags) binnen het project is er een json versie van de OAS contracten beschikbaar op de [registry](https://gitlab.com/inlichtingenbureau/vum/koppelvlak/-/packages) pagina.
+##
