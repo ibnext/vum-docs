@@ -10,13 +10,16 @@
       - .go/pkg/mod/
       - .go/src/github.com/
 
+stages:
+  - release
+
 job-that-succeeds:
   stage: release
   script:
     - 'echo "It succeeded!"'
     - 'echo "Could make a job here to validate lint of yaml"'
 
-tag:
+registry-upload-json:
   stage: release
   image: golang:1.17
   extends: .go-cache
