@@ -1,7 +1,5 @@
 Versie: 1.0.0
 
-Datum: 15 februari 2022
-
 **Naast dit bestand kunt u ook de [releasenotes](./releasenotes.md) en [workflow](workflow.md) bestanden vinden.<br>**
 Releasenotes beschrijft wat de veranderingen zijn voor elke versie dat uitgebracht is, hierbij wordt ook de uitleg beschreven.<br>
 De workflow bestand heeft een beschrijving over hoe er in dit repository gewerkt wordt.
