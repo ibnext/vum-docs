@@ -1,8 +1,6 @@
-# Releasenotes Koppelvlak specificaties VUM v0.99.7
+# Releasenotes Koppelvlak specificaties VUM v1.0.0
 
-In versie 0.99.7 van de koppelvlak specificaties zijn er wijzigingen
-doorgevoerd met betrekking tot de velden postcode en straal. Hieronder
-de wijzigingen per versie:
+
 
 <table>
 <colgroup>
@@ -17,6 +15,12 @@ de wijzigingen per versie:
 <th><strong>nr</strong></th>
 <th><strong>aanpassing</strong></th>
 <th><strong>motivatie</strong></th>
+</tr>
+<tr class="header">
+<th>1.0.0</th>
+<th>1</th>
+<th>-</th>
+<th>Publicatie 1.0.0 versie</th>
 </tr>
 <tr class="odd">
 <th>0.99.7</th>

@@ -1,14 +1,17 @@
 openapi: 3.0.0
 info:
-  title: VUM API Vacatures tussen VUM-UV en bronnen
-  description: Contract tbv interactie van bronnen met VUM uitwisselingsvoorziening voor Vacatures
+  title: VUM API Vacatures tussen VUM-UV en bemiddelaar
+  description: Contract tbv interactie van bemiddelaars met VUM uitwisselingsvoorziening voor Vacatures
   contact:
     name: Helpdesk
     url: https://www.twi-programma.nl
     email: beheer@twi-programma.nl
-  version: '0.99.7'
+  version: '1.0.0'
 servers:
-- url: https://api.example.com/v1
+- url: https://jobsearch.vum.vum.n-id.network/v1
+  description: staging/test server
+- url: https://jobsearch.vum.vum-acct.n-id.network/v1
+  description: acceptatie server
 paths:
   /vacatures/matches:
     post:
@@ -36,11 +39,6 @@ paths:
           schema:
             type: string
           required: false
-        - in: header
-          name: X-VUM-SUWIparty
-          schema:
-            type: boolean
-          required: true
       requestBody:
         $ref: '#/components/requestBodies/VacatureMatchesRequest'
       responses:
@@ -62,16 +60,7 @@ paths:
           content:
             application/json:
               schema:
-                required:
-                  - maximumAantalResultatenBereikt
-                  - matches
-                type: object
-                properties:
-                  maximumAantalResultatenBereikt:
-                    type: boolean
-                    description: "Geeft aan of bron meer matches zou kunnen leveren dan de teruggeleverde set. Bronnen mogen per zoekvraag een maximum aantal (standaard 100) resultaten leveren"
-                  matches:
-                    $ref: '#/components/schemas/VacatureMatchingProfielen'
+                $ref: '#/components/schemas/inline_response_200'
         '400':
           description: 'Bad request'
           content:
@@ -98,19 +87,60 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-  /vacatures/{idVacature}:
+      callbacks:
+        bronMatch:
+          '{$request.body#/callbackUrl}':
+            post:
+              parameters:
+              - in: header
+                name: X-VUM-berichtVersie
+                schema:
+                  type: string
+                required: true
+              - in: header
+                name: X-VUM-toParty
+                schema:
+                  type: string
+                required: true
+              - in: header
+                name: X-VUM-viaParty
+                schema:
+                  type: string
+                required: false
+              - in: header
+                name: X-VUM-vraagID
+                schema:
+                  $ref: '#/components/schemas/VraagID'
+                required: true
+              requestBody:
+                $ref: '#/components/requestBodies/VacatureMatchesCallbackRequest'
+              responses:
+                '200':
+                  description: 'bevestiging aan de uitwisselingsvoorziening'
+                '400':
+                  description: 'Bad request'
+                  content:
+                    application/json:
+                      schema:
+                        $ref: '#/components/schemas/Error'
+                '500':
+                  description: 'Internal Server Error'
+                  content:
+                    application/json:
+                      schema:
+                        $ref: '#/components/schemas/Error'
+                '503':
+                  description: 'Service Unavailable'
+                  content:
+                    application/json:
+                      schema:
+                        $ref: '#/components/schemas/Error'
+  /vacatures/{vumID}:
     get:
-      summary: Vraag volledige vacature op bij opgegeven idVacature
-      description: Vraag volledige vacature op bij een opgegeven idVacature
+      summary: Vraag volledige vacature op bij opgegeven vumID
+      description: Vraag volledige vacature op bij een opgegeven vumID
       operationId: getVacature
       parameters:
-        - name: idVacature
-          in: path
-          required: true
-          style: simple
-          explode: false
-          schema:
-            $ref: '#/components/schemas/IDVacature'
         - in: header
           name: X-VUM-berichtVersie
           schema:
@@ -131,11 +161,13 @@ paths:
           schema:
             type: string
           required: false
-        - in: header
-          name: X-VUM-SUWIparty
+        - in: path
+          name: vumID
+          required: true
+          style: simple
+          explode: false
           schema:
-            type: boolean
-          required: true      
+            $ref: '#/components/schemas/VumID'
       responses:
         '200':
           description: 'OK'
@@ -155,7 +187,12 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Vacature'
+                type: object
+                properties:
+                  bronID:
+                    $ref: '#/components/schemas/String200'
+                  vacature:
+                    $ref: '#/components/schemas/Vacature'
         '400':
           description: 'Bad request'
           content:
@@ -165,7 +202,7 @@ paths:
         '401':
           description: 'not authorized'
         '429':
-          description: 'Too Many Requests, limiet is overschreden voor deze uitvraag'
+          description: 'Too Many Requests, limiet is overschreden voor deze vraagID'
           content:
             application/json:
               schema:
@@ -182,8 +219,45 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+  /callbackExample:
+    post:
+      summary: Voorbeeld voor de callback methode
+      description: Voorbeeld voor de callback methode, alleen om te laten zien hoe de echte Callback er uit ziet!
+      parameters:
+        - in: header
+          name: X-VUM-berichtVersie
+          schema:
+            type: string
+          required: true
+        - in: header
+          name: X-VUM-toParty
+          schema:
+            type: string
+          required: true
+        - in: header
+          name: X-VUM-viaParty
+          schema:
+            type: string
+          required: false
+        - in: header
+          name: X-VUM-vraagID
+          schema:
+            $ref: '#/components/schemas/VraagID'
+          required: true
+      operationId: callbackExample
+      requestBody:
+        $ref: '#/components/requestBodies/VacatureMatchesCallbackRequest'
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Fout bij uitvoeren van zoekvraag
+        '401':
+          description: 'not authorized'
 components:
   schemas:
+    VumID:
+      $ref: '#/components/schemas/String500'
     IDVacature:
       $ref: '#/components/schemas/String200'
     VacatureMatchingProfielen:
@@ -194,8 +268,8 @@ components:
       allOf:
       - type: object
         properties:
-          idVacature:
-            $ref: '#/components/schemas/IDVacature'
+          vumID:
+            $ref: '#/components/schemas/VumID'
       - $ref: '#/components/schemas/MPVacature'
     Vacature:
       type: object
@@ -657,8 +731,8 @@ components:
         antwoordnummeradres:
           type: object
           properties:
-            antwoordnummer:
-              $ref: '#/components/schemas/Integer5'
+              antwoordnummer:
+                $ref: '#/components/schemas/Integer5'
     AdresBuitenland:
       type: object
       properties:
@@ -714,9 +788,16 @@ components:
           properties:
             landencodeIso:
               $ref: '#/components/schemas/StringCode2'
+    String200:
+      maxLength: 200
+      type: string
     String320:
       maxLength: 320
       type: string
+    Integer1000:
+      maximum: 999
+      minimum: 0
+      type: integer
     Indicatie:
       maximum: 9
       minimum: 0
@@ -733,11 +814,6 @@ components:
       maximum: 99999
       minimum: 0
       type: integer
-    Integer10AsString:
-      maxLength: 10
-      type: string
-      pattern: '^[0-9]+$'
-      example: '9999999999'
     StringCode:
       maxLength: 10
       type: string
@@ -759,6 +835,11 @@ components:
     String6:
       maxLength: 6
       type: string
+    Integer10AsString:
+      maxLength: 10
+      type: string
+      pattern: '^[0-9]+$'
+      example: '9999999999'
     String9:
       maxLength: 9
       type: string
@@ -779,9 +860,6 @@ components:
       type: string
     String100:
       maxLength: 100
-      type: string
-    String200:
-      maxLength: 200
       type: string
     String120:
       maxLength: 120
@@ -808,6 +886,14 @@ components:
       pattern: ^[0-9]{4}[a-zA-Z]{2}$
       type: string
       example: '1234AB'
+    VraagID:
+      maxLength: 100
+      type: string
+    inline_response_200:
+      type: object
+      properties:
+        vraagID:
+          $ref: '#/components/schemas/VraagID'
     Error:
       type: object
       properties:
@@ -826,9 +912,30 @@ components:
         application/json:
           schema:
             required:
+            - callbackURL
             - vraagObject
             type: object
             properties:
+              callbackURL:
+                type: string
+                format: uri
               vraagObject:
                 $ref: '#/components/schemas/MPVacature'
+      required: true
+    VacatureMatchesCallbackRequest:
+      content:
+        application/json:
+          schema:
+            required:
+            - vraagID
+            - matches
+            - maximumAantalResultatenBereikt
+            type: object
+            properties:
+              vraagID:
+                $ref: '#/components/schemas/VraagID'
+              maximumAantalResultatenBereikt:
+                type: boolean
+              matches:
+                $ref: '#/components/schemas/VacatureMatchingProfielen'
       required: true
