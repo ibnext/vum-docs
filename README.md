@@ -1,4 +1,4 @@
-Versie: 0.99.7
+Versie: 1.0.0
 
 Datum: 15 februari 2022
 
@@ -214,13 +214,13 @@ string.</p>
 <p>Yaml veld bemiddelingspostcode heeft een example.</p></th>
 </tr>
 <tr class="odd">
-<th>0.99.7</th>
+<th>1.0.0</th>
 <th>15 februari 2022</th>
 <th>Postcode en Straal velden verwijderd uit het zoekopdracht voor
 Vacature en WerkzoekendeProfielen.</th>
 </tr>
 <tr class="header">
-<th>0.99.7</th>
+<th>1.0.0</th>
 <th>15 februari 2022</th>
 <th>Mobiliteit object en velden bemiddelingspostcode &amp;
 maximaleReisafstand binnen het mobiliteits object verplicht gemaakt
@@ -400,20 +400,20 @@ toegevoegd.
 <th><strong>Omschrijving</strong></th>
 </tr>
 <tr class="odd">
-<th>VUM-Bemiddelaar-WerkzoekendeProfielen-0.99.7.yaml</th>
+<th>VUM-Bemiddelaar-WerkzoekendeProfielen-1.0.0.yaml</th>
 <th>Contract tussen VUM uitwisselingsvoorziening en bemiddelaar voor
 bevragen van Werkzoekende profielen, inclusief callback specificatie
 voor endpoint /werkzoekendeProfielen/matches<br />
 (Contract 1 in bovenstaand diagram)</th>
 </tr>
 <tr class="header">
-<th>VUM-Bron-WerkzoekendeProfielen-0.99.7.yaml</th>
+<th>VUM-Bron-WerkzoekendeProfielen-1.0.0.yaml</th>
 <th>Contract tussen VUM uitwisselingsvoorziening en bronnen voor
 bevragen van Werkzoekende profielen, met synchrone endpoints<br />
 (Contract 2 in bovenstaand diagram)</th>
 </tr>
 <tr class="odd">
-<th>VUM-Bemiddelaar-Vacatures-0.99.7.yaml</th>
+<th>VUM-Bemiddelaar-Vacatures-1.0.0.yaml</th>
 <th>Contract tussen VUM uitwisselingsvoorziening en bemiddelaar voor
 bevragen van Vacatures, inclusief callback specificatie voor endpoint
 /vacatures/matches<br />
@@ -421,7 +421,7 @@ bevragen van Vacatures, inclusief callback specificatie voor endpoint
 Werkzoekende Profielen, analoog qua opzet aan contract 1)</th>
 </tr>
 <tr class="header">
-<th>VUM-Bron-Vacatures-0.99.7.yaml</th>
+<th>VUM-Bron-Vacatures-1.0.0.yaml</th>
 <th>Contract tussen VUM uitwisselingsvoorziening en bronnen voor
 bevragen van Vacatures, met synchrone endpoints<br />
 (contract 4, niet in bovenstaand diagram dat betrekking heeft op
