@@ -214,18 +214,23 @@ string.</p>
 <p>Yaml veld bemiddelingspostcode heeft een example.</p></th>
 </tr>
 <tr class="odd">
-<th>1.0.0</th>
+<th>0.99.7</th>
 <th>15 februari 2022</th>
 <th>Postcode en Straal velden verwijderd uit het zoekopdracht voor
 Vacature en WerkzoekendeProfielen.</th>
 </tr>
 <tr class="header">
-<th>1.0.0</th>
+<th>0.99.7</th>
 <th>15 februari 2022</th>
 <th>Mobiliteit object en velden bemiddelingspostcode &amp;
 maximaleReisafstand binnen het mobiliteits object verplicht gemaakt
 t.b.v. geomatching op bronnen en filteren van resultaten door
 bronnen.</th>
+</tr>
+<tr class="odd">
+<th>1.0.0</th>
+<th>23 mei 2022</th>
+<th>Versie 1.0.0</th>
 </tr>
 </thead>
 <tbody>
