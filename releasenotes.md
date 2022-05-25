@@ -1,5 +1,51 @@
 # Releasenotes Koppelvlak specificaties VUM v1.0.0
 
+**Openstaande punten in deze release (v1.0.0)**
+
+ - De koppelvlakspecificaties staan lege waardes toe voor attributen. Dit komt niet overeen met de VUM Gegevensstandaard. Dit betreft lege lijsten, lege objecten en lege tekst. 
+
+ - De koppelvlakspecificaties staan attributen toe in de dataobjecten die niet in de specificatie zijn opgenomen. De VUM Gegevensstandaard sluit alle attributen uit die niet in de VUM Gegevensstandaard zijn opgenomen.
+
+ - De wijze waarop “oneOf” constructies zijn geformuleerd heeft het onverwachte resultaat dat alle waardes voor de betreffende atttributen door de koppelvlakspecificaties afgewezen worden. Dit betreft de attributen 'beroep', 'opleidingsnaam', 'adres' en 'adresDetailsBuitenland'. De implemenatie van de VUM Uitwisselingsvoorziening wijkt hierin af van de koppelvlakspecificaties en accepteert de gewenste waardes voor deze attributen wel. De 'oneOf' constructies werken niet als verwacht omdat de definities van de keuzes elkaar niet volledig uitsluiten en elke waarde vervolgens aan alle keuzes voldoet. Als het gewenst is om de OpenAPI bestanden geautomatiseerd te verwerken, dan kan ‘"additionalProperties": false’ worden toegevoegd aan de schemadefinities van de keuzes voor de ‘oneOf’ constructies. 
+
+ - Enumeraties uit de VUM Gegevensstandaard zijn niet in de koppelvlakspecificaties opgenomen. Dit staat waardes toe die wel aan het patroon voor het attribuut voldoen maar niet in de enumeratie van de VUM Gegevensstandaard voorkomen. 
+
+ - De betekenis van de gebruikte formaat specificatie ‘URL’ voor het attribuut 'url' is niet nader gedefinieerd en heeft daarmee geen beperkende betekenis.
+
+ - Een aantal attributen hebben in de koppelvlakspecificaties een ander type dan in de VUM Gegevenstandaard. De implementatie van de VUM Gegevensuitwisseling volgt de koppelvlakspecificaties voor deze attributen.
+ 
+- De volgende attributen hebben een string als datatype in de koppelvlakspecificaties maar zijn een integer in de VUM Gegevensstandaard:    
+
+```
+    codeOpleidingsnaam
+    codeGedragscompetentie
+    codeTypeOvereenkomst
+    codeWerkEnDenkniveauMinimaal
+    indicatieBeschikbaarheidContactgegevens
+    datumAanvangAdres
+    datumAanvangBeschikbaarVoorWerk
+    datumAanvangWerkzaamheden
+    datumEindeAdres
+    datumEindeBeschikbaarVoorWerk
+    datumEindeWerkzaamheden
+    sluitingsDatumVacature
+    datumAanvangVolgenCursus
+    datumCertificaat
+    datumEindeVolgenCursus
+    datumAanvangVolgenOpleiding
+    datumDiploma
+    datumEindeVolgenOpleiding
+    idVacature
+    nummerVacature
+```
+
+ - Het attribuut ‘indicatieLdrRegistratie’ is een integer in de koppelvlakspecificaties en een boolean in de VUM Gegevensstandaard. 
+ - Het attribuut ‘postbusnummerBuitenland’ heeft de maximale lengte van 9 posities in de koppelvlakspecificaties en van maar 7 posities in de VUM Gegevensstandaard, . 
+ - Het attribuut 'url' heeft een geen limiet op de lengte in de koppevlakspecificaties maar een maximum lengte van 512 in de VUM Gegevensstandaard. 
+ - Het attribuut ‘vakvaardigheid’ is in de koppelvlakspecificaties weergegeven als een object met een ingebed attribuut 'omschrijving'. In de VUM Gegevensstandaard is ‘vakvaardigheid’ een enkel  - attribuut 'omschrijving vakvaardigheid' van type 'string'.
+ 
+ - In de naam van het schema ‘Telefoonummer’ mist een 'n'.
+
 
 
 <table>
