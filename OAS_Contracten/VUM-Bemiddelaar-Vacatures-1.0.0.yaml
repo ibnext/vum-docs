@@ -8,10 +8,12 @@ info:
     email: beheer@twi-programma.nl
   version: '1.0.0'
 servers:
-- url: https://jobsearch.vum.vum.n-id.network/v1
+- url: https://test.vumdevelopment.nl/api/v1
   description: staging/test server
-- url: https://jobsearch.vum.vum-acct.n-id.network/v1
+- url: https://accept.vumdevelopment.nl/api/v1
   description: acceptatie server
+- url: https://prod.vumdevelopment.nl/api/v1
+  description: productie server
 paths:
   /vacatures/matches:
     post:
