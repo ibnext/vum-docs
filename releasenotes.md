@@ -44,8 +44,6 @@
  - Het attribuut 'url' heeft een geen limiet op de lengte in de koppevlakspecificaties maar een maximum lengte van 512 in de VUM Gegevensstandaard. 
  - Het attribuut ‘vakvaardigheid’ is in de koppelvlakspecificaties weergegeven als een object met een ingebed attribuut 'omschrijving'. In de VUM Gegevensstandaard is ‘vakvaardigheid’ een enkel  - attribuut 'omschrijving vakvaardigheid' van type 'string'.
  
- - In de naam van het schema ‘Telefoonummer’ mist een 'n'.
-
 
 
 <table>

@@ -315,7 +315,7 @@ components:
         telefoonnummer:
           type: array
           items:
-            $ref: '#/components/schemas/Telefoonummer'
+            $ref: '#/components/schemas/Telefoonnummer'
         contactpersoon:
           type: array
           items:
@@ -635,7 +635,7 @@ components:
           $ref: '#/components/schemas/Indicatie'
     Emailadres:
       $ref: '#/components/schemas/String320'
-    Telefoonummer:
+    Telefoonnummer:
       $ref: '#/components/schemas/String14'
     ContactpersoonAfdeling:
       type: object
@@ -643,7 +643,7 @@ components:
         naamContactpersoonAfdeling:
           $ref: '#/components/schemas/String35'
         telefoonnummer:
-          $ref: '#/components/schemas/Telefoonummer'
+          $ref: '#/components/schemas/Telefoonnummer'
         emailadres:
           $ref: '#/components/schemas/Emailadres'
     Webadres:
