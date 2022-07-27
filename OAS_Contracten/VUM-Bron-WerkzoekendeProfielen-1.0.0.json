@@ -1,0 +1,1088 @@
+{
+  "components": {
+    "requestBodies": {
+      "WerkzoekendeProfielMatchesRequest": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "properties": {
+                "vraagObject": {
+                  "$ref": "#/components/schemas/MPWerkzoekende"
+                }
+              },
+              "required": [
+                "vraagObject"
+              ],
+              "type": "object"
+            }
+          }
+        },
+        "required": true
+      }
+    },
+    "schemas": {
+      "Arbeidsmarktkwalificatie": {
+        "properties": {
+          "codeWerkEnDenkniveauWerkzoekende": {
+            "$ref": "#/components/schemas/Integer1"
+          },
+          "cursus": {
+            "items": {
+              "$ref": "#/components/schemas/Cursus"
+            },
+            "type": "array"
+          },
+          "gedragscompetentie": {
+            "items": {
+              "$ref": "#/components/schemas/Gedragscompetentie"
+            },
+            "type": "array"
+          },
+          "interesse": {
+            "items": {
+              "$ref": "#/components/schemas/Interesse"
+            },
+            "type": "array"
+          },
+          "opleiding": {
+            "items": {
+              "$ref": "#/components/schemas/Opleiding"
+            },
+            "type": "array"
+          },
+          "rijbewijs": {
+            "items": {
+              "$ref": "#/components/schemas/Rijbewijs"
+            },
+            "type": "array"
+          },
+          "taalbeheersing": {
+            "items": {
+              "$ref": "#/components/schemas/Taalbeheersing"
+            },
+            "type": "array"
+          },
+          "vakvaardigheid": {
+            "items": {
+              "$ref": "#/components/schemas/Vakvaardigheid"
+            },
+            "type": "array"
+          },
+          "werkervaring": {
+            "items": {
+              "$ref": "#/components/schemas/Werkervaring"
+            },
+            "type": "array"
+          }
+        },
+        "type": "object"
+      },
+      "Beroepsnaam": {
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/BeroepsnaamGecodeerd"
+          },
+          {
+            "$ref": "#/components/schemas/BeroepsnaamOngecodeerd"
+          }
+        ]
+      },
+      "BeroepsnaamGecodeerd": {
+        "properties": {
+          "beroepsnaamGecodeerd": {
+            "properties": {
+              "codeBeroepsnaam": {
+                "$ref": "#/components/schemas/StringCode"
+              },
+              "omschrijvingBeroepsnaam": {
+                "$ref": "#/components/schemas/String120"
+              }
+            },
+            "type": "object"
+          }
+        },
+        "type": "object"
+      },
+      "BeroepsnaamOngecodeerd": {
+        "properties": {
+          "beroepsnaamOngecodeerd": {
+            "properties": {
+              "naamBeroepOngecodeerd": {
+                "$ref": "#/components/schemas/String120"
+              }
+            },
+            "type": "object"
+          }
+        },
+        "type": "object"
+      },
+      "ContactpersoonAfdeling": {
+        "properties": {
+          "emailadres": {
+            "$ref": "#/components/schemas/Emailadres"
+          },
+          "naamContactpersoonAfdeling": {
+            "$ref": "#/components/schemas/String35"
+          },
+          "telefoonnummer": {
+            "$ref": "#/components/schemas/Telefoonummer"
+          }
+        },
+        "type": "object"
+      },
+      "Contractvorm": {
+        "properties": {
+          "codeTypeArbeidscontract": {
+            "$ref": "#/components/schemas/StringCode1"
+          },
+          "codeTypeOvereenkomst": {
+            "$ref": "#/components/schemas/StringCode2"
+          }
+        },
+        "type": "object"
+      },
+      "Cursus": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/MPCursus"
+          },
+          {
+            "properties": {
+              "datumAanvangVolgenCursus": {
+                "$ref": "#/components/schemas/Date"
+              },
+              "datumEindeVolgenCursus": {
+                "$ref": "#/components/schemas/Date"
+              },
+              "naamOpleidingsinstituut": {
+                "$ref": "#/components/schemas/String500"
+              }
+            },
+            "type": "object"
+          }
+        ]
+      },
+      "Date": {
+        "format": "date",
+        "type": "string"
+      },
+      "EisAanWerk": {
+        "properties": {
+          "indicatieAanpassingWerkomgeving": {
+            "$ref": "#/components/schemas/Indicatie"
+          },
+          "indicatieBegeleiding": {
+            "$ref": "#/components/schemas/Indicatie"
+          },
+          "indicatieWerkvariatie": {
+            "$ref": "#/components/schemas/Indicatie"
+          }
+        },
+        "type": "object"
+      },
+      "Emailadres": {
+        "$ref": "#/components/schemas/String320"
+      },
+      "Error": {
+        "properties": {
+          "code": {
+            "$ref": "#/components/schemas/StringCode"
+          },
+          "details": {
+            "$ref": "#/components/schemas/String2000"
+          },
+          "message": {
+            "$ref": "#/components/schemas/String500"
+          }
+        },
+        "required": [
+          "code",
+          "message"
+        ],
+        "type": "object"
+      },
+      "Flexibiliteit": {
+        "properties": {
+          "codeRegiostraal": {
+            "$ref": "#/components/schemas/Integer1"
+          },
+          "datumAanvangBeschikbaarVoorWerk": {
+            "$ref": "#/components/schemas/Date"
+          },
+          "datumEindeBeschikbaarVoorWerk": {
+            "$ref": "#/components/schemas/Date"
+          },
+          "indicatieOnregelmatigWerkOfPloegendienst": {
+            "$ref": "#/components/schemas/Indicatie"
+          }
+        },
+        "type": "object"
+      },
+      "Gedragscompetentie": {
+        "properties": {
+          "codeBeheersingGedragscompetentie": {
+            "$ref": "#/components/schemas/Integer1"
+          },
+          "codeGedragscompetentie": {
+            "$ref": "#/components/schemas/Integer10AsString"
+          },
+          "omschrijvingGedragscompetentie": {
+            "$ref": "#/components/schemas/String120"
+          }
+        },
+        "type": "object"
+      },
+      "IDWerkzoekende": {
+        "$ref": "#/components/schemas/String200"
+      },
+      "Indicatie": {
+        "maximum": 9,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "Integer1": {
+        "maximum": 9,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "Integer1000": {
+        "maximum": 999,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "Integer10AsString": {
+        "example": "9999999999",
+        "maxLength": 10,
+        "pattern": "^[0-9]+$",
+        "type": "string"
+      },
+      "Integer2": {
+        "maximum": 99,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "Integer5": {
+        "maximum": 99999,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "Interesse": {
+        "properties": {
+          "naamInteresse": {
+            "$ref": "#/components/schemas/String120"
+          }
+        },
+        "type": "object"
+      },
+      "MPArbeidsmarktkwalificatie": {
+        "properties": {
+          "codeWerkEnDenkniveauWerkzoekende": {
+            "$ref": "#/components/schemas/Integer1"
+          },
+          "cursus": {
+            "items": {
+              "$ref": "#/components/schemas/MPCursus"
+            },
+            "type": "array"
+          },
+          "gedragscompetentie": {
+            "items": {
+              "$ref": "#/components/schemas/Gedragscompetentie"
+            },
+            "type": "array"
+          },
+          "opleiding": {
+            "items": {
+              "$ref": "#/components/schemas/MPOpleiding"
+            },
+            "type": "array"
+          },
+          "rijbewijs": {
+            "items": {
+              "$ref": "#/components/schemas/Rijbewijs"
+            },
+            "type": "array"
+          },
+          "taalbeheersing": {
+            "items": {
+              "$ref": "#/components/schemas/Taalbeheersing"
+            },
+            "type": "array"
+          },
+          "vakvaardigheid": {
+            "items": {
+              "$ref": "#/components/schemas/Vakvaardigheid"
+            },
+            "type": "array"
+          },
+          "werkervaring": {
+            "items": {
+              "$ref": "#/components/schemas/MPWerkervaring"
+            },
+            "type": "array"
+          }
+        },
+        "type": "object"
+      },
+      "MPCursus": {
+        "properties": {
+          "datumCertificaat": {
+            "$ref": "#/components/schemas/Date"
+          },
+          "naamCursus": {
+            "$ref": "#/components/schemas/String120"
+          }
+        },
+        "type": "object"
+      },
+      "MPOpleiding": {
+        "properties": {
+          "codeNiveauOpleiding": {
+            "$ref": "#/components/schemas/Integer1"
+          },
+          "datumDiploma": {
+            "$ref": "#/components/schemas/Date"
+          },
+          "indicatieDiploma": {
+            "$ref": "#/components/schemas/Indicatie"
+          },
+          "opleidingsnaam": {
+            "$ref": "#/components/schemas/Opleidingsnaam"
+          }
+        },
+        "type": "object"
+      },
+      "MPVervoermiddel": {
+        "properties": {
+          "indicatieBeschikbaarVoorUitvoeringWerk": {
+            "$ref": "#/components/schemas/Indicatie"
+          },
+          "indicatieBeschikbaarVoorWoonWerkverkeer": {
+            "$ref": "#/components/schemas/Indicatie"
+          }
+        },
+        "type": "object"
+      },
+      "MPWerkervaring": {
+        "properties": {
+          "beroep": {
+            "$ref": "#/components/schemas/Beroepsnaam"
+          },
+          "datumAanvangWerkzaamheden": {
+            "$ref": "#/components/schemas/Date"
+          },
+          "datumEindeWerkzaamheden": {
+            "$ref": "#/components/schemas/Date"
+          },
+          "naamOrganisatie": {
+            "$ref": "#/components/schemas/String70"
+          }
+        },
+        "type": "object"
+      },
+      "MPWerkzoekende": {
+        "properties": {
+          "arbeidsmarktkwalificatie": {
+            "$ref": "#/components/schemas/MPArbeidsmarktkwalificatie"
+          },
+          "bemiddelingsberoep": {
+            "items": {
+              "$ref": "#/components/schemas/Beroepsnaam"
+            },
+            "type": "array"
+          },
+          "contractvorm": {
+            "items": {
+              "$ref": "#/components/schemas/Contractvorm"
+            },
+            "type": "array"
+          },
+          "flexibiliteit": {
+            "$ref": "#/components/schemas/Flexibiliteit"
+          },
+          "indicatieBeschikbaarheidContactgegevens": {
+            "$ref": "#/components/schemas/Indicatie"
+          },
+          "indicatieLdrRegistratie": {
+            "$ref": "#/components/schemas/Indicatie"
+          },
+          "mobiliteit": {
+            "$ref": "#/components/schemas/Mobiliteit"
+          },
+          "sector": {
+            "items": {
+              "$ref": "#/components/schemas/SectorBeroepsEnBedrijfsleven"
+            },
+            "type": "array"
+          },
+          "vervoermiddel": {
+            "items": {
+              "$ref": "#/components/schemas/MPVervoermiddel"
+            },
+            "type": "array"
+          },
+          "voorkeursland": {
+            "items": {
+              "$ref": "#/components/schemas/Voorkeursland"
+            },
+            "type": "array"
+          },
+          "werktijden": {
+            "$ref": "#/components/schemas/Werktijden"
+          }
+        },
+        "type": "object"
+      },
+      "MPWerkzoekendeMatch": {
+        "allOf": [
+          {
+            "properties": {
+              "idWerkzoekende": {
+                "$ref": "#/components/schemas/IDWerkzoekende"
+              }
+            },
+            "type": "object"
+          },
+          {
+            "$ref": "#/components/schemas/MPWerkzoekende"
+          }
+        ]
+      },
+      "Mobiliteit": {
+        "properties": {
+          "bemiddelingspostcode": {
+            "$ref": "#/components/schemas/Postcode"
+          },
+          "maximaleReisafstand": {
+            "$ref": "#/components/schemas/Integer1000"
+          },
+          "maximaleReistijd": {
+            "$ref": "#/components/schemas/Integer1000"
+          }
+        },
+        "type": "object"
+      },
+      "Opleiding": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/MPOpleiding"
+          },
+          {
+            "properties": {
+              "codeStatusOpleiding": {
+                "$ref": "#/components/schemas/Integer1"
+              },
+              "datumAanvangVolgenOpleiding": {
+                "$ref": "#/components/schemas/Date"
+              },
+              "datumEindeVolgenOpleiding": {
+                "$ref": "#/components/schemas/Date"
+              },
+              "naamOpleidingsinstituut": {
+                "$ref": "#/components/schemas/String500"
+              }
+            },
+            "type": "object"
+          }
+        ]
+      },
+      "Opleidingsnaam": {
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/OpleidingsnaamGecodeerd"
+          },
+          {
+            "$ref": "#/components/schemas/OpleidingsnaamOngecodeerd"
+          }
+        ]
+      },
+      "OpleidingsnaamGecodeerd": {
+        "properties": {
+          "opleidingsnaamGecodeerd": {
+            "properties": {
+              "codeOpleidingsnaam": {
+                "$ref": "#/components/schemas/Integer10AsString"
+              },
+              "omschrijvingOpleidingsnaam": {
+                "$ref": "#/components/schemas/String120"
+              }
+            },
+            "type": "object"
+          }
+        },
+        "type": "object"
+      },
+      "OpleidingsnaamOngecodeerd": {
+        "properties": {
+          "opleidingsnaamOngecodeerd": {
+            "properties": {
+              "naamOpleidingOngecodeerd": {
+                "$ref": "#/components/schemas/String120"
+              },
+              "omschrijvingOpleiding": {
+                "$ref": "#/components/schemas/String2000"
+              }
+            },
+            "type": "object"
+          }
+        },
+        "type": "object"
+      },
+      "Postcode": {
+        "example": "1234AB",
+        "pattern": "^[0-9]{4}[a-zA-Z]{2}$",
+        "type": "string"
+      },
+      "Rijbewijs": {
+        "properties": {
+          "codeSoortRijbewijs": {
+            "$ref": "#/components/schemas/StringCode3"
+          }
+        },
+        "type": "object"
+      },
+      "SectorBeroepsEnBedrijfsleven": {
+        "properties": {
+          "codeSbi": {
+            "$ref": "#/components/schemas/Integer5"
+          }
+        },
+        "type": "object"
+      },
+      "String120": {
+        "maxLength": 120,
+        "type": "string"
+      },
+      "String14": {
+        "maxLength": 14,
+        "type": "string"
+      },
+      "String200": {
+        "maxLength": 200,
+        "type": "string"
+      },
+      "String2000": {
+        "maxLength": 2000,
+        "type": "string"
+      },
+      "String320": {
+        "maxLength": 320,
+        "type": "string"
+      },
+      "String35": {
+        "maxLength": 35,
+        "type": "string"
+      },
+      "String500": {
+        "maxLength": 500,
+        "type": "string"
+      },
+      "String70": {
+        "maxLength": 70,
+        "type": "string"
+      },
+      "StringCode": {
+        "maxLength": 10,
+        "type": "string"
+      },
+      "StringCode1": {
+        "maxLength": 1,
+        "type": "string"
+      },
+      "StringCode2": {
+        "maxLength": 2,
+        "type": "string"
+      },
+      "StringCode3": {
+        "maxLength": 3,
+        "type": "string"
+      },
+      "Taalbeheersing": {
+        "properties": {
+          "codeNiveauTaalbeheersingLezen": {
+            "$ref": "#/components/schemas/Integer1"
+          },
+          "codeNiveauTaalbeheersingLuisteren": {
+            "$ref": "#/components/schemas/Integer1"
+          },
+          "codeNiveauTaalbeheersingMondeling": {
+            "$ref": "#/components/schemas/Integer1"
+          },
+          "codeNiveauTaalbeheersingSchriftelijk": {
+            "$ref": "#/components/schemas/Integer1"
+          },
+          "codeTaal": {
+            "$ref": "#/components/schemas/StringCode3"
+          }
+        },
+        "type": "object"
+      },
+      "Telefoonummer": {
+        "$ref": "#/components/schemas/String14"
+      },
+      "URL": {
+        "format": "URL",
+        "type": "string"
+      },
+      "Vakvaardigheid": {
+        "properties": {
+          "omschrijving": {
+            "$ref": "#/components/schemas/String120"
+          }
+        },
+        "type": "object"
+      },
+      "Vervoermiddel": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/MPVervoermiddel"
+          },
+          {
+            "properties": {
+              "codeVervoermiddel": {
+                "$ref": "#/components/schemas/Integer2"
+              }
+            },
+            "type": "object"
+          }
+        ]
+      },
+      "Voorkeursland": {
+        "properties": {
+          "landencodeIso": {
+            "$ref": "#/components/schemas/StringCode2"
+          }
+        },
+        "type": "object"
+      },
+      "Webadres": {
+        "properties": {
+          "codeWebadres": {
+            "$ref": "#/components/schemas/Integer2"
+          },
+          "url": {
+            "$ref": "#/components/schemas/URL"
+          }
+        },
+        "type": "object"
+      },
+      "Werkervaring": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/MPWerkervaring"
+          },
+          {
+            "properties": {
+              "toelichtingWerkervaring": {
+                "$ref": "#/components/schemas/String2000"
+              }
+            },
+            "type": "object"
+          }
+        ]
+      },
+      "Werktijden": {
+        "properties": {
+          "aantalWerkurenPerWeekMaximaal": {
+            "$ref": "#/components/schemas/Integer2"
+          },
+          "aantalWerkurenPerWeekMinimaal": {
+            "$ref": "#/components/schemas/Integer2"
+          },
+          "indicatieKantoortijden": {
+            "$ref": "#/components/schemas/Indicatie"
+          }
+        },
+        "type": "object"
+      },
+      "Werkzoekende": {
+        "properties": {
+          "arbeidsmarktkwalificatie": {
+            "$ref": "#/components/schemas/Arbeidsmarktkwalificatie"
+          },
+          "bemiddelingsberoep": {
+            "items": {
+              "$ref": "#/components/schemas/Beroepsnaam"
+            },
+            "type": "array"
+          },
+          "contactpersoon": {
+            "items": {
+              "$ref": "#/components/schemas/ContactpersoonAfdeling"
+            },
+            "type": "array"
+          },
+          "contractvorm": {
+            "items": {
+              "$ref": "#/components/schemas/Contractvorm"
+            },
+            "type": "array"
+          },
+          "eisAanWerk": {
+            "$ref": "#/components/schemas/EisAanWerk"
+          },
+          "emailadres": {
+            "items": {
+              "$ref": "#/components/schemas/Emailadres"
+            },
+            "type": "array"
+          },
+          "flexibiliteit": {
+            "$ref": "#/components/schemas/Flexibiliteit"
+          },
+          "idWerkzoekende": {
+            "$ref": "#/components/schemas/IDWerkzoekende"
+          },
+          "indicatieBeschikbaarheidContactgegevens": {
+            "$ref": "#/components/schemas/Indicatie"
+          },
+          "indicatieLdrRegistratie": {
+            "$ref": "#/components/schemas/Indicatie"
+          },
+          "mobiliteit": {
+            "$ref": "#/components/schemas/Mobiliteit"
+          },
+          "persoonlijkePresentatie": {
+            "$ref": "#/components/schemas/String2000"
+          },
+          "sector": {
+            "items": {
+              "$ref": "#/components/schemas/SectorBeroepsEnBedrijfsleven"
+            },
+            "type": "array"
+          },
+          "telefoonnummer": {
+            "items": {
+              "$ref": "#/components/schemas/Telefoonummer"
+            },
+            "type": "array"
+          },
+          "vervoermiddel": {
+            "items": {
+              "$ref": "#/components/schemas/Vervoermiddel"
+            },
+            "type": "array"
+          },
+          "voorkeursland": {
+            "items": {
+              "$ref": "#/components/schemas/Voorkeursland"
+            },
+            "type": "array"
+          },
+          "webadres": {
+            "items": {
+              "$ref": "#/components/schemas/Webadres"
+            },
+            "type": "array"
+          },
+          "werktijden": {
+            "$ref": "#/components/schemas/Werktijden"
+          }
+        },
+        "type": "object"
+      },
+      "WerkzoekendeMatchingProfielen": {
+        "items": {
+          "$ref": "#/components/schemas/MPWerkzoekendeMatch"
+        },
+        "type": "array"
+      }
+    }
+  },
+  "info": {
+    "contact": {
+      "email": "beheer@twi-programma.nl",
+      "name": "Helpdesk",
+      "url": "https://www.twi-programma.nl"
+    },
+    "description": "Contract tbv interactie van bronnen met VUM uitwisselingsvoorziening voor WerkzoekendeProfielen",
+    "title": "VUM API WerkzoekendeProfielen tussen VUM-UV en bronnen",
+    "version": "1.0.0"
+  },
+  "openapi": "3.0.0",
+  "paths": {
+    "/werkzoekendeProfielen/matches": {
+      "post": {
+        "description": "Zoekopdracht om matches voor Werkzoekende MatchingProfielen op te vragen",
+        "operationId": "MatchesWerkzoekendeProfielen",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "X-VUM-berichtVersie",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "X-VUM-fromParty",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "X-VUM-toParty",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "X-VUM-viaParty",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "X-VUM-SUWIparty",
+            "required": true,
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/WerkzoekendeProfielMatchesRequest"
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "matches": {
+                      "$ref": "#/components/schemas/WerkzoekendeMatchingProfielen"
+                    },
+                    "maximumAantalResultatenBereikt": {
+                      "description": "Geeft aan of bron meer matches zou kunnen leveren dan de teruggeleverde set. Bronnen mogen per zoekvraag een maximum aantal (standaard 100) resultaten leveren",
+                      "type": "boolean"
+                    }
+                  },
+                  "required": [
+                    "maximumAantalResultatenBereikt",
+                    "matches"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "OK",
+            "headers": {
+              "X-VUM-berichtVersie": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "X-VUM-fromParty": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "X-VUM-toParty": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "X-VUM-viaParty": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Bad request"
+          },
+          "401": {
+            "description": "not authorized"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Too Many Requests"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Internal Server Error"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Service Unavailable"
+          }
+        },
+        "summary": "Zoekopdracht voor MatchingProfielen Werkzoekende"
+      }
+    },
+    "/werkzoekendeProfielen/{idWerkzoekende}": {
+      "get": {
+        "description": "Vraag detailprofielen op bij een opgegeven idWerkzoekende",
+        "operationId": "getWerkzoekendeProfiel",
+        "parameters": [
+          {
+            "explode": false,
+            "in": "path",
+            "name": "idWerkzoekende",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/IDWerkzoekende"
+            },
+            "style": "simple"
+          },
+          {
+            "in": "header",
+            "name": "X-VUM-berichtVersie",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "X-VUM-fromParty",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "X-VUM-toParty",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "X-VUM-viaParty",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "X-VUM-SUWIparty",
+            "required": true,
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Werkzoekende"
+                }
+              }
+            },
+            "description": "OK",
+            "headers": {
+              "X-VUM-berichtVersie": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "X-VUM-fromParty": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "X-VUM-toParty": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "X-VUM-viaParty": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Bad request"
+          },
+          "401": {
+            "description": "not authorized"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Too Many Requests, limiet is overschreden voor deze uitvraag"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Internal Server Error"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Service Unavailable"
+          }
+        },
+        "summary": "Vraag detailprofielen op bij opgegeven idWerkzoekende"
+      }
+    }
+  },
+  "servers": [
+    {
+      "url": "https://api.example.com/v1"
+    }
+  ]
+}
