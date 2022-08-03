@@ -156,7 +156,7 @@
             "$ref": "#/components/schemas/String35"
           },
           "telefoonnummer": {
-            "$ref": "#/components/schemas/Telefoonummer"
+            "$ref": "#/components/schemas/Telefoonnummer"
           }
         },
         "type": "object"
@@ -652,7 +652,7 @@
         },
         "type": "object"
       },
-      "Telefoonummer": {
+      "Telefoonnummer": {
         "$ref": "#/components/schemas/String14"
       },
       "URL": {
@@ -795,7 +795,7 @@
           },
           "telefoonnummer": {
             "items": {
-              "$ref": "#/components/schemas/Telefoonummer"
+              "$ref": "#/components/schemas/Telefoonnummer"
             },
             "type": "array"
           },
