@@ -246,7 +246,7 @@
           },
           "telefoonnummer": {
             "items": {
-              "$ref": "#/components/schemas/Telefoonummer"
+              "$ref": "#/components/schemas/Telefoonnummer"
             },
             "type": "array"
           }
@@ -848,7 +848,7 @@
         },
         "type": "object"
       },
-      "Telefoonummer": {
+      "Telefoonnummer": {
         "$ref": "#/components/schemas/String14"
       },
       "URL": {
