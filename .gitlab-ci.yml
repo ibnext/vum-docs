@@ -11,16 +11,11 @@
       - .go/src/github.com/
 
 stages:
-  - release
+  - validate
 
-job-that-succeeds:
-  stage: release
-  script:
-    - 'echo "It succeeded!"'
-    - 'echo "Could make a job here to validate lint of yaml"'
 
-registry-upload-json:
-  stage: release
+lint:
+  stage: validate
   image: golang:1.17
   extends: .go-cache
   script:
@@ -28,10 +23,6 @@ registry-upload-json:
       for F in ./OAS_Contracten/*.yaml; do
         json_file_path=$(echo $F | sed "s/.yaml/.json/");
         yaml2json $F > $json_file_path;
-        
-        json_file_name="$(basename -- $json_file_path)";
-        curl --header "JOB-TOKEN: $CI_JOB_TOKEN" --upload-file $json_file_path "${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/generic/json_oas_contracten/${CI_COMMIT_TAG}/$json_file_name";
       done;
+      git diff --text --exit-code HEAD || (echo "You should probably run make tojson" && exit 1)
       '
-  rules:
-    - if: '$CI_COMMIT_TAG =~ /\d+\.\d+\.\d+.*/'
