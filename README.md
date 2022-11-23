@@ -104,8 +104,8 @@ documentatie:
 | Entiteiten en attributen v0.8.4.xlsx | 0.8.4      | VUM          | Beschrijving bij entiteiten, attributen uit het gegevensmodel VUM |
 | Gegevensuitwisseling Architectuur    | 1.0        | VUM          | Architectuur van de VUM gegevensuitwisseling                      |
 | KSA VUM                              | 0.8        | VUM          | Keten Start Architectuur                                          |
-| Het uniforme werkzoekende profiel    | 1.0        | VUM          | Specificatie van Het uniforme werkzoekende profiel                |
-| De uniforme vacature-standaard       | 1.0        | VUM          | Specificatie van De uniforme vacature-standaard                   |
+| Het uniforme werkzoekende profiel    | 1.1.0      | VUM          | Specificatie van Het uniforme werkzoekende profiel                |
+| De uniforme vacature-standaard       | 1.1.0      | VUM          | Specificatie van De uniforme vacature-standaard                   |
 
 ## Samenhang met standaarden
 
@@ -227,6 +227,11 @@ bronnen.</th>
 <th>1.0.0</th>
 <th>23 mei 2022</th>
 <th>Versie 1.0.0</th>
+</tr>
+<tr class="header">
+<th>1.1.0</th>
+<th>28 november 2022</th>
+<th>Enumeraties vanuit de gegevensstandaard toegevoegd aan de OAS contracten</th>
 </tr>
 </thead>
 <tbody>
@@ -401,20 +406,20 @@ toegevoegd.
 <th><strong>Omschrijving</strong></th>
 </tr>
 <tr class="odd">
-<th>VUM-Bemiddelaar-WerkzoekendeProfielen-1.0.0.yaml</th>
+<th>VUM-Bemiddelaar-WerkzoekendeProfielen-1.1.0.yaml</th>
 <th>Contract tussen VUM uitwisselingsvoorziening en bemiddelaar voor
 bevragen van Werkzoekende profielen, inclusief callback specificatie
 voor endpoint /werkzoekendeProfielen/matches<br />
 (Contract 1 in bovenstaand diagram)</th>
 </tr>
 <tr class="header">
-<th>VUM-Bron-WerkzoekendeProfielen-1.0.0.yaml</th>
+<th>VUM-Bron-WerkzoekendeProfielen-1.1.0.yaml</th>
 <th>Contract tussen VUM uitwisselingsvoorziening en bronnen voor
 bevragen van Werkzoekende profielen, met synchrone endpoints<br />
 (Contract 2 in bovenstaand diagram)</th>
 </tr>
 <tr class="odd">
-<th>VUM-Bemiddelaar-Vacatures-1.0.0.yaml</th>
+<th>VUM-Bemiddelaar-Vacatures-1.1.0.yaml</th>
 <th>Contract tussen VUM uitwisselingsvoorziening en bemiddelaar voor
 bevragen van Vacatures, inclusief callback specificatie voor endpoint
 /vacatures/matches<br />
@@ -422,7 +427,7 @@ bevragen van Vacatures, inclusief callback specificatie voor endpoint
 Werkzoekende Profielen, analoog qua opzet aan contract 1)</th>
 </tr>
 <tr class="header">
-<th>VUM-Bron-Vacatures-1.0.0.yaml</th>
+<th>VUM-Bron-Vacatures-1.1.0.yaml</th>
 <th>Contract tussen VUM uitwisselingsvoorziening en bronnen voor
 bevragen van Vacatures, met synchrone endpoints<br />
 (contract 4, niet in bovenstaand diagram dat betrekking heeft op
