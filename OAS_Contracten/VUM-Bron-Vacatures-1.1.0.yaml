@@ -191,14 +191,74 @@ components:
       items:
         $ref: '#/components/schemas/MPVacatureMatch'
     MPVacatureMatch:
-      allOf:
-      - type: object
-        properties:
-          idVacature:
-            $ref: '#/components/schemas/IDVacature'
-      - $ref: '#/components/schemas/MPVacature'
+      type: object
+      additionalProperties: false
+      properties:
+        idVacature:
+          $ref: '#/components/schemas/IDVacature'
+        codeWerkEnDenkniveauMinimaal:
+          type: string
+          enum: ['0', '1', '2', '3', '4', '5', '6', '7']
+        indicatieLdrRegistratie:
+          type: integer
+          enum: [1, 2]
+        sluitingsDatumVacature:
+            $ref: '#/components/schemas/Date'
+        sollicitatiewijze:
+          type: array
+          items:
+            $ref: '#/components/schemas/MPSollicitatiewijze'
+        werkgever:
+            $ref: '#/components/schemas/MPWerkgever'
+        sector:
+          $ref: '#/components/schemas/SectorBeroepsEnBedrijfsleven'
+        arbeidsVoorwaarden:
+          $ref: '#/components/schemas/MPArbeidsVoorwaarden'
+        contractvorm:
+          type: array
+          items:
+            $ref: '#/components/schemas/Contractvorm'
+        beroep:
+          $ref: '#/components/schemas/Beroepsnaam'
+        werkervaring:
+          type: array
+          items:
+            $ref: '#/components/schemas/Werkervaring'
+        rijbewijs:
+          type: array
+          items:
+            $ref: '#/components/schemas/Rijbewijs'
+        vervoermiddel:
+          type: array
+          items:
+            $ref: '#/components/schemas/MPVervoermiddel'
+        flexibiliteit:
+          $ref: '#/components/schemas/Flexibiliteit'
+        werktijden:
+          $ref: '#/components/schemas/Werktijden'
+        cursus:
+          type: array
+          items:
+            $ref: '#/components/schemas/Cursus'
+        opleiding:
+          type: array
+          items:
+            $ref: '#/components/schemas/MPOpleiding'
+        gedragscompetentie:
+          type: array
+          items:
+            $ref: '#/components/schemas/Gedragscompetentie'
+        vakvaardigheid:
+          type: array
+          items:
+            $ref: '#/components/schemas/Vakvaardigheid'
+        taalbeheersing:
+          type: array
+          items:
+            $ref: '#/components/schemas/Taalbeheersing'
     Vacature:
       type: object
+      additionalProperties: false
       properties:
         idVacature:
           $ref: '#/components/schemas/IDVacature'
@@ -270,6 +330,7 @@ components:
             $ref: '#/components/schemas/Taalbeheersing'
     MPVacature:
       type: object
+      additionalProperties: false
       properties:
         codeWerkEnDenkniveauMinimaal:
           type: string
@@ -337,6 +398,7 @@ components:
       - $ref: '#/components/schemas/BeroepsnaamOngecodeerd'
     Werkervaring:
       type: object
+      additionalProperties: false
       properties:
         aantalJarenWerkzaamInBeroep:
           $ref: '#/components/schemas/Integer2'
@@ -350,9 +412,11 @@ components:
       - $ref: '#/components/schemas/MPOpleidingsnaamOngecodeerd'
     BeroepsnaamGecodeerd:
       type: object
+      additionalProperties: false
       properties:
         beroepsnaamGecodeerd:
           type: object
+          additionalProperties: false
           properties:
             codeBeroepsnaam:
               $ref: '#/components/schemas/StringCode'
@@ -360,17 +424,21 @@ components:
               $ref: '#/components/schemas/String120'
     BeroepsnaamOngecodeerd:
       type: object
+      additionalProperties: false
       properties:
         beroepsnaamOngecodeerd:
           type: object
+          additionalProperties: false
           properties:
             naamBeroepOngecodeerd:
               $ref: '#/components/schemas/String120'
     OpleidingsnaamGecodeerd:
       type: object
+      additionalProperties: false
       properties:
         opleidingsnaamGecodeerd:
           type: object
+          additionalProperties: false
           properties:
             codeOpleidingsnaam:
               $ref: '#/components/schemas/Integer10AsString'
@@ -378,9 +446,11 @@ components:
               $ref: '#/components/schemas/String120'
     OpleidingsnaamOngecodeerd:
       type: object
+      additionalProperties: false
       properties:
         opleidingsnaamOngecodeerd:
           type: object
+          additionalProperties: false
           properties:
             naamOpleidingOngecodeerd:
               $ref: '#/components/schemas/String120'
@@ -388,14 +458,17 @@ components:
               $ref: '#/components/schemas/String2000'
     MPOpleidingsnaamOngecodeerd:
       type: object
+      additionalProperties: false
       properties:
         mpOpleidingsnaamOngecodeerd:
           type: object
+          additionalProperties: false
           properties:
             naamOpleidingOngecodeerd:
               $ref: '#/components/schemas/String120'
     Gedragscompetentie:
       type: object
+      additionalProperties: false
       properties:
         codeGedragscompetentie:
           type: string
@@ -433,6 +506,7 @@ components:
           enum: [1,2,3,4,5,9]
     Werktijden:
       type: object
+      additionalProperties: false
       properties:
         aantalWerkurenPerWeekMinimaal:
           $ref: '#/components/schemas/Integer2'
@@ -442,6 +516,7 @@ components:
           $ref: '#/components/schemas/Indicatie'
     Flexibiliteit:
       type: object
+      additionalProperties: false
       properties:
         codeRegiostraal:
           maximum: 9
@@ -455,12 +530,14 @@ components:
           $ref: '#/components/schemas/Date'
     Rijbewijs:
       type: object
+      additionalProperties: false
       properties:
         codeSoortRijbewijs:
           type: string
           enum: ['A', 'A1', 'A2', 'AM', 'B', 'B+', 'C1', 'C', 'D1', 'D', 'BE', 'C1E', 'CE', 'D1E', 'DE', 'T']
     Opleiding:
       type: object
+      additionalProperties: false
       properties:
         codeNiveauOpleiding:
           type: integer
@@ -472,6 +549,7 @@ components:
           $ref: '#/components/schemas/Opleidingsnaam'
     MPOpleiding:
       type: object
+      additionalProperties: false
       properties:
         codeNiveauOpleiding:
           type: integer
@@ -483,21 +561,25 @@ components:
           $ref: '#/components/schemas/MPOpleidingsnaam'
     Cursus:
       type: object
+      additionalProperties: false
       properties:
         naamCursus:
           $ref: '#/components/schemas/String120'
     SectorBeroepsEnBedrijfsleven:
       type: object
+      additionalProperties: false
       properties:
         codeSbi:
           $ref: '#/components/schemas/Integer5'
     Vakvaardigheid:
       type: object
+      additionalProperties: false
       properties:
         omschrijving:
           $ref: '#/components/schemas/String120'
     Taalbeheersing:
       type: object
+      additionalProperties: false
       properties:
         codeTaal:
           $ref: '#/components/schemas/StringCode3'
@@ -510,15 +592,19 @@ components:
         codeNiveauTaalbeheersingLuisteren:
           $ref: '#/components/schemas/IntegerTaal'
     Vervoermiddel:
-      allOf:
-        - $ref: '#/components/schemas/MPVervoermiddel'
-        - type: object
-          properties:
-            codeVervoermiddel:
-              type: integer
-              enum: [1, 2, 3, 4, 5, 9]
+      type: object
+      additionalProperties: false
+      properties:
+        indicatieBeschikbaarVoorUitvoeringWerk:
+          $ref: '#/components/schemas/Indicatie'
+        indicatieBeschikbaarVoorWoonWerkverkeer:
+          $ref: '#/components/schemas/Indicatie'       
+        codeVervoermiddel:
+          type: integer
+          enum: [1, 2, 3, 4, 5, 9]
     MPVervoermiddel:
       type: object
+      additionalProperties: false
       properties:
         indicatieBeschikbaarVoorUitvoeringWerk:
           $ref: '#/components/schemas/Indicatie'
@@ -530,6 +616,7 @@ components:
       $ref: '#/components/schemas/String14'
     ContactpersoonAfdeling:
       type: object
+      additionalProperties: false
       properties:
         naamContactpersoonAfdeling:
           $ref: '#/components/schemas/String35'
@@ -543,6 +630,7 @@ components:
             $ref: '#/components/schemas/Emailadres'
     Webadres:
       type: object
+      additionalProperties: false
       properties:
         codeWebadres:
           $ref: '#/components/schemas/Integer2'
@@ -550,6 +638,7 @@ components:
           $ref: '#/components/schemas/URL'
     Contractvorm:
       type: object
+      additionalProperties: false
       properties:
         codeTypeArbeidscontract:
           type: string
@@ -559,6 +648,7 @@ components:
           enum: ["01", "02", "03", "04"]
     Sollicitatiewijze:
       type: object
+      additionalProperties: false
       properties:
         codeSollicitatiewijze:
           type: string
@@ -567,12 +657,14 @@ components:
           $ref: '#/components/schemas/Webadres'
     MPSollicitatiewijze:
       type: object
+      additionalProperties: false
       properties:
         codeSollicitatiewijze:
           type: string
           enum: ["1", "2", "3", "4"]
     Werkgever:
       type: object
+      additionalProperties: false
       properties:
         handelsnaamOrganisatie:
           $ref: '#/components/schemas/String500'
@@ -594,6 +686,7 @@ components:
             $ref: '#/components/schemas/SectorBeroepsEnBedrijfsleven'
     MPWerkgever:
       type: object
+      additionalProperties: false
       properties:
         adresHouding:
           type: array
@@ -605,6 +698,7 @@ components:
             $ref: '#/components/schemas/SectorBeroepsEnBedrijfsleven'
     ArbeidsVoorwaarden:
       type: object
+      additionalProperties: false
       properties:
         datumAanvangWerkzaamheden:
           $ref: '#/components/schemas/Date'
@@ -616,6 +710,7 @@ components:
           $ref: '#/components/schemas/String100'
     MPArbeidsVoorwaarden:
       type: object
+      additionalProperties: false
       properties:
         datumAanvangWerkzaamheden:
           $ref: '#/components/schemas/Date'
@@ -625,6 +720,7 @@ components:
           $ref: '#/components/schemas/String100'
     AdresHouding:
       type: object
+      additionalProperties: false
       properties:
         codeFunctieAdres:
           type: string
@@ -639,9 +735,11 @@ components:
           -  $ref: '#/components/schemas/AdresBuitenland'
     AdresNederland:
       type: object
+      additionalProperties: false
       properties:
         adresNederland:
           type: object
+          additionalProperties: false
           properties:
             codeGemeente:
               $ref: '#/components/schemas/StringCode4'
@@ -668,9 +766,11 @@ components:
               -  $ref: '#/components/schemas/Antwoordnummeradres'
     Straatadres:
       type: object
+      additionalProperties: false
       properties:
         straatadres:
           type: object
+          additionalProperties: false
           properties:
             aanduidingBijHuisnummer:
               $ref: '#/components/schemas/StringCode2'
@@ -692,25 +792,31 @@ components:
               enum: ["WW"]
     Postbusadres:
       type: object
+      additionalProperties: false
       properties:
         postbusadres:
           type: object
+          additionalProperties: false
           properties:
             postbusnummer:
               $ref: '#/components/schemas/Integer5'
     Antwoordnummeradres:
       type: object
+      additionalProperties: false
       properties:
         antwoordnummeradres:
           type: object
+          additionalProperties: false
           properties:
             antwoordnummer:
               $ref: '#/components/schemas/Integer5'
     AdresBuitenland:
       type: object
+      additionalProperties: false
       properties:
         adresBuitenland:
           type: object
+          additionalProperties: false
           properties:
             landencodeIso:
               $ref: '#/components/schemas/StringCode2'
@@ -730,9 +836,11 @@ components:
               -  $ref: '#/components/schemas/PostbusadresBuitenland'
     StraatadresBuitenland:
       type: object
+      additionalProperties: false
       properties:
         straatadresbuitenland:
           type: object
+          additionalProperties: false
           properties:
             huisnummerBuitenland:
               $ref: '#/components/schemas/String9'
@@ -740,14 +848,17 @@ components:
               $ref: '#/components/schemas/String24'
     PostbusadresBuitenland:
       type: object
+      additionalProperties: false
       properties:
         postbusadresbuitenland:
           type: object
+          additionalProperties: false
           properties:
             postbusnummerBuitenland:
               $ref: '#/components/schemas/String9'
     MPAdresHouding:
       type: object
+      additionalProperties: false
       properties:
         codeFunctieAdres:
           type: string
@@ -756,9 +867,11 @@ components:
           $ref: '#/components/schemas/MPAdresBuitenland'
     MPAdresBuitenland:
       type: object
+      additionalProperties: false
       properties:
         adresBuitenland:
           type: object
+          additionalProperties: false
           properties:
             landencodeIso:
               $ref: '#/components/schemas/StringCode2'

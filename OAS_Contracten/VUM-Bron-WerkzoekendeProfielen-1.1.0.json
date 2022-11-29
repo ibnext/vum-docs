@@ -22,6 +22,7 @@
     },
     "schemas": {
       "Arbeidsmarktkwalificatie": {
+        "additionalProperties": false,
         "properties": {
           "codeWerkEnDenkniveauWerkzoekende": {
             "enum": [
@@ -98,8 +99,10 @@
         ]
       },
       "BeroepsnaamGecodeerd": {
+        "additionalProperties": false,
         "properties": {
           "beroepsnaamGecodeerd": {
+            "additionalProperties": false,
             "properties": {
               "codeBeroepsnaam": {
                 "$ref": "#/components/schemas/StringCode"
@@ -114,8 +117,10 @@
         "type": "object"
       },
       "BeroepsnaamOngecodeerd": {
+        "additionalProperties": false,
         "properties": {
           "beroepsnaamOngecodeerd": {
+            "additionalProperties": false,
             "properties": {
               "naamBeroepOngecodeerd": {
                 "$ref": "#/components/schemas/String120"
@@ -127,6 +132,7 @@
         "type": "object"
       },
       "ContactpersoonAfdeling": {
+        "additionalProperties": false,
         "properties": {
           "emailadres": {
             "$ref": "#/components/schemas/Emailadres"
@@ -141,6 +147,7 @@
         "type": "object"
       },
       "Contractvorm": {
+        "additionalProperties": false,
         "properties": {
           "codeTypeArbeidscontract": {
             "enum": [
@@ -162,31 +169,32 @@
         "type": "object"
       },
       "Cursus": {
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/MPCursus"
+        "additionalProperties": false,
+        "properties": {
+          "datumAanvangVolgenCursus": {
+            "$ref": "#/components/schemas/Date"
           },
-          {
-            "properties": {
-              "datumAanvangVolgenCursus": {
-                "$ref": "#/components/schemas/Date"
-              },
-              "datumEindeVolgenCursus": {
-                "$ref": "#/components/schemas/Date"
-              },
-              "naamOpleidingsinstituut": {
-                "$ref": "#/components/schemas/String500"
-              }
-            },
-            "type": "object"
+          "datumCertificaat": {
+            "$ref": "#/components/schemas/Date"
+          },
+          "datumEindeVolgenCursus": {
+            "$ref": "#/components/schemas/Date"
+          },
+          "naamCursus": {
+            "$ref": "#/components/schemas/String120"
+          },
+          "naamOpleidingsinstituut": {
+            "$ref": "#/components/schemas/String500"
           }
-        ]
+        },
+        "type": "object"
       },
       "Date": {
         "format": "date",
         "type": "string"
       },
       "EisAanWerk": {
+        "additionalProperties": false,
         "properties": {
           "indicatieAanpassingWerkomgeving": {
             "$ref": "#/components/schemas/Indicatie"
@@ -222,6 +230,7 @@
         "type": "object"
       },
       "Flexibiliteit": {
+        "additionalProperties": false,
         "properties": {
           "codeRegiostraal": {
             "maximum": 9,
@@ -241,6 +250,7 @@
         "type": "object"
       },
       "Gedragscompetentie": {
+        "additionalProperties": false,
         "properties": {
           "codeBeheersingGedragscompetentie": {
             "enum": [
@@ -360,6 +370,7 @@
         "type": "integer"
       },
       "Interesse": {
+        "additionalProperties": false,
         "properties": {
           "naamInteresse": {
             "$ref": "#/components/schemas/String120"
@@ -368,6 +379,7 @@
         "type": "object"
       },
       "MPArbeidsmarktkwalificatie": {
+        "additionalProperties": false,
         "properties": {
           "codeWerkEnDenkniveauWerkzoekende": {
             "enum": [
@@ -428,6 +440,7 @@
         "type": "object"
       },
       "MPCursus": {
+        "additionalProperties": false,
         "properties": {
           "datumCertificaat": {
             "$ref": "#/components/schemas/Date"
@@ -439,6 +452,7 @@
         "type": "object"
       },
       "MPOpleiding": {
+        "additionalProperties": false,
         "properties": {
           "codeNiveauOpleiding": {
             "enum": [
@@ -471,6 +485,7 @@
         "type": "object"
       },
       "MPVervoermiddel": {
+        "additionalProperties": false,
         "properties": {
           "indicatieBeschikbaarVoorUitvoeringWerk": {
             "$ref": "#/components/schemas/Indicatie"
@@ -482,6 +497,7 @@
         "type": "object"
       },
       "MPWerkervaring": {
+        "additionalProperties": false,
         "properties": {
           "beroep": {
             "$ref": "#/components/schemas/Beroepsnaam"
@@ -499,6 +515,7 @@
         "type": "object"
       },
       "MPWerkzoekende": {
+        "additionalProperties": false,
         "properties": {
           "arbeidsmarktkwalificatie": {
             "$ref": "#/components/schemas/MPArbeidsmarktkwalificatie"
@@ -560,21 +577,72 @@
         "type": "object"
       },
       "MPWerkzoekendeMatch": {
-        "allOf": [
-          {
-            "properties": {
-              "idWerkzoekende": {
-                "$ref": "#/components/schemas/IDWerkzoekende"
-              }
-            },
-            "type": "object"
+        "additionalProperties": false,
+        "properties": {
+          "arbeidsmarktkwalificatie": {
+            "$ref": "#/components/schemas/MPArbeidsmarktkwalificatie"
           },
-          {
-            "$ref": "#/components/schemas/MPWerkzoekende"
+          "bemiddelingsberoep": {
+            "items": {
+              "$ref": "#/components/schemas/Beroepsnaam"
+            },
+            "type": "array"
+          },
+          "contractvorm": {
+            "items": {
+              "$ref": "#/components/schemas/Contractvorm"
+            },
+            "type": "array"
+          },
+          "flexibiliteit": {
+            "$ref": "#/components/schemas/Flexibiliteit"
+          },
+          "idWerkzoekende": {
+            "$ref": "#/components/schemas/IDWerkzoekende"
+          },
+          "indicatieBeschikbaarheidContactgegevens": {
+            "enum": [
+              1,
+              2
+            ],
+            "type": "integer"
+          },
+          "indicatieLdrRegistratie": {
+            "enum": [
+              1,
+              2
+            ],
+            "type": "integer"
+          },
+          "mobiliteit": {
+            "$ref": "#/components/schemas/Mobiliteit"
+          },
+          "sector": {
+            "items": {
+              "$ref": "#/components/schemas/SectorBeroepsEnBedrijfsleven"
+            },
+            "type": "array"
+          },
+          "vervoermiddel": {
+            "items": {
+              "$ref": "#/components/schemas/MPVervoermiddel"
+            },
+            "type": "array"
+          },
+          "voorkeursland": {
+            "items": {
+              "$ref": "#/components/schemas/Voorkeursland"
+            },
+            "type": "array"
+          },
+          "werktijden": {
+            "$ref": "#/components/schemas/Werktijden"
           }
-        ]
+        },
+        "type": "object"
       },
       "Mobiliteit": {
+        "additionalProperties": false,
         "properties": {
           "bemiddelingspostcode": {
             "$ref": "#/components/schemas/Postcode"
@@ -589,34 +657,55 @@
         "type": "object"
       },
       "Opleiding": {
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/MPOpleiding"
+        "additionalProperties": false,
+        "properties": {
+          "codeNiveauOpleiding": {
+            "enum": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              9
+            ],
+            "type": "integer"
           },
-          {
-            "properties": {
-              "codeStatusOpleiding": {
-                "enum": [
-                  0,
-                  1,
-                  2,
-                  3
-                ],
-                "type": "integer"
-              },
-              "datumAanvangVolgenOpleiding": {
-                "$ref": "#/components/schemas/Date"
-              },
-              "datumEindeVolgenOpleiding": {
-                "$ref": "#/components/schemas/Date"
-              },
-              "naamOpleidingsinstituut": {
-                "$ref": "#/components/schemas/String500"
-              }
-            },
-            "type": "object"
+          "codeStatusOpleiding": {
+            "enum": [
+              0,
+              1,
+              2,
+              3
+            ],
+            "type": "integer"
+          },
+          "datumAanvangVolgenOpleiding": {
+            "$ref": "#/components/schemas/Date"
+          },
+          "datumDiploma": {
+            "$ref": "#/components/schemas/Date"
+          },
+          "datumEindeVolgenOpleiding": {
+            "$ref": "#/components/schemas/Date"
+          },
+          "indicatieDiploma": {
+            "enum": [
+              0,
+              1,
+              2,
+              8
+            ],
+            "type": "integer"
+          },
+          "naamOpleidingsinstituut": {
+            "$ref": "#/components/schemas/String500"
+          },
+          "opleidingsnaam": {
+            "$ref": "#/components/schemas/Opleidingsnaam"
           }
-        ]
+        },
+        "type": "object"
       },
       "Opleidingsnaam": {
         "oneOf": [
@@ -629,8 +718,10 @@
         ]
       },
       "OpleidingsnaamGecodeerd": {
+        "additionalProperties": false,
         "properties": {
           "opleidingsnaamGecodeerd": {
+            "additionalProperties": false,
             "properties": {
               "codeOpleidingsnaam": {
                 "$ref": "#/components/schemas/Integer10AsString"
@@ -645,8 +736,10 @@
         "type": "object"
       },
       "OpleidingsnaamOngecodeerd": {
+        "additionalProperties": false,
         "properties": {
           "opleidingsnaamOngecodeerd": {
+            "additionalProperties": false,
             "properties": {
               "naamOpleidingOngecodeerd": {
                 "$ref": "#/components/schemas/String120"
@@ -666,6 +759,7 @@
         "type": "string"
       },
       "Rijbewijs": {
+        "additionalProperties": false,
         "properties": {
           "codeSoortRijbewijs": {
             "enum": [
@@ -692,6 +786,7 @@
         "type": "object"
       },
       "SectorBeroepsEnBedrijfsleven": {
+        "additionalProperties": false,
         "properties": {
           "codeSbi": {
             "$ref": "#/components/schemas/Integer5"
@@ -748,6 +843,7 @@
         "type": "string"
       },
       "Taalbeheersing": {
+        "additionalProperties": false,
         "properties": {
           "codeNiveauTaalbeheersingLezen": {
             "$ref": "#/components/schemas/IntegerTaal"
@@ -775,6 +871,7 @@
         "type": "string"
       },
       "Vakvaardigheid": {
+        "additionalProperties": false,
         "properties": {
           "omschrijving": {
             "$ref": "#/components/schemas/String120"
@@ -783,29 +880,30 @@
         "type": "object"
       },
       "Vervoermiddel": {
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/MPVervoermiddel"
+        "additionalProperties": false,
+        "properties": {
+          "codeVervoermiddel": {
+            "enum": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              9
+            ],
+            "type": "integer"
           },
-          {
-            "properties": {
-              "codeVervoermiddel": {
-                "enum": [
-                  1,
-                  2,
-                  3,
-                  4,
-                  5,
-                  9
-                ],
-                "type": "integer"
-              }
-            },
-            "type": "object"
+          "indicatieBeschikbaarVoorUitvoeringWerk": {
+            "$ref": "#/components/schemas/Indicatie"
+          },
+          "indicatieBeschikbaarVoorWoonWerkverkeer": {
+            "$ref": "#/components/schemas/Indicatie"
           }
-        ]
+        },
+        "type": "object"
       },
       "Voorkeursland": {
+        "additionalProperties": false,
         "properties": {
           "landencodeIso": {
             "$ref": "#/components/schemas/StringCode2"
@@ -814,6 +912,7 @@
         "type": "object"
       },
       "Webadres": {
+        "additionalProperties": false,
         "properties": {
           "codeWebadres": {
             "$ref": "#/components/schemas/Integer2"
@@ -825,21 +924,28 @@
         "type": "object"
       },
       "Werkervaring": {
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/MPWerkervaring"
+        "additionalProperties": false,
+        "properties": {
+          "beroep": {
+            "$ref": "#/components/schemas/Beroepsnaam"
           },
-          {
-            "properties": {
-              "toelichtingWerkervaring": {
-                "$ref": "#/components/schemas/String2000"
-              }
-            },
-            "type": "object"
+          "datumAanvangWerkzaamheden": {
+            "$ref": "#/components/schemas/Date"
+          },
+          "datumEindeWerkzaamheden": {
+            "$ref": "#/components/schemas/Date"
+          },
+          "naamOrganisatie": {
+            "$ref": "#/components/schemas/String70"
+          },
+          "toelichtingWerkervaring": {
+            "$ref": "#/components/schemas/String2000"
           }
-        ]
+        },
+        "type": "object"
       },
       "Werktijden": {
+        "additionalProperties": false,
         "properties": {
           "aantalWerkurenPerWeekMaximaal": {
             "$ref": "#/components/schemas/Integer2"
@@ -854,6 +960,7 @@
         "type": "object"
       },
       "Werkzoekende": {
+        "additionalProperties": false,
         "properties": {
           "arbeidsmarktkwalificatie": {
             "$ref": "#/components/schemas/Arbeidsmarktkwalificatie"
