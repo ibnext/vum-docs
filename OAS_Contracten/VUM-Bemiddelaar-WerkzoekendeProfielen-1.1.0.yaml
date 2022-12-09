@@ -221,8 +221,10 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-  /callbackExample:
+  /callbackWP:
     post:
+      tags:
+        - callback
       summary: Voorbeeld voor de callback methode
       description: Voorbeeld voor de callback methode, alleen om te laten zien hoe de echte Callback er uit ziet!
       parameters:
@@ -246,7 +248,7 @@ paths:
           schema:
             $ref: '#/components/schemas/VraagID'
           required: true
-      operationId: callbackExample
+      operationId: callbackWP
       requestBody:
         $ref: '#/components/requestBodies/WerkzoekendeProfielMatchesCallbackRequest'
       responses:
@@ -304,7 +306,7 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Beroepsnaam'
-      required: 
+      required:
         - mobiliteit
         - vumID
     Werkzoekende:
@@ -405,7 +407,7 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Beroepsnaam'
-      required: 
+      required:
         - mobiliteit
     Arbeidsmarktkwalificatie:
       type: object
@@ -745,7 +747,7 @@ components:
         indicatieBeschikbaarVoorUitvoeringWerk:
           $ref: '#/components/schemas/Indicatie'
         indicatieBeschikbaarVoorWoonWerkverkeer:
-          $ref: '#/components/schemas/Indicatie'    
+          $ref: '#/components/schemas/Indicatie'
         codeVervoermiddel:
           type: integer
           enum: [1, 2, 3, 4, 5, 9]

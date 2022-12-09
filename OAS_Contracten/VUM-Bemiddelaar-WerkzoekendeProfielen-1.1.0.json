@@ -1130,10 +1130,10 @@
   },
   "openapi": "3.0.0",
   "paths": {
-    "/callbackExample": {
+    "/callbackWP": {
       "post": {
         "description": "Voorbeeld voor de callback methode, alleen om te laten zien hoe de echte Callback er uit ziet!",
-        "operationId": "callbackExample",
+        "operationId": "callbackWP",
         "parameters": [
           {
             "in": "header",
@@ -1182,7 +1182,10 @@
             "description": "not authorized"
           }
         },
-        "summary": "Voorbeeld voor de callback methode"
+        "summary": "Voorbeeld voor de callback methode",
+        "tags": [
+          "callback"
+        ]
       }
     },
     "/werkzoekendeProfielen/matches": {
