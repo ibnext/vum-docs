@@ -3,7 +3,7 @@
     GOPATH: $CI_PROJECT_DIR/.go
   before_script:
     - mkdir -p .go
-    - go install github.com/mbrukman/yaml2json/cmd/yaml2json@latest
+    - go install github.com/mbrukman/yaml2json/cmd/yaml2json@v0.0.0-20221001214909-57b35dca0a2c
     - export PATH=.go/bin/:$PATH
   cache:
     paths:
