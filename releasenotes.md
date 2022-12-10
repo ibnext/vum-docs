@@ -1,6 +1,6 @@
-# Releasenotes Koppelvlak specificaties VUM v1.1.0
+# Releasenotes Koppelvlak specificaties VUM v1.1.1
 
-**Openstaande punten in deze release (v1.1.0)**
+**Openstaande punten in deze release (v1.1.1)**
 
  - De koppelvlakspecificaties staan lege waardes toe voor attributen. Dit komt niet overeen met de VUM Gegevensstandaard. Dit betreft lege lijsten, lege objecten en lege tekst. 
 
@@ -57,6 +57,12 @@
 <th><strong>nr</strong></th>
 <th><strong>aanpassing</strong></th>
 <th><strong>motivatie</strong></th>
+</tr>
+<tr class="odd">
+<th>1.1.1</th>
+<th>1</th>
+<th>Callback endpoint callbackExample gescheiden in callbackWP en callbackVacature</th>
+<th>Op de callback ontvangen 'Werkzoekende Profielen' and 'Vacature' matches kunnen nu op een verschillende manier worden verwerkt.</th>
 </tr>
 <tr class="odd">
 <th>1.1.0</th>
