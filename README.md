@@ -231,7 +231,7 @@ bronnen.</th>
 <tr class="header">
 <th>1.1.0</th>
 <th>28 november 2022</th>
-<th>Enumeraties vanuit de gegevensstandaard toegevoegd aan de OAS contracten</th>
+<th>Enumeraties vanuit de gegevensstandaard toegevoegd aan de OAS contracten &amp; OneOf notaties kloppend gemaakt door additionalProperties op false te zetten.</th>
 </tr>
 </thead>
 <tbody>
