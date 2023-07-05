@@ -233,6 +233,11 @@ bronnen.</th>
 <th>28 november 2022</th>
 <th>Enumeraties vanuit de gegevensstandaard toegevoegd aan de OAS contracten &amp; OneOf notaties kloppend gemaakt door additionalProperties op false te zetten.</th>
 </tr>
+<tr class="odd">
+<th>1.2.0</th>
+<th>5 juli 2023</th>
+<th>Mobiliteit inclusief onderligende attributen toegevoegd aan vacature koppelvlak voor t.b.v. van het stellen van een zoekvraag. Tevens idVacature verplicht gemaakt in antwoorden van een bron.</th>
+</tr>
 </thead>
 <tbody>
 </tbody>

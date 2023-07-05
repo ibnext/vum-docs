@@ -55,6 +55,24 @@
 <th><strong>motivatie</strong></th>
 </tr>
 <tr class="odd">
+<th>1.2.0</th>
+<th>1</th>
+<th>Mobiliteit entiteit toegevoegd aan vacature zoekvraag in koppelvlak</th>
+<th>De entiteit "mobiliteit" is toegevoegd t.b.v. het stellen van een zoekvraag binnen het Vacature koppelvlak. De entiteit is toegevoegd aan "MPVacature" in het bemiddelaar en bron koppelvlak.</th>
+</tr>
+<tr class="odd">
+<th>1.2.0</th>
+<th>2</th>
+<th>Entiteiten bemiddelingspostcode en maximaleReisafstand zijn toegevoegd aan de nieuwe entiteit "Mobiliteit"</th>
+<th>Deze entiteiten zijn toegevoegd t.b.v. het stellen van een zoekvraag binnen het Vacature koppelvlak.</th>
+</tr>
+<tr class="odd">
+<th>1.2.0</th>
+<th>3</th>
+<th>Attribuut "idVacature" is nu verplicht in de antwoorden van een bron.</th>
+<th>Dit attribuut is nodig om detailvragen te kunnen doen, zonder idVacature is dit niet mogelijk.</th>
+</tr>
+<tr class="odd">
 <th>1.1.1</th>
 <th>1</th>
 <th>Callback endpoint callbackExample gescheiden in callbackWP en callbackVacature</th>
