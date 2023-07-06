@@ -1,47 +1,16 @@
 {
   "components": {
     "requestBodies": {
-      "VacatureMatchesCallbackRequest": {
-        "content": {
-          "application/json": {
-            "schema": {
-              "properties": {
-                "matches": {
-                  "$ref": "#/components/schemas/VacatureMatchingProfielen"
-                },
-                "maximumAantalResultatenBereikt": {
-                  "type": "boolean"
-                },
-                "vraagID": {
-                  "$ref": "#/components/schemas/VraagID"
-                }
-              },
-              "required": [
-                "vraagID",
-                "matches",
-                "maximumAantalResultatenBereikt"
-              ],
-              "type": "object"
-            }
-          }
-        },
-        "required": true
-      },
       "VacatureMatchesRequest": {
         "content": {
           "application/json": {
             "schema": {
               "properties": {
-                "callbackURL": {
-                  "format": "uri",
-                  "type": "string"
-                },
                 "vraagObject": {
                   "$ref": "#/components/schemas/MPVacature"
                 }
               },
               "required": [
-                "callbackURL",
                 "vraagObject"
               ],
               "type": "object"
@@ -439,6 +408,11 @@
         ],
         "type": "integer"
       },
+      "Integer1000": {
+        "maximum": 999,
+        "minimum": 0,
+        "type": "integer"
+      },
       "Integer10AsString": {
         "example": "9999999999",
         "maxLength": 10,
@@ -637,6 +611,9 @@
             ],
             "type": "integer"
           },
+          "mobiliteit": {
+            "$ref": "#/components/schemas/Mobiliteit"
+          },
           "opleiding": {
             "items": {
               "$ref": "#/components/schemas/MPOpleiding"
@@ -692,6 +669,9 @@
             "$ref": "#/components/schemas/Werktijden"
           }
         },
+        "required": [
+          "mobiliteit"
+        ],
         "type": "object"
       },
       "MPVacatureMatch": {
@@ -736,6 +716,9 @@
               "$ref": "#/components/schemas/Gedragscompetentie"
             },
             "type": "array"
+          },
+          "idVacature": {
+            "$ref": "#/components/schemas/IDVacature"
           },
           "indicatieLdrRegistratie": {
             "enum": [
@@ -786,9 +769,6 @@
             },
             "type": "array"
           },
-          "vumID": {
-            "$ref": "#/components/schemas/VumID"
-          },
           "werkervaring": {
             "items": {
               "$ref": "#/components/schemas/Werkervaring"
@@ -803,7 +783,7 @@
           }
         },
         "required": [
-          "vumID"
+          "idVacature"
         ],
         "type": "object"
       },
@@ -835,6 +815,21 @@
             "type": "array"
           }
         },
+        "type": "object"
+      },
+      "Mobiliteit": {
+        "properties": {
+          "bemiddelingspostcode": {
+            "$ref": "#/components/schemas/Postcode"
+          },
+          "maximaleReisafstand": {
+            "$ref": "#/components/schemas/Integer1000"
+          }
+        },
+        "required": [
+          "bemiddelingspostcode",
+          "maximaleReisafstand"
+        ],
         "type": "object"
       },
       "Opleiding": {
@@ -1291,6 +1286,9 @@
             "$ref": "#/components/schemas/Werktijden"
           }
         },
+        "required": [
+          "idVacature"
+        ],
         "type": "object"
       },
       "VacatureMatchingProfielen": {
@@ -1330,13 +1328,6 @@
           }
         },
         "type": "object"
-      },
-      "VraagID": {
-        "maxLength": 100,
-        "type": "string"
-      },
-      "VumID": {
-        "$ref": "#/components/schemas/String500"
       },
       "Webadres": {
         "additionalProperties": false,
@@ -1406,14 +1397,6 @@
           }
         },
         "type": "object"
-      },
-      "inline_response_200": {
-        "properties": {
-          "vraagID": {
-            "$ref": "#/components/schemas/VraagID"
-          }
-        },
-        "type": "object"
       }
     }
   },
@@ -1423,152 +1406,14 @@
       "name": "Helpdesk",
       "url": "https://www.twi-programma.nl"
     },
-    "description": "Contract tbv interactie van bemiddelaars met VUM uitwisselingsvoorziening voor Vacatures",
-    "title": "VUM API Vacatures tussen VUM-UV en bemiddelaar",
+    "description": "Contract tbv interactie van bronnen met VUM uitwisselingsvoorziening voor Vacatures",
+    "title": "VUM API Vacatures tussen VUM-UV en bronnen",
     "version": "1.0.0"
   },
   "openapi": "3.0.0",
   "paths": {
-    "/callbackVacature": {
-      "post": {
-        "description": "Voorbeeld voor de callback methode, alleen om te laten zien hoe de echte Callback er uit ziet!",
-        "operationId": "callbackVacature",
-        "parameters": [
-          {
-            "in": "header",
-            "name": "X-VUM-berichtVersie",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "in": "header",
-            "name": "X-VUM-toParty",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "in": "header",
-            "name": "X-VUM-viaParty",
-            "required": false,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "in": "header",
-            "name": "X-VUM-vraagID",
-            "required": true,
-            "schema": {
-              "$ref": "#/components/schemas/VraagID"
-            }
-          }
-        ],
-        "requestBody": {
-          "$ref": "#/components/requestBodies/VacatureMatchesCallbackRequest"
-        },
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "400": {
-            "description": "Fout bij uitvoeren van zoekvraag"
-          },
-          "401": {
-            "description": "not authorized"
-          }
-        },
-        "summary": "Voorbeeld voor de callback methode",
-        "tags": [
-          "callback"
-        ]
-      }
-    },
     "/vacatures/matches": {
       "post": {
-        "callbacks": {
-          "bronMatch": {
-            "{$request.body#/callbackUrl}": {
-              "post": {
-                "parameters": [
-                  {
-                    "in": "header",
-                    "name": "X-VUM-berichtVersie",
-                    "required": true,
-                    "schema": {
-                      "type": "string"
-                    }
-                  },
-                  {
-                    "in": "header",
-                    "name": "X-VUM-toParty",
-                    "required": true,
-                    "schema": {
-                      "type": "string"
-                    }
-                  },
-                  {
-                    "in": "header",
-                    "name": "X-VUM-viaParty",
-                    "required": false,
-                    "schema": {
-                      "type": "string"
-                    }
-                  },
-                  {
-                    "in": "header",
-                    "name": "X-VUM-vraagID",
-                    "required": true,
-                    "schema": {
-                      "$ref": "#/components/schemas/VraagID"
-                    }
-                  }
-                ],
-                "requestBody": {
-                  "$ref": "#/components/requestBodies/VacatureMatchesCallbackRequest"
-                },
-                "responses": {
-                  "200": {
-                    "description": "bevestiging aan de uitwisselingsvoorziening"
-                  },
-                  "400": {
-                    "content": {
-                      "application/json": {
-                        "schema": {
-                          "$ref": "#/components/schemas/Error"
-                        }
-                      }
-                    },
-                    "description": "Bad request"
-                  },
-                  "500": {
-                    "content": {
-                      "application/json": {
-                        "schema": {
-                          "$ref": "#/components/schemas/Error"
-                        }
-                      }
-                    },
-                    "description": "Internal Server Error"
-                  },
-                  "503": {
-                    "content": {
-                      "application/json": {
-                        "schema": {
-                          "$ref": "#/components/schemas/Error"
-                        }
-                      }
-                    },
-                    "description": "Service Unavailable"
-                  }
-                }
-              }
-            }
-          }
-        },
         "description": "Zoekopdracht om Vacature matches op te vragen",
         "operationId": "MatchesVacatures",
         "parameters": [
@@ -1603,6 +1448,14 @@
             "schema": {
               "type": "string"
             }
+          },
+          {
+            "in": "header",
+            "name": "X-VUM-SUWIparty",
+            "required": true,
+            "schema": {
+              "type": "boolean"
+            }
           }
         ],
         "requestBody": {
@@ -1613,7 +1466,20 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/inline_response_200"
+                  "properties": {
+                    "matches": {
+                      "$ref": "#/components/schemas/VacatureMatchingProfielen"
+                    },
+                    "maximumAantalResultatenBereikt": {
+                      "description": "Geeft aan of bron meer matches zou kunnen leveren dan de teruggeleverde set. Bronnen mogen per zoekvraag een maximum aantal (standaard 100) resultaten leveren",
+                      "type": "boolean"
+                    }
+                  },
+                  "required": [
+                    "maximumAantalResultatenBereikt",
+                    "matches"
+                  ],
+                  "type": "object"
                 }
               }
             },
@@ -1688,11 +1554,21 @@
         "summary": "Zoekopdracht voor Vacatures"
       }
     },
-    "/vacatures/{vumID}": {
+    "/vacatures/{idVacature}": {
       "get": {
-        "description": "Vraag volledige vacature op bij een opgegeven vumID",
+        "description": "Vraag volledige vacature op bij een opgegeven idVacature",
         "operationId": "getVacature",
         "parameters": [
+          {
+            "explode": false,
+            "in": "path",
+            "name": "idVacature",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/IDVacature"
+            },
+            "style": "simple"
+          },
           {
             "in": "header",
             "name": "X-VUM-berichtVersie",
@@ -1726,14 +1602,12 @@
             }
           },
           {
-            "explode": false,
-            "in": "path",
-            "name": "vumID",
+            "in": "header",
+            "name": "X-VUM-SUWIparty",
             "required": true,
             "schema": {
-              "$ref": "#/components/schemas/VumID"
-            },
-            "style": "simple"
+              "type": "boolean"
+            }
           }
         ],
         "responses": {
@@ -1741,15 +1615,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "properties": {
-                    "bronID": {
-                      "$ref": "#/components/schemas/String200"
-                    },
-                    "vacature": {
-                      "$ref": "#/components/schemas/Vacature"
-                    }
-                  },
-                  "type": "object"
+                  "$ref": "#/components/schemas/Vacature"
                 }
               }
             },
@@ -1798,7 +1664,7 @@
                 }
               }
             },
-            "description": "Too Many Requests, limiet is overschreden voor deze vraagID"
+            "description": "Too Many Requests, limiet is overschreden voor deze uitvraag"
           },
           "500": {
             "content": {
@@ -1821,22 +1687,13 @@
             "description": "Service Unavailable"
           }
         },
-        "summary": "Vraag volledige vacature op bij opgegeven vumID"
+        "summary": "Vraag volledige vacature op bij opgegeven idVacature"
       }
     }
   },
   "servers": [
     {
-      "description": "staging/test server",
-      "url": "https://test.vumdevelopment.nl/api/v1"
-    },
-    {
-      "description": "acceptatie server",
-      "url": "https://accept.vumdevelopment.nl/api/v1"
-    },
-    {
-      "description": "productie server",
-      "url": "https://prod.vumdevelopment.nl/api/v1"
+      "url": "https://api.example.com/v1"
     }
   ]
 }
