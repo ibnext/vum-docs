@@ -743,6 +743,7 @@
       },
       "codeBeroepsnaam": {
         "$comment": "De code van het beroep volgens het UWV Beroepen & Opleidingen Register",
+        "type": "string",
         "pattern": "^[0-9]{1,10}$"
       },
       "contractvorm_selectie": {
