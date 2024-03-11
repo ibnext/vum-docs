@@ -565,7 +565,11 @@
               "$ref": "#/components/schemas/Beroepsnaam"
             }
           }
-        }
+        },
+        "required": [
+          "mobiliteit",
+          "idWerkzoekende"
+        ]
       },
       "IDWerkzoekende": {
         "$ref": "#/components/schemas/String200"
@@ -725,7 +729,10 @@
               "$ref": "#/components/schemas/Beroepsnaam"
             }
           }
-        }
+        },
+        "required": [
+          "mobiliteit"
+        ]
       },
       "Arbeidsmarktkwalificatie": {
         "type": "object",

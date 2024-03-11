@@ -353,6 +353,9 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Beroepsnaam'
+      required:
+      - mobiliteit
+      - idWerkzoekende
     IDWerkzoekende:
       $ref: '#/components/schemas/String200'
     Werkzoekende:
@@ -453,6 +456,8 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Beroepsnaam'
+      required:
+      - mobiliteit
     Arbeidsmarktkwalificatie:
       type: object
       additionalProperties: false
