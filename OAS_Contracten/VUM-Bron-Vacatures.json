@@ -1222,7 +1222,7 @@
         "additionalProperties": false,
         "properties": {
           "codeTaal": {
-            "$ref": "#/components/schemas/StringCode3"
+            "$ref": "#/components/schemas/TaalCode3"
           },
           "codeNiveauTaalbeheersingMondeling": {
             "$ref": "#/components/schemas/IntegerTaal"
@@ -1780,6 +1780,11 @@
       },
       "StringCode4": {
         "maxLength": 4,
+        "type": "string"
+      },
+      "TaalCode3": {
+        "maxLength": 3,
+        "minLength": 3,
         "type": "string"
       },
       "URL": {

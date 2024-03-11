@@ -374,19 +374,19 @@ components:
         - '2.0.0'
       required: true
   headers:
-    X-VUM-berichtVersie:
+    vum_bericht_versie:
       schema:
         type: string
-    X-VUM-fromParty:
+    vum_from_party:
+      schema: 
+        type: string
+    vum_to_party:
       schema:
         type: string
-    X-VUM-toParty:
-      schema:
+    vum_via_party:
+      schema: 
         type: string
-    X-VUM-viaParty:
-      schema:
-        type: string
-    API-Version:
+    api_version:
       schema:
         type: string
         enum:
@@ -863,7 +863,7 @@ components:
       additionalProperties: false
       properties:
         codeTaal:
-          $ref: '#/components/schemas/StringCode3'
+          $ref: '#/components/schemas/TaalCode3'
         codeNiveauTaalbeheersingMondeling:
           $ref: '#/components/schemas/IntegerTaal'
         codeNiveauTaalbeheersingSchriftelijk:
@@ -975,6 +975,10 @@ components:
       type: string
     StringCode3:
       maxLength: 3
+      type: string
+    TaalCode3:
+      maxLength: 3
+      minLength: 3
       type: string
     URL:
       type: string
