@@ -504,12 +504,14 @@ components:
           $gte:
             $ref: '#/components/schemas/codeWerkEnDenkNiveau_choice'
           $lt:
+            type: integer
             const: '7'
         required:
         - $lt
       - type: object
         properties:
           $eq:
+            type: integer
             const: '7'
           $lt: false
     codeWerkEnDenkNiveau_choice:

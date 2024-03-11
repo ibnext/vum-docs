@@ -808,6 +808,7 @@
                 "$ref": "#/components/schemas/codeWerkEnDenkNiveau_choice"
               },
               "$lt": {
+                "type": "integer",
                 "const": "7"
               }
             },
@@ -819,6 +820,7 @@
             "type": "object",
             "properties": {
               "$eq": {
+                "type": "integer",
                 "const": "7"
               },
               "$lt": false
