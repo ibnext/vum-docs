@@ -467,7 +467,7 @@ components:
           $ref: '#/components/schemas/codeBeroepsnaam'
     codeBeroepsnaam:
       $comment: De code van het beroep volgens het UWV Beroepen & Opleidingen Register
-      pattern: '[0-9]{1,10}'
+      pattern: '^[0-9]{1,10}$'
     contractvorm_selectie:
       type: object
       properties:
@@ -1083,7 +1083,7 @@ components:
       type: string
       format: date
     Postcode:
-      pattern: ^[0-9]{4}[a-zA-Z]{2}$
+      pattern: '^[0-9]{4}[a-zA-Z]{2}$'
       type: string
       example: '1234AB'
     Error:
