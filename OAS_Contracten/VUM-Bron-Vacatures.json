@@ -810,7 +810,7 @@
               },
               "$lt": {
                 "type": "integer",
-                "const": "7"
+                "const": 7
               }
             },
             "required": [
@@ -822,7 +822,7 @@
             "properties": {
               "$eq": {
                 "type": "integer",
-                "const": "7"
+                "const": 7
               },
               "$lt": false
             }
@@ -1704,15 +1704,11 @@
               },
               "woonbootverwijzing": {
                 "type": "string",
-                "enum": [
-                  "AB"
-                ]
+                "const": "AB"
               },
               "woonwagenverwijzing": {
                 "type": "string",
-                "enum": [
-                  "WW"
-                ]
+                "const": "WW"
               }
             }
           }

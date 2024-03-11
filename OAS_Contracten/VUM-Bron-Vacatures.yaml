@@ -506,14 +506,14 @@ components:
             $ref: '#/components/schemas/codeWerkEnDenkNiveau_choice'
           $lt:
             type: integer
-            const: '7'
+            const: 7
         required:
         - $lt
       - type: object
         properties:
           $eq:
             type: integer
-            const: '7'
+            const: 7
           $lt: false
     codeWerkEnDenkNiveau_choice:
       $comment: Dit is een beperkte keuze voor gebruik in de selectie.
@@ -1029,10 +1029,10 @@ components:
               $ref: '#/components/schemas/String24'
             woonbootverwijzing:
               type: string
-              enum: ["AB"]
+              const: "AB"
             woonwagenverwijzing:
               type: string
-              enum: ["WW"]
+              const: "WW"
     Postbusadres:
       type: object
       additionalProperties: false
