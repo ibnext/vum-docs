@@ -4,15 +4,15 @@ info:
   description: Contract tbv interactie van bemiddelaars met VUM uitwisselingsvoorziening voor Vacatures
   contact:
     name: Helpdesk
-    url: https://www.matchingsgegevens.nl
-    email: programma-vum@ictu.nl
-  version: '2.0.0'
+    url: https://www.twi-programma.nl
+    email: beheer@twi-programma.nl
+  version: '1.0.0'
 servers:
-- url: https://test.vumdevelopment.nl/api/v2
+- url: https://test.vumdevelopment.nl/api/v1
   description: staging/test server
-- url: https://accept.vumdevelopment.nl/api/v2
+- url: https://accept.vumdevelopment.nl/api/v1
   description: acceptatie server
-- url: https://prod.vumdevelopment.nl/api/v2
+- url: https://prod.vumdevelopment.nl/api/v1
   description: productie server
 paths:
   /vacatures/matches:
@@ -346,7 +346,6 @@ components:
       name: X-VUM-berichtVersie
       schema:
         type: string
-        const: '2.0.0'
       required: true
     vum_from_party:
       in: header
@@ -378,7 +377,6 @@ components:
     vum_bericht_versie:
       schema:
         type: string
-        const: '2.0.0'
     vum_from_party:
       schema: 
         type: string
@@ -678,7 +676,7 @@ components:
       type: object
       additionalProperties: false
       properties:
-        opleidingsnaamOngecodeerd:
+        mpOpleidingsnaamOngecodeerd:
           type: object
           additionalProperties: false
           properties:

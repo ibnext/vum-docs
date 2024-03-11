@@ -5,15 +5,14 @@
     "description": "Contract tbv interactie van bronnen met VUM uitwisselingsvoorziening voor Vacatures",
     "contact": {
       "name": "Helpdesk",
-      "url": "https://www.matchingsgegevens.nl",
-      "email": "programma-vum@ictu.nl"
+      "url": "https://www.twi-programma.nl",
+      "email": "beheer@twi-programma.nl"
     },
-    "version": "2.0.0"
+    "version": "1.0.0"
   },
   "servers": [
     {
-      "url": "https://bron.vumdevelopment.nl/api/v2",
-      "description": "Testbron"
+      "url": "https://api.example.com/v1"
     }
   ],
   "paths": {
@@ -418,8 +417,7 @@
         "in": "header",
         "name": "X-VUM-berichtVersie",
         "schema": {
-          "type": "string",
-          "const": "2.0.0"
+          "type": "string"
         },
         "required": true
       },
@@ -470,8 +468,7 @@
     "headers": {
       "vum_bericht_versie": {
         "schema": {
-          "type": "string",
-          "const": "2.0.0"
+          "type": "string"
         }
       },
       "vum_from_party": {
@@ -968,7 +965,7 @@
         "type": "object",
         "additionalProperties": false,
         "properties": {
-          "opleidingsnaamOngecodeerd": {
+          "mpOpleidingsnaamOngecodeerd": {
             "type": "object",
             "additionalProperties": false,
             "properties": {
