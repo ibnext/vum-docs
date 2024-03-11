@@ -5,22 +5,22 @@
     "description": "Contract tbv interactie van bemiddelaars met VUM uitwisselingsvoorziening voor werkzoekendeProfielen",
     "contact": {
       "name": "Helpdesk",
-      "url": "https://www.twi-programma.nl",
-      "email": "beheer@twi-programma.nl"
+      "url": "https://www.matchingsgegevens.nl",
+      "email": "programma-vum@ictu.nl"
     },
-    "version": "1.0.0"
+    "version": "2.0.0"
   },
   "servers": [
     {
-      "url": "https://test.vumdevelopment.nl/api/v1",
+      "url": "https://test.vumdevelopment.nl/api/v2",
       "description": "staging/test server"
     },
     {
-      "url": "https://accept.vumdevelopment.nl/api/v1",
+      "url": "https://accept.vumdevelopment.nl/api/v2",
       "description": "acceptatie server"
     },
     {
-      "url": "https://prod.vumdevelopment.nl/api/v1",
+      "url": "https://prod.vumdevelopment.nl/api/v2",
       "description": "productie server"
     }
   ],
@@ -573,7 +573,8 @@
         "in": "header",
         "name": "X-VUM-berichtVersie",
         "schema": {
-          "type": "string"
+          "type": "string",
+          "const": "2.0.0"
         },
         "required": true
       },
@@ -616,7 +617,8 @@
     "headers": {
       "vum_bericht_versie": {
         "schema": {
-          "type": "string"
+          "type": "string",
+          "const": "2.0.0"
         }
       },
       "vum_from_party": {
