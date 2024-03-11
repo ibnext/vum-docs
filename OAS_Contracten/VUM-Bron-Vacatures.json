@@ -968,7 +968,7 @@
         "type": "object",
         "additionalProperties": false,
         "properties": {
-          "mpOpleidingsnaamOngecodeerd": {
+          "opleidingsnaamOngecodeerd": {
             "type": "object",
             "additionalProperties": false,
             "properties": {
