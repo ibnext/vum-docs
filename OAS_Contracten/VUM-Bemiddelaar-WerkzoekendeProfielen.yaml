@@ -1141,9 +1141,9 @@ components:
       maxLength: 3
       type: string
     TaalCode3:
-      maxLength: 3
-      minLength: 3
+      $comment: This does not exclude the special codes, B-codes and reserved range of ISO-639
       type: string
+      pattern: '^[a-z]{3}$'
     URL:
       type: string
       format: url
