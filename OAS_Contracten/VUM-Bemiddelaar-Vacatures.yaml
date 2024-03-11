@@ -1010,7 +1010,7 @@ components:
       type: string
     URL:
       type: string
-      format: URL
+      format: url
     String6:
       maxLength: 6
       type: string

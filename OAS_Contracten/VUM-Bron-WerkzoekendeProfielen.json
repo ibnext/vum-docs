@@ -1283,7 +1283,7 @@
       },
       "URL": {
         "type": "string",
-        "format": "URL"
+        "format": "url"
       },
       "String120": {
         "maxLength": 120,

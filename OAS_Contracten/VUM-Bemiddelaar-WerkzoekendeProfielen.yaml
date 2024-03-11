@@ -846,7 +846,7 @@ components:
       type: string
     URL:
       type: string
-      format: URL
+      format: url
     String120:
       maxLength: 120
       type: string

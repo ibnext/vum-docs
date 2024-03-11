@@ -1585,7 +1585,7 @@
       },
       "URL": {
         "type": "string",
-        "format": "URL"
+        "format": "url"
       },
       "String6": {
         "maxLength": 6,
