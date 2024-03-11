@@ -820,6 +820,7 @@
         }
       },
       "MPWerkzoekende": {
+        "type": "object",
         "properties": {
           "bemiddelingsberoep": {
             "$ref": "#/components/schemas/bemiddelingsberoep_selectie"
@@ -1023,7 +1024,7 @@
         },
         "required": [
           "afstand",
-          "selectie"
+          "postcode"
         ]
       },
       "taalbeheersingen_selectie": {

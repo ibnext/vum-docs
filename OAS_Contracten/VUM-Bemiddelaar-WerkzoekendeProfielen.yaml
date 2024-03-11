@@ -515,6 +515,7 @@ components:
           items:
             $ref: '#/components/schemas/Beroepsnaam'
     MPWerkzoekende:
+      type: object
       properties:
         bemiddelingsberoep:
           $ref: '#/components/schemas/bemiddelingsberoep_selectie'
@@ -653,7 +654,7 @@ components:
           $ref: '#/components/schemas/Postcode'
       required:
       - afstand
-      - selectie
+      - postcode
     taalbeheersingen_selectie:
       type: object
       properties:

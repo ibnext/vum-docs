@@ -428,7 +428,7 @@ components:
           enum:
           - 1
           - 2
-        sluitingsDatumVacature:
+        sluitingsdatumVacature:
           $ref: '#/components/schemas/Date'
         sollicitatiewijze:
           type: array
@@ -510,7 +510,7 @@ components:
           enum:
           - 1
           - 2
-        sluitingsDatumVacature:
+        sluitingsdatumVacature:
           $ref: '#/components/schemas/Date'
         sollicitatiewijze:
           type: array
@@ -609,19 +609,19 @@ components:
           $gte:
             $ref: '#/components/schemas/codeWerkEnDenkNiveau_choice'
           $lt:
-            type: integer
-            const: 7
+            type: string
+            const: '7'
         required:
         - $lt
       - type: object
         properties:
           $eq:
-            type: integer
-            const: 7
+            type: string
+            const: '7'
           $lt: false
     codeWerkEnDenkNiveau_choice:
       $comment: Dit is een beperkte keuze voor gebruik in de selectie.
-      type: integer
+      type: string
       enum:
       - '1'
       - '2'
@@ -678,7 +678,7 @@ components:
           $ref: '#/components/schemas/Postcode'
       required:
       - afstand
-      - selectie
+      - postcode
     taalbeheersingen_selectie:
       type: object
       properties:

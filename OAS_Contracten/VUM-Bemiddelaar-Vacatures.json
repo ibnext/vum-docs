@@ -688,7 +688,7 @@
               2
             ]
           },
-          "sluitingsDatumVacature": {
+          "sluitingsdatumVacature": {
             "$ref": "#/components/schemas/Date"
           },
           "sollicitatiewijze": {
@@ -807,7 +807,7 @@
               2
             ]
           },
-          "sluitingsDatumVacature": {
+          "sluitingsdatumVacature": {
             "$ref": "#/components/schemas/Date"
           },
           "sollicitatiewijze": {
@@ -956,8 +956,8 @@
                 "$ref": "#/components/schemas/codeWerkEnDenkNiveau_choice"
               },
               "$lt": {
-                "type": "integer",
-                "const": 7
+                "type": "string",
+                "const": "7"
               }
             },
             "required": [
@@ -968,8 +968,8 @@
             "type": "object",
             "properties": {
               "$eq": {
-                "type": "integer",
-                "const": 7
+                "type": "string",
+                "const": "7"
               },
               "$lt": false
             }
@@ -978,7 +978,7 @@
       },
       "codeWerkEnDenkNiveau_choice": {
         "$comment": "Dit is een beperkte keuze voor gebruik in de selectie.",
-        "type": "integer",
+        "type": "string",
         "enum": [
           "1",
           "2",
@@ -1054,7 +1054,7 @@
         },
         "required": [
           "afstand",
-          "selectie"
+          "postcode"
         ]
       },
       "taalbeheersingen_selectie": {
