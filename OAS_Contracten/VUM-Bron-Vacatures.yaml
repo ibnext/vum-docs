@@ -16,31 +16,12 @@ paths:
       description: Zoekopdracht om Vacature matches op te vragen
       operationId: MatchesVacatures
       parameters:
-        - in: header
-          name: X-VUM-berichtVersie
-          schema:
-            type: string
-          required: true
-        - in: header
-          name: X-VUM-fromParty
-          schema:
-            type: string
-          required: true
-        - in: header
-          name: X-VUM-toParty
-          schema:
-            type: string
-          required: true
-        - in: header
-          name: X-VUM-viaParty
-          schema:
-            type: string
-          required: false
-        - in: header
-          name: X-VUM-SUWIparty
-          schema:
-            type: boolean
-          required: true
+      - $ref: '#/components/parameters/vum_bericht_versie'
+      - $ref: '#/components/parameters/vum_from_party'
+      - $ref: '#/components/parameters/vum_to_party'
+      - $ref: '#/components/parameters/vum_via_party'
+      - $ref: '#/components/parameters/vum_suwi_party'
+      - $ref: '#/components/parameters/api_version'
       requestBody:
         $ref: '#/components/requestBodies/VacatureMatchesRequest'
       responses:
@@ -48,17 +29,15 @@ paths:
           description: 'OK'
           headers:
             X-VUM-berichtVersie:
-              schema:
-                type: string
+              $ref: '#/components/headers/vum_bericht_versie'
             X-VUM-fromParty:
-              schema:
-                type: string
+              $ref: '#/components/headers/vum_from_party'
             X-VUM-toParty:
-              schema:
-                type: string
+              $ref: '#/components/headers/vum_to_party'
             X-VUM-viaParty:
-              schema:
-                type: string
+              $ref: '#/components/headers/vum_via_party'
+            API-Version:
+              $ref: '#/components/headers/api_version'
           content:
             application/json:
               schema:
@@ -74,26 +53,81 @@ paths:
                     $ref: '#/components/schemas/VacatureMatchingProfielen'
         '400':
           description: 'Bad request'
+          headers:
+            X-VUM-berichtVersie:
+              $ref: '#/components/headers/vum_bericht_versie'
+            X-VUM-fromParty:
+              $ref: '#/components/headers/vum_from_party'
+            X-VUM-toParty:
+              $ref: '#/components/headers/vum_to_party'
+            X-VUM-viaParty:
+              $ref: '#/components/headers/vum_via_party'
+            API-Version:
+              $ref: '#/components/headers/api_version'
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
         '401':
           description: 'not authorized'
+          headers:
+            X-VUM-berichtVersie:
+              $ref: '#/components/headers/vum_bericht_versie'
+            X-VUM-fromParty:
+              $ref: '#/components/headers/vum_from_party'
+            X-VUM-toParty:
+              $ref: '#/components/headers/vum_to_party'
+            X-VUM-viaParty:
+              $ref: '#/components/headers/vum_via_party'
+            API-Version:
+              $ref: '#/components/headers/api_version'
         '429':
           description: 'Too Many Requests'
+          headers:
+            X-VUM-berichtVersie:
+              $ref: '#/components/headers/vum_bericht_versie'
+            X-VUM-fromParty:
+              $ref: '#/components/headers/vum_from_party'
+            X-VUM-toParty:
+              $ref: '#/components/headers/vum_to_party'
+            X-VUM-viaParty:
+              $ref: '#/components/headers/vum_via_party'
+            API-Version:
+              $ref: '#/components/headers/api_version'
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
         '500':
           description: 'Internal Server Error'
+          headers:
+            X-VUM-berichtVersie:
+              $ref: '#/components/headers/vum_bericht_versie'
+            X-VUM-fromParty:
+              $ref: '#/components/headers/vum_from_party'
+            X-VUM-toParty:
+              $ref: '#/components/headers/vum_to_party'
+            X-VUM-viaParty:
+              $ref: '#/components/headers/vum_via_party'
+            API-Version:
+              $ref: '#/components/headers/api_version'
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
         '503':
           description: 'Service Unavailable'
+          headers:
+            X-VUM-berichtVersie:
+              $ref: '#/components/headers/vum_bericht_versie'
+            X-VUM-fromParty:
+              $ref: '#/components/headers/vum_from_party'
+            X-VUM-toParty:
+              $ref: '#/components/headers/vum_to_party'
+            X-VUM-viaParty:
+              $ref: '#/components/headers/vum_via_party'
+            API-Version:
+              $ref: '#/components/headers/api_version'
           content:
             application/json:
               schema:
@@ -104,85 +138,176 @@ paths:
       description: Vraag volledige vacature op bij een opgegeven idVacature
       operationId: getVacature
       parameters:
-        - name: idVacature
-          in: path
-          required: true
-          style: simple
-          explode: false
-          schema:
-            $ref: '#/components/schemas/IDVacature'
-        - in: header
-          name: X-VUM-berichtVersie
-          schema:
-            type: string
-          required: true
-        - in: header
-          name: X-VUM-fromParty
-          schema:
-            type: string
-          required: true
-        - in: header
-          name: X-VUM-toParty
-          schema:
-            type: string
-          required: true
-        - in: header
-          name: X-VUM-viaParty
-          schema:
-            type: string
-          required: false
-        - in: header
-          name: X-VUM-SUWIparty
-          schema:
-            type: boolean
-          required: true      
+      - name: idVacature
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          $ref: '#/components/schemas/IDVacature'
+      - $ref: '#/components/parameters/vum_bericht_versie'
+      - $ref: '#/components/parameters/vum_from_party'
+      - $ref: '#/components/parameters/vum_to_party'
+      - $ref: '#/components/parameters/vum_via_party'
+      - $ref: '#/components/parameters/vum_suwi_party'
+      - $ref: '#/components/parameters/api_version'
       responses:
         '200':
           description: 'OK'
           headers:
             X-VUM-berichtVersie:
-              schema:
-                type: string
+              $ref: '#/components/headers/vum_bericht_versie'
             X-VUM-fromParty:
-              schema:
-                type: string
+              $ref: '#/components/headers/vum_from_party'
             X-VUM-toParty:
-              schema:
-                type: string
+              $ref: '#/components/headers/vum_to_party'
             X-VUM-viaParty:
-              schema:
-                type: string
+              $ref: '#/components/headers/vum_via_party'
+            API-Version:
+              $ref: '#/components/headers/api_version'
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Vacature'
         '400':
           description: 'Bad request'
+          headers:
+            X-VUM-berichtVersie:
+              $ref: '#/components/headers/vum_bericht_versie'
+            X-VUM-fromParty:
+              $ref: '#/components/headers/vum_from_party'
+            X-VUM-toParty:
+              $ref: '#/components/headers/vum_to_party'
+            X-VUM-viaParty:
+              $ref: '#/components/headers/vum_via_party'
+            API-Version:
+              $ref: '#/components/headers/api_version'
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
         '401':
           description: 'not authorized'
+          headers:
+            X-VUM-berichtVersie:
+              $ref: '#/components/headers/vum_bericht_versie'
+            X-VUM-fromParty:
+              $ref: '#/components/headers/vum_from_party'
+            X-VUM-toParty:
+              $ref: '#/components/headers/vum_to_party'
+            X-VUM-viaParty:
+              $ref: '#/components/headers/vum_via_party'
+            API-Version:
+              $ref: '#/components/headers/api_version'
         '429':
           description: 'Too Many Requests, limiet is overschreden voor deze uitvraag'
+          headers:
+            X-VUM-berichtVersie:
+              $ref: '#/components/headers/vum_bericht_versie'
+            X-VUM-fromParty:
+              $ref: '#/components/headers/vum_from_party'
+            X-VUM-toParty:
+              $ref: '#/components/headers/vum_to_party'
+            X-VUM-viaParty:
+              $ref: '#/components/headers/vum_via_party'
+            API-Version:
+              $ref: '#/components/headers/api_version'
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
         '500':
           description: 'Internal Server Error'
+          headers:
+            X-VUM-berichtVersie:
+              $ref: '#/components/headers/vum_bericht_versie'
+            X-VUM-fromParty:
+              $ref: '#/components/headers/vum_from_party'
+            X-VUM-toParty:
+              $ref: '#/components/headers/vum_to_party'
+            X-VUM-viaParty:
+              $ref: '#/components/headers/vum_via_party'
+            API-Version:
+              $ref: '#/components/headers/api_version'
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
         '503':
           description: 'Service Unavailable'
+          headers:
+            X-VUM-berichtVersie:
+              $ref: '#/components/headers/vum_bericht_versie'
+            X-VUM-fromParty:
+              $ref: '#/components/headers/vum_from_party'
+            X-VUM-toParty:
+              $ref: '#/components/headers/vum_to_party'
+            X-VUM-viaParty:
+              $ref: '#/components/headers/vum_via_party'
+            API-Version:
+              $ref: '#/components/headers/api_version'
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
 components:
+  parameters:
+    vum_bericht_versie:
+      in: header
+      name: X-VUM-berichtVersie
+      schema:
+        type: string
+      required: true
+    vum_from_party:
+      in: header
+      name: X-VUM-fromParty
+      schema:
+        type: string
+      required: true
+    vum_to_party:
+      in: header
+      name: X-VUM-toParty
+      schema:
+        type: string
+      required: true
+    vum_via_party:
+      in: header
+      name: X-VUM-viaParty
+      schema:
+        type: string
+      required: true
+    vum_suwi_party:
+      in: header
+      name: X-VUM-SUWIparty
+      schema:
+        type: boolean
+      required: true
+    api_version:
+      in: header
+      name: API-Version
+      schema:
+        type: string
+        enum:
+        - '2.0.0'
+      required: true
+  headers:
+    vum_bericht_versie:
+      schema:
+        type: string
+    vum_from_party:
+      schema:
+        type: string
+    vum_to_party:
+      schema:
+        type: string
+    vum_via_party:
+      schema:
+        type: string
+    api_version:
+      schema:
+        type: string
+        enum:
+        - '2.0.0'
   schemas:
     IDVacature:
       $ref: '#/components/schemas/String200'

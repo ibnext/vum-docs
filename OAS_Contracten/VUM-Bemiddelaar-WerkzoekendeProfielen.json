@@ -32,36 +32,19 @@
         "operationId": "MatcheswerkzoekendeProfielen",
         "parameters": [
           {
-            "in": "header",
-            "name": "X-VUM-berichtVersie",
-            "schema": {
-              "type": "string"
-            },
-            "required": true
+            "$ref": "#/components/parameters/vum_bericht_versie"
           },
           {
-            "in": "header",
-            "name": "X-VUM-fromParty",
-            "schema": {
-              "type": "string"
-            },
-            "required": true
+            "$ref": "#/components/parameters/vum_from_party"
           },
           {
-            "in": "header",
-            "name": "X-VUM-toParty",
-            "schema": {
-              "type": "string"
-            },
-            "required": true
+            "$ref": "#/components/parameters/vum_to_party"
           },
           {
-            "in": "header",
-            "name": "X-VUM-viaParty",
-            "schema": {
-              "type": "string"
-            },
-            "required": false
+            "$ref": "#/components/parameters/vum_via_party"
+          },
+          {
+            "$ref": "#/components/parameters/api_version"
           }
         ],
         "requestBody": {
@@ -72,24 +55,19 @@
             "description": "OK",
             "headers": {
               "X-VUM-berichtVersie": {
-                "schema": {
-                  "type": "string"
-                }
+                "$ref": "#/components/headers/vum_bericht_versie"
               },
               "X-VUM-fromParty": {
-                "schema": {
-                  "type": "string"
-                }
+                "$ref": "#/components/headers/vum_from_party"
               },
               "X-VUM-toParty": {
-                "schema": {
-                  "type": "string"
-                }
+                "$ref": "#/components/headers/vum_to_party"
               },
               "X-VUM-viaParty": {
-                "schema": {
-                  "type": "string"
-                }
+                "$ref": "#/components/headers/vum_via_party"
+              },
+              "API-Version": {
+                "$ref": "#/components/headers/api_version"
               }
             },
             "content": {
@@ -102,6 +80,23 @@
           },
           "400": {
             "description": "Bad request",
+            "headers": {
+              "X-VUM-berichtVersie": {
+                "$ref": "#/components/headers/vum_bericht_versie"
+              },
+              "X-VUM-fromParty": {
+                "$ref": "#/components/headers/vum_from_party"
+              },
+              "X-VUM-toParty": {
+                "$ref": "#/components/headers/vum_to_party"
+              },
+              "X-VUM-viaParty": {
+                "$ref": "#/components/headers/vum_via_party"
+              },
+              "API-Version": {
+                "$ref": "#/components/headers/api_version"
+              }
+            },
             "content": {
               "application/json": {
                 "schema": {
@@ -111,10 +106,44 @@
             }
           },
           "401": {
-            "description": "not authorized"
+            "description": "not authorized",
+            "headers": {
+              "X-VUM-berichtVersie": {
+                "$ref": "#/components/headers/vum_bericht_versie"
+              },
+              "X-VUM-fromParty": {
+                "$ref": "#/components/headers/vum_from_party"
+              },
+              "X-VUM-toParty": {
+                "$ref": "#/components/headers/vum_to_party"
+              },
+              "X-VUM-viaParty": {
+                "$ref": "#/components/headers/vum_via_party"
+              },
+              "API-Version": {
+                "$ref": "#/components/headers/api_version"
+              }
+            }
           },
           "429": {
             "description": "Too Many Requests",
+            "headers": {
+              "X-VUM-berichtVersie": {
+                "$ref": "#/components/headers/vum_bericht_versie"
+              },
+              "X-VUM-fromParty": {
+                "$ref": "#/components/headers/vum_from_party"
+              },
+              "X-VUM-toParty": {
+                "$ref": "#/components/headers/vum_to_party"
+              },
+              "X-VUM-viaParty": {
+                "$ref": "#/components/headers/vum_via_party"
+              },
+              "API-Version": {
+                "$ref": "#/components/headers/api_version"
+              }
+            },
             "content": {
               "application/json": {
                 "schema": {
@@ -125,6 +154,23 @@
           },
           "500": {
             "description": "Internal Server Error",
+            "headers": {
+              "X-VUM-berichtVersie": {
+                "$ref": "#/components/headers/vum_bericht_versie"
+              },
+              "X-VUM-fromParty": {
+                "$ref": "#/components/headers/vum_from_party"
+              },
+              "X-VUM-toParty": {
+                "$ref": "#/components/headers/vum_to_party"
+              },
+              "X-VUM-viaParty": {
+                "$ref": "#/components/headers/vum_via_party"
+              },
+              "API-Version": {
+                "$ref": "#/components/headers/api_version"
+              }
+            },
             "content": {
               "application/json": {
                 "schema": {
@@ -135,6 +181,23 @@
           },
           "503": {
             "description": "Service Unavailable",
+            "headers": {
+              "X-VUM-berichtVersie": {
+                "$ref": "#/components/headers/vum_bericht_versie"
+              },
+              "X-VUM-fromParty": {
+                "$ref": "#/components/headers/vum_from_party"
+              },
+              "X-VUM-toParty": {
+                "$ref": "#/components/headers/vum_to_party"
+              },
+              "X-VUM-viaParty": {
+                "$ref": "#/components/headers/vum_via_party"
+              },
+              "API-Version": {
+                "$ref": "#/components/headers/api_version"
+              }
+            },
             "content": {
               "application/json": {
                 "schema": {
@@ -150,28 +213,16 @@
               "post": {
                 "parameters": [
                   {
-                    "in": "header",
-                    "name": "X-VUM-berichtVersie",
-                    "schema": {
-                      "type": "string"
-                    },
-                    "required": true
+                    "$ref": "#/components/parameters/vum_bericht_versie"
                   },
                   {
-                    "in": "header",
-                    "name": "X-VUM-toParty",
-                    "schema": {
-                      "type": "string"
-                    },
-                    "required": true
+                    "$ref": "#/components/parameters/vum_to_party"
                   },
                   {
-                    "in": "header",
-                    "name": "X-VUM-viaParty",
-                    "schema": {
-                      "type": "string"
-                    },
-                    "required": false
+                    "$ref": "#/components/parameters/vum_via_party"
+                  },
+                  {
+                    "$ref": "#/components/parameters/api_version"
                   },
                   {
                     "in": "header",
@@ -187,10 +238,26 @@
                 },
                 "responses": {
                   "200": {
-                    "description": "bevestiging aan de uitwisselingsvoorziening"
+                    "description": "bevestiging aan de uitwisselingsvoorziening",
+                    "headers": {
+                      "X-VUM-berichtVersie": {
+                        "$ref": "#/components/headers/vum_bericht_versie"
+                      },
+                      "API-Version": {
+                        "$ref": "#/components/headers/api_version"
+                      }
+                    }
                   },
                   "400": {
                     "description": "Bad request",
+                    "headers": {
+                      "X-VUM-berichtVersie": {
+                        "$ref": "#/components/headers/vum_bericht_versie"
+                      },
+                      "API-Version": {
+                        "$ref": "#/components/headers/api_version"
+                      }
+                    },
                     "content": {
                       "application/json": {
                         "schema": {
@@ -201,6 +268,14 @@
                   },
                   "500": {
                     "description": "Internal Server Error",
+                    "headers": {
+                      "X-VUM-berichtVersie": {
+                        "$ref": "#/components/headers/vum_bericht_versie"
+                      },
+                      "API-Version": {
+                        "$ref": "#/components/headers/api_version"
+                      }
+                    },
                     "content": {
                       "application/json": {
                         "schema": {
@@ -211,6 +286,14 @@
                   },
                   "503": {
                     "description": "Service Unavailable",
+                    "headers": {
+                      "X-VUM-berichtVersie": {
+                        "$ref": "#/components/headers/vum_bericht_versie"
+                      },
+                      "API-Version": {
+                        "$ref": "#/components/headers/api_version"
+                      }
+                    },
                     "content": {
                       "application/json": {
                         "schema": {
@@ -233,36 +316,19 @@
         "operationId": "getWerkzoekendeProfiel",
         "parameters": [
           {
-            "in": "header",
-            "name": "X-VUM-berichtVersie",
-            "schema": {
-              "type": "string"
-            },
-            "required": true
+            "$ref": "#/components/parameters/vum_bericht_versie"
           },
           {
-            "in": "header",
-            "name": "X-VUM-fromParty",
-            "schema": {
-              "type": "string"
-            },
-            "required": true
+            "$ref": "#/components/parameters/vum_from_party"
           },
           {
-            "in": "header",
-            "name": "X-VUM-toParty",
-            "schema": {
-              "type": "string"
-            },
-            "required": true
+            "$ref": "#/components/parameters/vum_to_party"
           },
           {
-            "in": "header",
-            "name": "X-VUM-viaParty",
-            "schema": {
-              "type": "string"
-            },
-            "required": false
+            "$ref": "#/components/parameters/vum_via_party"
+          },
+          {
+            "$ref": "#/components/parameters/api_version"
           },
           {
             "in": "path",
@@ -280,24 +346,19 @@
             "description": "OK",
             "headers": {
               "X-VUM-berichtVersie": {
-                "schema": {
-                  "type": "string"
-                }
+                "$ref": "#/components/headers/vum_bericht_versie"
               },
               "X-VUM-fromParty": {
-                "schema": {
-                  "type": "string"
-                }
+                "$ref": "#/components/headers/vum_from_party"
               },
               "X-VUM-toParty": {
-                "schema": {
-                  "type": "string"
-                }
+                "$ref": "#/components/headers/vum_to_party"
               },
               "X-VUM-viaParty": {
-                "schema": {
-                  "type": "string"
-                }
+                "$ref": "#/components/headers/vum_via_party"
+              },
+              "API-Version": {
+                "$ref": "#/components/headers/api_version"
               }
             },
             "content": {
@@ -318,6 +379,23 @@
           },
           "400": {
             "description": "Bad request",
+            "headers": {
+              "X-VUM-berichtVersie": {
+                "$ref": "#/components/headers/vum_bericht_versie"
+              },
+              "X-VUM-fromParty": {
+                "$ref": "#/components/headers/vum_from_party"
+              },
+              "X-VUM-toParty": {
+                "$ref": "#/components/headers/vum_to_party"
+              },
+              "X-VUM-viaParty": {
+                "$ref": "#/components/headers/vum_via_party"
+              },
+              "API-Version": {
+                "$ref": "#/components/headers/api_version"
+              }
+            },
             "content": {
               "application/json": {
                 "schema": {
@@ -327,10 +405,32 @@
             }
           },
           "401": {
-            "description": "not authorized"
+            "description": "not authorized",
+            "headers": {
+              "API-Version": {
+                "$ref": "#/components/headers/api_version"
+              }
+            }
           },
           "429": {
             "description": "Too Many Requests, limiet is overschreden voor deze vraagID",
+            "headers": {
+              "X-VUM-berichtVersie": {
+                "$ref": "#/components/headers/vum_bericht_versie"
+              },
+              "X-VUM-fromParty": {
+                "$ref": "#/components/headers/vum_from_party"
+              },
+              "X-VUM-toParty": {
+                "$ref": "#/components/headers/vum_to_party"
+              },
+              "X-VUM-viaParty": {
+                "$ref": "#/components/headers/vum_via_party"
+              },
+              "API-Version": {
+                "$ref": "#/components/headers/api_version"
+              }
+            },
             "content": {
               "application/json": {
                 "schema": {
@@ -341,6 +441,23 @@
           },
           "500": {
             "description": "Internal Server Error",
+            "headers": {
+              "X-VUM-berichtVersie": {
+                "$ref": "#/components/headers/vum_bericht_versie"
+              },
+              "X-VUM-fromParty": {
+                "$ref": "#/components/headers/vum_from_party"
+              },
+              "X-VUM-toParty": {
+                "$ref": "#/components/headers/vum_to_party"
+              },
+              "X-VUM-viaParty": {
+                "$ref": "#/components/headers/vum_via_party"
+              },
+              "API-Version": {
+                "$ref": "#/components/headers/api_version"
+              }
+            },
             "content": {
               "application/json": {
                 "schema": {
@@ -351,6 +468,23 @@
           },
           "503": {
             "description": "Service Unavailable",
+            "headers": {
+              "X-VUM-berichtVersie": {
+                "$ref": "#/components/headers/vum_bericht_versie"
+              },
+              "X-VUM-fromParty": {
+                "$ref": "#/components/headers/vum_from_party"
+              },
+              "X-VUM-toParty": {
+                "$ref": "#/components/headers/vum_to_party"
+              },
+              "X-VUM-viaParty": {
+                "$ref": "#/components/headers/vum_via_party"
+              },
+              "API-Version": {
+                "$ref": "#/components/headers/api_version"
+              }
+            },
             "content": {
               "application/json": {
                 "schema": {
@@ -371,28 +505,16 @@
         "description": "Voorbeeld voor de callback methode, alleen om te laten zien hoe de echte Callback er uit ziet!",
         "parameters": [
           {
-            "in": "header",
-            "name": "X-VUM-berichtVersie",
-            "schema": {
-              "type": "string"
-            },
-            "required": true
+            "$ref": "#/components/parameters/vum_bericht_versie"
           },
           {
-            "in": "header",
-            "name": "X-VUM-toParty",
-            "schema": {
-              "type": "string"
-            },
-            "required": true
+            "$ref": "#/components/parameters/vum_to_party"
           },
           {
-            "in": "header",
-            "name": "X-VUM-viaParty",
-            "schema": {
-              "type": "string"
-            },
-            "required": false
+            "$ref": "#/components/parameters/vum_via_party"
+          },
+          {
+            "$ref": "#/components/parameters/api_version"
           },
           {
             "in": "header",
@@ -409,12 +531,36 @@
         },
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "headers": {
+              "X-VUM-berichtVersie": {
+                "$ref": "#/components/headers/vum_bericht_versie"
+              },
+              "API-Version": {
+                "$ref": "#/components/headers/api_version"
+              }
+            }
           },
           "400": {
+            "headers": {
+              "X-VUM-berichtVersie": {
+                "$ref": "#/components/headers/vum_bericht_versie"
+              },
+              "API-Version": {
+                "$ref": "#/components/headers/api_version"
+              }
+            },
             "description": "Fout bij uitvoeren van zoekvraag"
           },
           "401": {
+            "headers": {
+              "X-VUM-berichtVersie": {
+                "$ref": "#/components/headers/vum_bericht_versie"
+              },
+              "API-Version": {
+                "$ref": "#/components/headers/api_version"
+              }
+            },
             "description": "not authorized"
           }
         }
@@ -422,6 +568,81 @@
     }
   },
   "components": {
+    "parameters": {
+      "vum_bericht_versie": {
+        "in": "header",
+        "name": "X-VUM-berichtVersie",
+        "schema": {
+          "type": "string"
+        },
+        "required": true
+      },
+      "vum_from_party": {
+        "in": "header",
+        "name": "X-VUM-fromParty",
+        "schema": {
+          "type": "string"
+        },
+        "required": true
+      },
+      "vum_to_party": {
+        "in": "header",
+        "name": "X-VUM-toParty",
+        "schema": {
+          "type": "string"
+        },
+        "required": true
+      },
+      "vum_via_party": {
+        "in": "header",
+        "name": "X-VUM-viaParty",
+        "schema": {
+          "type": "string"
+        },
+        "required": true
+      },
+      "api_version": {
+        "in": "header",
+        "name": "API-Version",
+        "schema": {
+          "type": "string",
+          "enum": [
+            "2.0.0"
+          ]
+        },
+        "required": true
+      }
+    },
+    "headers": {
+      "X-VUM-berichtVersie": {
+        "schema": {
+          "type": "string"
+        }
+      },
+      "X-VUM-fromParty": {
+        "schema": {
+          "type": "string"
+        }
+      },
+      "X-VUM-toParty": {
+        "schema": {
+          "type": "string"
+        }
+      },
+      "X-VUM-viaParty": {
+        "schema": {
+          "type": "string"
+        }
+      },
+      "API-Version": {
+        "schema": {
+          "type": "string",
+          "enum": [
+            "2.0.0"
+          ]
+        }
+      }
+    },
     "schemas": {
       "VumID": {
         "$ref": "#/components/schemas/String500"
