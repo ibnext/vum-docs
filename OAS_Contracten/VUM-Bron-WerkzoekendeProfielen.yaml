@@ -422,45 +422,198 @@ components:
           items:
             $ref: '#/components/schemas/Beroepsnaam'
     MPWerkzoekende:
-      type: object
-      additionalProperties: false
       properties:
-        indicatieLdrRegistratie:
-          type: integer
-          enum: [1, 2]
-        indicatieBeschikbaarheidContactgegevens:
-          type: integer
-          enum: [1, 2]
-        voorkeursland:
-          type: array
-          items:
-            $ref: '#/components/schemas/Voorkeursland'
-        vervoermiddel:
-          type: array
-          items:
-            $ref: '#/components/schemas/MPVervoermiddel'
-        mobiliteit:
-          $ref: '#/components/schemas/Mobiliteit'
-        flexibiliteit:
-          $ref: '#/components/schemas/Flexibiliteit'
-        werktijden:
-          $ref: '#/components/schemas/Werktijden'
+        bemiddelingsberoep: 
+          $ref: '#/components/schemas/bemiddelingsberoep_selectie'
         contractvorm:
-          type: array
-          items:
-            $ref: '#/components/schemas/Contractvorm'
-        arbeidsmarktkwalificatie:
-          $ref: '#/components/schemas/MPArbeidsmarktkwalificatie'
-        sector:
-          type: array
-          items:
-            $ref: '#/components/schemas/SectorBeroepsEnBedrijfsleven'
-        bemiddelingsberoep:
-          type: array
-          items:
-            $ref: '#/components/schemas/Beroepsnaam'
+           $ref: '#/components/schemas/contractvorm_selectie'
+        flexibiliteit:
+          $ref: '#/components/schemas/flexibiliteit_selectie'
+        rijbewijs:
+          $ref: '#/components/schemas/rijbewijs_selectie'
+        selectiegebied:
+          $ref: '#/components/schemas/selectiegebied_selectie'
+        taalbeheersing:
+          $ref: '#/components/schemas/taalbeheersingen_selectie'
+        werktijden:
+          $ref: '#/components/schemas/werktijden_selectie'
       required:
-      - mobiliteit
+      - selectiegebied
+    bemiddelingsberoep_selectie:
+      type: object
+      properties:
+        $elemMatch:
+          type: object
+          properties:
+            beroepsnaamGecodeerd:
+              $ref: '#/components/schemas/beroepsnaamGecodeerd_selectie'
+    beroepsnaamGecodeerd_selectie:
+      type: object
+      properties:
+        codeBeroepsnaam:
+          $ref: '#/components/schemas/codeBeroepsnamen_selectie'
+    codeBeroepsnamen_selectie:
+      type: object
+      properties:
+        $or:
+          type: array
+          items:
+            $ref: '#/components/schemas/codeBeroepsnaam_selectie'
+          minItems: 1
+    codeBeroepsnaam_selectie:
+      type: object
+      properties:
+        $eq:
+          $ref: '#/components/schemas/codeBeroepsnaam'
+    codeBeroepsnaam:
+      $comment: De code van het beroep volgens het UWV Beroepen & Opleidingen Register
+      pattern: '[0-9]{1,10}'
+    contractvorm_selectie:
+      type: object
+      properties:
+        $elemMatch:
+          type: object
+          properties:
+            codeTypeArbeidscontract:
+              $ref: '#/components/schemas/codeTypeArbeidscontracten_selectie'
+    codeTypeArbeidscontracten_selectie:
+      type: object
+      properties:
+        $or:
+          type: array
+          items:
+            $ref: '#/components/schemas/codeTypeArbeidscontract_selectie'
+          minItems: 1
+    codeTypeArbeidscontract_selectie:
+      type: object
+      properties:
+        $eq:
+          $ref: '#/components/schemas/codeTypeArbeidscontract'
+    codeTypeArbeidscontract:
+      type: string
+      enum:
+      - O
+      - B 
+    flexibiliteit_selectie:
+      type: object
+      properties:
+        indicatieOnregelmatigWerkOfPloegendienst:
+          $ref: '#/components/schemas/indicatieOnregelmatigWerkOfPloegendienst_selectie'
+    indicatieOnregelmatigWerkOfPloegendienst_selectie:
+      type: object
+      properties:
+        $eq:
+          $ref: '#/components/schemas/indicatieOnregelmatigWerkOfPloegendienst_choice'
+    indicatieOnregelmatigWerkOfPloegendienst_choice:
+      $comment: Dit is een beperkte keuze voor gebruik in de selectie.
+      enum:
+      - 1
+      - 2
+    rijbewijs_selectie:
+      type: object
+      properties:
+        $all:
+          type: array
+          items:
+            $ref: '#/components/schemas/codeSoortRijbewijs_match'
+          minItems: 1
+    codeSoortRijbewijs_match:
+      type: object
+      properties:
+        $elemMatch:
+          properties:
+            codeSoortRijbewijs:
+              $ref: '#/components/schemas/codeSoortRijbewijs_selectie'
+          type: object
+    codeSoortRijbewijs_selectie:
+      type: object
+      properties:
+        $eq:
+          $ref: '#/components/schemas/codeSoortRijbewijs'
+    codeSoortRijbewijs:
+      type: string
+      enum: ['A', 'A1', 'A2', 'AM', 'B', 'B+', 'C1', 'C', 'D1', 'D', 'BE', 'C1E', 'CE', 'D1E', 'DE', 'T']
+    selectiegebied_selectie:
+      type: object
+      properties:
+        afstand:
+          $ref: '#/components/schemas/Integer1000'
+        postcode:
+          $ref: '#/components/schemas/Postcode'
+    taalbeheersingen_selectie:
+      type: object
+      properties:
+        $all:
+          items:
+            $ref: '#/components/schemas/taalbeheersing_match'
+          minItems: 1
+          type: array
+    taalbeheersing_match:
+      type: object
+      properties:
+        $elemMatch:
+          $ref: '#/components/schemas/taalbeheersing_selectie'
+    taalbeheersing_selectie:
+      type: object
+      properties:
+        codeNiveauTaalbeheersingMondeling:
+          $ref: '#/components/schemas/codeNiveauTaalbeheersing_selectie'
+        codeNiveauTaalbeheersingSchriftelijk:
+          $ref: '#/components/schemas/codeNiveauTaalbeheersing_selectie'
+        codeTaal:
+          $ref: '#/components/schemas/codeTaal_selectie'
+      required:
+      - codeTaal
+    codeNiveauTaalbeheersing_choice:
+      $comment: Dit is een beperkte keuze voor gebruik in de selectie.
+      type: integer
+      enum:
+      - 2
+      - 3
+      - 4
+    codeNiveauTaalbeheersing_selectie:
+      type: object
+      properties:
+        $gte:
+          $ref: '#/components/schemas/codeNiveauTaalbeheersing_choice'
+    codeTaal_selectie:
+      type: object
+      properties:
+        $eq:
+          $ref: '#/components/schemas/TaalCode3'
+    werktijden_selectie:
+      type: object
+      properties:
+        aantalWerkurenPerWeekMaximaal:
+          $ref: '#/components/schemas/aantalWerkurenPerWeekMaximaal_selectie'
+        aantalWerkurenPerWeekMinimaal:
+          $ref: '#/components/schemas/aantalWerkurenPerWeekMinimaal_selectie'
+        indicatieKantoortijden:
+          $ref: '#/components/schemas/indicatieKantoortijden_selectie'
+    aantalWerkurenPerWeekMaximaal_selectie:
+      type: object
+      properties:
+        $gte:
+          $ref: '#/components/schemas/aantalWerkuren'
+    aantalWerkurenPerWeekMinimaal_selectie:
+      type: object
+      properties:
+        $lte:
+          $ref: '#/components/schemas/aantalWerkuren'
+    aantalWerkuren:
+      type: integer
+      maximum: 99
+      minimum: 1
+    indicatieKantoortijden_selectie:
+      type: object
+      properties:
+        $eq:
+          $ref: '#/components/schemas/indicatieKantoortijden_choice'
+    indicatieKantoortijden_choice:
+      $comment: Dit is een beperkte keuze voor gebruik in de selectie.
+      enum: 
+      - 1
+      - 2
     Arbeidsmarktkwalificatie:
       type: object
       additionalProperties: false
@@ -552,7 +705,7 @@ components:
           additionalProperties: false
           properties:
             codeBeroepsnaam:
-              $ref: '#/components/schemas/StringCode'
+              $ref: '#/components/schemas/codeBeroepsnaam'
             omschrijvingBeroepsnaam:
               $ref: '#/components/schemas/String120'
     BeroepsnaamOngecodeerd:
@@ -692,8 +845,7 @@ components:
       additionalProperties: false
       properties:
         codeSoortRijbewijs:
-          type: string
-          enum: ['A', 'A1', 'A2', 'AM', 'B', 'B+', 'C1', 'C', 'D1', 'D', 'BE', 'C1E', 'CE', 'D1E', 'DE', 'T']
+          $ref: '#/components/schemas/codeSoortRijbewijs'
     Opleiding:
       type: object
       additionalProperties: false
@@ -840,8 +992,7 @@ components:
       additionalProperties: false
       properties:
         codeTypeArbeidscontract:
-          type: string
-          enum: ["B", "O"]
+          $ref: '#/components/schemas/codeTypeArbeidscontract'
         codeTypeOvereenkomst:
           type: string
           enum: ["01", "02", "03", "04"]

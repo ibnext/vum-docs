@@ -745,116 +745,256 @@
       },
       "MPVacature": {
         "type": "object",
-        "additionalProperties": false,
         "properties": {
-          "codeWerkEnDenkniveauMinimaal": {
-            "type": "string",
-            "enum": [
-              "0",
-              "1",
-              "2",
-              "3",
-              "4",
-              "5",
-              "6",
-              "7"
-            ]
-          },
-          "indicatieLdrRegistratie": {
-            "type": "integer",
-            "enum": [
-              1,
-              2
-            ]
-          },
-          "sluitingsDatumVacature": {
-            "$ref": "#/components/schemas/Date"
-          },
-          "sollicitatiewijze": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/MPSollicitatiewijze"
-            }
-          },
-          "werkgever": {
-            "$ref": "#/components/schemas/MPWerkgever"
-          },
-          "sector": {
-            "$ref": "#/components/schemas/SectorBeroepsEnBedrijfsleven"
-          },
-          "arbeidsVoorwaarden": {
-            "$ref": "#/components/schemas/MPArbeidsVoorwaarden"
-          },
-          "contractvorm": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Contractvorm"
-            }
-          },
           "beroep": {
-            "$ref": "#/components/schemas/Beroepsnaam"
+            "$ref": "#/components/schemas/beroep_selectie"
           },
-          "werkervaring": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Werkervaring"
-            }
+          "codeWerkEnDenkNiveauMinimaal": {
+            "$ref": "#/components/schemas/codeWerkEnDenkNiveauMinimaal_selectie"
           },
           "rijbewijs": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Rijbewijs"
-            }
+            "$ref": "#/components/schemas/rijbewijs_selectie"
           },
-          "vervoermiddel": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/MPVervoermiddel"
-            }
-          },
-          "mobiliteit": {
-            "$ref": "#/components/schemas/Mobiliteit"
-          },
-          "flexibiliteit": {
-            "$ref": "#/components/schemas/Flexibiliteit"
-          },
-          "werktijden": {
-            "$ref": "#/components/schemas/Werktijden"
-          },
-          "cursus": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Cursus"
-            }
-          },
-          "opleiding": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/MPOpleiding"
-            }
-          },
-          "gedragscompetentie": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Gedragscompetentie"
-            }
-          },
-          "vakvaardigheid": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Vakvaardigheid"
-            }
+          "selectiegebied": {
+            "$ref": "#/components/schemas/selectiegebied_selectie"
           },
           "taalbeheersing": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Taalbeheersing"
-            }
+            "$ref": "#/components/schemas/taalbeheersingen_selectie"
+          },
+          "werktijden": {
+            "$ref": "#/components/schemas/werktijden_selectie"
           }
         },
         "required": [
-          "mobiliteit"
+          "selectiegebied"
         ]
+      },
+      "beroep_selectie": {
+        "type": "object",
+        "properties": {
+          "beroepsnaamGecodeerd": {
+            "$ref": "#/components/schemas/beroepsnaamGecodeerd_selectie"
+          }
+        }
+      },
+      "beroepsnaamGecodeerd_selectie": {
+        "type": "object",
+        "properties": {
+          "codeBeroepsnaam": {
+            "$ref": "#/components/schemas/codeBeroepsnaam_selectie"
+          }
+        }
+      },
+      "codeBeroepsnaam_selectie": {
+        "type": "object",
+        "properties": {
+          "$eq": {
+            "$ref": "#/components/schemas/codeBeroepsnaam"
+          }
+        }
+      },
+      "codeBeroepsnaam": {
+        "$comment": "De code van het beroep volgens het UWV Beroepen & Opleidingen Register",
+        "pattern": "[0-9]{1,10}"
+      },
+      "codeWerkEnDenkNiveauMinimaal_selectie": {
+        "oneOf": [
+          {
+            "$comment": "Onbekende properties worden door maar 1 oneOf keuze toegestaan",
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "$gte": {
+                "$ref": "#/components/schemas/codeWerkEnDenkNiveau_choice"
+              },
+              "$lt": {
+                "const": "7"
+              }
+            },
+            "required": [
+              "$lt"
+            ]
+          },
+          {
+            "type": "object",
+            "properties": {
+              "$eq": {
+                "const": "7"
+              },
+              "$lt": false
+            }
+          }
+        ]
+      },
+      "codeWerkEnDenkNiveau_choice": {
+        "$comment": "Dit is een beperkte keuze voor gebruik in de selectie.",
+        "enum": [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5",
+          "6"
+        ]
+      },
+      "rijbewijs_selectie": {
+        "type": "object",
+        "properties": {
+          "$all": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/codeSoortRijbewijs_match"
+            },
+            "minItems": 1
+          }
+        }
+      },
+      "codeSoortRijbewijs_match": {
+        "type": "object",
+        "properties": {
+          "$elemMatch": {
+            "properties": {
+              "codeSoortRijbewijs": {
+                "$ref": "#/components/schemas/codeSoortRijbewijs_selectie"
+              }
+            },
+            "type": "object"
+          }
+        }
+      },
+      "codeSoortRijbewijs_selectie": {
+        "type": "object",
+        "properties": {
+          "$eq": {
+            "$ref": "#/components/schemas/codeSoortRijbewijs"
+          }
+        }
+      },
+      "codeSoortRijbewijs": {
+        "type": "string",
+        "enum": [
+          "A",
+          "A1",
+          "A2",
+          "AM",
+          "B",
+          "B+",
+          "C1",
+          "C",
+          "D1",
+          "D",
+          "BE",
+          "C1E",
+          "CE",
+          "D1E",
+          "DE",
+          "T"
+        ]
+      },
+      "selectiegebied_selectie": {
+        "type": "object",
+        "properties": {
+          "afstand": {
+            "$ref": "#/components/schemas/Integer1000"
+          },
+          "postcode": {
+            "$ref": "#/components/schemas/Postcode"
+          }
+        }
+      },
+      "taalbeheersingen_selectie": {
+        "type": "object",
+        "properties": {
+          "$all": {
+            "items": {
+              "$ref": "#/components/schemas/taalbeheersing_match"
+            },
+            "minItems": 1,
+            "type": "array"
+          }
+        }
+      },
+      "taalbeheersing_match": {
+        "type": "object",
+        "properties": {
+          "$elemMatch": {
+            "$ref": "#/components/schemas/taalbeheersing_selectie"
+          }
+        }
+      },
+      "taalbeheersing_selectie": {
+        "type": "object",
+        "properties": {
+          "codeNiveauTaalbeheersingMondeling": {
+            "$ref": "#/components/schemas/codeNiveauTaalbeheersing_selectie"
+          },
+          "codeNiveauTaalbeheersingSchriftelijk": {
+            "$ref": "#/components/schemas/codeNiveauTaalbeheersing_selectie"
+          },
+          "codeTaal": {
+            "$ref": "#/components/schemas/codeTaal_selectie"
+          }
+        },
+        "required": [
+          "codeTaal"
+        ]
+      },
+      "codeNiveauTaalbeheersing_choice": {
+        "$comment": "Dit is een beperkte keuze voor gebruik in de selectie.",
+        "type": "integer",
+        "enum": [
+          2,
+          3,
+          4
+        ]
+      },
+      "codeNiveauTaalbeheersing_selectie": {
+        "type": "object",
+        "properties": {
+          "$gte": {
+            "$ref": "#/components/schemas/codeNiveauTaalbeheersing_choice"
+          }
+        }
+      },
+      "codeTaal_selectie": {
+        "type": "object",
+        "properties": {
+          "$eq": {
+            "$ref": "#/components/schemas/TaalCode3"
+          }
+        }
+      },
+      "werktijden_selectie": {
+        "type": "object",
+        "properties": {
+          "aantalWerkurenPerWeekMaximaal": {
+            "$ref": "#/components/schemas/aantalWerkurenPerWeekMaximaal_selectie"
+          },
+          "aantalWerkurenPerWeekMinimaal": {
+            "$ref": "#/components/schemas/aantalWerkurenPerWeekMinimaal_selectie"
+          }
+        }
+      },
+      "aantalWerkurenPerWeekMaximaal_selectie": {
+        "type": "object",
+        "properties": {
+          "$gte": {
+            "$ref": "#/components/schemas/aantalWerkuren"
+          }
+        }
+      },
+      "aantalWerkurenPerWeekMinimaal_selectie": {
+        "type": "object",
+        "properties": {
+          "$lte": {
+            "$ref": "#/components/schemas/aantalWerkuren"
+          }
+        }
+      },
+      "aantalWerkuren": {
+        "type": "integer",
+        "maximum": 99,
+        "minimum": 1
       },
       "Beroepsnaam": {
         "oneOf": [
@@ -904,7 +1044,7 @@
             "additionalProperties": false,
             "properties": {
               "codeBeroepsnaam": {
-                "$ref": "#/components/schemas/StringCode"
+                "$ref": "#/components/schemas/codeBeroepsnaam"
               },
               "omschrijvingBeroepsnaam": {
                 "$ref": "#/components/schemas/String120"
@@ -1111,25 +1251,7 @@
         "additionalProperties": false,
         "properties": {
           "codeSoortRijbewijs": {
-            "type": "string",
-            "enum": [
-              "A",
-              "A1",
-              "A2",
-              "AM",
-              "B",
-              "B+",
-              "C1",
-              "C",
-              "D1",
-              "D",
-              "BE",
-              "C1E",
-              "CE",
-              "D1E",
-              "DE",
-              "T"
-            ]
+            "$ref": "#/components/schemas/codeSoortRijbewijs"
           }
         }
       },
