@@ -1,12 +1,13 @@
 openapi: 3.1.0
 info:
   title: VUM API Vacatures tussen VUM-UV en bemiddelaar
-  description: Contract tbv interactie van bemiddelaars met VUM uitwisselingsvoorziening voor Vacatures
+  description: Contract tbv interactie van bemiddelaars met VUM uitwisselingsvoorziening
+    voor Vacatures
   contact:
     name: Helpdesk
     url: https://www.matchingsgegevens.nl
     email: programma-vum@ictu.nl
-  version: '2.0.0'
+  version: 2.0.0
 servers:
 - url: https://test.vumdevelopment.nl/api/v2
   description: staging/test server
@@ -30,7 +31,7 @@ paths:
         $ref: '#/components/requestBodies/VacatureMatchesRequest'
       responses:
         '200':
-          description: 'OK'
+          description: OK
           headers:
             X-VUM-berichtVersie:
               $ref: '#/components/headers/vum_bericht_versie'
@@ -47,7 +48,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/inline_response_200'
         '400':
-          description: 'Bad request'
+          description: Bad request
           headers:
             X-VUM-berichtVersie:
               $ref: '#/components/headers/vum_bericht_versie'
@@ -64,7 +65,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
         '401':
-          description: 'not authorized'
+          description: not authorized
           headers:
             X-VUM-berichtVersie:
               $ref: '#/components/headers/vum_bericht_versie'
@@ -77,7 +78,7 @@ paths:
             API-Version:
               $ref: '#/components/headers/api_version'
         '429':
-          description: 'Too Many Requests'
+          description: Too Many Requests
           headers:
             X-VUM-berichtVersie:
               $ref: '#/components/headers/vum_bericht_versie'
@@ -94,7 +95,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
         '500':
-          description: 'Internal Server Error'
+          description: Internal Server Error
           headers:
             X-VUM-berichtVersie:
               $ref: '#/components/headers/vum_bericht_versie'
@@ -111,7 +112,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
         '503':
-          description: 'Service Unavailable'
+          description: Service Unavailable
           headers:
             X-VUM-berichtVersie:
               $ref: '#/components/headers/vum_bericht_versie'
@@ -145,14 +146,14 @@ paths:
                 $ref: '#/components/requestBodies/VacatureMatchesCallbackRequest'
               responses:
                 '200':
-                  description: 'bevestiging aan de uitwisselingsvoorziening'
+                  description: bevestiging aan de uitwisselingsvoorziening
                   headers:
                     X-VUM-berichtVersie:
                       $ref: '#/components/headers/vum_bericht_versie'
                     API-Version:
                       $ref: '#/components/headers/api_version'
                 '400':
-                  description: 'Bad request'
+                  description: Bad request
                   headers:
                     X-VUM-berichtVersie:
                       $ref: '#/components/headers/vum_bericht_versie'
@@ -163,7 +164,7 @@ paths:
                       schema:
                         $ref: '#/components/schemas/Error'
                 '500':
-                  description: 'Internal Server Error'
+                  description: Internal Server Error
                   headers:
                     X-VUM-berichtVersie:
                       $ref: '#/components/headers/vum_bericht_versie'
@@ -174,7 +175,7 @@ paths:
                       schema:
                         $ref: '#/components/schemas/Error'
                 '503':
-                  description: 'Service Unavailable'
+                  description: Service Unavailable
                   headers:
                     X-VUM-berichtVersie:
                       $ref: '#/components/headers/vum_bericht_versie'
@@ -204,7 +205,7 @@ paths:
           $ref: '#/components/schemas/VumID'
       responses:
         '200':
-          description: 'OK'
+          description: OK
           headers:
             X-VUM-berichtVersie:
               $ref: '#/components/headers/vum_bericht_versie'
@@ -226,7 +227,7 @@ paths:
                   vacature:
                     $ref: '#/components/schemas/Vacature'
         '400':
-          description: 'Bad request'
+          description: Bad request
           headers:
             X-VUM-berichtVersie:
               $ref: '#/components/headers/vum_bericht_versie'
@@ -243,12 +244,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
         '401':
-          description: 'not authorized'
+          description: not authorized
           headers:
             API-Version:
               $ref: '#/components/headers/api_version'
         '429':
-          description: 'Too Many Requests, limiet is overschreden voor deze vraagID'
+          description: Too Many Requests, limiet is overschreden voor deze vraagID
           headers:
             X-VUM-berichtVersie:
               $ref: '#/components/headers/vum_bericht_versie'
@@ -265,7 +266,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
         '500':
-          description: 'Internal Server Error'
+          description: Internal Server Error
           headers:
             X-VUM-berichtVersie:
               $ref: '#/components/headers/vum_bericht_versie'
@@ -282,7 +283,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
         '503':
-          description: 'Service Unavailable'
+          description: Service Unavailable
           headers:
             X-VUM-berichtVersie:
               $ref: '#/components/headers/vum_bericht_versie'
@@ -301,9 +302,10 @@ paths:
   /callbackVacature:
     post:
       tags:
-        - callback
+      - callback
       summary: Voorbeeld voor de callback methode
-      description: Voorbeeld voor de callback methode, alleen om te laten zien hoe de echte Callback er uit ziet!
+      description: Voorbeeld voor de callback methode, alleen om te laten zien hoe
+        de echte Callback er uit ziet!
       parameters:
       - $ref: '#/components/parameters/vum_bericht_versie'
       - $ref: '#/components/parameters/vum_to_party'
@@ -333,7 +335,7 @@ paths:
             API-Version:
               $ref: '#/components/headers/api_version'
         '401':
-          description: 'not authorized'
+          description: not authorized
           headers:
             X-VUM-berichtVersie:
               $ref: '#/components/headers/vum_bericht_versie'
@@ -346,7 +348,7 @@ components:
       name: X-VUM-berichtVersie
       schema:
         type: string
-        const: '2.0.0'
+        const: 2.0.0
       required: true
     vum_from_party:
       in: header
@@ -372,27 +374,27 @@ components:
       schema:
         type: string
         enum:
-        - '2.0.0'
+        - 2.0.0
       required: true
   headers:
     vum_bericht_versie:
       schema:
         type: string
-        const: '2.0.0'
+        const: 2.0.0
     vum_from_party:
-      schema: 
+      schema:
         type: string
     vum_to_party:
       schema:
         type: string
     vum_via_party:
-      schema: 
+      schema:
         type: string
     api_version:
       schema:
         type: string
         enum:
-        - '2.0.0'
+        - 2.0.0
   schemas:
     VumID:
       $ref: '#/components/schemas/String500'
@@ -406,24 +408,34 @@ components:
       type: object
       additionalProperties: false
       required:
-        - vumID
+      - vumID
       properties:
         vumID:
-            $ref: '#/components/schemas/VumID'
+          $ref: '#/components/schemas/VumID'
         codeWerkEnDenkniveauMinimaal:
           type: string
-          enum: ['0', '1', '2', '3', '4', '5', '6', '7']
+          enum:
+          - '0'
+          - '1'
+          - '2'
+          - '3'
+          - '4'
+          - '5'
+          - '6'
+          - '7'
         indicatieLdrRegistratie:
           type: integer
-          enum: [1, 2]
+          enum:
+          - 1
+          - 2
         sluitingsDatumVacature:
-            $ref: '#/components/schemas/Date'
+          $ref: '#/components/schemas/Date'
         sollicitatiewijze:
           type: array
           items:
             $ref: '#/components/schemas/MPSollicitatiewijze'
         werkgever:
-            $ref: '#/components/schemas/MPWerkgever'
+          $ref: '#/components/schemas/MPWerkgever'
         sector:
           $ref: '#/components/schemas/SectorBeroepsEnBedrijfsleven'
         arbeidsVoorwaarden:
@@ -484,18 +496,28 @@ components:
           $ref: '#/components/schemas/String2000'
         codeWerkEnDenkniveauMinimaal:
           type: string
-          enum: ['0', '1', '2', '3', '4', '5', '6', '7']
+          enum:
+          - '0'
+          - '1'
+          - '2'
+          - '3'
+          - '4'
+          - '5'
+          - '6'
+          - '7'
         indicatieLdrRegistratie:
           type: integer
-          enum: [1, 2]
+          enum:
+          - 1
+          - 2
         sluitingsDatumVacature:
-            $ref: '#/components/schemas/Date'
+          $ref: '#/components/schemas/Date'
         sollicitatiewijze:
           type: array
           items:
             $ref: '#/components/schemas/Sollicitatiewijze'
         werkgever:
-            $ref: '#/components/schemas/Werkgever'
+          $ref: '#/components/schemas/Werkgever'
         sector:
           $ref: '#/components/schemas/SectorBeroepsEnBedrijfsleven'
         arbeidsVoorwaarden:
@@ -577,7 +599,7 @@ components:
     codeBeroepsnaam:
       $comment: De code van het beroep volgens het UWV Beroepen & Opleidingen Register
       type: string
-      pattern: '^[0-9]{1,10}$'
+      pattern: ^[0-9]{1,10}$
     codeWerkEnDenkNiveauMinimaal_selectie:
       oneOf:
       - $comment: Onbekende properties worden door maar 1 oneOf keuze toegestaan
@@ -630,7 +652,23 @@ components:
           $ref: '#/components/schemas/codeSoortRijbewijs'
     codeSoortRijbewijs:
       type: string
-      enum: ['A', 'A1', 'A2', 'AM', 'B', 'B+', 'C1', 'C', 'D1', 'D', 'BE', 'C1E', 'CE', 'D1E', 'DE', 'T']
+      enum:
+      - A
+      - A1
+      - A2
+      - AM
+      - B
+      - B+
+      - C1
+      - C
+      - D1
+      - D
+      - BE
+      - C1E
+      - CE
+      - D1E
+      - DE
+      - T
     selectiegebied_selectie:
       type: object
       properties:
@@ -783,7 +821,32 @@ components:
       properties:
         codeGedragscompetentie:
           type: string
-          enum: ["24100", "24101", "24102", "24104", "24105", "24106", "24107", "24108", "24109", "24110", "24111", "24112", "24113", "24114", "24115", "24116", "24118", "24119", "24120", "24121", "24122", "24123", "24124", "24125", "24126"]
+          enum:
+          - '24100'
+          - '24101'
+          - '24102'
+          - '24104'
+          - '24105'
+          - '24106'
+          - '24107'
+          - '24108'
+          - '24109'
+          - '24110'
+          - '24111'
+          - '24112'
+          - '24113'
+          - '24114'
+          - '24115'
+          - '24116'
+          - '24118'
+          - '24119'
+          - '24120'
+          - '24121'
+          - '24122'
+          - '24123'
+          - '24124'
+          - '24125'
+          - '24126'
         omschrijvingGedragscompetentie:
           type: string
           enum:
@@ -814,7 +877,13 @@ components:
           - Bedrijfsmatig handelen
         codeBeheersingGedragscompetentie:
           type: integer
-          enum: [1,2,3,4,5,9]
+          enum:
+          - 1
+          - 2
+          - 3
+          - 4
+          - 5
+          - 9
     Werktijden:
       type: object
       additionalProperties: false
@@ -833,8 +902,8 @@ components:
         maximaleReisafstand:
           $ref: '#/components/schemas/Integer1000'
       required:
-        - bemiddelingspostcode
-        - maximaleReisafstand
+      - bemiddelingspostcode
+      - maximaleReisafstand
     Flexibiliteit:
       type: object
       additionalProperties: false
@@ -861,10 +930,21 @@ components:
       properties:
         codeNiveauOpleiding:
           type: integer
-          enum: [1, 2, 3, 4, 5, 6, 9]
+          enum:
+          - 1
+          - 2
+          - 3
+          - 4
+          - 5
+          - 6
+          - 9
         indicatieDiploma:
           type: integer
-          enum: [0, 1, 2, 8]
+          enum:
+          - 0
+          - 1
+          - 2
+          - 8
         opleidingsnaam:
           $ref: '#/components/schemas/Opleidingsnaam'
     MPOpleiding:
@@ -873,10 +953,21 @@ components:
       properties:
         codeNiveauOpleiding:
           type: integer
-          enum: [1, 2, 3, 4, 5, 6, 9]
+          enum:
+          - 1
+          - 2
+          - 3
+          - 4
+          - 5
+          - 6
+          - 9
         indicatieDiploma:
           type: integer
-          enum: [0, 1, 2, 8]
+          enum:
+          - 0
+          - 1
+          - 2
+          - 8
         opleidingsnaam:
           $ref: '#/components/schemas/MPOpleidingsnaam'
     Cursus:
@@ -904,7 +995,7 @@ components:
         codeTaal:
           $ref: '#/components/schemas/TaalCode3'
         codeNiveauTaalbeheersingMondeling:
-          $ref: "#/components/schemas/IntegerTaal"
+          $ref: '#/components/schemas/IntegerTaal'
         codeNiveauTaalbeheersingSchriftelijk:
           $ref: '#/components/schemas/IntegerTaal'
         codeNiveauTaalbeheersingLezen:
@@ -921,7 +1012,13 @@ components:
           $ref: '#/components/schemas/Indicatie'
         codeVervoermiddel:
           type: integer
-          enum: [1, 2, 3, 4, 5, 9]
+          enum:
+          - 1
+          - 2
+          - 3
+          - 4
+          - 5
+          - 9
     MPVervoermiddel:
       type: object
       additionalProperties: false
@@ -967,17 +1064,27 @@ components:
       properties:
         codeTypeArbeidscontract:
           type: string
-          enum: ["B", "O"]
+          enum:
+          - B
+          - O
         codeTypeOvereenkomst:
           type: string
-          enum: ["01", "02", "03", "04"]
+          enum:
+          - '01'
+          - '02'
+          - '03'
+          - '04'
     Sollicitatiewijze:
       type: object
       additionalProperties: false
       properties:
         codeSollicitatiewijze:
           type: string
-          enum: ["1", "2", "3", "4"]
+          enum:
+          - '1'
+          - '2'
+          - '3'
+          - '4'
         webadres:
           $ref: '#/components/schemas/Webadres'
     MPSollicitatiewijze:
@@ -986,7 +1093,11 @@ components:
       properties:
         codeSollicitatiewijze:
           type: string
-          enum: ["1", "2", "3", "4"]
+          enum:
+          - '1'
+          - '2'
+          - '3'
+          - '4'
     Werkgever:
       type: object
       additionalProperties: false
@@ -1049,15 +1160,22 @@ components:
       properties:
         codeFunctieAdres:
           type: string
-          enum: ["B", "W", "C", "L", "A", "V", "E"]
+          enum:
+          - B
+          - W
+          - C
+          - L
+          - A
+          - V
+          - E
         datumAanvangAdres:
           $ref: '#/components/schemas/Date'
         datumEindeAdres:
           $ref: '#/components/schemas/Date'
         adres:
           oneOf:
-          -  $ref: '#/components/schemas/AdresNederland'
-          -  $ref: '#/components/schemas/AdresBuitenland'
+          - $ref: '#/components/schemas/AdresNederland'
+          - $ref: '#/components/schemas/AdresBuitenland'
     AdresNederland:
       type: object
       additionalProperties: false
@@ -1086,9 +1204,9 @@ components:
               $ref: '#/components/schemas/String80'
             adresDetails:
               oneOf:
-              -  $ref: '#/components/schemas/Straatadres'
-              -  $ref: '#/components/schemas/Postbusadres'
-              -  $ref: '#/components/schemas/Antwoordnummeradres'
+              - $ref: '#/components/schemas/Straatadres'
+              - $ref: '#/components/schemas/Postbusadres'
+              - $ref: '#/components/schemas/Antwoordnummeradres'
     Straatadres:
       type: object
       additionalProperties: false
@@ -1111,10 +1229,10 @@ components:
               $ref: '#/components/schemas/String24'
             woonbootverwijzing:
               type: string
-              const: "AB"
+              const: AB
             woonwagenverwijzing:
               type: string
-              const: "WW"
+              const: WW
     Postbusadres:
       type: object
       additionalProperties: false
@@ -1133,8 +1251,8 @@ components:
           type: object
           additionalProperties: false
           properties:
-              antwoordnummer:
-                $ref: '#/components/schemas/Integer5'
+            antwoordnummer:
+              $ref: '#/components/schemas/Integer5'
     AdresBuitenland:
       type: object
       additionalProperties: false
@@ -1157,8 +1275,8 @@ components:
               $ref: '#/components/schemas/String40'
             adresDetailsBuitenland:
               oneOf:
-              -  $ref: '#/components/schemas/StraatadresBuitenland'
-              -  $ref: '#/components/schemas/PostbusadresBuitenland'
+              - $ref: '#/components/schemas/StraatadresBuitenland'
+              - $ref: '#/components/schemas/PostbusadresBuitenland'
     StraatadresBuitenland:
       type: object
       additionalProperties: false
@@ -1187,7 +1305,14 @@ components:
       properties:
         codeFunctieAdres:
           type: string
-          enum: ["B", "W", "C", "L", "A", "V", "E"]
+          enum:
+          - B
+          - W
+          - C
+          - L
+          - A
+          - V
+          - E
         adres:
           $ref: '#/components/schemas/MPAdresBuitenland'
     MPAdresBuitenland:
@@ -1207,7 +1332,10 @@ components:
       maxLength: 320
       type: string
     Indicatie:
-      enum: [0, 1, 2]
+      enum:
+      - 0
+      - 1
+      - 2
       type: integer
     Integer2:
       maximum: 99
@@ -1223,7 +1351,13 @@ components:
       type: integer
     IntegerTaal:
       type: integer
-      enum: [0, 1, 2, 3, 4, 8]
+      enum:
+      - 0
+      - 1
+      - 2
+      - 3
+      - 4
+      - 8
     StringCode:
       maxLength: 10
       type: string
@@ -1240,9 +1374,10 @@ components:
       maxLength: 4
       type: string
     TaalCode3:
-      $comment: This does not exclude the special codes, B-codes and reserved range of ISO-639
+      $comment: This does not exclude the special codes, B-codes and reserved range
+        of ISO-639
       type: string
-      pattern: '^[a-z]{3}$'
+      pattern: ^[a-z]{3}$
     URL:
       type: string
       format: url
@@ -1252,7 +1387,7 @@ components:
     Integer10AsString:
       maxLength: 10
       type: string
-      pattern: '^[0-9]+$'
+      pattern: ^[0-9]+$
       example: '9999999999'
     String9:
       maxLength: 9
@@ -1297,9 +1432,9 @@ components:
       type: string
       format: date
     Postcode:
-      pattern: '^[0-9]{4}[a-zA-Z]{2}$'
+      pattern: ^[0-9]{4}[a-zA-Z]{2}$
       type: string
-      example: '1234AB'
+      example: 1234AB
     VraagID:
       maxLength: 100
       type: string
@@ -1318,8 +1453,8 @@ components:
         details:
           $ref: '#/components/schemas/String2000'
       required:
-        - code
-        - message
+      - code
+      - message
   requestBodies:
     VacatureMatchesRequest:
       content:

@@ -1,12 +1,13 @@
 openapi: 3.1.0
 info:
   title: VUM API WerkzoekendeProfielen tussen VUM-UV en bronnen
-  description: Contract tbv interactie van bronnen met VUM uitwisselingsvoorziening voor WerkzoekendeProfielen
+  description: Contract tbv interactie van bronnen met VUM uitwisselingsvoorziening
+    voor WerkzoekendeProfielen
   contact:
     name: Helpdesk
     url: https://www.matchingsgegevens.nl
     email: programma-vum@ictu.nl
-  version: '2.0.0'
+  version: 2.0.0
 servers:
 - url: https://bron.vumdevelopment.nl/api/v2
   description: Testbron
@@ -14,20 +15,21 @@ paths:
   /werkzoekendeProfielen/matches:
     post:
       summary: Zoekopdracht voor MatchingProfielen Werkzoekende
-      description: Zoekopdracht om matches voor Werkzoekende MatchingProfielen op te vragen
+      description: Zoekopdracht om matches voor Werkzoekende MatchingProfielen op
+        te vragen
       operationId: MatchesWerkzoekendeProfielen
       parameters:
-        - $ref: '#/components/parameters/vum_bericht_versie'
-        - $ref: '#/components/parameters/vum_from_party'
-        - $ref: '#/components/parameters/vum_to_party'
-        - $ref: '#/components/parameters/vum_via_party'
-        - $ref: '#/components/parameters/vum_suwi_party'
-        - $ref: '#/components/parameters/api_version'
+      - $ref: '#/components/parameters/vum_bericht_versie'
+      - $ref: '#/components/parameters/vum_from_party'
+      - $ref: '#/components/parameters/vum_to_party'
+      - $ref: '#/components/parameters/vum_via_party'
+      - $ref: '#/components/parameters/vum_suwi_party'
+      - $ref: '#/components/parameters/api_version'
       requestBody:
         $ref: '#/components/requestBodies/WerkzoekendeProfielMatchesRequest'
       responses:
         '200':
-          description: 'OK'
+          description: OK
           headers:
             X-VUM-berichtVersie:
               $ref: '#/components/headers/vum_bericht_versie'
@@ -43,17 +45,19 @@ paths:
             application/json:
               schema:
                 required:
-                  - maximumAantalResultatenBereikt
-                  - matches
+                - maximumAantalResultatenBereikt
+                - matches
                 type: object
                 properties:
                   maximumAantalResultatenBereikt:
                     type: boolean
-                    description: "Geeft aan of bron meer matches zou kunnen leveren dan de teruggeleverde set. Bronnen mogen per zoekvraag een maximum aantal (standaard 100) resultaten leveren"
+                    description: Geeft aan of bron meer matches zou kunnen leveren
+                      dan de teruggeleverde set. Bronnen mogen per zoekvraag een maximum
+                      aantal (standaard 100) resultaten leveren
                   matches:
                     $ref: '#/components/schemas/WerkzoekendeMatchingProfielen'
         '400':
-          description: 'Bad request'
+          description: Bad request
           headers:
             X-VUM-berichtVersie:
               $ref: '#/components/headers/vum_bericht_versie'
@@ -70,7 +74,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
         '401':
-          description: 'not authorized'
+          description: not authorized
           headers:
             X-VUM-berichtVersie:
               $ref: '#/components/headers/vum_bericht_versie'
@@ -83,7 +87,7 @@ paths:
             API-Version:
               $ref: '#/components/headers/api_version'
         '429':
-          description: 'Too Many Requests'
+          description: Too Many Requests
           headers:
             X-VUM-berichtVersie:
               $ref: '#/components/headers/vum_bericht_versie'
@@ -100,7 +104,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
         '500':
-          description: 'Internal Server Error'
+          description: Internal Server Error
           headers:
             X-VUM-berichtVersie:
               $ref: '#/components/headers/vum_bericht_versie'
@@ -117,7 +121,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
         '503':
-          description: 'Service Unavailable'
+          description: Service Unavailable
           headers:
             X-VUM-berichtVersie:
               $ref: '#/components/headers/vum_bericht_versie'
@@ -139,22 +143,22 @@ paths:
       description: Vraag detailprofielen op bij een opgegeven idWerkzoekende
       operationId: getWerkzoekendeProfiel
       parameters:
-        - name: idWerkzoekende
-          in: path
-          required: true
-          style: simple
-          explode: false
-          schema:
-            $ref: '#/components/schemas/IDWerkzoekende'
-        - $ref: '#/components/parameters/vum_bericht_versie'
-        - $ref: '#/components/parameters/vum_from_party'
-        - $ref: '#/components/parameters/vum_to_party'
-        - $ref: '#/components/parameters/vum_via_party'
-        - $ref: '#/components/parameters/vum_suwi_party'
-        - $ref: '#/components/parameters/api_version'
+      - name: idWerkzoekende
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          $ref: '#/components/schemas/IDWerkzoekende'
+      - $ref: '#/components/parameters/vum_bericht_versie'
+      - $ref: '#/components/parameters/vum_from_party'
+      - $ref: '#/components/parameters/vum_to_party'
+      - $ref: '#/components/parameters/vum_via_party'
+      - $ref: '#/components/parameters/vum_suwi_party'
+      - $ref: '#/components/parameters/api_version'
       responses:
         '200':
-          description: 'OK'
+          description: OK
           headers:
             X-VUM-berichtVersie:
               $ref: '#/components/headers/vum_bericht_versie'
@@ -171,7 +175,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Werkzoekende'
         '400':
-          description: 'Bad request'
+          description: Bad request
           headers:
             X-VUM-berichtVersie:
               $ref: '#/components/headers/vum_bericht_versie'
@@ -188,7 +192,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
         '401':
-          description: 'not authorized'
+          description: not authorized
           headers:
             X-VUM-berichtVersie:
               $ref: '#/components/headers/vum_bericht_versie'
@@ -201,7 +205,7 @@ paths:
             API-Version:
               $ref: '#/components/headers/api_version'
         '429':
-          description: 'Too Many Requests, limiet is overschreden voor deze uitvraag'
+          description: Too Many Requests, limiet is overschreden voor deze uitvraag
           headers:
             X-VUM-berichtVersie:
               $ref: '#/components/headers/vum_bericht_versie'
@@ -218,7 +222,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
         '500':
-          description: 'Internal Server Error'
+          description: Internal Server Error
           headers:
             X-VUM-berichtVersie:
               $ref: '#/components/headers/vum_bericht_versie'
@@ -235,7 +239,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
         '503':
-          description: 'Service Unavailable'
+          description: Service Unavailable
           headers:
             X-VUM-berichtVersie:
               $ref: '#/components/headers/vum_bericht_versie'
@@ -258,7 +262,7 @@ components:
       name: X-VUM-berichtVersie
       schema:
         type: string
-        const: '2.0.0'
+        const: 2.0.0
       required: true
     vum_from_party:
       in: header
@@ -284,7 +288,7 @@ components:
       schema:
         type: string
         enum:
-        - '2.0.0'
+        - 2.0.0
       required: true
     vum_suwi_party:
       in: header
@@ -296,21 +300,21 @@ components:
     vum_bericht_versie:
       schema:
         type: string
-        const: '2.0.0'
+        const: 2.0.0
     vum_from_party:
-      schema: 
+      schema:
         type: string
     vum_to_party:
       schema:
         type: string
     vum_via_party:
-      schema: 
+      schema:
         type: string
     api_version:
       schema:
         type: string
         enum:
-        - '2.0.0'
+        - 2.0.0
   schemas:
     WerkzoekendeMatchingProfielen:
       type: array
@@ -324,10 +328,14 @@ components:
           $ref: '#/components/schemas/IDWerkzoekende'
         indicatieLdrRegistratie:
           type: integer
-          enum: [1, 2]
+          enum:
+          - 1
+          - 2
         indicatieBeschikbaarheidContactgegevens:
           type: integer
-          enum: [1, 2]
+          enum:
+          - 1
+          - 2
         voorkeursland:
           type: array
           items:
@@ -369,10 +377,14 @@ components:
           $ref: '#/components/schemas/IDWerkzoekende'
         indicatieLdrRegistratie:
           type: integer
-          enum: [1, 2]
+          enum:
+          - 1
+          - 2
         indicatieBeschikbaarheidContactgegevens:
           type: integer
-          enum: [1, 2]
+          enum:
+          - 1
+          - 2
         persoonlijkePresentatie:
           $ref: '#/components/schemas/String2000'
         voorkeursland:
@@ -423,10 +435,10 @@ components:
             $ref: '#/components/schemas/Beroepsnaam'
     MPWerkzoekende:
       properties:
-        bemiddelingsberoep: 
+        bemiddelingsberoep:
           $ref: '#/components/schemas/bemiddelingsberoep_selectie'
         contractvorm:
-           $ref: '#/components/schemas/contractvorm_selectie'
+          $ref: '#/components/schemas/contractvorm_selectie'
         flexibiliteit:
           $ref: '#/components/schemas/flexibiliteit_selectie'
         rijbewijs:
@@ -468,7 +480,7 @@ components:
     codeBeroepsnaam:
       $comment: De code van het beroep volgens het UWV Beroepen & Opleidingen Register
       type: string
-      pattern: '^[0-9]{1,10}$'
+      pattern: ^[0-9]{1,10}$
     contractvorm_selectie:
       type: object
       properties:
@@ -494,7 +506,7 @@ components:
       type: string
       enum:
       - O
-      - B 
+      - B
     flexibiliteit_selectie:
       type: object
       properties:
@@ -534,7 +546,23 @@ components:
           $ref: '#/components/schemas/codeSoortRijbewijs'
     codeSoortRijbewijs:
       type: string
-      enum: ['A', 'A1', 'A2', 'AM', 'B', 'B+', 'C1', 'C', 'D1', 'D', 'BE', 'C1E', 'CE', 'D1E', 'DE', 'T']
+      enum:
+      - A
+      - A1
+      - A2
+      - AM
+      - B
+      - B+
+      - C1
+      - C
+      - D1
+      - D
+      - BE
+      - C1E
+      - CE
+      - D1E
+      - DE
+      - T
     selectiegebied_selectie:
       type: object
       properties:
@@ -617,7 +645,7 @@ components:
     indicatieKantoortijden_choice:
       $comment: Dit is een beperkte keuze voor gebruik in de selectie.
       type: integer
-      enum: 
+      enum:
       - 1
       - 2
     Arbeidsmarktkwalificatie:
@@ -626,7 +654,15 @@ components:
       properties:
         codeWerkEnDenkniveauWerkzoekende:
           type: integer
-          enum: [0, 1, 2, 3, 4, 5, 6, 7]
+          enum:
+          - 0
+          - 1
+          - 2
+          - 3
+          - 4
+          - 5
+          - 6
+          - 7
         vakvaardigheid:
           type: array
           items:
@@ -665,7 +701,15 @@ components:
       properties:
         codeWerkEnDenkniveauWerkzoekende:
           type: integer
-          enum: [0, 1, 2, 3, 4, 5, 6, 7]
+          enum:
+          - 0
+          - 1
+          - 2
+          - 3
+          - 4
+          - 5
+          - 6
+          - 7
         vakvaardigheid:
           type: array
           items:
@@ -754,7 +798,32 @@ components:
       properties:
         codeGedragscompetentie:
           type: string
-          enum: ["24100", "24101", "24102", "24104", "24105", "24106", "24107", "24108", "24109", "24110", "24111", "24112", "24113", "24114", "24115", "24116", "24118", "24119", "24120", "24121", "24122", "24123", "24124", "24125", "24126"]
+          enum:
+          - '24100'
+          - '24101'
+          - '24102'
+          - '24104'
+          - '24105'
+          - '24106'
+          - '24107'
+          - '24108'
+          - '24109'
+          - '24110'
+          - '24111'
+          - '24112'
+          - '24113'
+          - '24114'
+          - '24115'
+          - '24116'
+          - '24118'
+          - '24119'
+          - '24120'
+          - '24121'
+          - '24122'
+          - '24123'
+          - '24124'
+          - '24125'
+          - '24126'
         omschrijvingGedragscompetentie:
           type: string
           enum:
@@ -785,7 +854,13 @@ components:
           - Bedrijfsmatig handelen
         codeBeheersingGedragscompetentie:
           type: integer
-          enum: [1,2,3,4,5,9]
+          enum:
+          - 1
+          - 2
+          - 3
+          - 4
+          - 5
+          - 9
     Werktijden:
       type: object
       additionalProperties: false
@@ -831,7 +906,7 @@ components:
         naamOrganisatie:
           $ref: '#/components/schemas/String70'
         beroep:
-          $ref: '#/components/schemas/Beroepsnaam'     
+          $ref: '#/components/schemas/Beroepsnaam'
         toelichtingWerkervaring:
           $ref: '#/components/schemas/String2000'
     MPWerkervaring:
@@ -858,21 +933,36 @@ components:
       properties:
         codeNiveauOpleiding:
           type: integer
-          enum: [1, 2, 3, 4, 5, 6, 9]
+          enum:
+          - 1
+          - 2
+          - 3
+          - 4
+          - 5
+          - 6
+          - 9
         indicatieDiploma:
           type: integer
-          enum: [0, 1, 2, 8]
+          enum:
+          - 0
+          - 1
+          - 2
+          - 8
         datumDiploma:
           $ref: '#/components/schemas/Date'
         opleidingsnaam:
-          $ref: '#/components/schemas/Opleidingsnaam'     
+          $ref: '#/components/schemas/Opleidingsnaam'
         datumAanvangVolgenOpleiding:
           $ref: '#/components/schemas/Date'
         datumEindeVolgenOpleiding:
           $ref: '#/components/schemas/Date'
         codeStatusOpleiding:
           type: integer
-          enum: [0, 1, 2, 3]
+          enum:
+          - 0
+          - 1
+          - 2
+          - 3
         naamOpleidingsinstituut:
           $ref: '#/components/schemas/String500'
     MPOpleiding:
@@ -881,10 +971,21 @@ components:
       properties:
         codeNiveauOpleiding:
           type: integer
-          enum: [1, 2, 3, 4, 5, 6, 9]
+          enum:
+          - 1
+          - 2
+          - 3
+          - 4
+          - 5
+          - 6
+          - 9
         indicatieDiploma:
           type: integer
-          enum: [0, 1, 2, 8]
+          enum:
+          - 0
+          - 1
+          - 2
+          - 8
         datumDiploma:
           $ref: '#/components/schemas/Date'
         opleidingsnaam:
@@ -896,7 +997,7 @@ components:
         naamCursus:
           $ref: '#/components/schemas/String120'
         datumCertificaat:
-          $ref: '#/components/schemas/Date'       
+          $ref: '#/components/schemas/Date'
         datumAanvangVolgenCursus:
           $ref: '#/components/schemas/Date'
         datumEindeVolgenCursus:
@@ -957,7 +1058,13 @@ components:
           $ref: '#/components/schemas/Indicatie'
         codeVervoermiddel:
           type: integer
-          enum: [1, 2, 3, 4, 5, 9]
+          enum:
+          - 1
+          - 2
+          - 3
+          - 4
+          - 5
+          - 9
     MPVervoermiddel:
       type: object
       additionalProperties: false
@@ -1001,7 +1108,11 @@ components:
           $ref: '#/components/schemas/codeTypeArbeidscontract'
         codeTypeOvereenkomst:
           type: string
-          enum: ["01", "02", "03", "04"]
+          enum:
+          - '01'
+          - '02'
+          - '03'
+          - '04'
     Interesse:
       type: object
       additionalProperties: false
@@ -1025,7 +1136,10 @@ components:
       minimum: 0
       type: integer
     Indicatie:
-      enum: [0, 1, 2]
+      enum:
+      - 0
+      - 1
+      - 2
       type: integer
     Integer2:
       maximum: 99
@@ -1038,11 +1152,17 @@ components:
     Integer10AsString:
       maxLength: 10
       type: string
-      pattern: '^[0-9]+$'
+      pattern: ^[0-9]+$
       example: '9999999999'
     IntegerTaal:
       type: integer
-      enum: [0, 1, 2, 3, 4, 8]
+      enum:
+      - 0
+      - 1
+      - 2
+      - 3
+      - 4
+      - 8
     StringCode:
       maxLength: 10
       type: string
@@ -1056,9 +1176,10 @@ components:
       maxLength: 3
       type: string
     TaalCode3:
-      $comment: This does not exclude the special codes, B-codes and reserved range of ISO-639
+      $comment: This does not exclude the special codes, B-codes and reserved range
+        of ISO-639
       type: string
-      pattern: '^[a-z]{3}$'
+      pattern: ^[a-z]{3}$
     URL:
       type: string
       format: url
@@ -1084,9 +1205,9 @@ components:
       type: string
       format: date
     Postcode:
-      pattern: '^[0-9]{4}[a-zA-Z]{2}$'
+      pattern: ^[0-9]{4}[a-zA-Z]{2}$
       type: string
-      example: '1234AB'
+      example: 1234AB
     Error:
       type: object
       properties:
@@ -1097,8 +1218,8 @@ components:
         details:
           $ref: '#/components/schemas/String2000'
       required:
-        - code
-        - message
+      - code
+      - message
   requestBodies:
     WerkzoekendeProfielMatchesRequest:
       content:
