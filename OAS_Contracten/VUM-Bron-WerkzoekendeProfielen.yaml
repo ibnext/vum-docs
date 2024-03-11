@@ -506,6 +506,7 @@ components:
           $ref: '#/components/schemas/indicatieOnregelmatigWerkOfPloegendienst_choice'
     indicatieOnregelmatigWerkOfPloegendienst_choice:
       $comment: Dit is een beperkte keuze voor gebruik in de selectie.
+      type: integer
       enum:
       - 1
       - 2
@@ -614,6 +615,7 @@ components:
           $ref: '#/components/schemas/indicatieKantoortijden_choice'
     indicatieKantoortijden_choice:
       $comment: Dit is een beperkte keuze voor gebruik in de selectie.
+      type: integer
       enum: 
       - 1
       - 2

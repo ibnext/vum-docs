@@ -950,6 +950,7 @@
       },
       "indicatieOnregelmatigWerkOfPloegendienst_choice": {
         "$comment": "Dit is een beperkte keuze voor gebruik in de selectie.",
+        "type": "integer",
         "enum": [
           1,
           2
@@ -1131,6 +1132,7 @@
       },
       "indicatieKantoortijden_choice": {
         "$comment": "Dit is een beperkte keuze voor gebruik in de selectie.",
+        "type": "integer",
         "enum": [
           1,
           2
