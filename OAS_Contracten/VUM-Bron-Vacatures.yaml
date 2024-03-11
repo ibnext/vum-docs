@@ -552,6 +552,9 @@ components:
           $ref: '#/components/schemas/Integer1000'
         postcode:
           $ref: '#/components/schemas/Postcode'
+      required:
+      - afstand
+      - postcode
     taalbeheersingen_selectie:
       type: object
       properties:

@@ -900,7 +900,11 @@
           "postcode": {
             "$ref": "#/components/schemas/Postcode"
           }
-        }
+        },
+        "required": [
+          "afstand",
+          "postcode"
+        ]
       },
       "taalbeheersingen_selectie": {
         "type": "object",
