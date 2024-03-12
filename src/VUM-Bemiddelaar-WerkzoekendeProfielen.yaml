@@ -1,0 +1,256 @@
+openapi: 3.1.0
+info:
+  title: VUM API werkzoekendeProfielen tussen VUM-UV en bemiddelaar
+  description: Contract tbv interactie van bemiddelaars met VUM uitwisselingsvoorziening
+    voor werkzoekendeProfielen
+  contact:
+    name: Helpdesk
+    url: https://www.matchingsgegevens.nl
+    email: programma-vum@ictu.nl
+  version: 2.0.0
+servers:
+- url: https://test.vumdevelopment.nl/api/v2
+  description: staging/test server
+- url: https://accept.vumdevelopment.nl/api/v2
+  description: acceptatie server
+- url: https://prod.vumdevelopment.nl/api/v2
+  description: productie server
+paths:
+  /werkzoekendeProfielen/matches:
+    post:
+      summary: Zoekopdracht voor MatchingProfielen werkzoekende
+      description: Zoekopdracht om matches voor Werkzoekende MatchingProfielen op
+        te vragen
+      operationId: MatcheswerkzoekendeProfielen
+      parameters:
+      - $ref: '#/components/parameters/vum_bericht_versie'
+      - $ref: '#/components/parameters/vum_from_party'
+      - $ref: '#/components/parameters/vum_to_party'
+      - $ref: '#/components/parameters/vum_via_party'
+      - $ref: '#/components/parameters/api_version'
+      requestBody:
+        $ref: '#/components/requestBodies/WerkzoekendeProfielMatchesRequest'
+      responses:
+        '200':
+          description: OK
+          headers:
+            X-VUM-berichtVersie:
+              $ref: '#/components/headers/vum_bericht_versie'
+            X-VUM-fromParty:
+              $ref: '#/components/headers/vum_from_party'
+            X-VUM-toParty:
+              $ref: '#/components/headers/vum_to_party'
+            X-VUM-viaParty:
+              $ref: '#/components/headers/vum_via_party'
+            API-Version:
+              $ref: '#/components/headers/api_version'
+          content:
+            application/json:
+              schema:
+                required:
+                - maximumAantalResultatenBereikt
+                - matches
+                type: object
+                properties:
+                  maximumAantalResultatenBereikt:
+                    type: boolean
+                    description: Geeft aan of bron meer matches zou kunnen leveren
+                      dan de teruggeleverde set. Bronnen mogen per zoekvraag een maximum
+                      aantal (standaard 100) resultaten leveren
+                  matches:
+                    $ref: '#/components/schemas/WerkzoekendeMatchingProfielen'
+        '400':
+          description: Bad request
+          headers:
+            X-VUM-berichtVersie:
+              $ref: '#/components/headers/vum_bericht_versie'
+            X-VUM-fromParty:
+              $ref: '#/components/headers/vum_from_party'
+            X-VUM-toParty:
+              $ref: '#/components/headers/vum_to_party'
+            X-VUM-viaParty:
+              $ref: '#/components/headers/vum_via_party'
+            API-Version:
+              $ref: '#/components/headers/api_version'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: not authorized
+          headers:
+            X-VUM-berichtVersie:
+              $ref: '#/components/headers/vum_bericht_versie'
+            X-VUM-fromParty:
+              $ref: '#/components/headers/vum_from_party'
+            X-VUM-toParty:
+              $ref: '#/components/headers/vum_to_party'
+            X-VUM-viaParty:
+              $ref: '#/components/headers/vum_via_party'
+            API-Version:
+              $ref: '#/components/headers/api_version'
+        '429':
+          description: Too Many Requests
+          headers:
+            X-VUM-berichtVersie:
+              $ref: '#/components/headers/vum_bericht_versie'
+            X-VUM-fromParty:
+              $ref: '#/components/headers/vum_from_party'
+            X-VUM-toParty:
+              $ref: '#/components/headers/vum_to_party'
+            X-VUM-viaParty:
+              $ref: '#/components/headers/vum_via_party'
+            API-Version:
+              $ref: '#/components/headers/api_version'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal Server Error
+          headers:
+            X-VUM-berichtVersie:
+              $ref: '#/components/headers/vum_bericht_versie'
+            X-VUM-fromParty:
+              $ref: '#/components/headers/vum_from_party'
+            X-VUM-toParty:
+              $ref: '#/components/headers/vum_to_party'
+            X-VUM-viaParty:
+              $ref: '#/components/headers/vum_via_party'
+            API-Version:
+              $ref: '#/components/headers/api_version'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '503':
+          description: Service Unavailable
+          headers:
+            X-VUM-berichtVersie:
+              $ref: '#/components/headers/vum_bericht_versie'
+            X-VUM-fromParty:
+              $ref: '#/components/headers/vum_from_party'
+            X-VUM-toParty:
+              $ref: '#/components/headers/vum_to_party'
+            X-VUM-viaParty:
+              $ref: '#/components/headers/vum_via_party'
+            API-Version:
+              $ref: '#/components/headers/api_version'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /werkzoekendeProfielen/{vumID}:
+    get:
+      summary: Vraag detailprofielen op bij opgegeven vumID
+      description: Vraag detailprofielen op bij een opgegeven vumID
+      operationId: getWerkzoekendeProfiel
+      parameters:
+      - in: path
+        name: vumID
+        required: true
+        style: simple
+        explode: false
+        schema:
+          $ref: '#/components/schemas/VumID'
+      - $ref: '#/components/parameters/vum_bericht_versie'
+      - $ref: '#/components/parameters/vum_from_party'
+      - $ref: '#/components/parameters/vum_to_party'
+      - $ref: '#/components/parameters/vum_via_party'
+      - $ref: '#/components/parameters/api_version'
+      responses:
+        '200':
+          description: OK
+          headers:
+            X-VUM-berichtVersie:
+              $ref: '#/components/headers/vum_bericht_versie'
+            X-VUM-fromParty:
+              $ref: '#/components/headers/vum_from_party'
+            X-VUM-toParty:
+              $ref: '#/components/headers/vum_to_party'
+            X-VUM-viaParty:
+              $ref: '#/components/headers/vum_via_party'
+            API-Version:
+              $ref: '#/components/headers/api_version'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  bronID:
+                    $ref: '#/components/schemas/String200'
+                  werkzoekende:
+                    $ref: '#/components/schemas/Werkzoekende'
+        '400':
+          description: Bad request
+          headers:
+            X-VUM-berichtVersie:
+              $ref: '#/components/headers/vum_bericht_versie'
+            X-VUM-fromParty:
+              $ref: '#/components/headers/vum_from_party'
+            X-VUM-toParty:
+              $ref: '#/components/headers/vum_to_party'
+            X-VUM-viaParty:
+              $ref: '#/components/headers/vum_via_party'
+            API-Version:
+              $ref: '#/components/headers/api_version'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: not authorized
+          headers:
+            API-Version:
+              $ref: '#/components/headers/api_version'
+        '429':
+          description: Too Many Requests, limiet is overschreden voor deze uitvraag
+          headers:
+            X-VUM-berichtVersie:
+              $ref: '#/components/headers/vum_bericht_versie'
+            X-VUM-fromParty:
+              $ref: '#/components/headers/vum_from_party'
+            X-VUM-toParty:
+              $ref: '#/components/headers/vum_to_party'
+            X-VUM-viaParty:
+              $ref: '#/components/headers/vum_via_party'
+            API-Version:
+              $ref: '#/components/headers/api_version'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal Server Error
+          headers:
+            X-VUM-berichtVersie:
+              $ref: '#/components/headers/vum_bericht_versie'
+            X-VUM-fromParty:
+              $ref: '#/components/headers/vum_from_party'
+            X-VUM-toParty:
+              $ref: '#/components/headers/vum_to_party'
+            X-VUM-viaParty:
+              $ref: '#/components/headers/vum_via_party'
+            API-Version:
+              $ref: '#/components/headers/api_version'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '503':
+          description: Service Unavailable
+          headers:
+            X-VUM-berichtVersie:
+              $ref: '#/components/headers/vum_bericht_versie'
+            X-VUM-fromParty:
+              $ref: '#/components/headers/vum_from_party'
+            X-VUM-toParty:
+              $ref: '#/components/headers/vum_to_party'
+            X-VUM-viaParty:
+              $ref: '#/components/headers/vum_via_party'
+            API-Version:
+              $ref: '#/components/headers/api_version'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'

@@ -73,7 +73,20 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/inline_response_200"
+                  "required": [
+                    "maximumAantalResultatenBereikt",
+                    "matches"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "maximumAantalResultatenBereikt": {
+                      "type": "boolean",
+                      "description": "Geeft aan of bron meer matches zou kunnen leveren dan de teruggeleverde set. Bronnen mogen per zoekvraag een maximum aantal (standaard 100) resultaten leveren"
+                    },
+                    "matches": {
+                      "$ref": "#/components/schemas/VacatureMatchingProfielen"
+                    }
+                  }
                 }
               }
             }
@@ -206,106 +219,6 @@
               }
             }
           }
-        },
-        "callbacks": {
-          "bronMatch": {
-            "{$request.body#/callbackUrl}": {
-              "post": {
-                "parameters": [
-                  {
-                    "$ref": "#/components/parameters/vum_bericht_versie"
-                  },
-                  {
-                    "$ref": "#/components/parameters/vum_to_party"
-                  },
-                  {
-                    "$ref": "#/components/parameters/vum_via_party"
-                  },
-                  {
-                    "$ref": "#/components/parameters/api_version"
-                  },
-                  {
-                    "in": "header",
-                    "name": "X-VUM-vraagID",
-                    "schema": {
-                      "$ref": "#/components/schemas/VraagID"
-                    },
-                    "required": true
-                  }
-                ],
-                "requestBody": {
-                  "$ref": "#/components/requestBodies/VacatureMatchesCallbackRequest"
-                },
-                "responses": {
-                  "200": {
-                    "description": "bevestiging aan de uitwisselingsvoorziening",
-                    "headers": {
-                      "X-VUM-berichtVersie": {
-                        "$ref": "#/components/headers/vum_bericht_versie"
-                      },
-                      "API-Version": {
-                        "$ref": "#/components/headers/api_version"
-                      }
-                    }
-                  },
-                  "400": {
-                    "description": "Bad request",
-                    "headers": {
-                      "X-VUM-berichtVersie": {
-                        "$ref": "#/components/headers/vum_bericht_versie"
-                      },
-                      "API-Version": {
-                        "$ref": "#/components/headers/api_version"
-                      }
-                    },
-                    "content": {
-                      "application/json": {
-                        "schema": {
-                          "$ref": "#/components/schemas/Error"
-                        }
-                      }
-                    }
-                  },
-                  "500": {
-                    "description": "Internal Server Error",
-                    "headers": {
-                      "X-VUM-berichtVersie": {
-                        "$ref": "#/components/headers/vum_bericht_versie"
-                      },
-                      "API-Version": {
-                        "$ref": "#/components/headers/api_version"
-                      }
-                    },
-                    "content": {
-                      "application/json": {
-                        "schema": {
-                          "$ref": "#/components/schemas/Error"
-                        }
-                      }
-                    }
-                  },
-                  "503": {
-                    "description": "Service Unavailable",
-                    "headers": {
-                      "X-VUM-berichtVersie": {
-                        "$ref": "#/components/headers/vum_bericht_versie"
-                      },
-                      "API-Version": {
-                        "$ref": "#/components/headers/api_version"
-                      }
-                    },
-                    "content": {
-                      "application/json": {
-                        "schema": {
-                          "$ref": "#/components/schemas/Error"
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
         }
       }
     },
@@ -315,6 +228,16 @@
         "description": "Vraag volledige vacature op bij een opgegeven vumID",
         "operationId": "getVacature",
         "parameters": [
+          {
+            "name": "vumID",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "$ref": "#/components/schemas/VumID"
+            }
+          },
           {
             "$ref": "#/components/parameters/vum_bericht_versie"
           },
@@ -329,16 +252,6 @@
           },
           {
             "$ref": "#/components/parameters/api_version"
-          },
-          {
-            "in": "path",
-            "name": "vumID",
-            "required": true,
-            "style": "simple",
-            "explode": false,
-            "schema": {
-              "$ref": "#/components/schemas/VumID"
-            }
           }
         ],
         "responses": {
@@ -413,7 +326,7 @@
             }
           },
           "429": {
-            "description": "Too Many Requests, limiet is overschreden voor deze vraagID",
+            "description": "Too Many Requests, limiet is overschreden voor deze uitvraag",
             "headers": {
               "X-VUM-berichtVersie": {
                 "$ref": "#/components/headers/vum_bericht_versie"
@@ -495,1270 +408,150 @@
           }
         }
       }
-    },
-    "/callbackVacature": {
-      "post": {
-        "tags": [
-          "callback"
-        ],
-        "summary": "Voorbeeld voor de callback methode",
-        "description": "Voorbeeld voor de callback methode, alleen om te laten zien hoe de echte Callback er uit ziet!",
-        "parameters": [
-          {
-            "$ref": "#/components/parameters/vum_bericht_versie"
-          },
-          {
-            "$ref": "#/components/parameters/vum_to_party"
-          },
-          {
-            "$ref": "#/components/parameters/vum_via_party"
-          },
-          {
-            "$ref": "#/components/parameters/api_version"
-          },
-          {
-            "in": "header",
-            "name": "X-VUM-vraagID",
-            "schema": {
-              "$ref": "#/components/schemas/VraagID"
-            },
-            "required": true
-          }
-        ],
-        "operationId": "callbackVacature",
-        "requestBody": {
-          "$ref": "#/components/requestBodies/VacatureMatchesCallbackRequest"
-        },
-        "responses": {
-          "200": {
-            "description": "OK",
-            "headers": {
-              "X-VUM-berichtVersie": {
-                "$ref": "#/components/headers/vum_bericht_versie"
-              },
-              "API-Version": {
-                "$ref": "#/components/headers/api_version"
-              }
-            }
-          },
-          "400": {
-            "description": "Fout bij uitvoeren van zoekvraag",
-            "headers": {
-              "X-VUM-berichtVersie": {
-                "$ref": "#/components/headers/vum_bericht_versie"
-              },
-              "API-Version": {
-                "$ref": "#/components/headers/api_version"
-              }
-            }
-          },
-          "401": {
-            "description": "not authorized",
-            "headers": {
-              "X-VUM-berichtVersie": {
-                "$ref": "#/components/headers/vum_bericht_versie"
-              },
-              "API-Version": {
-                "$ref": "#/components/headers/api_version"
-              }
-            }
-          }
-        }
-      }
     }
   },
   "components": {
+    "headers": {
+      "api_version": {
+        "schema": {
+          "enum": [
+            "2.0.0"
+          ],
+          "type": "string"
+        }
+      },
+      "vum_bericht_versie": {
+        "schema": {
+          "const": "2.0.0",
+          "type": "string"
+        }
+      },
+      "vum_from_party": {
+        "schema": {
+          "type": "string"
+        }
+      },
+      "vum_to_party": {
+        "schema": {
+          "type": "string"
+        }
+      },
+      "vum_via_party": {
+        "schema": {
+          "type": "string"
+        }
+      }
+    },
     "parameters": {
+      "api_version": {
+        "in": "header",
+        "name": "API-Version",
+        "required": true,
+        "schema": {
+          "enum": [
+            "2.0.0"
+          ],
+          "type": "string"
+        }
+      },
       "vum_bericht_versie": {
         "in": "header",
         "name": "X-VUM-berichtVersie",
+        "required": true,
         "schema": {
-          "type": "string",
-          "const": "2.0.0"
-        },
-        "required": true
+          "const": "2.0.0",
+          "type": "string"
+        }
       },
       "vum_from_party": {
         "in": "header",
         "name": "X-VUM-fromParty",
+        "required": true,
         "schema": {
           "type": "string"
-        },
-        "required": true
+        }
       },
       "vum_to_party": {
         "in": "header",
         "name": "X-VUM-toParty",
+        "required": true,
         "schema": {
           "type": "string"
-        },
-        "required": true
+        }
       },
       "vum_via_party": {
         "in": "header",
         "name": "X-VUM-viaParty",
+        "required": true,
         "schema": {
           "type": "string"
-        },
-        "required": true
-      },
-      "api_version": {
-        "in": "header",
-        "name": "API-Version",
-        "schema": {
-          "type": "string",
-          "enum": [
-            "2.0.0"
-          ]
-        },
-        "required": true
+        }
       }
     },
-    "headers": {
-      "vum_bericht_versie": {
-        "schema": {
-          "type": "string",
-          "const": "2.0.0"
-        }
-      },
-      "vum_from_party": {
-        "schema": {
-          "type": "string"
-        }
-      },
-      "vum_to_party": {
-        "schema": {
-          "type": "string"
-        }
-      },
-      "vum_via_party": {
-        "schema": {
-          "type": "string"
-        }
-      },
-      "api_version": {
-        "schema": {
-          "type": "string",
-          "enum": [
-            "2.0.0"
-          ]
-        }
+    "requestBodies": {
+      "VacatureMatchesRequest": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "properties": {
+                "vraagObject": {
+                  "$ref": "#/components/schemas/MPVacature"
+                }
+              },
+              "required": [
+                "vraagObject"
+              ],
+              "type": "object"
+            }
+          }
+        },
+        "required": true
       }
     },
     "schemas": {
-      "VumID": {
-        "$ref": "#/components/schemas/String500"
-      },
-      "IDVacature": {
-        "$ref": "#/components/schemas/String200"
-      },
-      "VacatureMatchingProfielen": {
-        "type": "array",
-        "items": {
-          "$ref": "#/components/schemas/MPVacatureMatch"
-        }
-      },
-      "MPVacatureMatch": {
-        "type": "object",
-        "additionalProperties": false,
-        "required": [
-          "vumID"
-        ],
-        "properties": {
-          "vumID": {
-            "$ref": "#/components/schemas/VumID"
-          },
-          "codeWerkEnDenkniveauMinimaal": {
-            "type": "string",
-            "enum": [
-              "0",
-              "1",
-              "2",
-              "3",
-              "4",
-              "5",
-              "6",
-              "7"
-            ]
-          },
-          "indicatieLdrRegistratie": {
-            "type": "integer",
-            "enum": [
-              1,
-              2
-            ]
-          },
-          "sluitingsdatumVacature": {
-            "$ref": "#/components/schemas/Date"
-          },
-          "sollicitatiewijze": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/MPSollicitatiewijze"
-            }
-          },
-          "werkgever": {
-            "$ref": "#/components/schemas/MPWerkgever"
-          },
-          "sector": {
-            "$ref": "#/components/schemas/SectorBeroepsEnBedrijfsleven"
-          },
-          "arbeidsVoorwaarden": {
-            "$ref": "#/components/schemas/MPArbeidsVoorwaarden"
-          },
-          "contractvorm": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Contractvorm"
-            }
-          },
-          "beroep": {
-            "$ref": "#/components/schemas/Beroepsnaam"
-          },
-          "werkervaring": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Werkervaring"
-            }
-          },
-          "rijbewijs": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Rijbewijs"
-            }
-          },
-          "vervoermiddel": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/MPVervoermiddel"
-            }
-          },
-          "flexibiliteit": {
-            "$ref": "#/components/schemas/Flexibiliteit"
-          },
-          "werktijden": {
-            "$ref": "#/components/schemas/Werktijden"
-          },
-          "cursus": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Cursus"
-            }
-          },
-          "opleiding": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/MPOpleiding"
-            }
-          },
-          "gedragscompetentie": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Gedragscompetentie"
-            }
-          },
-          "vakvaardigheid": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Vakvaardigheid"
-            }
-          },
-          "taalbeheersing": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Taalbeheersing"
-            }
-          }
-        }
-      },
-      "Vacature": {
-        "type": "object",
+      "AdresBuitenland": {
         "additionalProperties": false,
         "properties": {
-          "idVacature": {
-            "$ref": "#/components/schemas/IDVacature"
-          },
-          "naamVacature": {
-            "$ref": "#/components/schemas/String120"
-          },
-          "nummerVacature": {
-            "$ref": "#/components/schemas/String11"
-          },
-          "omschrijvingVacature": {
-            "$ref": "#/components/schemas/String2000"
-          },
-          "codeWerkEnDenkniveauMinimaal": {
-            "type": "string",
-            "enum": [
-              "0",
-              "1",
-              "2",
-              "3",
-              "4",
-              "5",
-              "6",
-              "7"
-            ]
-          },
-          "indicatieLdrRegistratie": {
-            "type": "integer",
-            "enum": [
-              1,
-              2
-            ]
-          },
-          "sluitingsdatumVacature": {
-            "$ref": "#/components/schemas/Date"
-          },
-          "sollicitatiewijze": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Sollicitatiewijze"
-            }
-          },
-          "werkgever": {
-            "$ref": "#/components/schemas/Werkgever"
-          },
-          "sector": {
-            "$ref": "#/components/schemas/SectorBeroepsEnBedrijfsleven"
-          },
-          "arbeidsVoorwaarden": {
-            "$ref": "#/components/schemas/ArbeidsVoorwaarden"
-          },
-          "contractvorm": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Contractvorm"
-            }
-          },
-          "beroep": {
-            "$ref": "#/components/schemas/Beroepsnaam"
-          },
-          "werkervaring": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Werkervaring"
-            }
-          },
-          "rijbewijs": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Rijbewijs"
-            }
-          },
-          "vervoermiddel": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Vervoermiddel"
-            }
-          },
-          "flexibiliteit": {
-            "$ref": "#/components/schemas/Flexibiliteit"
-          },
-          "werktijden": {
-            "$ref": "#/components/schemas/Werktijden"
-          },
-          "cursus": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Cursus"
-            }
-          },
-          "opleiding": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Opleiding"
-            }
-          },
-          "gedragscompetentie": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Gedragscompetentie"
-            }
-          },
-          "vakvaardigheid": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Vakvaardigheid"
-            }
-          },
-          "taalbeheersing": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Taalbeheersing"
-            }
-          }
-        }
-      },
-      "MPVacature": {
-        "type": "object",
-        "properties": {
-          "beroep": {
-            "$ref": "#/components/schemas/beroep_selectie"
-          },
-          "codeWerkEnDenkNiveauMinimaal": {
-            "$ref": "#/components/schemas/codeWerkEnDenkNiveauMinimaal_selectie"
-          },
-          "rijbewijs": {
-            "$ref": "#/components/schemas/rijbewijs_selectie"
-          },
-          "selectiegebied": {
-            "$ref": "#/components/schemas/selectiegebied_selectie"
-          },
-          "taalbeheersing": {
-            "$ref": "#/components/schemas/taalbeheersingen_selectie"
-          },
-          "werktijden": {
-            "$ref": "#/components/schemas/werktijden_selectie"
-          }
-        },
-        "required": [
-          "selectiegebied"
-        ]
-      },
-      "beroep_selectie": {
-        "type": "object",
-        "properties": {
-          "beroepsnaamGecodeerd": {
-            "$ref": "#/components/schemas/beroepsnaamGecodeerd_selectie"
-          }
-        }
-      },
-      "beroepsnaamGecodeerd_selectie": {
-        "type": "object",
-        "properties": {
-          "codeBeroepsnaam": {
-            "$ref": "#/components/schemas/codeBeroepsnaam_selectie"
-          }
-        }
-      },
-      "codeBeroepsnaam_selectie": {
-        "type": "object",
-        "properties": {
-          "$eq": {
-            "$ref": "#/components/schemas/codeBeroepsnaam"
-          }
-        }
-      },
-      "codeBeroepsnaam": {
-        "$comment": "De code van het beroep volgens het UWV Beroepen & Opleidingen Register",
-        "type": "string",
-        "pattern": "^[0-9]{1,10}$"
-      },
-      "codeWerkEnDenkNiveauMinimaal_selectie": {
-        "oneOf": [
-          {
-            "$comment": "Onbekende properties worden door maar 1 oneOf keuze toegestaan",
-            "type": "object",
+          "adresBuitenland": {
             "additionalProperties": false,
             "properties": {
-              "$gte": {
-                "$ref": "#/components/schemas/codeWerkEnDenkNiveau_choice"
+              "adresDetailsBuitenland": {
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/StraatadresBuitenland"
+                  },
+                  {
+                    "$ref": "#/components/schemas/PostbusadresBuitenland"
+                  }
+                ]
               },
-              "$lt": {
-                "type": "string",
-                "const": "7"
-              }
-            },
-            "required": [
-              "$lt"
-            ]
-          },
-          {
-            "type": "object",
-            "properties": {
-              "$eq": {
-                "type": "string",
-                "const": "7"
+              "landencodeIso": {
+                "$ref": "#/components/schemas/StringCode2"
               },
-              "$lt": false
-            }
-          }
-        ]
-      },
-      "codeWerkEnDenkNiveau_choice": {
-        "$comment": "Dit is een beperkte keuze voor gebruik in de selectie.",
-        "type": "string",
-        "enum": [
-          "1",
-          "2",
-          "3",
-          "4",
-          "5",
-          "6"
-        ]
-      },
-      "rijbewijs_selectie": {
-        "type": "object",
-        "properties": {
-          "$all": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/codeSoortRijbewijs_match"
-            },
-            "minItems": 1
-          }
-        }
-      },
-      "codeSoortRijbewijs_match": {
-        "type": "object",
-        "properties": {
-          "$elemMatch": {
-            "properties": {
-              "codeSoortRijbewijs": {
-                "$ref": "#/components/schemas/codeSoortRijbewijs_selectie"
+              "landsnaam": {
+                "$ref": "#/components/schemas/String40"
+              },
+              "locatieomschrijvingBuitenland": {
+                "$ref": "#/components/schemas/String70"
+              },
+              "postcodeBuitenland": {
+                "$ref": "#/components/schemas/String9"
+              },
+              "regionaamBuitenland": {
+                "$ref": "#/components/schemas/String24"
+              },
+              "woonplaatsnaamBuitenland": {
+                "$ref": "#/components/schemas/String40"
               }
             },
             "type": "object"
           }
-        }
-      },
-      "codeSoortRijbewijs_selectie": {
-        "type": "object",
-        "properties": {
-          "$eq": {
-            "$ref": "#/components/schemas/codeSoortRijbewijs"
-          }
-        }
-      },
-      "codeSoortRijbewijs": {
-        "type": "string",
-        "enum": [
-          "A",
-          "A1",
-          "A2",
-          "AM",
-          "B",
-          "B+",
-          "C1",
-          "C",
-          "D1",
-          "D",
-          "BE",
-          "C1E",
-          "CE",
-          "D1E",
-          "DE",
-          "T"
-        ]
-      },
-      "selectiegebied_selectie": {
-        "type": "object",
-        "properties": {
-          "afstand": {
-            "$ref": "#/components/schemas/Integer1000"
-          },
-          "postcode": {
-            "$ref": "#/components/schemas/Postcode"
-          }
         },
-        "required": [
-          "afstand",
-          "postcode"
-        ]
-      },
-      "taalbeheersingen_selectie": {
-        "type": "object",
-        "properties": {
-          "$all": {
-            "items": {
-              "$ref": "#/components/schemas/taalbeheersing_match"
-            },
-            "minItems": 1,
-            "type": "array"
-          }
-        }
-      },
-      "taalbeheersing_match": {
-        "type": "object",
-        "properties": {
-          "$elemMatch": {
-            "$ref": "#/components/schemas/taalbeheersing_selectie"
-          }
-        }
-      },
-      "taalbeheersing_selectie": {
-        "type": "object",
-        "properties": {
-          "codeNiveauTaalbeheersingMondeling": {
-            "$ref": "#/components/schemas/codeNiveauTaalbeheersing_selectie"
-          },
-          "codeNiveauTaalbeheersingSchriftelijk": {
-            "$ref": "#/components/schemas/codeNiveauTaalbeheersing_selectie"
-          },
-          "codeTaal": {
-            "$ref": "#/components/schemas/codeTaal_selectie"
-          }
-        },
-        "required": [
-          "codeTaal"
-        ]
-      },
-      "codeNiveauTaalbeheersing_choice": {
-        "$comment": "Dit is een beperkte keuze voor gebruik in de selectie.",
-        "type": "integer",
-        "enum": [
-          2,
-          3,
-          4
-        ]
-      },
-      "codeNiveauTaalbeheersing_selectie": {
-        "type": "object",
-        "properties": {
-          "$gte": {
-            "$ref": "#/components/schemas/codeNiveauTaalbeheersing_choice"
-          }
-        }
-      },
-      "codeTaal_selectie": {
-        "type": "object",
-        "properties": {
-          "$eq": {
-            "$ref": "#/components/schemas/TaalCode3"
-          }
-        }
-      },
-      "werktijden_selectie": {
-        "type": "object",
-        "properties": {
-          "aantalWerkurenPerWeekMaximaal": {
-            "$ref": "#/components/schemas/aantalWerkurenPerWeekMaximaal_selectie"
-          },
-          "aantalWerkurenPerWeekMinimaal": {
-            "$ref": "#/components/schemas/aantalWerkurenPerWeekMinimaal_selectie"
-          }
-        }
-      },
-      "aantalWerkurenPerWeekMaximaal_selectie": {
-        "type": "object",
-        "properties": {
-          "$gte": {
-            "$ref": "#/components/schemas/aantalWerkuren"
-          }
-        }
-      },
-      "aantalWerkurenPerWeekMinimaal_selectie": {
-        "type": "object",
-        "properties": {
-          "$lte": {
-            "$ref": "#/components/schemas/aantalWerkuren"
-          }
-        }
-      },
-      "aantalWerkuren": {
-        "type": "integer",
-        "maximum": 99,
-        "minimum": 1
-      },
-      "Beroepsnaam": {
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/BeroepsnaamGecodeerd"
-          },
-          {
-            "$ref": "#/components/schemas/BeroepsnaamOngecodeerd"
-          }
-        ]
-      },
-      "Werkervaring": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "aantalJarenWerkzaamInBeroep": {
-            "$ref": "#/components/schemas/Integer2"
-          }
-        }
-      },
-      "Opleidingsnaam": {
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/OpleidingsnaamGecodeerd"
-          },
-          {
-            "$ref": "#/components/schemas/OpleidingsnaamOngecodeerd"
-          }
-        ]
-      },
-      "MPOpleidingsnaam": {
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/OpleidingsnaamGecodeerd"
-          },
-          {
-            "$ref": "#/components/schemas/MPOpleidingsnaamOngecodeerd"
-          }
-        ]
-      },
-      "BeroepsnaamGecodeerd": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "beroepsnaamGecodeerd": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-              "codeBeroepsnaam": {
-                "$ref": "#/components/schemas/codeBeroepsnaam"
-              },
-              "omschrijvingBeroepsnaam": {
-                "$ref": "#/components/schemas/String120"
-              }
-            }
-          }
-        }
-      },
-      "BeroepsnaamOngecodeerd": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "beroepsnaamOngecodeerd": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-              "naamBeroepOngecodeerd": {
-                "$ref": "#/components/schemas/String120"
-              }
-            }
-          }
-        }
-      },
-      "OpleidingsnaamGecodeerd": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "opleidingsnaamGecodeerd": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-              "codeOpleidingsnaam": {
-                "$ref": "#/components/schemas/Integer10AsString"
-              },
-              "omschrijvingOpleidingsnaam": {
-                "$ref": "#/components/schemas/String120"
-              }
-            }
-          }
-        }
-      },
-      "OpleidingsnaamOngecodeerd": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "opleidingsnaamOngecodeerd": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-              "naamOpleidingOngecodeerd": {
-                "$ref": "#/components/schemas/String120"
-              },
-              "omschrijvingOpleiding": {
-                "$ref": "#/components/schemas/String2000"
-              }
-            }
-          }
-        }
-      },
-      "MPOpleidingsnaamOngecodeerd": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "opleidingsnaamOngecodeerd": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-              "naamOpleidingOngecodeerd": {
-                "$ref": "#/components/schemas/String120"
-              }
-            }
-          }
-        }
-      },
-      "Gedragscompetentie": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "codeGedragscompetentie": {
-            "type": "string",
-            "enum": [
-              "24100",
-              "24101",
-              "24102",
-              "24104",
-              "24105",
-              "24106",
-              "24107",
-              "24108",
-              "24109",
-              "24110",
-              "24111",
-              "24112",
-              "24113",
-              "24114",
-              "24115",
-              "24116",
-              "24118",
-              "24119",
-              "24120",
-              "24121",
-              "24122",
-              "24123",
-              "24124",
-              "24125",
-              "24126"
-            ]
-          },
-          "omschrijvingGedragscompetentie": {
-            "type": "string",
-            "enum": [
-              "Beslissen en activiteiten initi\u00ebren",
-              "Aansturen",
-              "Begeleiden",
-              "Aandacht en begrip tonen",
-              "Samenwerken en overleggen",
-              "Ethisch en integer handelen",
-              "Relaties bouwen en netwerken",
-              "Overtuigen en be\u00efnvloeden",
-              "Presenteren",
-              "Formuleren en rapporteren",
-              "Vakdeskundigheid toepassen",
-              "Materialen en middelen inzetten",
-              "Analyseren",
-              "Onderzoeken",
-              "Creeren en innoveren",
-              "Leren",
-              "Plannen en organiseren",
-              "Op de behoeften en verwachtingen van de klant richten",
-              "Kwaliteit leveren",
-              "Instructies en procedures opvolgen",
-              "Omgaan met verandering en aanpassen",
-              "Met druk en tegenslag omgaan",
-              "Gedrevenheid en ambitie tonen",
-              "Ondernemend en commercieel handelen",
-              "Bedrijfsmatig handelen"
-            ]
-          },
-          "codeBeheersingGedragscompetentie": {
-            "type": "integer",
-            "enum": [
-              1,
-              2,
-              3,
-              4,
-              5,
-              9
-            ]
-          }
-        }
-      },
-      "Werktijden": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "aantalWerkurenPerWeekMinimaal": {
-            "$ref": "#/components/schemas/Integer2"
-          },
-          "aantalWerkurenPerWeekMaximaal": {
-            "$ref": "#/components/schemas/Integer2"
-          },
-          "indicatieKantoortijden": {
-            "$ref": "#/components/schemas/Indicatie"
-          }
-        }
-      },
-      "Mobiliteit": {
-        "type": "object",
-        "properties": {
-          "bemiddelingspostcode": {
-            "$ref": "#/components/schemas/Postcode"
-          },
-          "maximaleReisafstand": {
-            "$ref": "#/components/schemas/Integer1000"
-          }
-        },
-        "required": [
-          "bemiddelingspostcode",
-          "maximaleReisafstand"
-        ]
-      },
-      "Flexibiliteit": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "codeRegiostraal": {
-            "maximum": 9,
-            "minimum": 1,
-            "type": "integer"
-          },
-          "indicatieOnregelmatigWerkOfPloegendienst": {
-            "$ref": "#/components/schemas/Indicatie"
-          },
-          "datumAanvangBeschikbaarVoorWerk": {
-            "$ref": "#/components/schemas/Date"
-          },
-          "datumEindeBeschikbaarVoorWerk": {
-            "$ref": "#/components/schemas/Date"
-          }
-        }
-      },
-      "Rijbewijs": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "codeSoortRijbewijs": {
-            "$ref": "#/components/schemas/codeSoortRijbewijs"
-          }
-        }
-      },
-      "Opleiding": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "codeNiveauOpleiding": {
-            "type": "integer",
-            "enum": [
-              1,
-              2,
-              3,
-              4,
-              5,
-              6,
-              9
-            ]
-          },
-          "indicatieDiploma": {
-            "type": "integer",
-            "enum": [
-              0,
-              1,
-              2,
-              8
-            ]
-          },
-          "opleidingsnaam": {
-            "$ref": "#/components/schemas/Opleidingsnaam"
-          }
-        }
-      },
-      "MPOpleiding": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "codeNiveauOpleiding": {
-            "type": "integer",
-            "enum": [
-              1,
-              2,
-              3,
-              4,
-              5,
-              6,
-              9
-            ]
-          },
-          "indicatieDiploma": {
-            "type": "integer",
-            "enum": [
-              0,
-              1,
-              2,
-              8
-            ]
-          },
-          "opleidingsnaam": {
-            "$ref": "#/components/schemas/MPOpleidingsnaam"
-          }
-        }
-      },
-      "Cursus": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "naamCursus": {
-            "$ref": "#/components/schemas/String120"
-          }
-        }
-      },
-      "SectorBeroepsEnBedrijfsleven": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "codeSbi": {
-            "$ref": "#/components/schemas/Integer5"
-          }
-        }
-      },
-      "Vakvaardigheid": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "omschrijving": {
-            "$ref": "#/components/schemas/String120"
-          }
-        }
-      },
-      "Taalbeheersing": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "codeTaal": {
-            "$ref": "#/components/schemas/TaalCode3"
-          },
-          "codeNiveauTaalbeheersingMondeling": {
-            "$ref": "#/components/schemas/IntegerTaal"
-          },
-          "codeNiveauTaalbeheersingSchriftelijk": {
-            "$ref": "#/components/schemas/IntegerTaal"
-          },
-          "codeNiveauTaalbeheersingLezen": {
-            "$ref": "#/components/schemas/IntegerTaal"
-          },
-          "codeNiveauTaalbeheersingLuisteren": {
-            "$ref": "#/components/schemas/IntegerTaal"
-          }
-        }
-      },
-      "Vervoermiddel": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "indicatieBeschikbaarVoorUitvoeringWerk": {
-            "$ref": "#/components/schemas/Indicatie"
-          },
-          "indicatieBeschikbaarVoorWoonWerkverkeer": {
-            "$ref": "#/components/schemas/Indicatie"
-          },
-          "codeVervoermiddel": {
-            "type": "integer",
-            "enum": [
-              1,
-              2,
-              3,
-              4,
-              5,
-              9
-            ]
-          }
-        }
-      },
-      "MPVervoermiddel": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "indicatieBeschikbaarVoorUitvoeringWerk": {
-            "$ref": "#/components/schemas/Indicatie"
-          },
-          "indicatieBeschikbaarVoorWoonWerkverkeer": {
-            "$ref": "#/components/schemas/Indicatie"
-          }
-        }
-      },
-      "Emailadres": {
-        "$ref": "#/components/schemas/String320"
-      },
-      "Telefoonnummer": {
-        "$ref": "#/components/schemas/String14"
-      },
-      "ContactpersoonAfdeling": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "naamContactpersoonAfdeling": {
-            "$ref": "#/components/schemas/String35"
-          },
-          "telefoonnummer": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Telefoonnummer"
-            }
-          },
-          "emailadres": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Emailadres"
-            }
-          }
-        }
-      },
-      "Webadres": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "codeWebadres": {
-            "type": "integer",
-            "enum": [
-              1,
-              2,
-              3,
-              4
-            ]
-          },
-          "url": {
-            "$ref": "#/components/schemas/URL"
-          }
-        }
-      },
-      "Contractvorm": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "codeTypeArbeidscontract": {
-            "type": "string",
-            "enum": [
-              "B",
-              "O"
-            ]
-          },
-          "codeTypeOvereenkomst": {
-            "type": "string",
-            "enum": [
-              "01",
-              "02",
-              "03",
-              "04"
-            ]
-          }
-        }
-      },
-      "Sollicitatiewijze": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "codeSollicitatiewijze": {
-            "type": "string",
-            "enum": [
-              "1",
-              "2",
-              "3",
-              "4"
-            ]
-          },
-          "webadres": {
-            "$ref": "#/components/schemas/Webadres"
-          }
-        }
-      },
-      "MPSollicitatiewijze": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "codeSollicitatiewijze": {
-            "type": "string",
-            "enum": [
-              "1",
-              "2",
-              "3",
-              "4"
-            ]
-          }
-        }
-      },
-      "Werkgever": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "handelsnaamOrganisatie": {
-            "$ref": "#/components/schemas/String500"
-          },
-          "webadres": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Webadres"
-            }
-          },
-          "adresHouding": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/AdresHouding"
-            }
-          },
-          "contactpersoon": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ContactpersoonAfdeling"
-            }
-          },
-          "sector": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/SectorBeroepsEnBedrijfsleven"
-            }
-          }
-        }
-      },
-      "MPWerkgever": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "adresHouding": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/MPAdresHouding"
-            }
-          },
-          "sector": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/SectorBeroepsEnBedrijfsleven"
-            }
-          }
-        }
-      },
-      "ArbeidsVoorwaarden": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "datumAanvangWerkzaamheden": {
-            "$ref": "#/components/schemas/Date"
-          },
-          "datumEindeWerkzaamheden": {
-            "$ref": "#/components/schemas/Date"
-          },
-          "omschrijvingArbeidsvoorwaarden": {
-            "$ref": "#/components/schemas/String2000"
-          },
-          "salarisIndicatie": {
-            "$ref": "#/components/schemas/String100"
-          }
-        }
-      },
-      "MPArbeidsVoorwaarden": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "datumAanvangWerkzaamheden": {
-            "$ref": "#/components/schemas/Date"
-          },
-          "datumEindeWerkzaamheden": {
-            "$ref": "#/components/schemas/Date"
-          },
-          "salarisIndicatie": {
-            "$ref": "#/components/schemas/String100"
-          }
-        }
+        "type": "object"
       },
       "AdresHouding": {
-        "type": "object",
         "additionalProperties": false,
         "properties": {
-          "codeFunctieAdres": {
-            "type": "string",
-            "enum": [
-              "B",
-              "W",
-              "C",
-              "L",
-              "A",
-              "V",
-              "E"
-            ]
-          },
-          "datumAanvangAdres": {
-            "$ref": "#/components/schemas/Date"
-          },
-          "datumEindeAdres": {
-            "$ref": "#/components/schemas/Date"
-          },
           "adres": {
             "oneOf": [
               {
@@ -1768,17 +561,47 @@
                 "$ref": "#/components/schemas/AdresBuitenland"
               }
             ]
+          },
+          "codeFunctieAdres": {
+            "enum": [
+              "B",
+              "W",
+              "C",
+              "L",
+              "A",
+              "V",
+              "E"
+            ],
+            "type": "string"
+          },
+          "datumAanvangAdres": {
+            "$ref": "#/components/schemas/Date"
+          },
+          "datumEindeAdres": {
+            "$ref": "#/components/schemas/Date"
           }
-        }
+        },
+        "type": "object"
       },
       "AdresNederland": {
-        "type": "object",
         "additionalProperties": false,
         "properties": {
           "adresNederland": {
-            "type": "object",
             "additionalProperties": false,
             "properties": {
+              "adresDetails": {
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/Straatadres"
+                  },
+                  {
+                    "$ref": "#/components/schemas/Postbusadres"
+                  },
+                  {
+                    "$ref": "#/components/schemas/Antwoordnummeradres"
+                  }
+                ]
+              },
               "codeGemeente": {
                 "$ref": "#/components/schemas/StringCode4"
               },
@@ -1805,30 +628,747 @@
               },
               "woonplaatsnaam": {
                 "$ref": "#/components/schemas/String80"
-              },
-              "adresDetails": {
-                "oneOf": [
-                  {
-                    "$ref": "#/components/schemas/Straatadres"
-                  },
-                  {
-                    "$ref": "#/components/schemas/Postbusadres"
-                  },
-                  {
-                    "$ref": "#/components/schemas/Antwoordnummeradres"
-                  }
-                ]
               }
-            }
+            },
+            "type": "object"
           }
-        }
+        },
+        "type": "object"
+      },
+      "Antwoordnummeradres": {
+        "additionalProperties": false,
+        "properties": {
+          "antwoordnummeradres": {
+            "additionalProperties": false,
+            "properties": {
+              "antwoordnummer": {
+                "$ref": "#/components/schemas/Integer5"
+              }
+            },
+            "type": "object"
+          }
+        },
+        "type": "object"
+      },
+      "ArbeidsVoorwaarden": {
+        "additionalProperties": false,
+        "properties": {
+          "datumAanvangWerkzaamheden": {
+            "$ref": "#/components/schemas/Date"
+          },
+          "datumEindeWerkzaamheden": {
+            "$ref": "#/components/schemas/Date"
+          },
+          "omschrijvingArbeidsvoorwaarden": {
+            "$ref": "#/components/schemas/String2000"
+          },
+          "salarisIndicatie": {
+            "$ref": "#/components/schemas/String100"
+          }
+        },
+        "type": "object"
+      },
+      "Beroepsnaam": {
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/BeroepsnaamGecodeerd"
+          },
+          {
+            "$ref": "#/components/schemas/BeroepsnaamOngecodeerd"
+          }
+        ]
+      },
+      "BeroepsnaamGecodeerd": {
+        "additionalProperties": false,
+        "properties": {
+          "beroepsnaamGecodeerd": {
+            "additionalProperties": false,
+            "properties": {
+              "codeBeroepsnaam": {
+                "$ref": "#/components/schemas/codeBeroepsnaam"
+              },
+              "omschrijvingBeroepsnaam": {
+                "$ref": "#/components/schemas/String120"
+              }
+            },
+            "type": "object"
+          }
+        },
+        "type": "object"
+      },
+      "BeroepsnaamOngecodeerd": {
+        "additionalProperties": false,
+        "properties": {
+          "beroepsnaamOngecodeerd": {
+            "additionalProperties": false,
+            "properties": {
+              "naamBeroepOngecodeerd": {
+                "$ref": "#/components/schemas/String120"
+              }
+            },
+            "type": "object"
+          }
+        },
+        "type": "object"
+      },
+      "ContactpersoonAfdeling": {
+        "additionalProperties": false,
+        "properties": {
+          "naamContactpersoonAfdeling": {
+            "$ref": "#/components/schemas/String35"
+          },
+          "emailadres": {
+            "items": {
+              "$ref": "#/components/schemas/Emailadres"
+            },
+            "type": "array"
+          },
+          "telefoonnummer": {
+            "items": {
+              "$ref": "#/components/schemas/Telefoonnummer"
+            },
+            "type": "array"
+          }
+        },
+        "type": "object"
+      },
+      "Contractvorm": {
+        "additionalProperties": false,
+        "properties": {
+          "codeTypeOvereenkomst": {
+            "enum": [
+              "01",
+              "02",
+              "03",
+              "04"
+            ],
+            "type": "string"
+          },
+          "codeTypeArbeidscontract": {
+            "enum": [
+              "B",
+              "O"
+            ],
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "Cursus": {
+        "additionalProperties": false,
+        "properties": {
+          "naamCursus": {
+            "$ref": "#/components/schemas/String120"
+          }
+        },
+        "type": "object"
+      },
+      "Date": {
+        "format": "date",
+        "type": "string"
+      },
+      "Emailadres": {
+        "$ref": "#/components/schemas/String320"
+      },
+      "Error": {
+        "properties": {
+          "code": {
+            "$ref": "#/components/schemas/StringCode"
+          },
+          "details": {
+            "$ref": "#/components/schemas/String2000"
+          },
+          "message": {
+            "$ref": "#/components/schemas/String500"
+          }
+        },
+        "required": [
+          "code",
+          "message"
+        ],
+        "type": "object"
+      },
+      "Flexibiliteit": {
+        "additionalProperties": false,
+        "properties": {
+          "codeRegiostraal": {
+            "maximum": 9,
+            "minimum": 1,
+            "type": "integer"
+          },
+          "datumAanvangBeschikbaarVoorWerk": {
+            "$ref": "#/components/schemas/Date"
+          },
+          "datumEindeBeschikbaarVoorWerk": {
+            "$ref": "#/components/schemas/Date"
+          },
+          "indicatieOnregelmatigWerkOfPloegendienst": {
+            "$ref": "#/components/schemas/Indicatie"
+          }
+        },
+        "type": "object"
+      },
+      "Gedragscompetentie": {
+        "additionalProperties": false,
+        "properties": {
+          "codeBeheersingGedragscompetentie": {
+            "enum": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              9
+            ],
+            "type": "integer"
+          },
+          "codeGedragscompetentie": {
+            "enum": [
+              "24100",
+              "24101",
+              "24102",
+              "24104",
+              "24105",
+              "24106",
+              "24107",
+              "24108",
+              "24109",
+              "24110",
+              "24111",
+              "24112",
+              "24113",
+              "24114",
+              "24115",
+              "24116",
+              "24118",
+              "24119",
+              "24120",
+              "24121",
+              "24122",
+              "24123",
+              "24124",
+              "24125",
+              "24126"
+            ],
+            "type": "string"
+          },
+          "omschrijvingGedragscompetentie": {
+            "enum": [
+              "Beslissen en activiteiten initi\u00ebren",
+              "Aansturen",
+              "Begeleiden",
+              "Aandacht en begrip tonen",
+              "Samenwerken en overleggen",
+              "Ethisch en integer handelen",
+              "Relaties bouwen en netwerken",
+              "Overtuigen en be\u00efnvloeden",
+              "Presenteren",
+              "Formuleren en rapporteren",
+              "Vakdeskundigheid toepassen",
+              "Materialen en middelen inzetten",
+              "Analyseren",
+              "Onderzoeken",
+              "Creeren en innoveren",
+              "Leren",
+              "Plannen en organiseren",
+              "Op de behoeften en verwachtingen van de klant richten",
+              "Kwaliteit leveren",
+              "Instructies en procedures opvolgen",
+              "Omgaan met verandering en aanpassen",
+              "Met druk en tegenslag omgaan",
+              "Gedrevenheid en ambitie tonen",
+              "Ondernemend en commercieel handelen",
+              "Bedrijfsmatig handelen"
+            ],
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "IDVacature": {
+        "$ref": "#/components/schemas/String200"
+      },
+      "Indicatie": {
+        "enum": [
+          0,
+          1,
+          2
+        ],
+        "type": "integer"
+      },
+      "Integer1000": {
+        "maximum": 999,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "Integer10AsString": {
+        "example": "9999999999",
+        "maxLength": 10,
+        "pattern": "^[0-9]+$",
+        "type": "string"
+      },
+      "Integer2": {
+        "maximum": 99,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "Integer5": {
+        "maximum": 99999,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "IntegerTaal": {
+        "enum": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          8
+        ],
+        "type": "integer"
+      },
+      "MPAdresBuitenland": {
+        "additionalProperties": false,
+        "properties": {
+          "adresBuitenland": {
+            "additionalProperties": false,
+            "properties": {
+              "landencodeIso": {
+                "$ref": "#/components/schemas/StringCode2"
+              }
+            },
+            "type": "object"
+          }
+        },
+        "type": "object"
+      },
+      "MPAdresHouding": {
+        "additionalProperties": false,
+        "properties": {
+          "adres": {
+            "$ref": "#/components/schemas/MPAdresBuitenland"
+          },
+          "codeFunctieAdres": {
+            "enum": [
+              "B",
+              "W",
+              "C",
+              "L",
+              "A",
+              "V",
+              "E"
+            ],
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "MPArbeidsVoorwaarden": {
+        "additionalProperties": false,
+        "properties": {
+          "datumAanvangWerkzaamheden": {
+            "$ref": "#/components/schemas/Date"
+          },
+          "datumEindeWerkzaamheden": {
+            "$ref": "#/components/schemas/Date"
+          },
+          "salarisIndicatie": {
+            "$ref": "#/components/schemas/String100"
+          }
+        },
+        "type": "object"
+      },
+      "MPOpleiding": {
+        "additionalProperties": false,
+        "properties": {
+          "codeNiveauOpleiding": {
+            "enum": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              9
+            ],
+            "type": "integer"
+          },
+          "indicatieDiploma": {
+            "enum": [
+              0,
+              1,
+              2,
+              8
+            ],
+            "type": "integer"
+          },
+          "opleidingsnaam": {
+            "$ref": "#/components/schemas/MPOpleidingsnaam"
+          }
+        },
+        "type": "object"
+      },
+      "MPOpleidingsnaam": {
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/OpleidingsnaamGecodeerd"
+          },
+          {
+            "$ref": "#/components/schemas/MPOpleidingsnaamOngecodeerd"
+          }
+        ]
+      },
+      "MPOpleidingsnaamOngecodeerd": {
+        "additionalProperties": false,
+        "properties": {
+          "opleidingsnaamOngecodeerd": {
+            "additionalProperties": false,
+            "properties": {
+              "naamOpleidingOngecodeerd": {
+                "$ref": "#/components/schemas/String120"
+              }
+            },
+            "type": "object"
+          }
+        },
+        "type": "object"
+      },
+      "MPSollicitatiewijze": {
+        "additionalProperties": false,
+        "properties": {
+          "codeSollicitatiewijze": {
+            "enum": [
+              "1",
+              "2",
+              "3",
+              "4"
+            ],
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "MPVacature": {
+        "properties": {
+          "beroep": {
+            "$ref": "#/components/schemas/beroep_selectie"
+          },
+          "codeWerkEnDenkNiveauMinimaal": {
+            "$ref": "#/components/schemas/codeWerkEnDenkNiveauMinimaal_selectie"
+          },
+          "rijbewijs": {
+            "$ref": "#/components/schemas/rijbewijs_selectie"
+          },
+          "selectiegebied": {
+            "$ref": "#/components/schemas/selectiegebied_selectie"
+          },
+          "taalbeheersing": {
+            "$ref": "#/components/schemas/taalbeheersingen_selectie"
+          },
+          "werktijden": {
+            "$ref": "#/components/schemas/werktijden_selectie"
+          }
+        },
+        "required": [
+          "selectiegebied"
+        ],
+        "type": "object"
+      },
+      "MPVacatureMatch": {
+        "additionalProperties": false,
+        "properties": {
+          "arbeidsVoorwaarden": {
+            "$ref": "#/components/schemas/MPArbeidsVoorwaarden"
+          },
+          "beroep": {
+            "$ref": "#/components/schemas/Beroepsnaam"
+          },
+          "codeWerkEnDenkniveauMinimaal": {
+            "enum": [
+              "0",
+              "1",
+              "2",
+              "3",
+              "4",
+              "5",
+              "6",
+              "7"
+            ],
+            "type": "string"
+          },
+          "contractvorm": {
+            "items": {
+              "$ref": "#/components/schemas/Contractvorm"
+            },
+            "type": "array"
+          },
+          "cursus": {
+            "items": {
+              "$ref": "#/components/schemas/Cursus"
+            },
+            "type": "array"
+          },
+          "flexibiliteit": {
+            "$ref": "#/components/schemas/Flexibiliteit"
+          },
+          "gedragscompetentie": {
+            "items": {
+              "$ref": "#/components/schemas/Gedragscompetentie"
+            },
+            "type": "array"
+          },
+          "indicatieLdrRegistratie": {
+            "enum": [
+              1,
+              2
+            ],
+            "type": "integer"
+          },
+          "opleiding": {
+            "items": {
+              "$ref": "#/components/schemas/MPOpleiding"
+            },
+            "type": "array"
+          },
+          "rijbewijs": {
+            "items": {
+              "$ref": "#/components/schemas/Rijbewijs"
+            },
+            "type": "array"
+          },
+          "sector": {
+            "$ref": "#/components/schemas/SectorBeroepsEnBedrijfsleven"
+          },
+          "sluitingsdatumVacature": {
+            "$ref": "#/components/schemas/Date"
+          },
+          "sollicitatiewijze": {
+            "items": {
+              "$ref": "#/components/schemas/MPSollicitatiewijze"
+            },
+            "type": "array"
+          },
+          "taalbeheersing": {
+            "items": {
+              "$ref": "#/components/schemas/Taalbeheersing"
+            },
+            "type": "array"
+          },
+          "vakvaardigheid": {
+            "items": {
+              "$ref": "#/components/schemas/Vakvaardigheid"
+            },
+            "type": "array"
+          },
+          "vervoermiddel": {
+            "items": {
+              "$ref": "#/components/schemas/MPVervoermiddel"
+            },
+            "type": "array"
+          },
+          "werkervaring": {
+            "items": {
+              "$ref": "#/components/schemas/Werkervaring"
+            },
+            "type": "array"
+          },
+          "werkgever": {
+            "$ref": "#/components/schemas/MPWerkgever"
+          },
+          "werktijden": {
+            "$ref": "#/components/schemas/Werktijden"
+          },
+          "vumID": {
+            "$ref": "#/components/schemas/VumID"
+          }
+        },
+        "required": [
+          "vumID"
+        ],
+        "type": "object"
+      },
+      "MPVervoermiddel": {
+        "additionalProperties": false,
+        "properties": {
+          "indicatieBeschikbaarVoorUitvoeringWerk": {
+            "$ref": "#/components/schemas/Indicatie"
+          },
+          "indicatieBeschikbaarVoorWoonWerkverkeer": {
+            "$ref": "#/components/schemas/Indicatie"
+          }
+        },
+        "type": "object"
+      },
+      "MPWerkgever": {
+        "additionalProperties": false,
+        "properties": {
+          "adresHouding": {
+            "items": {
+              "$ref": "#/components/schemas/MPAdresHouding"
+            },
+            "type": "array"
+          },
+          "sector": {
+            "items": {
+              "$ref": "#/components/schemas/SectorBeroepsEnBedrijfsleven"
+            },
+            "type": "array"
+          }
+        },
+        "type": "object"
+      },
+      "Opleiding": {
+        "additionalProperties": false,
+        "properties": {
+          "codeNiveauOpleiding": {
+            "enum": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              9
+            ],
+            "type": "integer"
+          },
+          "indicatieDiploma": {
+            "enum": [
+              0,
+              1,
+              2,
+              8
+            ],
+            "type": "integer"
+          },
+          "opleidingsnaam": {
+            "$ref": "#/components/schemas/Opleidingsnaam"
+          }
+        },
+        "type": "object"
+      },
+      "Opleidingsnaam": {
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/OpleidingsnaamGecodeerd"
+          },
+          {
+            "$ref": "#/components/schemas/OpleidingsnaamOngecodeerd"
+          }
+        ]
+      },
+      "OpleidingsnaamGecodeerd": {
+        "additionalProperties": false,
+        "properties": {
+          "opleidingsnaamGecodeerd": {
+            "additionalProperties": false,
+            "properties": {
+              "codeOpleidingsnaam": {
+                "$ref": "#/components/schemas/Integer10AsString"
+              },
+              "omschrijvingOpleidingsnaam": {
+                "$ref": "#/components/schemas/String120"
+              }
+            },
+            "type": "object"
+          }
+        },
+        "type": "object"
+      },
+      "OpleidingsnaamOngecodeerd": {
+        "additionalProperties": false,
+        "properties": {
+          "opleidingsnaamOngecodeerd": {
+            "additionalProperties": false,
+            "properties": {
+              "naamOpleidingOngecodeerd": {
+                "$ref": "#/components/schemas/String120"
+              },
+              "omschrijvingOpleiding": {
+                "$ref": "#/components/schemas/String2000"
+              }
+            },
+            "type": "object"
+          }
+        },
+        "type": "object"
+      },
+      "Postbusadres": {
+        "additionalProperties": false,
+        "properties": {
+          "postbusadres": {
+            "additionalProperties": false,
+            "properties": {
+              "postbusnummer": {
+                "$ref": "#/components/schemas/Integer5"
+              }
+            },
+            "type": "object"
+          }
+        },
+        "type": "object"
+      },
+      "PostbusadresBuitenland": {
+        "additionalProperties": false,
+        "properties": {
+          "postbusadresbuitenland": {
+            "additionalProperties": false,
+            "properties": {
+              "postbusnummerBuitenland": {
+                "$ref": "#/components/schemas/String9"
+              }
+            },
+            "type": "object"
+          }
+        },
+        "type": "object"
+      },
+      "Postcode": {
+        "example": "1234AB",
+        "pattern": "^[0-9]{4}[a-zA-Z]{2}$",
+        "type": "string"
+      },
+      "Rijbewijs": {
+        "additionalProperties": false,
+        "properties": {
+          "codeSoortRijbewijs": {
+            "$ref": "#/components/schemas/codeSoortRijbewijs"
+          }
+        },
+        "type": "object"
+      },
+      "SectorBeroepsEnBedrijfsleven": {
+        "additionalProperties": false,
+        "properties": {
+          "codeSbi": {
+            "$ref": "#/components/schemas/Integer5"
+          }
+        },
+        "type": "object"
+      },
+      "Sollicitatiewijze": {
+        "additionalProperties": false,
+        "properties": {
+          "codeSollicitatiewijze": {
+            "enum": [
+              "1",
+              "2",
+              "3",
+              "4"
+            ],
+            "type": "string"
+          },
+          "webadres": {
+            "$ref": "#/components/schemas/Webadres"
+          }
+        },
+        "type": "object"
       },
       "Straatadres": {
-        "type": "object",
         "additionalProperties": false,
         "properties": {
           "straatadres": {
-            "type": "object",
             "additionalProperties": false,
             "properties": {
               "aanduidingBijHuisnummer": {
@@ -1850,93 +1390,23 @@
                 "$ref": "#/components/schemas/String24"
               },
               "woonbootverwijzing": {
-                "type": "string",
-                "const": "AB"
+                "const": "AB",
+                "type": "string"
               },
               "woonwagenverwijzing": {
-                "type": "string",
-                "const": "WW"
+                "const": "WW",
+                "type": "string"
               }
-            }
+            },
+            "type": "object"
           }
-        }
-      },
-      "Postbusadres": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "postbusadres": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-              "postbusnummer": {
-                "$ref": "#/components/schemas/Integer5"
-              }
-            }
-          }
-        }
-      },
-      "Antwoordnummeradres": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "antwoordnummeradres": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-              "antwoordnummer": {
-                "$ref": "#/components/schemas/Integer5"
-              }
-            }
-          }
-        }
-      },
-      "AdresBuitenland": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "adresBuitenland": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-              "landencodeIso": {
-                "$ref": "#/components/schemas/StringCode2"
-              },
-              "landsnaam": {
-                "$ref": "#/components/schemas/String40"
-              },
-              "locatieomschrijvingBuitenland": {
-                "$ref": "#/components/schemas/String70"
-              },
-              "postcodeBuitenland": {
-                "$ref": "#/components/schemas/String9"
-              },
-              "regionaamBuitenland": {
-                "$ref": "#/components/schemas/String24"
-              },
-              "woonplaatsnaamBuitenland": {
-                "$ref": "#/components/schemas/String40"
-              },
-              "adresDetailsBuitenland": {
-                "oneOf": [
-                  {
-                    "$ref": "#/components/schemas/StraatadresBuitenland"
-                  },
-                  {
-                    "$ref": "#/components/schemas/PostbusadresBuitenland"
-                  }
-                ]
-              }
-            }
-          }
-        }
+        },
+        "type": "object"
       },
       "StraatadresBuitenland": {
-        "type": "object",
         "additionalProperties": false,
         "properties": {
           "straatadresbuitenland": {
-            "type": "object",
             "additionalProperties": false,
             "properties": {
               "huisnummerBuitenland": {
@@ -1945,102 +1415,75 @@
               "straatnaamBuitenland": {
                 "$ref": "#/components/schemas/String24"
               }
-            }
+            },
+            "type": "object"
           }
-        }
+        },
+        "type": "object"
       },
-      "PostbusadresBuitenland": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "postbusadresbuitenland": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-              "postbusnummerBuitenland": {
-                "$ref": "#/components/schemas/String9"
-              }
-            }
-          }
-        }
+      "String100": {
+        "maxLength": 100,
+        "type": "string"
       },
-      "MPAdresHouding": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "codeFunctieAdres": {
-            "type": "string",
-            "enum": [
-              "B",
-              "W",
-              "C",
-              "L",
-              "A",
-              "V",
-              "E"
-            ]
-          },
-          "adres": {
-            "$ref": "#/components/schemas/MPAdresBuitenland"
-          }
-        }
+      "String11": {
+        "maxLength": 11,
+        "type": "string"
       },
-      "MPAdresBuitenland": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "adresBuitenland": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-              "landencodeIso": {
-                "$ref": "#/components/schemas/StringCode2"
-              }
-            }
-          }
-        }
+      "String120": {
+        "maxLength": 120,
+        "type": "string"
+      },
+      "String14": {
+        "maxLength": 14,
+        "type": "string"
+      },
+      "String16": {
+        "maxLength": 16,
+        "type": "string"
       },
       "String200": {
         "maxLength": 200,
+        "type": "string"
+      },
+      "String2000": {
+        "maxLength": 2000,
+        "type": "string"
+      },
+      "String24": {
+        "maxLength": 24,
         "type": "string"
       },
       "String320": {
         "maxLength": 320,
         "type": "string"
       },
-      "Indicatie": {
-        "enum": [
-          0,
-          1,
-          2
-        ],
-        "type": "integer"
+      "String35": {
+        "maxLength": 35,
+        "type": "string"
       },
-      "Integer2": {
-        "maximum": 99,
-        "minimum": 0,
-        "type": "integer"
+      "String40": {
+        "maxLength": 40,
+        "type": "string"
       },
-      "Integer5": {
-        "maximum": 99999,
-        "minimum": 0,
-        "type": "integer"
+      "String500": {
+        "maxLength": 500,
+        "type": "string"
       },
-      "Integer1000": {
-        "maximum": 999,
-        "minimum": 0,
-        "type": "integer"
+      "String6": {
+        "maxLength": 6,
+        "type": "string"
       },
-      "IntegerTaal": {
-        "type": "integer",
-        "enum": [
-          0,
-          1,
-          2,
-          3,
-          4,
-          8
-        ]
+      "String70": {
+        "maxLength": 70,
+        "type": "string"
+      },
+      "String80": {
+        "maxLength": 80,
+        "type": "string"
+      },
+      "String9": {
+        "maxLength": 9,
+        "type": "string"
       },
       "StringCode": {
         "maxLength": 10,
@@ -2054,174 +1497,515 @@
         "maxLength": 2,
         "type": "string"
       },
-      "StringCode3": {
-        "maxLength": 3,
-        "type": "string"
-      },
       "StringCode4": {
         "maxLength": 4,
         "type": "string"
       },
       "TaalCode3": {
         "$comment": "This does not exclude the special codes, B-codes and reserved range of ISO-639",
-        "type": "string",
-        "pattern": "^[a-z]{3}$"
+        "pattern": "^[a-z]{3}$",
+        "type": "string"
+      },
+      "Taalbeheersing": {
+        "additionalProperties": false,
+        "properties": {
+          "codeNiveauTaalbeheersingLezen": {
+            "$ref": "#/components/schemas/IntegerTaal"
+          },
+          "codeNiveauTaalbeheersingLuisteren": {
+            "$ref": "#/components/schemas/IntegerTaal"
+          },
+          "codeNiveauTaalbeheersingMondeling": {
+            "$ref": "#/components/schemas/IntegerTaal"
+          },
+          "codeNiveauTaalbeheersingSchriftelijk": {
+            "$ref": "#/components/schemas/IntegerTaal"
+          },
+          "codeTaal": {
+            "$ref": "#/components/schemas/TaalCode3"
+          }
+        },
+        "type": "object"
+      },
+      "Telefoonnummer": {
+        "$ref": "#/components/schemas/String14"
       },
       "URL": {
-        "type": "string",
-        "format": "url"
-      },
-      "String6": {
-        "maxLength": 6,
+        "format": "url",
         "type": "string"
       },
-      "Integer10AsString": {
-        "maxLength": 10,
-        "type": "string",
-        "pattern": "^[0-9]+$",
-        "example": "9999999999"
-      },
-      "String9": {
-        "maxLength": 9,
-        "type": "string"
-      },
-      "String16": {
-        "maxLength": 16,
-        "type": "string"
-      },
-      "String24": {
-        "maxLength": 24,
-        "type": "string"
-      },
-      "String40": {
-        "maxLength": 40,
-        "type": "string"
-      },
-      "String70": {
-        "maxLength": 70,
-        "type": "string"
-      },
-      "String80": {
-        "maxLength": 80,
-        "type": "string"
-      },
-      "String100": {
-        "maxLength": 100,
-        "type": "string"
-      },
-      "String120": {
-        "maxLength": 120,
-        "type": "string"
-      },
-      "String500": {
-        "maxLength": 500,
-        "type": "string"
-      },
-      "String2000": {
-        "maxLength": 2000,
-        "type": "string"
-      },
-      "String11": {
-        "maxLength": 11,
-        "type": "string"
-      },
-      "String14": {
-        "maxLength": 14,
-        "type": "string"
-      },
-      "String35": {
-        "maxLength": 35,
-        "type": "string"
-      },
-      "Date": {
-        "type": "string",
-        "format": "date"
-      },
-      "Postcode": {
-        "pattern": "^[0-9]{4}[a-zA-Z]{2}$",
-        "type": "string",
-        "example": "1234AB"
-      },
-      "VraagID": {
-        "maxLength": 100,
-        "type": "string"
-      },
-      "inline_response_200": {
-        "type": "object",
+      "Vacature": {
+        "additionalProperties": false,
         "properties": {
-          "vraagID": {
-            "$ref": "#/components/schemas/VraagID"
-          }
-        }
-      },
-      "Error": {
-        "type": "object",
-        "properties": {
-          "code": {
-            "$ref": "#/components/schemas/StringCode"
+          "arbeidsVoorwaarden": {
+            "$ref": "#/components/schemas/ArbeidsVoorwaarden"
           },
-          "message": {
-            "$ref": "#/components/schemas/String500"
+          "beroep": {
+            "$ref": "#/components/schemas/Beroepsnaam"
           },
-          "details": {
+          "codeWerkEnDenkniveauMinimaal": {
+            "enum": [
+              "0",
+              "1",
+              "2",
+              "3",
+              "4",
+              "5",
+              "6",
+              "7"
+            ],
+            "type": "string"
+          },
+          "contractvorm": {
+            "items": {
+              "$ref": "#/components/schemas/Contractvorm"
+            },
+            "type": "array"
+          },
+          "cursus": {
+            "items": {
+              "$ref": "#/components/schemas/Cursus"
+            },
+            "type": "array"
+          },
+          "flexibiliteit": {
+            "$ref": "#/components/schemas/Flexibiliteit"
+          },
+          "gedragscompetentie": {
+            "items": {
+              "$ref": "#/components/schemas/Gedragscompetentie"
+            },
+            "type": "array"
+          },
+          "idVacature": {
+            "$ref": "#/components/schemas/IDVacature"
+          },
+          "indicatieLdrRegistratie": {
+            "enum": [
+              1,
+              2
+            ],
+            "type": "integer"
+          },
+          "naamVacature": {
+            "$ref": "#/components/schemas/String120"
+          },
+          "nummerVacature": {
+            "$ref": "#/components/schemas/String11"
+          },
+          "omschrijvingVacature": {
             "$ref": "#/components/schemas/String2000"
+          },
+          "opleiding": {
+            "items": {
+              "$ref": "#/components/schemas/Opleiding"
+            },
+            "type": "array"
+          },
+          "rijbewijs": {
+            "items": {
+              "$ref": "#/components/schemas/Rijbewijs"
+            },
+            "type": "array"
+          },
+          "sector": {
+            "$ref": "#/components/schemas/SectorBeroepsEnBedrijfsleven"
+          },
+          "sluitingsdatumVacature": {
+            "$ref": "#/components/schemas/Date"
+          },
+          "sollicitatiewijze": {
+            "items": {
+              "$ref": "#/components/schemas/Sollicitatiewijze"
+            },
+            "type": "array"
+          },
+          "taalbeheersing": {
+            "items": {
+              "$ref": "#/components/schemas/Taalbeheersing"
+            },
+            "type": "array"
+          },
+          "vakvaardigheid": {
+            "items": {
+              "$ref": "#/components/schemas/Vakvaardigheid"
+            },
+            "type": "array"
+          },
+          "vervoermiddel": {
+            "items": {
+              "$ref": "#/components/schemas/Vervoermiddel"
+            },
+            "type": "array"
+          },
+          "werkervaring": {
+            "items": {
+              "$ref": "#/components/schemas/Werkervaring"
+            },
+            "type": "array"
+          },
+          "werkgever": {
+            "$ref": "#/components/schemas/Werkgever"
+          },
+          "werktijden": {
+            "$ref": "#/components/schemas/Werktijden"
           }
         },
         "required": [
-          "code",
-          "message"
-        ]
-      }
-    },
-    "requestBodies": {
-      "VacatureMatchesRequest": {
-        "content": {
-          "application/json": {
-            "schema": {
-              "required": [
-                "callbackURL",
-                "vraagObject"
-              ],
-              "type": "object",
-              "properties": {
-                "callbackURL": {
-                  "type": "string",
-                  "format": "uri"
-                },
-                "vraagObject": {
-                  "$ref": "#/components/schemas/MPVacature"
-                }
-              }
-            }
-          }
-        },
-        "required": true
+          "idVacature"
+        ],
+        "type": "object"
       },
-      "VacatureMatchesCallbackRequest": {
-        "content": {
-          "application/json": {
-            "schema": {
-              "required": [
-                "vraagID",
-                "matches",
-                "maximumAantalResultatenBereikt"
-              ],
-              "type": "object",
-              "properties": {
-                "vraagID": {
-                  "$ref": "#/components/schemas/VraagID"
-                },
-                "maximumAantalResultatenBereikt": {
-                  "type": "boolean"
-                },
-                "matches": {
-                  "$ref": "#/components/schemas/VacatureMatchingProfielen"
-                }
-              }
-            }
+      "VacatureMatchingProfielen": {
+        "items": {
+          "$ref": "#/components/schemas/MPVacatureMatch"
+        },
+        "type": "array"
+      },
+      "Vakvaardigheid": {
+        "additionalProperties": false,
+        "properties": {
+          "omschrijving": {
+            "$ref": "#/components/schemas/String120"
           }
         },
-        "required": true
+        "type": "object"
+      },
+      "Vervoermiddel": {
+        "additionalProperties": false,
+        "properties": {
+          "codeVervoermiddel": {
+            "enum": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              9
+            ],
+            "type": "integer"
+          },
+          "indicatieBeschikbaarVoorUitvoeringWerk": {
+            "$ref": "#/components/schemas/Indicatie"
+          },
+          "indicatieBeschikbaarVoorWoonWerkverkeer": {
+            "$ref": "#/components/schemas/Indicatie"
+          }
+        },
+        "type": "object"
+      },
+      "VumID": {
+        "$ref": "#/components/schemas/String500"
+      },
+      "Webadres": {
+        "additionalProperties": false,
+        "properties": {
+          "codeWebadres": {
+            "enum": [
+              1,
+              2,
+              3,
+              4
+            ],
+            "type": "integer"
+          },
+          "url": {
+            "$ref": "#/components/schemas/URL"
+          }
+        },
+        "type": "object"
+      },
+      "Werkervaring": {
+        "additionalProperties": false,
+        "properties": {
+          "aantalJarenWerkzaamInBeroep": {
+            "$ref": "#/components/schemas/Integer2"
+          }
+        },
+        "type": "object"
+      },
+      "Werkgever": {
+        "additionalProperties": false,
+        "properties": {
+          "adresHouding": {
+            "items": {
+              "$ref": "#/components/schemas/AdresHouding"
+            },
+            "type": "array"
+          },
+          "contactpersoon": {
+            "items": {
+              "$ref": "#/components/schemas/ContactpersoonAfdeling"
+            },
+            "type": "array"
+          },
+          "handelsnaamOrganisatie": {
+            "$ref": "#/components/schemas/String500"
+          },
+          "sector": {
+            "items": {
+              "$ref": "#/components/schemas/SectorBeroepsEnBedrijfsleven"
+            },
+            "type": "array"
+          },
+          "webadres": {
+            "items": {
+              "$ref": "#/components/schemas/Webadres"
+            },
+            "type": "array"
+          }
+        },
+        "type": "object"
+      },
+      "Werktijden": {
+        "additionalProperties": false,
+        "properties": {
+          "aantalWerkurenPerWeekMaximaal": {
+            "$ref": "#/components/schemas/Integer2"
+          },
+          "aantalWerkurenPerWeekMinimaal": {
+            "$ref": "#/components/schemas/Integer2"
+          },
+          "indicatieKantoortijden": {
+            "$ref": "#/components/schemas/Indicatie"
+          }
+        },
+        "type": "object"
+      },
+      "aantalWerkuren": {
+        "maximum": 99,
+        "minimum": 1,
+        "type": "integer"
+      },
+      "aantalWerkurenPerWeekMaximaal_selectie": {
+        "properties": {
+          "$gte": {
+            "$ref": "#/components/schemas/aantalWerkuren"
+          }
+        },
+        "type": "object"
+      },
+      "aantalWerkurenPerWeekMinimaal_selectie": {
+        "properties": {
+          "$lte": {
+            "$ref": "#/components/schemas/aantalWerkuren"
+          }
+        },
+        "type": "object"
+      },
+      "beroep_selectie": {
+        "properties": {
+          "beroepsnaamGecodeerd": {
+            "$ref": "#/components/schemas/beroepsnaamGecodeerd_selectie"
+          }
+        },
+        "type": "object"
+      },
+      "beroepsnaamGecodeerd_selectie": {
+        "properties": {
+          "codeBeroepsnaam": {
+            "$ref": "#/components/schemas/codeBeroepsnaam_selectie"
+          }
+        },
+        "type": "object"
+      },
+      "codeBeroepsnaam": {
+        "$comment": "De code van het beroep volgens het UWV Beroepen & Opleidingen Register",
+        "pattern": "^[0-9]{1,10}$",
+        "type": "string"
+      },
+      "codeBeroepsnaam_selectie": {
+        "properties": {
+          "$eq": {
+            "$ref": "#/components/schemas/codeBeroepsnaam"
+          }
+        },
+        "type": "object"
+      },
+      "codeNiveauTaalbeheersing_choice": {
+        "$comment": "Dit is een beperkte keuze voor gebruik in de selectie.",
+        "enum": [
+          2,
+          3,
+          4
+        ],
+        "type": "integer"
+      },
+      "codeNiveauTaalbeheersing_selectie": {
+        "properties": {
+          "$gte": {
+            "$ref": "#/components/schemas/codeNiveauTaalbeheersing_choice"
+          }
+        },
+        "type": "object"
+      },
+      "codeSoortRijbewijs": {
+        "enum": [
+          "A",
+          "A1",
+          "A2",
+          "AM",
+          "B",
+          "B+",
+          "C1",
+          "C",
+          "D1",
+          "D",
+          "BE",
+          "C1E",
+          "CE",
+          "D1E",
+          "DE",
+          "T"
+        ],
+        "type": "string"
+      },
+      "codeSoortRijbewijs_match": {
+        "properties": {
+          "$elemMatch": {
+            "properties": {
+              "codeSoortRijbewijs": {
+                "$ref": "#/components/schemas/codeSoortRijbewijs_selectie"
+              }
+            },
+            "type": "object"
+          }
+        },
+        "type": "object"
+      },
+      "codeSoortRijbewijs_selectie": {
+        "properties": {
+          "$eq": {
+            "$ref": "#/components/schemas/codeSoortRijbewijs"
+          }
+        },
+        "type": "object"
+      },
+      "codeTaal_selectie": {
+        "properties": {
+          "$eq": {
+            "$ref": "#/components/schemas/TaalCode3"
+          }
+        },
+        "type": "object"
+      },
+      "codeWerkEnDenkNiveauMinimaal_selectie": {
+        "oneOf": [
+          {
+            "$comment": "Onbekende properties worden door maar 1 oneOf keuze toegestaan",
+            "additionalProperties": false,
+            "properties": {
+              "$gte": {
+                "$ref": "#/components/schemas/codeWerkEnDenkNiveau_choice"
+              },
+              "$lt": {
+                "const": "7",
+                "type": "string"
+              }
+            },
+            "required": [
+              "$lt"
+            ],
+            "type": "object"
+          },
+          {
+            "properties": {
+              "$eq": {
+                "const": "7",
+                "type": "string"
+              },
+              "$lt": false
+            },
+            "type": "object"
+          }
+        ]
+      },
+      "codeWerkEnDenkNiveau_choice": {
+        "$comment": "Dit is een beperkte keuze voor gebruik in de selectie.",
+        "enum": [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5",
+          "6"
+        ],
+        "type": "string"
+      },
+      "rijbewijs_selectie": {
+        "properties": {
+          "$all": {
+            "items": {
+              "$ref": "#/components/schemas/codeSoortRijbewijs_match"
+            },
+            "minItems": 1,
+            "type": "array"
+          }
+        },
+        "type": "object"
+      },
+      "selectiegebied_selectie": {
+        "properties": {
+          "afstand": {
+            "$ref": "#/components/schemas/Integer1000"
+          },
+          "postcode": {
+            "$ref": "#/components/schemas/Postcode"
+          }
+        },
+        "required": [
+          "afstand",
+          "postcode"
+        ],
+        "type": "object"
+      },
+      "taalbeheersing_match": {
+        "properties": {
+          "$elemMatch": {
+            "$ref": "#/components/schemas/taalbeheersing_selectie"
+          }
+        },
+        "type": "object"
+      },
+      "taalbeheersing_selectie": {
+        "properties": {
+          "codeNiveauTaalbeheersingMondeling": {
+            "$ref": "#/components/schemas/codeNiveauTaalbeheersing_selectie"
+          },
+          "codeNiveauTaalbeheersingSchriftelijk": {
+            "$ref": "#/components/schemas/codeNiveauTaalbeheersing_selectie"
+          },
+          "codeTaal": {
+            "$ref": "#/components/schemas/codeTaal_selectie"
+          }
+        },
+        "required": [
+          "codeTaal"
+        ],
+        "type": "object"
+      },
+      "taalbeheersingen_selectie": {
+        "properties": {
+          "$all": {
+            "items": {
+              "$ref": "#/components/schemas/taalbeheersing_match"
+            },
+            "minItems": 1,
+            "type": "array"
+          }
+        },
+        "type": "object"
+      },
+      "werktijden_selectie": {
+        "properties": {
+          "aantalWerkurenPerWeekMaximaal": {
+            "$ref": "#/components/schemas/aantalWerkurenPerWeekMaximaal_selectie"
+          },
+          "aantalWerkurenPerWeekMinimaal": {
+            "$ref": "#/components/schemas/aantalWerkurenPerWeekMinimaal_selectie"
+          }
+        },
+        "type": "object"
       }
     }
   }
