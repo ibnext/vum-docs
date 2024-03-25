@@ -1393,19 +1393,6 @@ components:
       - O
       - B
       type: string
-    codeTypeArbeidscontract_selectie:
-      properties:
-        $eq:
-          $ref: '#/components/schemas/codeTypeArbeidscontract'
-      type: object
-    codeTypeArbeidscontracten_selectie:
-      properties:
-        $or:
-          items:
-            $ref: '#/components/schemas/codeTypeArbeidscontract_selectie'
-          minItems: 1
-          type: array
-      type: object
     codeWerkEnDenkNiveauMinimaal_selectie:
       oneOf:
       - $comment: Onbekende properties worden door maar 1 oneOf keuze toegestaan
@@ -1435,12 +1422,24 @@ components:
       - '5'
       - '6'
       type: string
+
     contractvorm_selectie:
       properties:
         $elemMatch:
           properties:
-            codeTypeArbeidscontract:
-              $ref: '#/components/schemas/codeTypeArbeidscontracten_selectie'
+            $or:
+              type: array
+              items: 
+                $ref: '#/components/schemas/codeTypeArbeidscontract_selectie'
+              minItems: 1
+          type: object
+      type: object
+    codeTypeArbeidscontract_selectie:
+      properties:
+        codeTypeArbeidscontract:
+          properties:
+            $eq:
+              $ref: '#/components/schemas/codeTypeArbeidscontract'
           type: object
       type: object
     flexibiliteit_selectie:

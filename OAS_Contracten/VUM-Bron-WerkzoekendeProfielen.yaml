@@ -415,6 +415,8 @@ components:
     Contractvorm:
       additionalProperties: false
       properties:
+        codeTypeArbeidscontract:
+          $ref: '#/components/schemas/codeTypeArbeidscontract'
         codeTypeOvereenkomst:
           enum:
           - '01'
@@ -422,8 +424,6 @@ components:
           - '03'
           - '04'
           type: string
-        codeTypeArbeidscontract:
-          $ref: '#/components/schemas/codeTypeArbeidscontract'
       type: object
     Cursus:
       additionalProperties: false
@@ -1129,25 +1129,23 @@ components:
       - O
       - B
       type: string
-    codeTypeArbeidscontract_selectie:
-      properties:
-        $eq:
-          $ref: '#/components/schemas/codeTypeArbeidscontract'
-      type: object
-    codeTypeArbeidscontracten_selectie:
-      properties:
-        $or:
-          items:
-            $ref: '#/components/schemas/codeTypeArbeidscontract_selectie'
-          minItems: 1
-          type: array
-      type: object
     contractvorm_selectie:
       properties:
         $elemMatch:
           properties:
-            codeTypeArbeidscontract:
-              $ref: '#/components/schemas/codeTypeArbeidscontracten_selectie'
+            $or:
+              type: array
+              items:
+                $ref: '#/components/schemas/codeTypeArbeidscontract_selectie'
+              minItems: 1
+          type: object
+      type: object
+    codeTypeArbeidscontract_selectie:
+      properties:
+        codeTypeArbeidscontract:
+          properties:
+            $eq:
+              $ref: '#/components/schemas/codeTypeArbeidscontract'
           type: object
       type: object
     flexibiliteit_selectie:

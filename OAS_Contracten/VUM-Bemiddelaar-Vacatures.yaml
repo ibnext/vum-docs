@@ -462,17 +462,14 @@ components:
     Contractvorm:
       additionalProperties: false
       properties:
+        codeTypeArbeidscontract:
+          $ref: '#/components/schemas/codeTypeArbeidscontract'
         codeTypeOvereenkomst:
           enum:
           - '01'
           - '02'
           - '03'
           - '04'
-          type: string
-        codeTypeArbeidscontract:
-          enum:
-          - B
-          - O
           type: string
       type: object
     Cursus:
@@ -1282,6 +1279,11 @@ components:
         $eq:
           $ref: '#/components/schemas/TaalCode3'
       type: object
+    codeTypeArbeidscontract:
+      enum:
+      - O
+      - B
+      type: string
     codeWerkEnDenkNiveauMinimaal_selectie:
       oneOf:
       - $comment: Onbekende properties worden door maar 1 oneOf keuze toegestaan
