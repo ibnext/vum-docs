@@ -276,12 +276,7 @@ components:
     Contractvorm:
       additionalProperties: false
       properties:
-        codeTypeArbeidscontract_V:
-          enum:
-          - B
-          - O
-          type: string
-        codeTypeArbeidscontract_W:
+        codeTypeArbeidscontract:
           $ref: '#/components/schemas/codeTypeArbeidscontract'
         codeTypeOvereenkomst:
           enum:

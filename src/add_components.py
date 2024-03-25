@@ -125,7 +125,7 @@ def main(components_file, openapi_file, output_directory):
 
     print(f"Saving to {json_filename}")
     with open(json_filename, 'w') as fd:
-        json.dump(openapi, fd, indent=2)
+        json.dump(openapi, fd, indent=2, sort_keys=False)
     print(f"Saving to {yaml_filename}")
     with open(yaml_filename, 'w') as fd:
         yaml.dump(openapi, fd, Dumper=yaml.Dumper, sort_keys=False)
