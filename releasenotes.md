@@ -1,14 +1,8 @@
-# Releasenotes Koppelvlak specificaties VUM v1.0.0
+# Releasenotes Koppelvlak specificaties VUM v1.1.1
 
-**Openstaande punten in deze release (v1.0.0)**
+**Openstaande punten in deze release (v1.1.1)**
 
  - De koppelvlakspecificaties staan lege waardes toe voor attributen. Dit komt niet overeen met de VUM Gegevensstandaard. Dit betreft lege lijsten, lege objecten en lege tekst. 
-
- - De koppelvlakspecificaties staan attributen toe in de dataobjecten die niet in de specificatie zijn opgenomen. De VUM Gegevensstandaard sluit alle attributen uit die niet in de VUM Gegevensstandaard zijn opgenomen.
-
- - De wijze waarop “oneOf” constructies zijn geformuleerd heeft het onverwachte resultaat dat alle waardes voor de betreffende atttributen door de koppelvlakspecificaties afgewezen worden. Dit betreft de attributen 'beroep', 'opleidingsnaam', 'adres' en 'adresDetailsBuitenland'. De implemenatie van de VUM Uitwisselingsvoorziening wijkt hierin af van de koppelvlakspecificaties en accepteert de gewenste waardes voor deze attributen wel. De 'oneOf' constructies werken niet als verwacht omdat de definities van de keuzes elkaar niet volledig uitsluiten en elke waarde vervolgens aan alle keuzes voldoet. Als het gewenst is om de OpenAPI bestanden geautomatiseerd te verwerken, dan kan ‘"additionalProperties": false’ worden toegevoegd aan de schemadefinities van de keuzes voor de ‘oneOf’ constructies. 
-
- - Enumeraties uit de VUM Gegevensstandaard zijn niet in de koppelvlakspecificaties opgenomen. Dit staat waardes toe die wel aan het patroon voor het attribuut voldoen maar niet in de enumeratie van de VUM Gegevensstandaard voorkomen. 
 
  - De betekenis van de gebruikte formaat specificatie ‘URL’ voor het attribuut 'url' is niet nader gedefinieerd en heeft daarmee geen beperkende betekenis.
 
@@ -59,6 +53,36 @@
 <th><strong>nr</strong></th>
 <th><strong>aanpassing</strong></th>
 <th><strong>motivatie</strong></th>
+</tr>
+<tr class="odd">
+<th>1.2.0</th>
+<th>1</th>
+<th>Mobiliteit entiteit toegevoegd aan vacature zoekvraag in koppelvlak</th>
+<th>De entiteit "mobiliteit" is toegevoegd t.b.v. het stellen van een zoekvraag binnen het Vacature koppelvlak. De entiteit is toegevoegd aan "MPVacature" in het bemiddelaar en bron koppelvlak.</th>
+</tr>
+<tr class="odd">
+<th>1.2.0</th>
+<th>2</th>
+<th>Entiteiten bemiddelingspostcode en maximaleReisafstand zijn toegevoegd aan de nieuwe entiteit "Mobiliteit"</th>
+<th>Deze entiteiten zijn toegevoegd t.b.v. het stellen van een zoekvraag binnen het Vacature koppelvlak.</th>
+</tr>
+<tr class="odd">
+<th>1.2.0</th>
+<th>3</th>
+<th>Attribuut "idVacature" is nu verplicht in de antwoorden van een bron.</th>
+<th>Dit attribuut is nodig om detailvragen te kunnen doen, zonder idVacature is dit niet mogelijk.</th>
+</tr>
+<tr class="odd">
+<th>1.1.1</th>
+<th>1</th>
+<th>Callback endpoint callbackExample gescheiden in callbackWP en callbackVacature</th>
+<th>Op de callback ontvangen 'Werkzoekende Profielen' and 'Vacature' matches kunnen nu op een verschillende manier worden verwerkt.</th>
+</tr>
+<tr class="odd">
+<th>1.1.0</th>
+<th>1</th>
+<th>Enums</th>
+<th>Enumeraties vanuit de gegevensstandaard toegevoegd aan de OAS contracten &amp; OneOf notaties kloppend gemaakt door additionalProperties op false te zetten.</th>
 </tr>
 <tr class="header">
 <th>1.0.0</th>

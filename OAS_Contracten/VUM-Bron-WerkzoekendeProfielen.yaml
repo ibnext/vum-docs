@@ -189,23 +189,59 @@ components:
       items:
         $ref: '#/components/schemas/MPWerkzoekendeMatch'
     MPWerkzoekendeMatch:
-      allOf:
-      - type: object
-        properties:
-          idWerkzoekende:
-            $ref: '#/components/schemas/IDWerkzoekende'
-      - $ref: '#/components/schemas/MPWerkzoekende'
-    IDWerkzoekende:
-      $ref: '#/components/schemas/String200'
-    Werkzoekende:
       type: object
+      additionalProperties: false
       properties:
         idWerkzoekende:
           $ref: '#/components/schemas/IDWerkzoekende'
         indicatieLdrRegistratie:
-          $ref: '#/components/schemas/Indicatie'
+          type: integer
+          enum: [1, 2]
         indicatieBeschikbaarheidContactgegevens:
-          $ref: '#/components/schemas/Indicatie'
+          type: integer
+          enum: [1, 2]
+        voorkeursland:
+          type: array
+          items:
+            $ref: '#/components/schemas/Voorkeursland'
+        vervoermiddel:
+          type: array
+          items:
+            $ref: '#/components/schemas/MPVervoermiddel'
+        mobiliteit:
+          $ref: '#/components/schemas/Mobiliteit'
+        flexibiliteit:
+          $ref: '#/components/schemas/Flexibiliteit'
+        werktijden:
+          $ref: '#/components/schemas/Werktijden'
+        contractvorm:
+          type: array
+          items:
+            $ref: '#/components/schemas/Contractvorm'
+        arbeidsmarktkwalificatie:
+          $ref: '#/components/schemas/MPArbeidsmarktkwalificatie'
+        sector:
+          type: array
+          items:
+            $ref: '#/components/schemas/SectorBeroepsEnBedrijfsleven'
+        bemiddelingsberoep:
+          type: array
+          items:
+            $ref: '#/components/schemas/Beroepsnaam'
+    IDWerkzoekende:
+      $ref: '#/components/schemas/String200'
+    Werkzoekende:
+      type: object
+      additionalProperties: false
+      properties:
+        idWerkzoekende:
+          $ref: '#/components/schemas/IDWerkzoekende'
+        indicatieLdrRegistratie:
+          type: integer
+          enum: [1, 2]
+        indicatieBeschikbaarheidContactgegevens:
+          type: integer
+          enum: [1, 2]
         persoonlijkePresentatie:
           $ref: '#/components/schemas/String2000'
         voorkeursland:
@@ -256,11 +292,14 @@ components:
             $ref: '#/components/schemas/Beroepsnaam'
     MPWerkzoekende:
       type: object
+      additionalProperties: false
       properties:
         indicatieLdrRegistratie:
-          $ref: '#/components/schemas/Indicatie'
+          type: integer
+          enum: [1, 2]
         indicatieBeschikbaarheidContactgegevens:
-          $ref: '#/components/schemas/Indicatie'
+          type: integer
+          enum: [1, 2]
         voorkeursland:
           type: array
           items:
@@ -291,9 +330,11 @@ components:
             $ref: '#/components/schemas/Beroepsnaam'
     Arbeidsmarktkwalificatie:
       type: object
+      additionalProperties: false
       properties:
         codeWerkEnDenkniveauWerkzoekende:
-          $ref: '#/components/schemas/Integer1'
+          type: integer
+          enum: [0, 1, 2, 3, 4, 5, 6, 7]
         vakvaardigheid:
           type: array
           items:
@@ -328,9 +369,11 @@ components:
             $ref: '#/components/schemas/Werkervaring'
     MPArbeidsmarktkwalificatie:
       type: object
+      additionalProperties: false
       properties:
         codeWerkEnDenkniveauWerkzoekende:
-          $ref: '#/components/schemas/Integer1'
+          type: integer
+          enum: [0, 1, 2, 3, 4, 5, 6, 7]
         vakvaardigheid:
           type: array
           items:
@@ -369,9 +412,11 @@ components:
       - $ref: '#/components/schemas/OpleidingsnaamOngecodeerd'
     BeroepsnaamGecodeerd:
       type: object
+      additionalProperties: false
       properties:
         beroepsnaamGecodeerd:
           type: object
+          additionalProperties: false
           properties:
             codeBeroepsnaam:
               $ref: '#/components/schemas/StringCode'
@@ -379,17 +424,21 @@ components:
               $ref: '#/components/schemas/String120'
     BeroepsnaamOngecodeerd:
       type: object
+      additionalProperties: false
       properties:
         beroepsnaamOngecodeerd:
           type: object
+          additionalProperties: false
           properties:
             naamBeroepOngecodeerd:
               $ref: '#/components/schemas/String120'
     OpleidingsnaamGecodeerd:
       type: object
+      additionalProperties: false
       properties:
         opleidingsnaamGecodeerd:
           type: object
+          additionalProperties: false
           properties:
             codeOpleidingsnaam:
               $ref: '#/components/schemas/Integer10AsString'
@@ -397,9 +446,11 @@ components:
               $ref: '#/components/schemas/String120'
     OpleidingsnaamOngecodeerd:
       type: object
+      additionalProperties: false
       properties:
         opleidingsnaamOngecodeerd:
           type: object
+          additionalProperties: false
           properties:
             naamOpleidingOngecodeerd:
               $ref: '#/components/schemas/String120'
@@ -407,15 +458,45 @@ components:
               $ref: '#/components/schemas/String2000'
     Gedragscompetentie:
       type: object
+      additionalProperties: false
       properties:
         codeGedragscompetentie:
-          $ref: '#/components/schemas/Integer10AsString'
+          type: string
+          enum: ["24100", "24101", "24102", "24104", "24105", "24106", "24107", "24108", "24109", "24110", "24111", "24112", "24113", "24114", "24115", "24116", "24118", "24119", "24120", "24121", "24122", "24123", "24124", "24125", "24126"]
         omschrijvingGedragscompetentie:
-          $ref: '#/components/schemas/String120'
+          type: string
+          enum:
+          - "Beslissen en activiteiten initi\xEBren"
+          - Aansturen
+          - Begeleiden
+          - Aandacht en begrip tonen
+          - Samenwerken en overleggen
+          - Ethisch en integer handelen
+          - Relaties bouwen en netwerken
+          - "Overtuigen en be\xEFnvloeden"
+          - Presenteren
+          - Formuleren en rapporteren
+          - Vakdeskundigheid toepassen
+          - Materialen en middelen inzetten
+          - Analyseren
+          - Onderzoeken
+          - Creeren en innoveren
+          - Leren
+          - Plannen en organiseren
+          - Op de behoeften en verwachtingen van de klant richten
+          - Kwaliteit leveren
+          - Instructies en procedures opvolgen
+          - Omgaan met verandering en aanpassen
+          - Met druk en tegenslag omgaan
+          - Gedrevenheid en ambitie tonen
+          - Ondernemend en commercieel handelen
+          - Bedrijfsmatig handelen
         codeBeheersingGedragscompetentie:
-          $ref: '#/components/schemas/Integer1'
+          type: integer
+          enum: [1,2,3,4,5,9]
     Werktijden:
       type: object
+      additionalProperties: false
       properties:
         aantalWerkurenPerWeekMinimaal:
           $ref: '#/components/schemas/Integer2'
@@ -425,9 +506,12 @@ components:
           $ref: '#/components/schemas/Indicatie'
     Flexibiliteit:
       type: object
+      additionalProperties: false
       properties:
         codeRegiostraal:
-          $ref: '#/components/schemas/Integer1'
+          maximum: 9
+          minimum: 1
+          type: integer
         indicatieOnregelmatigWerkOfPloegendienst:
           $ref: '#/components/schemas/Indicatie'
         datumAanvangBeschikbaarVoorWerk:
@@ -436,6 +520,7 @@ components:
           $ref: '#/components/schemas/Date'
     Mobiliteit:
       type: object
+      additionalProperties: false
       properties:
         bemiddelingspostcode:
           $ref: '#/components/schemas/Postcode'
@@ -444,14 +529,22 @@ components:
         maximaleReistijd:
           $ref: '#/components/schemas/Integer1000'
     Werkervaring:
-      allOf:
-        - $ref: '#/components/schemas/MPWerkervaring'
-        - type: object
-          properties:
-            toelichtingWerkervaring:
-              $ref: '#/components/schemas/String2000'
+      type: object
+      additionalProperties: false
+      properties:
+        datumAanvangWerkzaamheden:
+          $ref: '#/components/schemas/Date'
+        datumEindeWerkzaamheden:
+          $ref: '#/components/schemas/Date'
+        naamOrganisatie:
+          $ref: '#/components/schemas/String70'
+        beroep:
+          $ref: '#/components/schemas/Beroepsnaam'     
+        toelichtingWerkervaring:
+          $ref: '#/components/schemas/String2000'
     MPWerkervaring:
       type: object
+      additionalProperties: false
       properties:
         datumAanvangWerkzaamheden:
           $ref: '#/components/schemas/Date'
@@ -463,46 +556,65 @@ components:
           $ref: '#/components/schemas/Beroepsnaam'
     Rijbewijs:
       type: object
+      additionalProperties: false
       properties:
         codeSoortRijbewijs:
-          $ref: '#/components/schemas/StringCode3'
+          type: string
+          enum: ['A', 'A1', 'A2', 'AM', 'B', 'B+', 'C1', 'C', 'D1', 'D', 'BE', 'C1E', 'CE', 'D1E', 'DE', 'T']
     Opleiding:
-      allOf:
-        - $ref: '#/components/schemas/MPOpleiding'
-        - type: object
-          properties:
-            datumAanvangVolgenOpleiding:
-              $ref: '#/components/schemas/Date'
-            datumEindeVolgenOpleiding:
-              $ref: '#/components/schemas/Date'
-            codeStatusOpleiding:
-              $ref: '#/components/schemas/Integer1'
-            naamOpleidingsinstituut:
-              $ref: '#/components/schemas/String500'
-    MPOpleiding:
       type: object
+      additionalProperties: false
       properties:
         codeNiveauOpleiding:
-          $ref: '#/components/schemas/Integer1'
+          type: integer
+          enum: [1, 2, 3, 4, 5, 6, 9]
         indicatieDiploma:
-          $ref: '#/components/schemas/Indicatie'
+          type: integer
+          enum: [0, 1, 2, 8]
+        datumDiploma:
+          $ref: '#/components/schemas/Date'
+        opleidingsnaam:
+          $ref: '#/components/schemas/Opleidingsnaam'     
+        datumAanvangVolgenOpleiding:
+          $ref: '#/components/schemas/Date'
+        datumEindeVolgenOpleiding:
+          $ref: '#/components/schemas/Date'
+        codeStatusOpleiding:
+          type: integer
+          enum: [0, 1, 2, 3]
+        naamOpleidingsinstituut:
+          $ref: '#/components/schemas/String500'
+    MPOpleiding:
+      type: object
+      additionalProperties: false
+      properties:
+        codeNiveauOpleiding:
+          type: integer
+          enum: [1, 2, 3, 4, 5, 6, 9]
+        indicatieDiploma:
+          type: integer
+          enum: [0, 1, 2, 8]
         datumDiploma:
           $ref: '#/components/schemas/Date'
         opleidingsnaam:
           $ref: '#/components/schemas/Opleidingsnaam'
     Cursus:
-      allOf:
-        - $ref: '#/components/schemas/MPCursus'
-        - type: object
-          properties:
-            datumAanvangVolgenCursus:
-              $ref: '#/components/schemas/Date'
-            datumEindeVolgenCursus:
-              $ref: '#/components/schemas/Date'
-            naamOpleidingsinstituut:
-              $ref: '#/components/schemas/String500'
+      type: object
+      additionalProperties: false
+      properties:
+        naamCursus:
+          $ref: '#/components/schemas/String120'
+        datumCertificaat:
+          $ref: '#/components/schemas/Date'       
+        datumAanvangVolgenCursus:
+          $ref: '#/components/schemas/Date'
+        datumEindeVolgenCursus:
+          $ref: '#/components/schemas/Date'
+        naamOpleidingsinstituut:
+          $ref: '#/components/schemas/String500'
     MPCursus:
       type: object
+      additionalProperties: false
       properties:
         naamCursus:
           $ref: '#/components/schemas/String120'
@@ -510,11 +622,13 @@ components:
           $ref: '#/components/schemas/Date'
     SectorBeroepsEnBedrijfsleven:
       type: object
+      additionalProperties: false
       properties:
         codeSbi:
           $ref: '#/components/schemas/Integer5'
     EisAanWerk:
       type: object
+      additionalProperties: false
       properties:
         indicatieAanpassingWerkomgeving:
           $ref: '#/components/schemas/Indicatie'
@@ -524,31 +638,38 @@ components:
           $ref: '#/components/schemas/Indicatie'
     Vakvaardigheid:
       type: object
+      additionalProperties: false
       properties:
         omschrijving:
           $ref: '#/components/schemas/String120'
     Taalbeheersing:
       type: object
+      additionalProperties: false
       properties:
         codeTaal:
           $ref: '#/components/schemas/StringCode3'
         codeNiveauTaalbeheersingMondeling:
-          $ref: '#/components/schemas/Integer1'
+          $ref: '#/components/schemas/IntegerTaal'
         codeNiveauTaalbeheersingSchriftelijk:
-          $ref: '#/components/schemas/Integer1'
+          $ref: '#/components/schemas/IntegerTaal'
         codeNiveauTaalbeheersingLezen:
-          $ref: '#/components/schemas/Integer1'
+          $ref: '#/components/schemas/IntegerTaal'
         codeNiveauTaalbeheersingLuisteren:
-          $ref: '#/components/schemas/Integer1'
+          $ref: '#/components/schemas/IntegerTaal'
     Vervoermiddel:
-      allOf:
-        - $ref: '#/components/schemas/MPVervoermiddel'
-        - type: object
-          properties:
-            codeVervoermiddel:
-              $ref: '#/components/schemas/Integer2'
+      type: object
+      additionalProperties: false
+      properties:
+        indicatieBeschikbaarVoorUitvoeringWerk:
+          $ref: '#/components/schemas/Indicatie'
+        indicatieBeschikbaarVoorWoonWerkverkeer:
+          $ref: '#/components/schemas/Indicatie'
+        codeVervoermiddel:
+          type: integer
+          enum: [1, 2, 3, 4, 5, 9]
     MPVervoermiddel:
       type: object
+      additionalProperties: false
       properties:
         indicatieBeschikbaarVoorUitvoeringWerk:
           $ref: '#/components/schemas/Indicatie'
@@ -560,6 +681,7 @@ components:
       $ref: '#/components/schemas/String14'
     ContactpersoonAfdeling:
       type: object
+      additionalProperties: false
       properties:
         naamContactpersoonAfdeling:
           $ref: '#/components/schemas/String35'
@@ -569,6 +691,7 @@ components:
           $ref: '#/components/schemas/Emailadres'
     Webadres:
       type: object
+      additionalProperties: false
       properties:
         codeWebadres:
           $ref: '#/components/schemas/Integer2'
@@ -576,18 +699,23 @@ components:
           $ref: '#/components/schemas/URL'
     Contractvorm:
       type: object
+      additionalProperties: false
       properties:
         codeTypeArbeidscontract:
-          $ref: '#/components/schemas/StringCode1'
+          type: string
+          enum: ["B", "O"]
         codeTypeOvereenkomst:
-          $ref: '#/components/schemas/StringCode2'
+          type: string
+          enum: ["01", "02", "03", "04"]
     Interesse:
       type: object
+      additionalProperties: false
       properties:
         naamInteresse:
           $ref: '#/components/schemas/String120'
     Voorkeursland:
       type: object
+      additionalProperties: false
       properties:
         landencodeIso:
           $ref: '#/components/schemas/StringCode2'
@@ -602,12 +730,7 @@ components:
       minimum: 0
       type: integer
     Indicatie:
-      maximum: 9
-      minimum: 0
-      type: integer
-    Integer1:
-      maximum: 9
-      minimum: 0
+      enum: [0, 1, 2]
       type: integer
     Integer2:
       maximum: 99
@@ -622,6 +745,9 @@ components:
       type: string
       pattern: '^[0-9]+$'
       example: '9999999999'
+    IntegerTaal:
+      type: integer
+      enum: [0, 1, 2, 3, 4, 8]
     StringCode:
       maxLength: 10
       type: string
@@ -674,8 +800,6 @@ components:
       required:
         - code
         - message
-
-  
   requestBodies:
     WerkzoekendeProfielMatchesRequest:
       content:
