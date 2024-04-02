@@ -1055,9 +1055,6 @@ components:
     StringCode2:
       maxLength: 2
       type: string
-    StringCode3:
-      maxLength: 3
-      type: string
     StringCode4:
       maxLength: 4
       type: string
@@ -1373,14 +1370,6 @@ components:
         $eq:
           $ref: '#/components/schemas/codeBeroepsnaam'
       type: object
-    codeBeroepsnamen_selectie:
-      properties:
-        $or:
-          items:
-            $ref: '#/components/schemas/codeBeroepsnaam_selectie'
-          minItems: 1
-          type: array
-      type: object
     codeNiveauTaalbeheersing_choice:
       enum:
       - 2
@@ -1485,11 +1474,6 @@ components:
               $ref: '#/components/schemas/codeTypeArbeidscontract'
           type: object
       type: object
-    flexibiliteit_selectie:
-      properties:
-        indicatieOnregelmatigWerkOfPloegendienst:
-          $ref: '#/components/schemas/indicatieOnregelmatigWerkOfPloegendienst_selectie'
-      type: object
     indicatieKantoortijden_choice:
       enum:
       - 1
@@ -1551,13 +1535,4 @@ components:
             $ref: '#/components/schemas/taalbeheersing_match'
           minItems: 1
           type: array
-      type: object
-    werktijden_selectie:
-      properties:
-        aantalWerkurenPerWeekMaximaal:
-          $ref: '#/components/schemas/aantalWerkurenPerWeekMaximaal_selectie'
-        aantalWerkurenPerWeekMinimaal:
-          $ref: '#/components/schemas/aantalWerkurenPerWeekMinimaal_selectie'
-        indicatieKantoortijden_W:
-          $ref: '#/components/schemas/indicatieKantoortijden_selectie'
       type: object
