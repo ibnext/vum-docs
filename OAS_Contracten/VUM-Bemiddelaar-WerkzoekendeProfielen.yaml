@@ -1,4 +1,4 @@
-openapi: 3.1.0
+openapi: 3.0.0
 info:
   title: VUM API werkzoekendeProfielen tussen VUM-UV en bemiddelaar
   description: Contract tbv interactie van bemiddelaars met VUM uitwisselingsvoorziening
@@ -47,18 +47,7 @@ paths:
           content:
             application/json:
               schema:
-                required:
-                - maximumAantalResultatenBereikt
-                - matches
-                type: object
-                properties:
-                  maximumAantalResultatenBereikt:
-                    type: boolean
-                    description: Geeft aan of bron meer matches zou kunnen leveren
-                      dan de teruggeleverde set. Bronnen mogen per zoekvraag een maximum
-                      aantal (standaard 100) resultaten leveren
-                  matches:
-                    $ref: '#/components/schemas/WerkzoekendeMatchingProfielen'
+                $ref: '#/components/schemas/WerkzoekendeProfielMatchesResponse'
         '400':
           description: Bad request
           headers:
@@ -263,7 +252,8 @@ components:
         type: string
     vum_bericht_versie:
       schema:
-        const: 2.0.0
+        enum:
+        - 2.0.0
         type: string
     vum_from_party:
       schema:
@@ -288,7 +278,8 @@ components:
       name: X-VUM-berichtVersie
       required: true
       schema:
-        const: 2.0.0
+        enum:
+        - 2.0.0
         type: string
     vum_from_party:
       in: header
@@ -322,6 +313,25 @@ components:
             type: object
       required: true
   schemas:
+    WerkzoekendeProfielMatchesResponse:
+      required:
+      - maximumAantalResultatenBereikt
+      - vraagID
+      - matches
+      type: object
+      properties:
+        maximumAantalResultatenBereikt:
+          type: boolean
+          description: Geeft aan of bron meer matches zou kunnen leveren dan de teruggeleverde
+            set. Bronnen mogen per zoekvraag een maximum aantal (standaard 100) resultaten
+            leveren
+        vraagID:
+          $ref: '#/components/schemas/VraagID'
+        matches:
+          $ref: '#/components/schemas/WerkzoekendeMatchingProfielen'
+    VraagID:
+      maxLength: 100
+      type: string
     Arbeidsmarktkwalificatie:
       additionalProperties: false
       properties:
@@ -684,16 +694,20 @@ components:
           $ref: '#/components/schemas/bemiddelingsberoep_selectie'
         contractvorm:
           $ref: '#/components/schemas/contractvorm_selectie'
-        flexibiliteit:
-          $ref: '#/components/schemas/flexibiliteit_selectie'
-        rijbewijs:
+        flexibiliteit.indicatieOnregelmatigWerkOfPloegendienst:
+          $ref: '#/components/schemas/indicatieOnregelmatigWerkOfPloegendienst_selectie'
+        arbeidsmarktkwalificatie.rijbewijs:
           $ref: '#/components/schemas/rijbewijs_selectie'
         selectiegebied:
           $ref: '#/components/schemas/selectiegebied_selectie'
-        taalbeheersing:
+        arbeidsmarktkwalificatie.taalbeheersing:
           $ref: '#/components/schemas/taalbeheersingen_selectie'
-        werktijden:
-          $ref: '#/components/schemas/werktijden_selectie'
+        werktijden.indicatieKantoortijden:
+          $ref: '#/components/schemas/indicatieKantoortijden_selectie'
+        werktijden.aantalWerkurenPerWeekMaximaal:
+          $ref: '#/components/schemas/aantalWerkurenPerWeekMaximaal_selectie'
+        werktijden.aantalWerkurenPerWeekMinimaal:
+          $ref: '#/components/schemas/aantalWerkurenPerWeekMinimaal_selectie'
       required:
       - selectiegebied
       type: object
@@ -867,8 +881,6 @@ components:
       maxLength: 2
       type: string
     TaalCode3:
-      $comment: This does not exclude the special codes, B-codes and reserved range
-        of ISO-639
       pattern: ^[a-z]{3}$
       type: string
     Taalbeheersing:
@@ -1044,17 +1056,18 @@ components:
       properties:
         $elemMatch:
           properties:
-            beroepsnaamGecodeerd:
-              $ref: '#/components/schemas/beroepsnaamGecodeerd_selectie'
+            $or:
+              type: array
+              items:
+                $ref: '#/components/schemas/beroepsnaamGecodeerd_selectie'
           type: object
       type: object
     beroepsnaamGecodeerd_selectie:
       properties:
-        codeBeroepsnaam:
-          $ref: '#/components/schemas/codeBeroepsnamen_selectie'
+        beroepsnaamGecodeerd.codeBeroepsnaam:
+          $ref: '#/components/schemas/codeBeroepsnaam_selectie'
       type: object
     codeBeroepsnaam:
-      $comment: De code van het beroep volgens het UWV Beroepen & Opleidingen Register
       pattern: ^[0-9]{1,10}$
       type: string
     codeBeroepsnaam_selectie:
@@ -1062,16 +1075,7 @@ components:
         $eq:
           $ref: '#/components/schemas/codeBeroepsnaam'
       type: object
-    codeBeroepsnamen_selectie:
-      properties:
-        $or:
-          items:
-            $ref: '#/components/schemas/codeBeroepsnaam_selectie'
-          minItems: 1
-          type: array
-      type: object
     codeNiveauTaalbeheersing_choice:
-      $comment: Dit is een beperkte keuze voor gebruik in de selectie.
       enum:
       - 2
       - 3
@@ -1143,13 +1147,7 @@ components:
               $ref: '#/components/schemas/codeTypeArbeidscontract'
           type: object
       type: object
-    flexibiliteit_selectie:
-      properties:
-        indicatieOnregelmatigWerkOfPloegendienst:
-          $ref: '#/components/schemas/indicatieOnregelmatigWerkOfPloegendienst_selectie'
-      type: object
     indicatieKantoortijden_choice:
-      $comment: Dit is een beperkte keuze voor gebruik in de selectie.
       enum:
       - 1
       - 2
@@ -1160,7 +1158,6 @@ components:
           $ref: '#/components/schemas/indicatieKantoortijden_choice'
       type: object
     indicatieOnregelmatigWerkOfPloegendienst_choice:
-      $comment: Dit is een beperkte keuze voor gebruik in de selectie.
       enum:
       - 1
       - 2
@@ -1211,13 +1208,4 @@ components:
             $ref: '#/components/schemas/taalbeheersing_match'
           minItems: 1
           type: array
-      type: object
-    werktijden_selectie:
-      properties:
-        aantalWerkurenPerWeekMaximaal:
-          $ref: '#/components/schemas/aantalWerkurenPerWeekMaximaal_selectie'
-        aantalWerkurenPerWeekMinimaal:
-          $ref: '#/components/schemas/aantalWerkurenPerWeekMinimaal_selectie'
-        indicatieKantoortijden:
-          $ref: '#/components/schemas/indicatieKantoortijden_selectie'
       type: object

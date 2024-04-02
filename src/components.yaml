@@ -7,7 +7,8 @@ components:
         type: string
     vum_bericht_versie:
       schema:
-        const: 2.0.0
+        enum:
+        - 2.0.0
         type: string
     vum_from_party:
       schema:
@@ -32,7 +33,8 @@ components:
       name: X-VUM-berichtVersie
       required: true
       schema:
-        const: 2.0.0
+        enum:
+        - 2.0.0
         type: string
     vum_from_party:
       in: header
@@ -83,6 +85,41 @@ components:
             type: object
       required: true
   schemas:
+    VacaturesMatchesResponse:
+      required:
+      - maximumAantalResultatenBereikt
+      - vraagID
+      - matches
+      type: object
+      properties:
+        maximumAantalResultatenBereikt:
+          type: boolean
+          description: Geeft aan of bron meer matches zou kunnen leveren
+            dan de teruggeleverde set. Bronnen mogen per zoekvraag een maximum
+            aantal (standaard 100) resultaten leveren
+        vraagID:
+          $ref: '#/components/schemas/VraagID'
+        matches:
+          $ref: '#/components/schemas/VacatureMatchingProfielen'
+    WerkzoekendeProfielMatchesResponse:
+      required:
+      - maximumAantalResultatenBereikt
+      - vraagID
+      - matches
+      type: object
+      properties:
+        maximumAantalResultatenBereikt:
+          type: boolean
+          description: Geeft aan of bron meer matches zou kunnen leveren
+            dan de teruggeleverde set. Bronnen mogen per zoekvraag een maximum
+            aantal (standaard 100) resultaten leveren
+        vraagID:
+          $ref: '#/components/schemas/VraagID'
+        matches:
+          $ref: '#/components/schemas/WerkzoekendeMatchingProfielen'
+    VraagID:
+      maxLength: 100
+      type: string
     AdresBuitenland:
       additionalProperties: false
       properties:
@@ -593,9 +630,9 @@ components:
       type: object
     MPVacature:
       properties:
-        beroep:
-          $ref: '#/components/schemas/beroep_selectie'
-        codeWerkEnDenkNiveauMinimaal:
+        beroep.beroepsnaamGecodeerd.codeBeroepsnaam:
+          $ref: '#/components/schemas/codeBeroepsnaam_selectie'
+        codeWerkEnDenkniveauMinimaal:
           $ref: '#/components/schemas/codeWerkEnDenkNiveauMinimaal_selectie'
         rijbewijs:
           $ref: '#/components/schemas/rijbewijs_selectie'
@@ -603,8 +640,10 @@ components:
           $ref: '#/components/schemas/selectiegebied_selectie'
         taalbeheersing:
           $ref: '#/components/schemas/taalbeheersingen_selectie'
-        werktijden:
-          $ref: '#/components/schemas/werktijden_selectie'
+        werktijden.aantalWerkurenPerWeekMaximaal:
+          $ref: '#/components/schemas/aantalWerkurenPerWeekMaximaal_selectie'
+        werktijden.aantalWerkurenPerWeekMinimaal:
+          $ref: '#/components/schemas/aantalWerkurenPerWeekMinimaal_selectie'
       required:
       - selectiegebied
       type: object
@@ -727,16 +766,20 @@ components:
           $ref: '#/components/schemas/bemiddelingsberoep_selectie'
         contractvorm:
           $ref: '#/components/schemas/contractvorm_selectie'
-        flexibiliteit:
-          $ref: '#/components/schemas/flexibiliteit_selectie'
-        rijbewijs:
+        flexibiliteit.indicatieOnregelmatigWerkOfPloegendienst:
+          $ref: '#/components/schemas/indicatieOnregelmatigWerkOfPloegendienst_selectie'
+        arbeidsmarktkwalificatie.rijbewijs:
           $ref: '#/components/schemas/rijbewijs_selectie'
         selectiegebied:
           $ref: '#/components/schemas/selectiegebied_selectie'
-        taalbeheersing:
+        arbeidsmarktkwalificatie.taalbeheersing:
           $ref: '#/components/schemas/taalbeheersingen_selectie'
-        werktijden:
-          $ref: '#/components/schemas/werktijden_selectie'
+        werktijden.indicatieKantoortijden:
+          $ref: '#/components/schemas/indicatieKantoortijden_selectie'
+        werktijden.aantalWerkurenPerWeekMaximaal:
+          $ref: '#/components/schemas/aantalWerkurenPerWeekMaximaal_selectie'
+        werktijden.aantalWerkurenPerWeekMinimaal:
+          $ref: '#/components/schemas/aantalWerkurenPerWeekMinimaal_selectie'
       required:
       - selectiegebied
       type: object
@@ -934,10 +977,12 @@ components:
             straatnaam:
               $ref: '#/components/schemas/String24'
             woonbootverwijzing:
-              const: AB
+              enum:
+              - AB
               type: string
             woonwagenverwijzing:
-              const: WW
+              enum:
+              - WW
               type: string
           type: object
       type: object
@@ -1017,8 +1062,6 @@ components:
       maxLength: 4
       type: string
     TaalCode3:
-      $comment: This does not exclude the special codes, B-codes and reserved range
-        of ISO-639
       pattern: ^[a-z]{3}$
       type: string
     Taalbeheersing:
@@ -1306,8 +1349,10 @@ components:
       properties:
         $elemMatch:
           properties:
-            beroepsnaamGecodeerd:
-              $ref: '#/components/schemas/beroepsnaamGecodeerd_selectie'
+            $or:
+              type: array
+              items:
+                $ref: '#/components/schemas/beroepsnaamGecodeerd_selectie'
           type: object
       type: object
     beroep_selectie:
@@ -1317,13 +1362,10 @@ components:
       type: object
     beroepsnaamGecodeerd_selectie:
       properties:
-        codeBeroepsnaam_V:
+        beroepsnaamGecodeerd.codeBeroepsnaam:
           $ref: '#/components/schemas/codeBeroepsnaam_selectie'
-        codeBeroepsnaam_W:
-          $ref: '#/components/schemas/codeBeroepsnamen_selectie'
       type: object
     codeBeroepsnaam:
-      $comment: De code van het beroep volgens het UWV Beroepen & Opleidingen Register
       pattern: ^[0-9]{1,10}$
       type: string
     codeBeroepsnaam_selectie:
@@ -1340,7 +1382,6 @@ components:
           type: array
       type: object
     codeNiveauTaalbeheersing_choice:
-      $comment: Dit is een beperkte keuze voor gebruik in de selectie.
       enum:
       - 2
       - 3
@@ -1395,25 +1436,27 @@ components:
       type: string
     codeWerkEnDenkNiveauMinimaal_selectie:
       oneOf:
-      - $comment: Onbekende properties worden door maar 1 oneOf keuze toegestaan
-        additionalProperties: false
+      - additionalProperties: false
         properties:
           $gte:
             $ref: '#/components/schemas/codeWerkEnDenkNiveau_choice'
           $lt:
-            const: '7'
+            enum:
+            - '7'
             type: string
         required:
         - $lt
         type: object
       - properties:
           $eq:
-            const: '7'
+            enum:
+            - '7'
             type: string
-          $lt: false
+        not:
+          required:
+          - $lt
         type: object
     codeWerkEnDenkNiveau_choice:
-      $comment: Dit is een beperkte keuze voor gebruik in de selectie.
       enum:
       - '1'
       - '2'
@@ -1448,7 +1491,6 @@ components:
           $ref: '#/components/schemas/indicatieOnregelmatigWerkOfPloegendienst_selectie'
       type: object
     indicatieKantoortijden_choice:
-      $comment: Dit is een beperkte keuze voor gebruik in de selectie.
       enum:
       - 1
       - 2
@@ -1459,7 +1501,6 @@ components:
           $ref: '#/components/schemas/indicatieKantoortijden_choice'
       type: object
     indicatieOnregelmatigWerkOfPloegendienst_choice:
-      $comment: Dit is een beperkte keuze voor gebruik in de selectie.
       enum:
       - 1
       - 2

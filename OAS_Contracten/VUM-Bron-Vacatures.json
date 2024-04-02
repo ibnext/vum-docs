@@ -1,5 +1,5 @@
 {
-  "openapi": "3.1.0",
+  "openapi": "3.0.0",
   "info": {
     "title": "VUM API Vacatures tussen VUM-UV en bronnen",
     "description": "Contract tbv interactie van bronnen met VUM uitwisselingsvoorziening voor Vacatures",
@@ -424,7 +424,9 @@
       },
       "vum_bericht_versie": {
         "schema": {
-          "const": "2.0.0",
+          "enum": [
+            "2.0.0"
+          ],
           "type": "string"
         }
       },
@@ -461,7 +463,9 @@
         "name": "X-VUM-berichtVersie",
         "required": true,
         "schema": {
-          "const": "2.0.0",
+          "enum": [
+            "2.0.0"
+          ],
           "type": "string"
         }
       },
@@ -1057,10 +1061,10 @@
       },
       "MPVacature": {
         "properties": {
-          "beroep": {
-            "$ref": "#/components/schemas/beroep_selectie"
+          "beroep.beroepsnaamGecodeerd.codeBeroepsnaam": {
+            "$ref": "#/components/schemas/codeBeroepsnaam_selectie"
           },
-          "codeWerkEnDenkNiveauMinimaal": {
+          "codeWerkEnDenkniveauMinimaal": {
             "$ref": "#/components/schemas/codeWerkEnDenkNiveauMinimaal_selectie"
           },
           "rijbewijs": {
@@ -1072,8 +1076,11 @@
           "taalbeheersing": {
             "$ref": "#/components/schemas/taalbeheersingen_selectie"
           },
-          "werktijden": {
-            "$ref": "#/components/schemas/werktijden_selectie"
+          "werktijden.aantalWerkurenPerWeekMaximaal": {
+            "$ref": "#/components/schemas/aantalWerkurenPerWeekMaximaal_selectie"
+          },
+          "werktijden.aantalWerkurenPerWeekMinimaal": {
+            "$ref": "#/components/schemas/aantalWerkurenPerWeekMinimaal_selectie"
           }
         },
         "required": [
@@ -1396,11 +1403,15 @@
                 "$ref": "#/components/schemas/String24"
               },
               "woonbootverwijzing": {
-                "const": "AB",
+                "enum": [
+                  "AB"
+                ],
                 "type": "string"
               },
               "woonwagenverwijzing": {
-                "const": "WW",
+                "enum": [
+                  "WW"
+                ],
                 "type": "string"
               }
             },
@@ -1508,7 +1519,6 @@
         "type": "string"
       },
       "TaalCode3": {
-        "$comment": "This does not exclude the special codes, B-codes and reserved range of ISO-639",
         "pattern": "^[a-z]{3}$",
         "type": "string"
       },
@@ -1796,24 +1806,7 @@
         },
         "type": "object"
       },
-      "beroep_selectie": {
-        "properties": {
-          "beroepsnaamGecodeerd": {
-            "$ref": "#/components/schemas/beroepsnaamGecodeerd_selectie"
-          }
-        },
-        "type": "object"
-      },
-      "beroepsnaamGecodeerd_selectie": {
-        "properties": {
-          "codeBeroepsnaam": {
-            "$ref": "#/components/schemas/codeBeroepsnaam_selectie"
-          }
-        },
-        "type": "object"
-      },
       "codeBeroepsnaam": {
-        "$comment": "De code van het beroep volgens het UWV Beroepen & Opleidingen Register",
         "pattern": "^[0-9]{1,10}$",
         "type": "string"
       },
@@ -1826,7 +1819,6 @@
         "type": "object"
       },
       "codeNiveauTaalbeheersing_choice": {
-        "$comment": "Dit is een beperkte keuze voor gebruik in de selectie.",
         "enum": [
           2,
           3,
@@ -1902,14 +1894,15 @@
       "codeWerkEnDenkNiveauMinimaal_selectie": {
         "oneOf": [
           {
-            "$comment": "Onbekende properties worden door maar 1 oneOf keuze toegestaan",
             "additionalProperties": false,
             "properties": {
               "$gte": {
                 "$ref": "#/components/schemas/codeWerkEnDenkNiveau_choice"
               },
               "$lt": {
-                "const": "7",
+                "enum": [
+                  "7"
+                ],
                 "type": "string"
               }
             },
@@ -1921,17 +1914,22 @@
           {
             "properties": {
               "$eq": {
-                "const": "7",
+                "enum": [
+                  "7"
+                ],
                 "type": "string"
-              },
-              "$lt": false
+              }
+            },
+            "not": {
+              "required": [
+                "$lt"
+              ]
             },
             "type": "object"
           }
         ]
       },
       "codeWerkEnDenkNiveau_choice": {
-        "$comment": "Dit is een beperkte keuze voor gebruik in de selectie.",
         "enum": [
           "1",
           "2",
@@ -2002,17 +2000,6 @@
             },
             "minItems": 1,
             "type": "array"
-          }
-        },
-        "type": "object"
-      },
-      "werktijden_selectie": {
-        "properties": {
-          "aantalWerkurenPerWeekMaximaal": {
-            "$ref": "#/components/schemas/aantalWerkurenPerWeekMaximaal_selectie"
-          },
-          "aantalWerkurenPerWeekMinimaal": {
-            "$ref": "#/components/schemas/aantalWerkurenPerWeekMinimaal_selectie"
           }
         },
         "type": "object"
