@@ -1,99 +1,138 @@
 openapi: 3.0.0
 info:
   title: VUM API WerkzoekendeProfielen tussen VUM-UV en bronnen
-  description: Contract tbv interactie van bronnen met VUM uitwisselingsvoorziening voor WerkzoekendeProfielen
+  description: Contract tbv interactie van bronnen met VUM uitwisselingsvoorziening
+    voor WerkzoekendeProfielen
   contact:
     name: Helpdesk
-    url: https://www.twi-programma.nl
-    email: beheer@twi-programma.nl
-  version: '1.0.0'
+    url: https://www.matchingsgegevens.nl
+    email: programma-vum@ictu.nl
+  version: 2.0.0
 servers:
-- url: https://api.example.com/v1
+- url: https://bron.vumdevelopment.nl/api/v2
+  description: Testbron
 paths:
   /werkzoekendeProfielen/matches:
     post:
       summary: Zoekopdracht voor MatchingProfielen Werkzoekende
-      description: Zoekopdracht om matches voor Werkzoekende MatchingProfielen op te vragen
+      description: Zoekopdracht om matches voor Werkzoekende MatchingProfielen op
+        te vragen
       operationId: MatchesWerkzoekendeProfielen
       parameters:
-        - in: header
-          name: X-VUM-berichtVersie
-          schema:
-            type: string
-          required: true
-        - in: header
-          name: X-VUM-fromParty
-          schema:
-            type: string
-          required: true
-        - in: header
-          name: X-VUM-toParty
-          schema:
-            type: string
-          required: true
-        - in: header
-          name: X-VUM-viaParty
-          schema:
-            type: string
-          required: false
-        - in: header
-          name: X-VUM-SUWIparty
-          schema:
-            type: boolean
-          required: true
+      - $ref: '#/components/parameters/vum_bericht_versie'
+      - $ref: '#/components/parameters/vum_from_party'
+      - $ref: '#/components/parameters/vum_to_party'
+      - $ref: '#/components/parameters/vum_via_party'
+      - $ref: '#/components/parameters/vum_suwi_party'
+      - $ref: '#/components/parameters/api_version'
       requestBody:
         $ref: '#/components/requestBodies/WerkzoekendeProfielMatchesRequest'
       responses:
         '200':
-          description: 'OK'
+          description: OK
           headers:
             X-VUM-berichtVersie:
-              schema:
-                type: string
+              $ref: '#/components/headers/vum_bericht_versie'
             X-VUM-fromParty:
-              schema:
-                type: string
+              $ref: '#/components/headers/vum_from_party'
             X-VUM-toParty:
-              schema:
-                type: string
+              $ref: '#/components/headers/vum_to_party'
             X-VUM-viaParty:
-              schema:
-                type: string
+              $ref: '#/components/headers/vum_via_party'
+            API-Version:
+              $ref: '#/components/headers/api_version'
           content:
             application/json:
               schema:
                 required:
-                  - maximumAantalResultatenBereikt
-                  - matches
+                - maximumAantalResultatenBereikt
+                - matches
                 type: object
                 properties:
                   maximumAantalResultatenBereikt:
                     type: boolean
-                    description: "Geeft aan of bron meer matches zou kunnen leveren dan de teruggeleverde set. Bronnen mogen per zoekvraag een maximum aantal (standaard 100) resultaten leveren"
+                    description: Geeft aan of bron meer matches zou kunnen leveren
+                      dan de teruggeleverde set. Bronnen mogen per zoekvraag een maximum
+                      aantal (standaard 100) resultaten leveren
                   matches:
                     $ref: '#/components/schemas/WerkzoekendeMatchingProfielen'
         '400':
-          description: 'Bad request'
+          description: Bad request
+          headers:
+            X-VUM-berichtVersie:
+              $ref: '#/components/headers/vum_bericht_versie'
+            X-VUM-fromParty:
+              $ref: '#/components/headers/vum_from_party'
+            X-VUM-toParty:
+              $ref: '#/components/headers/vum_to_party'
+            X-VUM-viaParty:
+              $ref: '#/components/headers/vum_via_party'
+            API-Version:
+              $ref: '#/components/headers/api_version'
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
         '401':
-          description: 'not authorized'
+          description: not authorized
+          headers:
+            X-VUM-berichtVersie:
+              $ref: '#/components/headers/vum_bericht_versie'
+            X-VUM-fromParty:
+              $ref: '#/components/headers/vum_from_party'
+            X-VUM-toParty:
+              $ref: '#/components/headers/vum_to_party'
+            X-VUM-viaParty:
+              $ref: '#/components/headers/vum_via_party'
+            API-Version:
+              $ref: '#/components/headers/api_version'
         '429':
-          description: 'Too Many Requests'
+          description: Too Many Requests
+          headers:
+            X-VUM-berichtVersie:
+              $ref: '#/components/headers/vum_bericht_versie'
+            X-VUM-fromParty:
+              $ref: '#/components/headers/vum_from_party'
+            X-VUM-toParty:
+              $ref: '#/components/headers/vum_to_party'
+            X-VUM-viaParty:
+              $ref: '#/components/headers/vum_via_party'
+            API-Version:
+              $ref: '#/components/headers/api_version'
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
         '500':
-          description: 'Internal Server Error'
+          description: Internal Server Error
+          headers:
+            X-VUM-berichtVersie:
+              $ref: '#/components/headers/vum_bericht_versie'
+            X-VUM-fromParty:
+              $ref: '#/components/headers/vum_from_party'
+            X-VUM-toParty:
+              $ref: '#/components/headers/vum_to_party'
+            X-VUM-viaParty:
+              $ref: '#/components/headers/vum_via_party'
+            API-Version:
+              $ref: '#/components/headers/api_version'
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
         '503':
-          description: 'Service Unavailable'
+          description: Service Unavailable
+          headers:
+            X-VUM-berichtVersie:
+              $ref: '#/components/headers/vum_bericht_versie'
+            X-VUM-fromParty:
+              $ref: '#/components/headers/vum_from_party'
+            X-VUM-toParty:
+              $ref: '#/components/headers/vum_to_party'
+            X-VUM-viaParty:
+              $ref: '#/components/headers/vum_via_party'
+            API-Version:
+              $ref: '#/components/headers/api_version'
           content:
             application/json:
               schema:
@@ -104,367 +143,386 @@ paths:
       description: Vraag detailprofielen op bij een opgegeven idWerkzoekende
       operationId: getWerkzoekendeProfiel
       parameters:
-        - name: idWerkzoekende
-          in: path
-          required: true
-          style: simple
-          explode: false
-          schema:
-            $ref: '#/components/schemas/IDWerkzoekende'
-        - in: header
-          name: X-VUM-berichtVersie
-          schema:
-            type: string
-          required: true
-        - in: header
-          name: X-VUM-fromParty
-          schema:
-            type: string
-          required: true
-        - in: header
-          name: X-VUM-toParty
-          schema:
-            type: string
-          required: true
-        - in: header
-          name: X-VUM-viaParty
-          schema:
-            type: string
-          required: false
-        - in: header
-          name: X-VUM-SUWIparty
-          schema:
-            type: boolean
-          required: true      
+      - name: idWerkzoekende
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          $ref: '#/components/schemas/IDWerkzoekende'
+      - $ref: '#/components/parameters/vum_bericht_versie'
+      - $ref: '#/components/parameters/vum_from_party'
+      - $ref: '#/components/parameters/vum_to_party'
+      - $ref: '#/components/parameters/vum_via_party'
+      - $ref: '#/components/parameters/vum_suwi_party'
+      - $ref: '#/components/parameters/api_version'
       responses:
         '200':
-          description: 'OK'
+          description: OK
           headers:
             X-VUM-berichtVersie:
-              schema:
-                type: string
+              $ref: '#/components/headers/vum_bericht_versie'
             X-VUM-fromParty:
-              schema:
-                type: string
+              $ref: '#/components/headers/vum_from_party'
             X-VUM-toParty:
-              schema:
-                type: string
+              $ref: '#/components/headers/vum_to_party'
             X-VUM-viaParty:
-              schema:
-                type: string
+              $ref: '#/components/headers/vum_via_party'
+            API-Version:
+              $ref: '#/components/headers/api_version'
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Werkzoekende'
         '400':
-          description: 'Bad request'
+          description: Bad request
+          headers:
+            X-VUM-berichtVersie:
+              $ref: '#/components/headers/vum_bericht_versie'
+            X-VUM-fromParty:
+              $ref: '#/components/headers/vum_from_party'
+            X-VUM-toParty:
+              $ref: '#/components/headers/vum_to_party'
+            X-VUM-viaParty:
+              $ref: '#/components/headers/vum_via_party'
+            API-Version:
+              $ref: '#/components/headers/api_version'
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
         '401':
-          description: 'not authorized'
+          description: not authorized
+          headers:
+            X-VUM-berichtVersie:
+              $ref: '#/components/headers/vum_bericht_versie'
+            X-VUM-fromParty:
+              $ref: '#/components/headers/vum_from_party'
+            X-VUM-toParty:
+              $ref: '#/components/headers/vum_to_party'
+            X-VUM-viaParty:
+              $ref: '#/components/headers/vum_via_party'
+            API-Version:
+              $ref: '#/components/headers/api_version'
         '429':
-          description: 'Too Many Requests, limiet is overschreden voor deze uitvraag'
+          description: Too Many Requests, limiet is overschreden voor deze uitvraag
+          headers:
+            X-VUM-berichtVersie:
+              $ref: '#/components/headers/vum_bericht_versie'
+            X-VUM-fromParty:
+              $ref: '#/components/headers/vum_from_party'
+            X-VUM-toParty:
+              $ref: '#/components/headers/vum_to_party'
+            X-VUM-viaParty:
+              $ref: '#/components/headers/vum_via_party'
+            API-Version:
+              $ref: '#/components/headers/api_version'
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
         '500':
-          description: 'Internal Server Error'
+          description: Internal Server Error
+          headers:
+            X-VUM-berichtVersie:
+              $ref: '#/components/headers/vum_bericht_versie'
+            X-VUM-fromParty:
+              $ref: '#/components/headers/vum_from_party'
+            X-VUM-toParty:
+              $ref: '#/components/headers/vum_to_party'
+            X-VUM-viaParty:
+              $ref: '#/components/headers/vum_via_party'
+            API-Version:
+              $ref: '#/components/headers/api_version'
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
         '503':
-          description: 'Service Unavailable'
+          description: Service Unavailable
+          headers:
+            X-VUM-berichtVersie:
+              $ref: '#/components/headers/vum_bericht_versie'
+            X-VUM-fromParty:
+              $ref: '#/components/headers/vum_from_party'
+            X-VUM-toParty:
+              $ref: '#/components/headers/vum_to_party'
+            X-VUM-viaParty:
+              $ref: '#/components/headers/vum_via_party'
+            API-Version:
+              $ref: '#/components/headers/api_version'
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
 components:
+  headers:
+    api_version:
+      schema:
+        enum:
+        - 2.0.0
+        type: string
+    vum_bericht_versie:
+      schema:
+        enum:
+        - 2.0.0
+        type: string
+    vum_from_party:
+      schema:
+        type: string
+    vum_to_party:
+      schema:
+        type: string
+    vum_via_party:
+      schema:
+        type: string
+  parameters:
+    api_version:
+      in: header
+      name: API-Version
+      required: true
+      schema:
+        enum:
+        - 2.0.0
+        type: string
+    vum_bericht_versie:
+      in: header
+      name: X-VUM-berichtVersie
+      required: true
+      schema:
+        enum:
+        - 2.0.0
+        type: string
+    vum_from_party:
+      in: header
+      name: X-VUM-fromParty
+      required: true
+      schema:
+        type: string
+    vum_suwi_party:
+      in: header
+      name: X-VUM-SUWIparty
+      required: true
+      schema:
+        type: boolean
+    vum_to_party:
+      in: header
+      name: X-VUM-toParty
+      required: true
+      schema:
+        type: string
+    vum_via_party:
+      in: header
+      name: X-VUM-viaParty
+      required: true
+      schema:
+        type: string
+  requestBodies:
+    WerkzoekendeProfielMatchesRequest:
+      content:
+        application/json:
+          schema:
+            additionalProperties: false
+            properties:
+              vraagObject:
+                $ref: '#/components/schemas/MPWerkzoekende'
+            required:
+            - vraagObject
+            type: object
+      required: true
   schemas:
-    WerkzoekendeMatchingProfielen:
-      type: array
-      items:
-        $ref: '#/components/schemas/MPWerkzoekendeMatch'
-    MPWerkzoekendeMatch:
-      type: object
-      additionalProperties: false
-      properties:
-        idWerkzoekende:
-          $ref: '#/components/schemas/IDWerkzoekende'
-        indicatieLdrRegistratie:
-          type: integer
-          enum: [1, 2]
-        indicatieBeschikbaarheidContactgegevens:
-          type: integer
-          enum: [1, 2]
-        voorkeursland:
-          type: array
-          items:
-            $ref: '#/components/schemas/Voorkeursland'
-        vervoermiddel:
-          type: array
-          items:
-            $ref: '#/components/schemas/MPVervoermiddel'
-        mobiliteit:
-          $ref: '#/components/schemas/Mobiliteit'
-        flexibiliteit:
-          $ref: '#/components/schemas/Flexibiliteit'
-        werktijden:
-          $ref: '#/components/schemas/Werktijden'
-        contractvorm:
-          type: array
-          items:
-            $ref: '#/components/schemas/Contractvorm'
-        arbeidsmarktkwalificatie:
-          $ref: '#/components/schemas/MPArbeidsmarktkwalificatie'
-        sector:
-          type: array
-          items:
-            $ref: '#/components/schemas/SectorBeroepsEnBedrijfsleven'
-        bemiddelingsberoep:
-          type: array
-          items:
-            $ref: '#/components/schemas/Beroepsnaam'
-    IDWerkzoekende:
-      $ref: '#/components/schemas/String200'
-    Werkzoekende:
-      type: object
-      additionalProperties: false
-      properties:
-        idWerkzoekende:
-          $ref: '#/components/schemas/IDWerkzoekende'
-        indicatieLdrRegistratie:
-          type: integer
-          enum: [1, 2]
-        indicatieBeschikbaarheidContactgegevens:
-          type: integer
-          enum: [1, 2]
-        persoonlijkePresentatie:
-          $ref: '#/components/schemas/String2000'
-        voorkeursland:
-          type: array
-          items:
-            $ref: '#/components/schemas/Voorkeursland'
-        eisAanWerk:
-          $ref: '#/components/schemas/EisAanWerk'
-        vervoermiddel:
-          type: array
-          items:
-            $ref: '#/components/schemas/Vervoermiddel'
-        mobiliteit:
-          $ref: '#/components/schemas/Mobiliteit'
-        flexibiliteit:
-          $ref: '#/components/schemas/Flexibiliteit'
-        werktijden:
-          $ref: '#/components/schemas/Werktijden'
-        contractvorm:
-          type: array
-          items:
-            $ref: '#/components/schemas/Contractvorm'
-        arbeidsmarktkwalificatie:
-          $ref: '#/components/schemas/Arbeidsmarktkwalificatie'
-        emailadres:
-          type: array
-          items:
-            $ref: '#/components/schemas/Emailadres'
-        webadres:
-          type: array
-          items:
-            $ref: '#/components/schemas/Webadres'
-        telefoonnummer:
-          type: array
-          items:
-            $ref: '#/components/schemas/Telefoonnummer'
-        contactpersoon:
-          type: array
-          items:
-            $ref: '#/components/schemas/ContactpersoonAfdeling'
-        sector:
-          type: array
-          items:
-            $ref: '#/components/schemas/SectorBeroepsEnBedrijfsleven'
-        bemiddelingsberoep:
-          type: array
-          items:
-            $ref: '#/components/schemas/Beroepsnaam'
-    MPWerkzoekende:
-      type: object
-      additionalProperties: false
-      properties:
-        indicatieLdrRegistratie:
-          type: integer
-          enum: [1, 2]
-        indicatieBeschikbaarheidContactgegevens:
-          type: integer
-          enum: [1, 2]
-        voorkeursland:
-          type: array
-          items:
-            $ref: '#/components/schemas/Voorkeursland'
-        vervoermiddel:
-          type: array
-          items:
-            $ref: '#/components/schemas/MPVervoermiddel'
-        mobiliteit:
-          $ref: '#/components/schemas/Mobiliteit'
-        flexibiliteit:
-          $ref: '#/components/schemas/Flexibiliteit'
-        werktijden:
-          $ref: '#/components/schemas/Werktijden'
-        contractvorm:
-          type: array
-          items:
-            $ref: '#/components/schemas/Contractvorm'
-        arbeidsmarktkwalificatie:
-          $ref: '#/components/schemas/MPArbeidsmarktkwalificatie'
-        sector:
-          type: array
-          items:
-            $ref: '#/components/schemas/SectorBeroepsEnBedrijfsleven'
-        bemiddelingsberoep:
-          type: array
-          items:
-            $ref: '#/components/schemas/Beroepsnaam'
     Arbeidsmarktkwalificatie:
-      type: object
       additionalProperties: false
       properties:
         codeWerkEnDenkniveauWerkzoekende:
+          enum:
+          - 0
+          - 1
+          - 2
+          - 3
+          - 4
+          - 5
+          - 6
+          - 7
           type: integer
-          enum: [0, 1, 2, 3, 4, 5, 6, 7]
-        vakvaardigheid:
-          type: array
-          items:
-            $ref: '#/components/schemas/Vakvaardigheid'
-        taalbeheersing:
-          type: array
-          items:
-            $ref: '#/components/schemas/Taalbeheersing'
-        gedragscompetentie:
-          type: array
-          items:
-            $ref: '#/components/schemas/Gedragscompetentie'
-        interesse:
-          type: array
-          items:
-            $ref: '#/components/schemas/Interesse'
-        rijbewijs:
-          type: array
-          items:
-            $ref: '#/components/schemas/Rijbewijs'
         cursus:
-          type: array
           items:
             $ref: '#/components/schemas/Cursus'
-        opleiding:
           type: array
-          items:
-            $ref: '#/components/schemas/Opleiding'
-        werkervaring:
-          type: array
-          items:
-            $ref: '#/components/schemas/Werkervaring'
-    MPArbeidsmarktkwalificatie:
-      type: object
-      additionalProperties: false
-      properties:
-        codeWerkEnDenkniveauWerkzoekende:
-          type: integer
-          enum: [0, 1, 2, 3, 4, 5, 6, 7]
-        vakvaardigheid:
-          type: array
-          items:
-            $ref: '#/components/schemas/Vakvaardigheid'
-        taalbeheersing:
-          type: array
-          items:
-            $ref: '#/components/schemas/Taalbeheersing'
         gedragscompetentie:
-          type: array
           items:
             $ref: '#/components/schemas/Gedragscompetentie'
-        rijbewijs:
           type: array
+        interesse:
+          items:
+            $ref: '#/components/schemas/Interesse'
+          type: array
+        opleiding:
+          items:
+            $ref: '#/components/schemas/Opleiding'
+          type: array
+        rijbewijs:
           items:
             $ref: '#/components/schemas/Rijbewijs'
-        cursus:
           type: array
+        taalbeheersing:
           items:
-            $ref: '#/components/schemas/MPCursus'
-        opleiding:
+            $ref: '#/components/schemas/Taalbeheersing'
           type: array
+        vakvaardigheid:
           items:
-            $ref: '#/components/schemas/MPOpleiding'
+            $ref: '#/components/schemas/Vakvaardigheid'
+          type: array
         werkervaring:
-          type: array
           items:
-            $ref: '#/components/schemas/MPWerkervaring'
+            $ref: '#/components/schemas/Werkervaring'
+          type: array
+      type: object
     Beroepsnaam:
       oneOf:
       - $ref: '#/components/schemas/BeroepsnaamGecodeerd'
       - $ref: '#/components/schemas/BeroepsnaamOngecodeerd'
-    Opleidingsnaam:
-      oneOf:
-      - $ref: '#/components/schemas/OpleidingsnaamGecodeerd'
-      - $ref: '#/components/schemas/OpleidingsnaamOngecodeerd'
     BeroepsnaamGecodeerd:
-      type: object
       additionalProperties: false
       properties:
         beroepsnaamGecodeerd:
-          type: object
           additionalProperties: false
           properties:
             codeBeroepsnaam:
-              $ref: '#/components/schemas/StringCode'
+              $ref: '#/components/schemas/codeBeroepsnaam'
             omschrijvingBeroepsnaam:
               $ref: '#/components/schemas/String120'
-    BeroepsnaamOngecodeerd:
+          type: object
       type: object
+    BeroepsnaamOngecodeerd:
       additionalProperties: false
       properties:
         beroepsnaamOngecodeerd:
-          type: object
           additionalProperties: false
           properties:
             naamBeroepOngecodeerd:
               $ref: '#/components/schemas/String120'
-    OpleidingsnaamGecodeerd:
+          type: object
       type: object
+    ContactpersoonAfdeling:
       additionalProperties: false
       properties:
-        opleidingsnaamGecodeerd:
-          type: object
-          additionalProperties: false
-          properties:
-            codeOpleidingsnaam:
-              $ref: '#/components/schemas/Integer10AsString'
-            omschrijvingOpleidingsnaam:
-              $ref: '#/components/schemas/String120'
-    OpleidingsnaamOngecodeerd:
+        naamContactpersoonAfdeling:
+          $ref: '#/components/schemas/String35'
+        emailadres:
+          $ref: '#/components/schemas/Emailadres'
+        telefoonnummer:
+          $ref: '#/components/schemas/Telefoonnummer'
       type: object
+    Contractvorm:
       additionalProperties: false
       properties:
-        opleidingsnaamOngecodeerd:
-          type: object
-          additionalProperties: false
-          properties:
-            naamOpleidingOngecodeerd:
-              $ref: '#/components/schemas/String120'
-            omschrijvingOpleiding:
-              $ref: '#/components/schemas/String2000'
+        codeTypeArbeidscontract:
+          $ref: '#/components/schemas/codeTypeArbeidscontract'
+        codeTypeOvereenkomst:
+          enum:
+          - '01'
+          - '02'
+          - '03'
+          - '04'
+          type: string
+      type: object
+    Cursus:
+      additionalProperties: false
+      properties:
+        naamCursus:
+          $ref: '#/components/schemas/String120'
+        datumAanvangVolgenCursus:
+          $ref: '#/components/schemas/Date'
+        datumCertificaat:
+          $ref: '#/components/schemas/Date'
+        datumEindeVolgenCursus:
+          $ref: '#/components/schemas/Date'
+        naamOpleidingsinstituut:
+          $ref: '#/components/schemas/String500'
+      type: object
+    Date:
+      format: date
+      type: string
+    EisAanWerk:
+      additionalProperties: false
+      properties:
+        indicatieAanpassingWerkomgeving:
+          $ref: '#/components/schemas/Indicatie'
+        indicatieBegeleiding:
+          $ref: '#/components/schemas/Indicatie'
+        indicatieWerkvariatie:
+          $ref: '#/components/schemas/Indicatie'
+      type: object
+    Emailadres:
+      $ref: '#/components/schemas/String320'
+    Error:
+      properties:
+        code:
+          $ref: '#/components/schemas/StringCode'
+        details:
+          $ref: '#/components/schemas/String2000'
+        message:
+          $ref: '#/components/schemas/String500'
+      required:
+      - code
+      - message
+      type: object
+    Flexibiliteit:
+      additionalProperties: false
+      properties:
+        codeRegiostraal:
+          maximum: 9
+          minimum: 1
+          type: integer
+        datumAanvangBeschikbaarVoorWerk:
+          $ref: '#/components/schemas/Date'
+        datumEindeBeschikbaarVoorWerk:
+          $ref: '#/components/schemas/Date'
+        indicatieOnregelmatigWerkOfPloegendienst:
+          $ref: '#/components/schemas/Indicatie'
+      type: object
     Gedragscompetentie:
-      type: object
       additionalProperties: false
       properties:
+        codeBeheersingGedragscompetentie:
+          enum:
+          - 1
+          - 2
+          - 3
+          - 4
+          - 5
+          - 9
+          type: integer
         codeGedragscompetentie:
+          enum:
+          - '24100'
+          - '24101'
+          - '24102'
+          - '24104'
+          - '24105'
+          - '24106'
+          - '24107'
+          - '24108'
+          - '24109'
+          - '24110'
+          - '24111'
+          - '24112'
+          - '24113'
+          - '24114'
+          - '24115'
+          - '24116'
+          - '24118'
+          - '24119'
+          - '24120'
+          - '24121'
+          - '24122'
+          - '24123'
+          - '24124'
+          - '24125'
+          - '24126'
           type: string
-          enum: ["24100", "24101", "24102", "24104", "24105", "24106", "24107", "24108", "24109", "24110", "24111", "24112", "24113", "24114", "24115", "24116", "24118", "24119", "24120", "24121", "24122", "24123", "24124", "24125", "24126"]
         omschrijvingGedragscompetentie:
-          type: string
           enum:
           - "Beslissen en activiteiten initi\xEBren"
           - Aansturen
@@ -491,247 +549,25 @@ components:
           - Gedrevenheid en ambitie tonen
           - Ondernemend en commercieel handelen
           - Bedrijfsmatig handelen
-        codeBeheersingGedragscompetentie:
-          type: integer
-          enum: [1,2,3,4,5,9]
-    Werktijden:
-      type: object
-      additionalProperties: false
-      properties:
-        aantalWerkurenPerWeekMinimaal:
-          $ref: '#/components/schemas/Integer2'
-        aantalWerkurenPerWeekMaximaal:
-          $ref: '#/components/schemas/Integer2'
-        indicatieKantoortijden:
-          $ref: '#/components/schemas/Indicatie'
-    Flexibiliteit:
-      type: object
-      additionalProperties: false
-      properties:
-        codeRegiostraal:
-          maximum: 9
-          minimum: 1
-          type: integer
-        indicatieOnregelmatigWerkOfPloegendienst:
-          $ref: '#/components/schemas/Indicatie'
-        datumAanvangBeschikbaarVoorWerk:
-          $ref: '#/components/schemas/Date'
-        datumEindeBeschikbaarVoorWerk:
-          $ref: '#/components/schemas/Date'
-    Mobiliteit:
-      type: object
-      additionalProperties: false
-      properties:
-        bemiddelingspostcode:
-          $ref: '#/components/schemas/Postcode'
-        maximaleReisafstand:
-          $ref: '#/components/schemas/Integer1000'
-        maximaleReistijd:
-          $ref: '#/components/schemas/Integer1000'
-    Werkervaring:
-      type: object
-      additionalProperties: false
-      properties:
-        datumAanvangWerkzaamheden:
-          $ref: '#/components/schemas/Date'
-        datumEindeWerkzaamheden:
-          $ref: '#/components/schemas/Date'
-        naamOrganisatie:
-          $ref: '#/components/schemas/String70'
-        beroep:
-          $ref: '#/components/schemas/Beroepsnaam'     
-        toelichtingWerkervaring:
-          $ref: '#/components/schemas/String2000'
-    MPWerkervaring:
-      type: object
-      additionalProperties: false
-      properties:
-        datumAanvangWerkzaamheden:
-          $ref: '#/components/schemas/Date'
-        datumEindeWerkzaamheden:
-          $ref: '#/components/schemas/Date'
-        naamOrganisatie:
-          $ref: '#/components/schemas/String70'
-        beroep:
-          $ref: '#/components/schemas/Beroepsnaam'
-    Rijbewijs:
-      type: object
-      additionalProperties: false
-      properties:
-        codeSoortRijbewijs:
           type: string
-          enum: ['A', 'A1', 'A2', 'AM', 'B', 'B+', 'C1', 'C', 'D1', 'D', 'BE', 'C1E', 'CE', 'D1E', 'DE', 'T']
-    Opleiding:
       type: object
-      additionalProperties: false
-      properties:
-        codeNiveauOpleiding:
-          type: integer
-          enum: [1, 2, 3, 4, 5, 6, 9]
-        indicatieDiploma:
-          type: integer
-          enum: [0, 1, 2, 8]
-        datumDiploma:
-          $ref: '#/components/schemas/Date'
-        opleidingsnaam:
-          $ref: '#/components/schemas/Opleidingsnaam'     
-        datumAanvangVolgenOpleiding:
-          $ref: '#/components/schemas/Date'
-        datumEindeVolgenOpleiding:
-          $ref: '#/components/schemas/Date'
-        codeStatusOpleiding:
-          type: integer
-          enum: [0, 1, 2, 3]
-        naamOpleidingsinstituut:
-          $ref: '#/components/schemas/String500'
-    MPOpleiding:
-      type: object
-      additionalProperties: false
-      properties:
-        codeNiveauOpleiding:
-          type: integer
-          enum: [1, 2, 3, 4, 5, 6, 9]
-        indicatieDiploma:
-          type: integer
-          enum: [0, 1, 2, 8]
-        datumDiploma:
-          $ref: '#/components/schemas/Date'
-        opleidingsnaam:
-          $ref: '#/components/schemas/Opleidingsnaam'
-    Cursus:
-      type: object
-      additionalProperties: false
-      properties:
-        naamCursus:
-          $ref: '#/components/schemas/String120'
-        datumCertificaat:
-          $ref: '#/components/schemas/Date'       
-        datumAanvangVolgenCursus:
-          $ref: '#/components/schemas/Date'
-        datumEindeVolgenCursus:
-          $ref: '#/components/schemas/Date'
-        naamOpleidingsinstituut:
-          $ref: '#/components/schemas/String500'
-    MPCursus:
-      type: object
-      additionalProperties: false
-      properties:
-        naamCursus:
-          $ref: '#/components/schemas/String120'
-        datumCertificaat:
-          $ref: '#/components/schemas/Date'
-    SectorBeroepsEnBedrijfsleven:
-      type: object
-      additionalProperties: false
-      properties:
-        codeSbi:
-          $ref: '#/components/schemas/Integer5'
-    EisAanWerk:
-      type: object
-      additionalProperties: false
-      properties:
-        indicatieAanpassingWerkomgeving:
-          $ref: '#/components/schemas/Indicatie'
-        indicatieBegeleiding:
-          $ref: '#/components/schemas/Indicatie'
-        indicatieWerkvariatie:
-          $ref: '#/components/schemas/Indicatie'
-    Vakvaardigheid:
-      type: object
-      additionalProperties: false
-      properties:
-        omschrijving:
-          $ref: '#/components/schemas/String120'
-    Taalbeheersing:
-      type: object
-      additionalProperties: false
-      properties:
-        codeTaal:
-          $ref: '#/components/schemas/StringCode3'
-        codeNiveauTaalbeheersingMondeling:
-          $ref: '#/components/schemas/IntegerTaal'
-        codeNiveauTaalbeheersingSchriftelijk:
-          $ref: '#/components/schemas/IntegerTaal'
-        codeNiveauTaalbeheersingLezen:
-          $ref: '#/components/schemas/IntegerTaal'
-        codeNiveauTaalbeheersingLuisteren:
-          $ref: '#/components/schemas/IntegerTaal'
-    Vervoermiddel:
-      type: object
-      additionalProperties: false
-      properties:
-        indicatieBeschikbaarVoorUitvoeringWerk:
-          $ref: '#/components/schemas/Indicatie'
-        indicatieBeschikbaarVoorWoonWerkverkeer:
-          $ref: '#/components/schemas/Indicatie'
-        codeVervoermiddel:
-          type: integer
-          enum: [1, 2, 3, 4, 5, 9]
-    MPVervoermiddel:
-      type: object
-      additionalProperties: false
-      properties:
-        indicatieBeschikbaarVoorUitvoeringWerk:
-          $ref: '#/components/schemas/Indicatie'
-        indicatieBeschikbaarVoorWoonWerkverkeer:
-          $ref: '#/components/schemas/Indicatie'
-    Emailadres:
-      $ref: '#/components/schemas/String320'
-    Telefoonnummer:
-      $ref: '#/components/schemas/String14'
-    ContactpersoonAfdeling:
-      type: object
-      additionalProperties: false
-      properties:
-        naamContactpersoonAfdeling:
-          $ref: '#/components/schemas/String35'
-        telefoonnummer:
-          $ref: '#/components/schemas/Telefoonnummer'
-        emailadres:
-          $ref: '#/components/schemas/Emailadres'
-    Webadres:
-      type: object
-      additionalProperties: false
-      properties:
-        codeWebadres:
-          $ref: '#/components/schemas/Integer2'
-        url:
-          $ref: '#/components/schemas/URL'
-    Contractvorm:
-      type: object
-      additionalProperties: false
-      properties:
-        codeTypeArbeidscontract:
-          type: string
-          enum: ["B", "O"]
-        codeTypeOvereenkomst:
-          type: string
-          enum: ["01", "02", "03", "04"]
-    Interesse:
-      type: object
-      additionalProperties: false
-      properties:
-        naamInteresse:
-          $ref: '#/components/schemas/String120'
-    Voorkeursland:
-      type: object
-      additionalProperties: false
-      properties:
-        landencodeIso:
-          $ref: '#/components/schemas/StringCode2'
-    String200:
-      maxLength: 200
-      type: string
-    String320:
-      maxLength: 320
-      type: string
+    IDWerkzoekende:
+      $ref: '#/components/schemas/String200'
+    Indicatie:
+      enum:
+      - 0
+      - 1
+      - 2
+      type: integer
     Integer1000:
       maximum: 999
       minimum: 0
       type: integer
-    Indicatie:
-      enum: [0, 1, 2]
-      type: integer
+    Integer10AsString:
+      example: '9999999999'
+      maxLength: 10
+      pattern: ^[0-9]+$
+      type: string
     Integer2:
       maximum: 99
       minimum: 0
@@ -740,75 +576,633 @@ components:
       maximum: 99999
       minimum: 0
       type: integer
-    Integer10AsString:
-      maxLength: 10
-      type: string
-      pattern: '^[0-9]+$'
-      example: '9999999999'
     IntegerTaal:
+      enum:
+      - 0
+      - 1
+      - 2
+      - 3
+      - 4
+      - 8
       type: integer
-      enum: [0, 1, 2, 3, 4, 8]
-    StringCode:
-      maxLength: 10
+    Interesse:
+      additionalProperties: false
+      properties:
+        naamInteresse:
+          $ref: '#/components/schemas/String120'
+      type: object
+    MPArbeidsmarktkwalificatie:
+      additionalProperties: false
+      properties:
+        codeWerkEnDenkniveauWerkzoekende:
+          enum:
+          - 0
+          - 1
+          - 2
+          - 3
+          - 4
+          - 5
+          - 6
+          - 7
+          type: integer
+        cursus:
+          items:
+            $ref: '#/components/schemas/MPCursus'
+          type: array
+        gedragscompetentie:
+          items:
+            $ref: '#/components/schemas/Gedragscompetentie'
+          type: array
+        opleiding:
+          items:
+            $ref: '#/components/schemas/MPOpleiding'
+          type: array
+        rijbewijs:
+          items:
+            $ref: '#/components/schemas/Rijbewijs'
+          type: array
+        taalbeheersing:
+          items:
+            $ref: '#/components/schemas/Taalbeheersing'
+          type: array
+        vakvaardigheid:
+          items:
+            $ref: '#/components/schemas/Vakvaardigheid'
+          type: array
+        werkervaring:
+          items:
+            $ref: '#/components/schemas/MPWerkervaring'
+          type: array
+      type: object
+    MPCursus:
+      additionalProperties: false
+      properties:
+        datumCertificaat:
+          $ref: '#/components/schemas/Date'
+        naamCursus:
+          $ref: '#/components/schemas/String120'
+      type: object
+    MPOpleiding:
+      additionalProperties: false
+      properties:
+        codeNiveauOpleiding:
+          enum:
+          - 1
+          - 2
+          - 3
+          - 4
+          - 5
+          - 6
+          - 9
+          type: integer
+        indicatieDiploma:
+          enum:
+          - 0
+          - 1
+          - 2
+          - 8
+          type: integer
+        datumDiploma:
+          $ref: '#/components/schemas/Date'
+        opleidingsnaam:
+          $ref: '#/components/schemas/Opleidingsnaam'
+      type: object
+    MPVervoermiddel:
+      additionalProperties: false
+      properties:
+        indicatieBeschikbaarVoorUitvoeringWerk:
+          $ref: '#/components/schemas/Indicatie'
+        indicatieBeschikbaarVoorWoonWerkverkeer:
+          $ref: '#/components/schemas/Indicatie'
+      type: object
+    MPWerkervaring:
+      additionalProperties: false
+      properties:
+        beroep:
+          $ref: '#/components/schemas/Beroepsnaam'
+        datumAanvangWerkzaamheden:
+          $ref: '#/components/schemas/Date'
+        datumEindeWerkzaamheden:
+          $ref: '#/components/schemas/Date'
+        naamOrganisatie:
+          $ref: '#/components/schemas/String70'
+      type: object
+    MPWerkzoekende:
+      properties:
+        bemiddelingsberoep:
+          $ref: '#/components/schemas/bemiddelingsberoep_selectie'
+        contractvorm:
+          $ref: '#/components/schemas/contractvorm_selectie'
+        flexibiliteit.indicatieOnregelmatigWerkOfPloegendienst:
+          $ref: '#/components/schemas/indicatieOnregelmatigWerkOfPloegendienst_selectie'
+        arbeidsmarktkwalificatie.rijbewijs:
+          $ref: '#/components/schemas/rijbewijs_selectie'
+        selectiegebied:
+          $ref: '#/components/schemas/selectiegebied_selectie'
+        arbeidsmarktkwalificatie.taalbeheersing:
+          $ref: '#/components/schemas/taalbeheersingen_selectie'
+        werktijden.indicatieKantoortijden:
+          $ref: '#/components/schemas/indicatieKantoortijden_selectie'
+        werktijden.aantalWerkurenPerWeekMaximaal:
+          $ref: '#/components/schemas/aantalWerkurenPerWeekMaximaal_selectie'
+        werktijden.aantalWerkurenPerWeekMinimaal:
+          $ref: '#/components/schemas/aantalWerkurenPerWeekMinimaal_selectie'
+      required:
+      - selectiegebied
+      type: object
+    MPWerkzoekendeMatch:
+      additionalProperties: false
+      properties:
+        arbeidsmarktkwalificatie:
+          $ref: '#/components/schemas/MPArbeidsmarktkwalificatie'
+        bemiddelingsberoep:
+          items:
+            $ref: '#/components/schemas/Beroepsnaam'
+          type: array
+        contractvorm:
+          items:
+            $ref: '#/components/schemas/Contractvorm'
+          type: array
+        flexibiliteit:
+          $ref: '#/components/schemas/Flexibiliteit'
+        indicatieBeschikbaarheidContactgegevens:
+          enum:
+          - 1
+          - 2
+          type: integer
+        indicatieLdrRegistratie:
+          enum:
+          - 1
+          - 2
+          type: integer
+        mobiliteit:
+          $ref: '#/components/schemas/Mobiliteit'
+        sector:
+          items:
+            $ref: '#/components/schemas/SectorBeroepsEnBedrijfsleven'
+          type: array
+        vervoermiddel:
+          items:
+            $ref: '#/components/schemas/MPVervoermiddel'
+          type: array
+        voorkeursland:
+          items:
+            $ref: '#/components/schemas/Voorkeursland'
+          type: array
+        werktijden:
+          $ref: '#/components/schemas/Werktijden'
+        idWerkzoekende:
+          $ref: '#/components/schemas/IDWerkzoekende'
+      required:
+      - mobiliteit
+      - idWerkzoekende
+      type: object
+    Mobiliteit:
+      additionalProperties: false
+      properties:
+        bemiddelingspostcode:
+          $ref: '#/components/schemas/Postcode'
+        maximaleReisafstand:
+          $ref: '#/components/schemas/Integer1000'
+        maximaleReistijd:
+          $ref: '#/components/schemas/Integer1000'
+      type: object
+    Opleiding:
+      additionalProperties: false
+      properties:
+        codeNiveauOpleiding:
+          enum:
+          - 1
+          - 2
+          - 3
+          - 4
+          - 5
+          - 6
+          - 9
+          type: integer
+        indicatieDiploma:
+          enum:
+          - 0
+          - 1
+          - 2
+          - 8
+          type: integer
+        opleidingsnaam:
+          $ref: '#/components/schemas/Opleidingsnaam'
+        codeStatusOpleiding:
+          enum:
+          - 0
+          - 1
+          - 2
+          - 3
+          type: integer
+        datumAanvangVolgenOpleiding:
+          $ref: '#/components/schemas/Date'
+        datumDiploma:
+          $ref: '#/components/schemas/Date'
+        datumEindeVolgenOpleiding:
+          $ref: '#/components/schemas/Date'
+        naamOpleidingsinstituut:
+          $ref: '#/components/schemas/String500'
+      type: object
+    Opleidingsnaam:
+      oneOf:
+      - $ref: '#/components/schemas/OpleidingsnaamGecodeerd'
+      - $ref: '#/components/schemas/OpleidingsnaamOngecodeerd'
+    OpleidingsnaamGecodeerd:
+      additionalProperties: false
+      properties:
+        opleidingsnaamGecodeerd:
+          additionalProperties: false
+          properties:
+            codeOpleidingsnaam:
+              $ref: '#/components/schemas/Integer10AsString'
+            omschrijvingOpleidingsnaam:
+              $ref: '#/components/schemas/String120'
+          type: object
+      type: object
+    OpleidingsnaamOngecodeerd:
+      additionalProperties: false
+      properties:
+        opleidingsnaamOngecodeerd:
+          additionalProperties: false
+          properties:
+            naamOpleidingOngecodeerd:
+              $ref: '#/components/schemas/String120'
+            omschrijvingOpleiding:
+              $ref: '#/components/schemas/String2000'
+          type: object
+      type: object
+    Postcode:
+      example: 1234AB
+      pattern: ^[0-9]{4}[a-zA-Z]{2}$
       type: string
-    StringCode1:
-      maxLength: 1
-      type: string
-    StringCode2:
-      maxLength: 2
-      type: string
-    StringCode3:
-      maxLength: 3
-      type: string
-    URL:
-      type: string
-      format: URL
+    Rijbewijs:
+      additionalProperties: false
+      properties:
+        codeSoortRijbewijs:
+          $ref: '#/components/schemas/codeSoortRijbewijs'
+      type: object
+    SectorBeroepsEnBedrijfsleven:
+      additionalProperties: false
+      properties:
+        codeSbi:
+          $ref: '#/components/schemas/Integer5'
+      type: object
     String120:
       maxLength: 120
-      type: string
-    String500:
-      maxLength: 500
-      type: string
-    String2000:
-      maxLength: 2000
       type: string
     String14:
       maxLength: 14
       type: string
+    String200:
+      maxLength: 200
+      type: string
+    String2000:
+      maxLength: 2000
+      type: string
+    String320:
+      maxLength: 320
+      type: string
     String35:
       maxLength: 35
+      type: string
+    String500:
+      maxLength: 500
       type: string
     String70:
       maxLength: 70
       type: string
-    Date:
+    StringCode:
+      maxLength: 10
       type: string
-      format: date
-    Postcode:
-      pattern: ^[0-9]{4}[a-zA-Z]{2}$
+    StringCode2:
+      maxLength: 2
       type: string
-      example: '1234AB'
-    Error:
-      type: object
+    TaalCode3:
+      pattern: ^[a-z]{3}$
+      type: string
+    Taalbeheersing:
+      additionalProperties: false
       properties:
-        code:
-          $ref: '#/components/schemas/StringCode'
-        message:
-          $ref: '#/components/schemas/String500'
-        details:
+        codeNiveauTaalbeheersingLezen:
+          $ref: '#/components/schemas/IntegerTaal'
+        codeNiveauTaalbeheersingLuisteren:
+          $ref: '#/components/schemas/IntegerTaal'
+        codeNiveauTaalbeheersingMondeling:
+          $ref: '#/components/schemas/IntegerTaal'
+        codeNiveauTaalbeheersingSchriftelijk:
+          $ref: '#/components/schemas/IntegerTaal'
+        codeTaal:
+          $ref: '#/components/schemas/TaalCode3'
+      type: object
+    Telefoonnummer:
+      $ref: '#/components/schemas/String14'
+    URL:
+      format: url
+      type: string
+    Vakvaardigheid:
+      additionalProperties: false
+      properties:
+        omschrijving:
+          $ref: '#/components/schemas/String120'
+      type: object
+    Vervoermiddel:
+      additionalProperties: false
+      properties:
+        codeVervoermiddel:
+          enum:
+          - 1
+          - 2
+          - 3
+          - 4
+          - 5
+          - 9
+          type: integer
+        indicatieBeschikbaarVoorUitvoeringWerk:
+          $ref: '#/components/schemas/Indicatie'
+        indicatieBeschikbaarVoorWoonWerkverkeer:
+          $ref: '#/components/schemas/Indicatie'
+      type: object
+    Voorkeursland:
+      additionalProperties: false
+      properties:
+        landencodeIso:
+          $ref: '#/components/schemas/StringCode2'
+      type: object
+    Webadres:
+      additionalProperties: false
+      properties:
+        codeWebadres:
+          enum:
+          - 1
+          - 2
+          - 3
+          - 4
+          type: integer
+        url:
+          $ref: '#/components/schemas/URL'
+      type: object
+    Werkervaring:
+      additionalProperties: false
+      properties:
+        beroep:
+          $ref: '#/components/schemas/Beroepsnaam'
+        datumAanvangWerkzaamheden:
+          $ref: '#/components/schemas/Date'
+        datumEindeWerkzaamheden:
+          $ref: '#/components/schemas/Date'
+        naamOrganisatie:
+          $ref: '#/components/schemas/String70'
+        toelichtingWerkervaring:
           $ref: '#/components/schemas/String2000'
+      type: object
+    Werktijden:
+      additionalProperties: false
+      properties:
+        aantalWerkurenPerWeekMaximaal:
+          $ref: '#/components/schemas/Integer2'
+        aantalWerkurenPerWeekMinimaal:
+          $ref: '#/components/schemas/Integer2'
+        indicatieKantoortijden:
+          $ref: '#/components/schemas/Indicatie'
+      type: object
+    Werkzoekende:
+      additionalProperties: false
+      properties:
+        arbeidsmarktkwalificatie:
+          $ref: '#/components/schemas/Arbeidsmarktkwalificatie'
+        bemiddelingsberoep:
+          items:
+            $ref: '#/components/schemas/Beroepsnaam'
+          type: array
+        contactpersoon:
+          items:
+            $ref: '#/components/schemas/ContactpersoonAfdeling'
+          type: array
+        contractvorm:
+          items:
+            $ref: '#/components/schemas/Contractvorm'
+          type: array
+        eisAanWerk:
+          $ref: '#/components/schemas/EisAanWerk'
+        emailadres:
+          items:
+            $ref: '#/components/schemas/Emailadres'
+          type: array
+        flexibiliteit:
+          $ref: '#/components/schemas/Flexibiliteit'
+        idWerkzoekende:
+          $ref: '#/components/schemas/IDWerkzoekende'
+        indicatieBeschikbaarheidContactgegevens:
+          enum:
+          - 1
+          - 2
+          type: integer
+        indicatieLdrRegistratie:
+          enum:
+          - 1
+          - 2
+          type: integer
+        mobiliteit:
+          $ref: '#/components/schemas/Mobiliteit'
+        persoonlijkePresentatie:
+          $ref: '#/components/schemas/String2000'
+        sector:
+          items:
+            $ref: '#/components/schemas/SectorBeroepsEnBedrijfsleven'
+          type: array
+        telefoonnummer:
+          items:
+            $ref: '#/components/schemas/Telefoonnummer'
+          type: array
+        vervoermiddel:
+          items:
+            $ref: '#/components/schemas/Vervoermiddel'
+          type: array
+        voorkeursland:
+          items:
+            $ref: '#/components/schemas/Voorkeursland'
+          type: array
+        webadres:
+          items:
+            $ref: '#/components/schemas/Webadres'
+          type: array
+        werktijden:
+          $ref: '#/components/schemas/Werktijden'
+      type: object
+    WerkzoekendeMatchingProfielen:
+      items:
+        $ref: '#/components/schemas/MPWerkzoekendeMatch'
+      type: array
+    aantalWerkuren:
+      maximum: 99
+      minimum: 1
+      type: integer
+    aantalWerkurenPerWeekMaximaal_selectie:
+      properties:
+        $gte:
+          $ref: '#/components/schemas/aantalWerkuren'
+      type: object
+    aantalWerkurenPerWeekMinimaal_selectie:
+      properties:
+        $lte:
+          $ref: '#/components/schemas/aantalWerkuren'
+      type: object
+    bemiddelingsberoep_selectie:
+      properties:
+        $elemMatch:
+          properties:
+            $or:
+              type: array
+              items:
+                $ref: '#/components/schemas/beroepsnaamGecodeerd_selectie'
+          type: object
+      type: object
+    beroepsnaamGecodeerd_selectie:
+      properties:
+        beroepsnaamGecodeerd.codeBeroepsnaam:
+          $ref: '#/components/schemas/codeBeroepsnaam_selectie'
+      type: object
+    codeBeroepsnaam:
+      pattern: ^[0-9]{1,10}$
+      type: string
+    codeBeroepsnaam_selectie:
+      properties:
+        $eq:
+          $ref: '#/components/schemas/codeBeroepsnaam'
+      type: object
+    codeNiveauTaalbeheersing_choice:
+      enum:
+      - 2
+      - 3
+      - 4
+      type: integer
+    codeNiveauTaalbeheersing_selectie:
+      properties:
+        $gte:
+          $ref: '#/components/schemas/codeNiveauTaalbeheersing_choice'
+      type: object
+    codeSoortRijbewijs:
+      enum:
+      - A
+      - A1
+      - A2
+      - AM
+      - B
+      - B+
+      - C1
+      - C
+      - D1
+      - D
+      - BE
+      - C1E
+      - CE
+      - D1E
+      - DE
+      - T
+      type: string
+    codeSoortRijbewijs_match:
+      properties:
+        $elemMatch:
+          properties:
+            codeSoortRijbewijs:
+              $ref: '#/components/schemas/codeSoortRijbewijs_selectie'
+          type: object
+      type: object
+    codeSoortRijbewijs_selectie:
+      properties:
+        $eq:
+          $ref: '#/components/schemas/codeSoortRijbewijs'
+      type: object
+    codeTaal_selectie:
+      properties:
+        $eq:
+          $ref: '#/components/schemas/TaalCode3'
+      type: object
+    codeTypeArbeidscontract:
+      enum:
+      - O
+      - B
+      type: string
+    contractvorm_selectie:
+      properties:
+        $elemMatch:
+          properties:
+            $or:
+              type: array
+              items:
+                $ref: '#/components/schemas/codeTypeArbeidscontract_selectie'
+              minItems: 1
+          type: object
+      type: object
+    codeTypeArbeidscontract_selectie:
+      properties:
+        codeTypeArbeidscontract:
+          properties:
+            $eq:
+              $ref: '#/components/schemas/codeTypeArbeidscontract'
+          type: object
+      type: object
+    indicatieKantoortijden_choice:
+      enum:
+      - 1
+      - 2
+      type: integer
+    indicatieKantoortijden_selectie:
+      properties:
+        $eq:
+          $ref: '#/components/schemas/indicatieKantoortijden_choice'
+      type: object
+    indicatieOnregelmatigWerkOfPloegendienst_choice:
+      enum:
+      - 1
+      - 2
+      type: integer
+    indicatieOnregelmatigWerkOfPloegendienst_selectie:
+      properties:
+        $eq:
+          $ref: '#/components/schemas/indicatieOnregelmatigWerkOfPloegendienst_choice'
+      type: object
+    rijbewijs_selectie:
+      properties:
+        $all:
+          items:
+            $ref: '#/components/schemas/codeSoortRijbewijs_match'
+          minItems: 1
+          type: array
+      type: object
+    selectiegebied_selectie:
+      properties:
+        afstand:
+          $ref: '#/components/schemas/Integer1000'
+        postcode:
+          $ref: '#/components/schemas/Postcode'
       required:
-        - code
-        - message
-  requestBodies:
-    WerkzoekendeProfielMatchesRequest:
-      content:
-        application/json:
-          schema:
-            required:
-            - vraagObject
-            type: object
-            properties:
-              vraagObject:
-                $ref: '#/components/schemas/MPWerkzoekende'
-      required: true
+      - afstand
+      - postcode
+      type: object
+    taalbeheersing_match:
+      properties:
+        $elemMatch:
+          $ref: '#/components/schemas/taalbeheersing_selectie'
+      type: object
+    taalbeheersing_selectie:
+      properties:
+        codeNiveauTaalbeheersingMondeling:
+          $ref: '#/components/schemas/codeNiveauTaalbeheersing_selectie'
+        codeNiveauTaalbeheersingSchriftelijk:
+          $ref: '#/components/schemas/codeNiveauTaalbeheersing_selectie'
+        codeTaal:
+          $ref: '#/components/schemas/codeTaal_selectie'
+      required:
+      - codeTaal
+      type: object
+    taalbeheersingen_selectie:
+      properties:
+        $all:
+          items:
+            $ref: '#/components/schemas/taalbeheersing_match'
+          minItems: 1
+          type: array
+      type: object

@@ -1,49 +1,98 @@
 {
   "components": {
-    "requestBodies": {
-      "WerkzoekendeProfielMatchesCallbackRequest": {
-        "content": {
-          "application/json": {
-            "schema": {
-              "additionalProperties": false,
-              "properties": {
-                "matches": {
-                  "$ref": "#/components/schemas/WerkzoekendeMatchingProfielen"
-                },
-                "maximumAantalResultatenBereikt": {
-                  "type": "boolean"
-                },
-                "vraagID": {
-                  "$ref": "#/components/schemas/VraagID"
-                }
-              },
-              "required": [
-                "vraagID",
-                "matches",
-                "maximumAantalResultatenBereikt"
-              ],
-              "type": "object"
-            }
-          }
-        },
-        "required": true
+    "headers": {
+      "api_version": {
+        "schema": {
+          "enum": [
+            "2.0.0"
+          ],
+          "type": "string"
+        }
       },
+      "vum_bericht_versie": {
+        "schema": {
+          "enum": [
+            "2.0.0"
+          ],
+          "type": "string"
+        }
+      },
+      "vum_from_party": {
+        "schema": {
+          "type": "string"
+        }
+      },
+      "vum_to_party": {
+        "schema": {
+          "type": "string"
+        }
+      },
+      "vum_via_party": {
+        "schema": {
+          "type": "string"
+        }
+      }
+    },
+    "parameters": {
+      "api_version": {
+        "in": "header",
+        "name": "API-Version",
+        "required": true,
+        "schema": {
+          "enum": [
+            "2.0.0"
+          ],
+          "type": "string"
+        }
+      },
+      "vum_bericht_versie": {
+        "in": "header",
+        "name": "X-VUM-berichtVersie",
+        "required": true,
+        "schema": {
+          "enum": [
+            "2.0.0"
+          ],
+          "type": "string"
+        }
+      },
+      "vum_from_party": {
+        "in": "header",
+        "name": "X-VUM-fromParty",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "vum_to_party": {
+        "in": "header",
+        "name": "X-VUM-toParty",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "vum_via_party": {
+        "in": "header",
+        "name": "X-VUM-viaParty",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      }
+    },
+    "requestBodies": {
       "WerkzoekendeProfielMatchesRequest": {
         "content": {
           "application/json": {
             "schema": {
               "additionalProperties": false,
               "properties": {
-                "callbackURL": {
-                  "format": "uri",
-                  "type": "string"
-                },
                 "vraagObject": {
                   "$ref": "#/components/schemas/MPWerkzoekende"
                 }
               },
               "required": [
-                "callbackURL",
                 "vraagObject"
               ],
               "type": "object"
@@ -138,7 +187,7 @@
             "additionalProperties": false,
             "properties": {
               "codeBeroepsnaam": {
-                "$ref": "#/components/schemas/StringCode"
+                "$ref": "#/components/schemas/codeBeroepsnaam"
               },
               "omschrijvingBeroepsnaam": {
                 "$ref": "#/components/schemas/String120"
@@ -183,11 +232,7 @@
         "additionalProperties": false,
         "properties": {
           "codeTypeArbeidscontract": {
-            "enum": [
-              "B",
-              "O"
-            ],
-            "type": "string"
+            "$ref": "#/components/schemas/codeTypeArbeidscontract"
           },
           "codeTypeOvereenkomst": {
             "enum": [
@@ -358,6 +403,9 @@
           }
         },
         "type": "object"
+      },
+      "IDWerkzoekende": {
+        "$ref": "#/components/schemas/String200"
       },
       "Indicatie": {
         "enum": [
@@ -545,67 +593,37 @@
         "type": "object"
       },
       "MPWerkzoekende": {
-        "additionalProperties": false,
         "properties": {
-          "arbeidsmarktkwalificatie": {
-            "$ref": "#/components/schemas/MPArbeidsmarktkwalificatie"
+          "arbeidsmarktkwalificatie.rijbewijs": {
+            "$ref": "#/components/schemas/rijbewijs_selectie"
+          },
+          "arbeidsmarktkwalificatie.taalbeheersing": {
+            "$ref": "#/components/schemas/taalbeheersingen_selectie"
           },
           "bemiddelingsberoep": {
-            "items": {
-              "$ref": "#/components/schemas/Beroepsnaam"
-            },
-            "type": "array"
+            "$ref": "#/components/schemas/bemiddelingsberoep_selectie"
           },
           "contractvorm": {
-            "items": {
-              "$ref": "#/components/schemas/Contractvorm"
-            },
-            "type": "array"
+            "$ref": "#/components/schemas/contractvorm_selectie"
           },
-          "flexibiliteit": {
-            "$ref": "#/components/schemas/Flexibiliteit"
+          "flexibiliteit.indicatieOnregelmatigWerkOfPloegendienst": {
+            "$ref": "#/components/schemas/indicatieOnregelmatigWerkOfPloegendienst_selectie"
           },
-          "indicatieBeschikbaarheidContactgegevens": {
-            "enum": [
-              1,
-              2
-            ],
-            "type": "integer"
+          "selectiegebied": {
+            "$ref": "#/components/schemas/selectiegebied_selectie"
           },
-          "indicatieLdrRegistratie": {
-            "enum": [
-              1,
-              2
-            ],
-            "type": "integer"
+          "werktijden.aantalWerkurenPerWeekMaximaal": {
+            "$ref": "#/components/schemas/aantalWerkurenPerWeekMaximaal_selectie"
           },
-          "mobiliteit": {
-            "$ref": "#/components/schemas/Mobiliteit"
+          "werktijden.aantalWerkurenPerWeekMinimaal": {
+            "$ref": "#/components/schemas/aantalWerkurenPerWeekMinimaal_selectie"
           },
-          "sector": {
-            "items": {
-              "$ref": "#/components/schemas/SectorBeroepsEnBedrijfsleven"
-            },
-            "type": "array"
-          },
-          "vervoermiddel": {
-            "items": {
-              "$ref": "#/components/schemas/MPVervoermiddel"
-            },
-            "type": "array"
-          },
-          "voorkeursland": {
-            "items": {
-              "$ref": "#/components/schemas/Voorkeursland"
-            },
-            "type": "array"
-          },
-          "werktijden": {
-            "$ref": "#/components/schemas/Werktijden"
+          "werktijden.indicatieKantoortijden": {
+            "$ref": "#/components/schemas/indicatieKantoortijden_selectie"
           }
         },
         "required": [
-          "mobiliteit"
+          "selectiegebied"
         ],
         "type": "object"
       },
@@ -691,10 +709,6 @@
             "$ref": "#/components/schemas/Integer1000"
           }
         },
-        "required": [
-          "bemiddelingspostcode",
-          "maximaleReisafstand"
-        ],
         "type": "object"
       },
       "Opleiding": {
@@ -803,25 +817,7 @@
         "additionalProperties": false,
         "properties": {
           "codeSoortRijbewijs": {
-            "enum": [
-              "A",
-              "A1",
-              "A2",
-              "AM",
-              "B",
-              "B+",
-              "C1",
-              "C",
-              "D1",
-              "D",
-              "BE",
-              "C1E",
-              "CE",
-              "D1E",
-              "DE",
-              "T"
-            ],
-            "type": "string"
+            "$ref": "#/components/schemas/codeSoortRijbewijs"
           }
         },
         "type": "object"
@@ -871,16 +867,12 @@
         "maxLength": 10,
         "type": "string"
       },
-      "StringCode1": {
-        "maxLength": 1,
-        "type": "string"
-      },
       "StringCode2": {
         "maxLength": 2,
         "type": "string"
       },
-      "StringCode3": {
-        "maxLength": 3,
+      "TaalCode3": {
+        "pattern": "^[a-z]{3}$",
         "type": "string"
       },
       "Taalbeheersing": {
@@ -899,7 +891,7 @@
             "$ref": "#/components/schemas/IntegerTaal"
           },
           "codeTaal": {
-            "$ref": "#/components/schemas/StringCode3"
+            "$ref": "#/components/schemas/TaalCode3"
           }
         },
         "type": "object"
@@ -908,7 +900,7 @@
         "$ref": "#/components/schemas/String14"
       },
       "URL": {
-        "format": "URL",
+        "format": "url",
         "type": "string"
       },
       "Vakvaardigheid": {
@@ -963,7 +955,13 @@
         "additionalProperties": false,
         "properties": {
           "codeWebadres": {
-            "$ref": "#/components/schemas/Integer2"
+            "enum": [
+              1,
+              2,
+              3,
+              4
+            ],
+            "type": "integer"
           },
           "url": {
             "$ref": "#/components/schemas/URL"
@@ -1044,7 +1042,7 @@
             "$ref": "#/components/schemas/Flexibiliteit"
           },
           "idWerkzoekende": {
-            "$ref": "#/components/schemas/String200"
+            "$ref": "#/components/schemas/IDWerkzoekende"
           },
           "indicatieBeschikbaarheidContactgegevens": {
             "enum": [
@@ -1108,10 +1106,276 @@
         },
         "type": "array"
       },
-      "inline_response_200": {
+      "WerkzoekendeProfielMatchesResponse": {
         "properties": {
+          "matches": {
+            "$ref": "#/components/schemas/WerkzoekendeMatchingProfielen"
+          },
+          "maximumAantalResultatenBereikt": {
+            "description": "Geeft aan of bron meer matches zou kunnen leveren dan de teruggeleverde set. Bronnen mogen per zoekvraag een maximum aantal (standaard 100) resultaten leveren",
+            "type": "boolean"
+          },
           "vraagID": {
             "$ref": "#/components/schemas/VraagID"
+          }
+        },
+        "required": [
+          "maximumAantalResultatenBereikt",
+          "vraagID",
+          "matches"
+        ],
+        "type": "object"
+      },
+      "aantalWerkuren": {
+        "maximum": 99,
+        "minimum": 1,
+        "type": "integer"
+      },
+      "aantalWerkurenPerWeekMaximaal_selectie": {
+        "properties": {
+          "$gte": {
+            "$ref": "#/components/schemas/aantalWerkuren"
+          }
+        },
+        "type": "object"
+      },
+      "aantalWerkurenPerWeekMinimaal_selectie": {
+        "properties": {
+          "$lte": {
+            "$ref": "#/components/schemas/aantalWerkuren"
+          }
+        },
+        "type": "object"
+      },
+      "bemiddelingsberoep_selectie": {
+        "properties": {
+          "$elemMatch": {
+            "properties": {
+              "$or": {
+                "items": {
+                  "$ref": "#/components/schemas/beroepsnaamGecodeerd_selectie"
+                },
+                "type": "array"
+              }
+            },
+            "type": "object"
+          }
+        },
+        "type": "object"
+      },
+      "beroepsnaamGecodeerd_selectie": {
+        "properties": {
+          "beroepsnaamGecodeerd.codeBeroepsnaam": {
+            "$ref": "#/components/schemas/codeBeroepsnaam_selectie"
+          }
+        },
+        "type": "object"
+      },
+      "codeBeroepsnaam": {
+        "pattern": "^[0-9]{1,10}$",
+        "type": "string"
+      },
+      "codeBeroepsnaam_selectie": {
+        "properties": {
+          "$eq": {
+            "$ref": "#/components/schemas/codeBeroepsnaam"
+          }
+        },
+        "type": "object"
+      },
+      "codeNiveauTaalbeheersing_choice": {
+        "enum": [
+          2,
+          3,
+          4
+        ],
+        "type": "integer"
+      },
+      "codeNiveauTaalbeheersing_selectie": {
+        "properties": {
+          "$gte": {
+            "$ref": "#/components/schemas/codeNiveauTaalbeheersing_choice"
+          }
+        },
+        "type": "object"
+      },
+      "codeSoortRijbewijs": {
+        "enum": [
+          "A",
+          "A1",
+          "A2",
+          "AM",
+          "B",
+          "B+",
+          "C1",
+          "C",
+          "D1",
+          "D",
+          "BE",
+          "C1E",
+          "CE",
+          "D1E",
+          "DE",
+          "T"
+        ],
+        "type": "string"
+      },
+      "codeSoortRijbewijs_match": {
+        "properties": {
+          "$elemMatch": {
+            "properties": {
+              "codeSoortRijbewijs": {
+                "$ref": "#/components/schemas/codeSoortRijbewijs_selectie"
+              }
+            },
+            "type": "object"
+          }
+        },
+        "type": "object"
+      },
+      "codeSoortRijbewijs_selectie": {
+        "properties": {
+          "$eq": {
+            "$ref": "#/components/schemas/codeSoortRijbewijs"
+          }
+        },
+        "type": "object"
+      },
+      "codeTaal_selectie": {
+        "properties": {
+          "$eq": {
+            "$ref": "#/components/schemas/TaalCode3"
+          }
+        },
+        "type": "object"
+      },
+      "codeTypeArbeidscontract": {
+        "enum": [
+          "O",
+          "B"
+        ],
+        "type": "string"
+      },
+      "codeTypeArbeidscontract_selectie": {
+        "properties": {
+          "codeTypeArbeidscontract": {
+            "properties": {
+              "$eq": {
+                "$ref": "#/components/schemas/codeTypeArbeidscontract"
+              }
+            },
+            "type": "object"
+          }
+        },
+        "type": "object"
+      },
+      "contractvorm_selectie": {
+        "properties": {
+          "$elemMatch": {
+            "properties": {
+              "$or": {
+                "items": {
+                  "$ref": "#/components/schemas/codeTypeArbeidscontract_selectie"
+                },
+                "minItems": 1,
+                "type": "array"
+              }
+            },
+            "type": "object"
+          }
+        },
+        "type": "object"
+      },
+      "indicatieKantoortijden_choice": {
+        "enum": [
+          1,
+          2
+        ],
+        "type": "integer"
+      },
+      "indicatieKantoortijden_selectie": {
+        "properties": {
+          "$eq": {
+            "$ref": "#/components/schemas/indicatieKantoortijden_choice"
+          }
+        },
+        "type": "object"
+      },
+      "indicatieOnregelmatigWerkOfPloegendienst_choice": {
+        "enum": [
+          1,
+          2
+        ],
+        "type": "integer"
+      },
+      "indicatieOnregelmatigWerkOfPloegendienst_selectie": {
+        "properties": {
+          "$eq": {
+            "$ref": "#/components/schemas/indicatieOnregelmatigWerkOfPloegendienst_choice"
+          }
+        },
+        "type": "object"
+      },
+      "rijbewijs_selectie": {
+        "properties": {
+          "$all": {
+            "items": {
+              "$ref": "#/components/schemas/codeSoortRijbewijs_match"
+            },
+            "minItems": 1,
+            "type": "array"
+          }
+        },
+        "type": "object"
+      },
+      "selectiegebied_selectie": {
+        "properties": {
+          "afstand": {
+            "$ref": "#/components/schemas/Integer1000"
+          },
+          "postcode": {
+            "$ref": "#/components/schemas/Postcode"
+          }
+        },
+        "required": [
+          "afstand",
+          "postcode"
+        ],
+        "type": "object"
+      },
+      "taalbeheersing_match": {
+        "properties": {
+          "$elemMatch": {
+            "$ref": "#/components/schemas/taalbeheersing_selectie"
+          }
+        },
+        "type": "object"
+      },
+      "taalbeheersing_selectie": {
+        "properties": {
+          "codeNiveauTaalbeheersingMondeling": {
+            "$ref": "#/components/schemas/codeNiveauTaalbeheersing_selectie"
+          },
+          "codeNiveauTaalbeheersingSchriftelijk": {
+            "$ref": "#/components/schemas/codeNiveauTaalbeheersing_selectie"
+          },
+          "codeTaal": {
+            "$ref": "#/components/schemas/codeTaal_selectie"
+          }
+        },
+        "required": [
+          "codeTaal"
+        ],
+        "type": "object"
+      },
+      "taalbeheersingen_selectie": {
+        "properties": {
+          "$all": {
+            "items": {
+              "$ref": "#/components/schemas/taalbeheersing_match"
+            },
+            "minItems": 1,
+            "type": "array"
           }
         },
         "type": "object"
@@ -1120,190 +1384,35 @@
   },
   "info": {
     "contact": {
-      "email": "beheer@twi-programma.nl",
+      "email": "programma-vum@ictu.nl",
       "name": "Helpdesk",
-      "url": "https://www.twi-programma.nl"
+      "url": "https://www.matchingsgegevens.nl"
     },
     "description": "Contract tbv interactie van bemiddelaars met VUM uitwisselingsvoorziening voor werkzoekendeProfielen",
     "title": "VUM API werkzoekendeProfielen tussen VUM-UV en bemiddelaar",
-    "version": "1.0.0"
+    "version": "2.0.0"
   },
   "openapi": "3.0.0",
   "paths": {
-    "/callbackWP": {
-      "post": {
-        "description": "Voorbeeld voor de callback methode, alleen om te laten zien hoe de echte Callback er uit ziet!",
-        "operationId": "callbackWP",
-        "parameters": [
-          {
-            "in": "header",
-            "name": "X-VUM-berichtVersie",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "in": "header",
-            "name": "X-VUM-toParty",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "in": "header",
-            "name": "X-VUM-viaParty",
-            "required": false,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "in": "header",
-            "name": "X-VUM-vraagID",
-            "required": true,
-            "schema": {
-              "$ref": "#/components/schemas/VraagID"
-            }
-          }
-        ],
-        "requestBody": {
-          "$ref": "#/components/requestBodies/WerkzoekendeProfielMatchesCallbackRequest"
-        },
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "400": {
-            "description": "Fout bij uitvoeren van zoekvraag"
-          },
-          "401": {
-            "description": "not authorized"
-          }
-        },
-        "summary": "Voorbeeld voor de callback methode",
-        "tags": [
-          "callback"
-        ]
-      }
-    },
     "/werkzoekendeProfielen/matches": {
       "post": {
-        "callbacks": {
-          "bronMatch": {
-            "{$request.body#/callbackUrl}": {
-              "post": {
-                "parameters": [
-                  {
-                    "in": "header",
-                    "name": "X-VUM-berichtVersie",
-                    "required": true,
-                    "schema": {
-                      "type": "string"
-                    }
-                  },
-                  {
-                    "in": "header",
-                    "name": "X-VUM-toParty",
-                    "required": true,
-                    "schema": {
-                      "type": "string"
-                    }
-                  },
-                  {
-                    "in": "header",
-                    "name": "X-VUM-viaParty",
-                    "required": false,
-                    "schema": {
-                      "type": "string"
-                    }
-                  },
-                  {
-                    "in": "header",
-                    "name": "X-VUM-vraagID",
-                    "required": true,
-                    "schema": {
-                      "$ref": "#/components/schemas/VraagID"
-                    }
-                  }
-                ],
-                "requestBody": {
-                  "$ref": "#/components/requestBodies/WerkzoekendeProfielMatchesCallbackRequest"
-                },
-                "responses": {
-                  "200": {
-                    "description": "bevestiging aan de uitwisselingsvoorziening"
-                  },
-                  "400": {
-                    "content": {
-                      "application/json": {
-                        "schema": {
-                          "$ref": "#/components/schemas/Error"
-                        }
-                      }
-                    },
-                    "description": "Bad request"
-                  },
-                  "500": {
-                    "content": {
-                      "application/json": {
-                        "schema": {
-                          "$ref": "#/components/schemas/Error"
-                        }
-                      }
-                    },
-                    "description": "Internal Server Error"
-                  },
-                  "503": {
-                    "content": {
-                      "application/json": {
-                        "schema": {
-                          "$ref": "#/components/schemas/Error"
-                        }
-                      }
-                    },
-                    "description": "Service Unavailable"
-                  }
-                }
-              }
-            }
-          }
-        },
         "description": "Zoekopdracht om matches voor Werkzoekende MatchingProfielen op te vragen",
         "operationId": "MatcheswerkzoekendeProfielen",
         "parameters": [
           {
-            "in": "header",
-            "name": "X-VUM-berichtVersie",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "$ref": "#/components/parameters/vum_bericht_versie"
           },
           {
-            "in": "header",
-            "name": "X-VUM-fromParty",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "$ref": "#/components/parameters/vum_from_party"
           },
           {
-            "in": "header",
-            "name": "X-VUM-toParty",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "$ref": "#/components/parameters/vum_to_party"
           },
           {
-            "in": "header",
-            "name": "X-VUM-viaParty",
-            "required": false,
-            "schema": {
-              "type": "string"
-            }
+            "$ref": "#/components/parameters/vum_via_party"
+          },
+          {
+            "$ref": "#/components/parameters/api_version"
           }
         ],
         "requestBody": {
@@ -1314,31 +1423,26 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/inline_response_200"
+                  "$ref": "#/components/schemas/WerkzoekendeProfielMatchesResponse"
                 }
               }
             },
             "description": "OK",
             "headers": {
+              "API-Version": {
+                "$ref": "#/components/headers/api_version"
+              },
               "X-VUM-berichtVersie": {
-                "schema": {
-                  "type": "string"
-                }
+                "$ref": "#/components/headers/vum_bericht_versie"
               },
               "X-VUM-fromParty": {
-                "schema": {
-                  "type": "string"
-                }
+                "$ref": "#/components/headers/vum_from_party"
               },
               "X-VUM-toParty": {
-                "schema": {
-                  "type": "string"
-                }
+                "$ref": "#/components/headers/vum_to_party"
               },
               "X-VUM-viaParty": {
-                "schema": {
-                  "type": "string"
-                }
+                "$ref": "#/components/headers/vum_via_party"
               }
             }
           },
@@ -1350,10 +1454,44 @@
                 }
               }
             },
-            "description": "Bad request"
+            "description": "Bad request",
+            "headers": {
+              "API-Version": {
+                "$ref": "#/components/headers/api_version"
+              },
+              "X-VUM-berichtVersie": {
+                "$ref": "#/components/headers/vum_bericht_versie"
+              },
+              "X-VUM-fromParty": {
+                "$ref": "#/components/headers/vum_from_party"
+              },
+              "X-VUM-toParty": {
+                "$ref": "#/components/headers/vum_to_party"
+              },
+              "X-VUM-viaParty": {
+                "$ref": "#/components/headers/vum_via_party"
+              }
+            }
           },
           "401": {
-            "description": "not authorized"
+            "description": "not authorized",
+            "headers": {
+              "API-Version": {
+                "$ref": "#/components/headers/api_version"
+              },
+              "X-VUM-berichtVersie": {
+                "$ref": "#/components/headers/vum_bericht_versie"
+              },
+              "X-VUM-fromParty": {
+                "$ref": "#/components/headers/vum_from_party"
+              },
+              "X-VUM-toParty": {
+                "$ref": "#/components/headers/vum_to_party"
+              },
+              "X-VUM-viaParty": {
+                "$ref": "#/components/headers/vum_via_party"
+              }
+            }
           },
           "429": {
             "content": {
@@ -1363,7 +1501,24 @@
                 }
               }
             },
-            "description": "Too Many Requests"
+            "description": "Too Many Requests",
+            "headers": {
+              "API-Version": {
+                "$ref": "#/components/headers/api_version"
+              },
+              "X-VUM-berichtVersie": {
+                "$ref": "#/components/headers/vum_bericht_versie"
+              },
+              "X-VUM-fromParty": {
+                "$ref": "#/components/headers/vum_from_party"
+              },
+              "X-VUM-toParty": {
+                "$ref": "#/components/headers/vum_to_party"
+              },
+              "X-VUM-viaParty": {
+                "$ref": "#/components/headers/vum_via_party"
+              }
+            }
           },
           "500": {
             "content": {
@@ -1373,7 +1528,24 @@
                 }
               }
             },
-            "description": "Internal Server Error"
+            "description": "Internal Server Error",
+            "headers": {
+              "API-Version": {
+                "$ref": "#/components/headers/api_version"
+              },
+              "X-VUM-berichtVersie": {
+                "$ref": "#/components/headers/vum_bericht_versie"
+              },
+              "X-VUM-fromParty": {
+                "$ref": "#/components/headers/vum_from_party"
+              },
+              "X-VUM-toParty": {
+                "$ref": "#/components/headers/vum_to_party"
+              },
+              "X-VUM-viaParty": {
+                "$ref": "#/components/headers/vum_via_party"
+              }
+            }
           },
           "503": {
             "content": {
@@ -1383,7 +1555,24 @@
                 }
               }
             },
-            "description": "Service Unavailable"
+            "description": "Service Unavailable",
+            "headers": {
+              "API-Version": {
+                "$ref": "#/components/headers/api_version"
+              },
+              "X-VUM-berichtVersie": {
+                "$ref": "#/components/headers/vum_bericht_versie"
+              },
+              "X-VUM-fromParty": {
+                "$ref": "#/components/headers/vum_from_party"
+              },
+              "X-VUM-toParty": {
+                "$ref": "#/components/headers/vum_to_party"
+              },
+              "X-VUM-viaParty": {
+                "$ref": "#/components/headers/vum_via_party"
+              }
+            }
           }
         },
         "summary": "Zoekopdracht voor MatchingProfielen werkzoekende"
@@ -1395,38 +1584,6 @@
         "operationId": "getWerkzoekendeProfiel",
         "parameters": [
           {
-            "in": "header",
-            "name": "X-VUM-berichtVersie",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "in": "header",
-            "name": "X-VUM-fromParty",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "in": "header",
-            "name": "X-VUM-toParty",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "in": "header",
-            "name": "X-VUM-viaParty",
-            "required": false,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
             "explode": false,
             "in": "path",
             "name": "vumID",
@@ -1435,6 +1592,21 @@
               "$ref": "#/components/schemas/VumID"
             },
             "style": "simple"
+          },
+          {
+            "$ref": "#/components/parameters/vum_bericht_versie"
+          },
+          {
+            "$ref": "#/components/parameters/vum_from_party"
+          },
+          {
+            "$ref": "#/components/parameters/vum_to_party"
+          },
+          {
+            "$ref": "#/components/parameters/vum_via_party"
+          },
+          {
+            "$ref": "#/components/parameters/api_version"
           }
         ],
         "responses": {
@@ -1456,25 +1628,20 @@
             },
             "description": "OK",
             "headers": {
+              "API-Version": {
+                "$ref": "#/components/headers/api_version"
+              },
               "X-VUM-berichtVersie": {
-                "schema": {
-                  "type": "string"
-                }
+                "$ref": "#/components/headers/vum_bericht_versie"
               },
               "X-VUM-fromParty": {
-                "schema": {
-                  "type": "string"
-                }
+                "$ref": "#/components/headers/vum_from_party"
               },
               "X-VUM-toParty": {
-                "schema": {
-                  "type": "string"
-                }
+                "$ref": "#/components/headers/vum_to_party"
               },
               "X-VUM-viaParty": {
-                "schema": {
-                  "type": "string"
-                }
+                "$ref": "#/components/headers/vum_via_party"
               }
             }
           },
@@ -1486,10 +1653,32 @@
                 }
               }
             },
-            "description": "Bad request"
+            "description": "Bad request",
+            "headers": {
+              "API-Version": {
+                "$ref": "#/components/headers/api_version"
+              },
+              "X-VUM-berichtVersie": {
+                "$ref": "#/components/headers/vum_bericht_versie"
+              },
+              "X-VUM-fromParty": {
+                "$ref": "#/components/headers/vum_from_party"
+              },
+              "X-VUM-toParty": {
+                "$ref": "#/components/headers/vum_to_party"
+              },
+              "X-VUM-viaParty": {
+                "$ref": "#/components/headers/vum_via_party"
+              }
+            }
           },
           "401": {
-            "description": "not authorized"
+            "description": "not authorized",
+            "headers": {
+              "API-Version": {
+                "$ref": "#/components/headers/api_version"
+              }
+            }
           },
           "429": {
             "content": {
@@ -1499,7 +1688,24 @@
                 }
               }
             },
-            "description": "Too Many Requests, limiet is overschreden voor deze vraagID"
+            "description": "Too Many Requests, limiet is overschreden voor deze uitvraag",
+            "headers": {
+              "API-Version": {
+                "$ref": "#/components/headers/api_version"
+              },
+              "X-VUM-berichtVersie": {
+                "$ref": "#/components/headers/vum_bericht_versie"
+              },
+              "X-VUM-fromParty": {
+                "$ref": "#/components/headers/vum_from_party"
+              },
+              "X-VUM-toParty": {
+                "$ref": "#/components/headers/vum_to_party"
+              },
+              "X-VUM-viaParty": {
+                "$ref": "#/components/headers/vum_via_party"
+              }
+            }
           },
           "500": {
             "content": {
@@ -1509,7 +1715,24 @@
                 }
               }
             },
-            "description": "Internal Server Error"
+            "description": "Internal Server Error",
+            "headers": {
+              "API-Version": {
+                "$ref": "#/components/headers/api_version"
+              },
+              "X-VUM-berichtVersie": {
+                "$ref": "#/components/headers/vum_bericht_versie"
+              },
+              "X-VUM-fromParty": {
+                "$ref": "#/components/headers/vum_from_party"
+              },
+              "X-VUM-toParty": {
+                "$ref": "#/components/headers/vum_to_party"
+              },
+              "X-VUM-viaParty": {
+                "$ref": "#/components/headers/vum_via_party"
+              }
+            }
           },
           "503": {
             "content": {
@@ -1519,7 +1742,24 @@
                 }
               }
             },
-            "description": "Service Unavailable"
+            "description": "Service Unavailable",
+            "headers": {
+              "API-Version": {
+                "$ref": "#/components/headers/api_version"
+              },
+              "X-VUM-berichtVersie": {
+                "$ref": "#/components/headers/vum_bericht_versie"
+              },
+              "X-VUM-fromParty": {
+                "$ref": "#/components/headers/vum_from_party"
+              },
+              "X-VUM-toParty": {
+                "$ref": "#/components/headers/vum_to_party"
+              },
+              "X-VUM-viaParty": {
+                "$ref": "#/components/headers/vum_via_party"
+              }
+            }
           }
         },
         "summary": "Vraag detailprofielen op bij opgegeven vumID"
@@ -1529,15 +1769,15 @@
   "servers": [
     {
       "description": "staging/test server",
-      "url": "https://test.vumdevelopment.nl/api/v1"
+      "url": "https://test.vumdevelopment.nl/api/v2"
     },
     {
       "description": "acceptatie server",
-      "url": "https://accept.vumdevelopment.nl/api/v1"
+      "url": "https://accept.vumdevelopment.nl/api/v2"
     },
     {
       "description": "productie server",
-      "url": "https://prod.vumdevelopment.nl/api/v1"
+      "url": "https://prod.vumdevelopment.nl/api/v2"
     }
   ]
 }
