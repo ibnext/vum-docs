@@ -26,12 +26,6 @@ lint:
         yaml2json $F > $json_file_path;
       done;
       git diff --text --exit-code HEAD || (echo "You should probably run make tojson" && exit 1)
-      git add ./OAS_Contracten/\*.json
-      git config user.email "${GITLAB_USER_EMAIL}"
-      git config user.name "${GITLAB_USER_NAME}"
-      git commit -m "Generate new/updated contracts in json format" || echo "No changes to commit"
-      git remote set-url origin https://${GL_USERNAME}:${GL_PASSWORD}@$CI_SERVER_HOST/$CI_PROJECT_PATH
-      git push origin HEAD:$CI_COMMIT_REF_NAME
 
 deploy_test:
   stage: deploy
