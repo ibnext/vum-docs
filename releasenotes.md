@@ -16,7 +16,7 @@ Daarnaast zijn in versie 2.0.0 de openstaande aandachtspunten opgelost met betre
 * De waarde van het attribuut "codeBeroepsnaam" is ingeperkt tot een string van 1 tot maximaal 10 numerieke karakters (0-9) in overeenstemming met de externe waardelijst
 * De waarde van het attribuut "codeWebadres" is ingeperkt tot de waardes "1", "2", "3" en "4" in overeenstemming met de VUM Gegevensstandaard
 * De waarde van het attribuut "codeTaal" is beperkt tot een string van 3 alfabetische "lowercase" karakters, in overeenstemming met de externe waardelijst
-* De ongedefinieerde specificatie "URL" voor het attribuut "url" is veranderd naar de standaard JSON Schema specificatie "url"
+* De ongedefinieerde specificatie "URL" voor het attribuut "url" is veranderd naar de standaard JSON Schema specificatie "uri"
 
 De nieuwe selectievraag en de synchrone beantwoording van de selectievraag zijn "breaking changes" ten opzichte van de voorgaande versie en leiden tot een ophoging van het major versienummmer. De releasenotes van de voorgaande 1.x.x versies zijn met deze wijzigingen verminderd relevant en zijn daarom niet meer in dit document opgenomen.
 

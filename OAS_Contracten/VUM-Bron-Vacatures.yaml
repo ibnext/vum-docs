@@ -1042,7 +1042,7 @@ components:
     Telefoonnummer:
       $ref: '#/components/schemas/String14'
     URL:
-      format: url
+      format: uri
       type: string
     Vacature:
       additionalProperties: false
