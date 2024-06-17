@@ -1294,7 +1294,7 @@
         "type": "string"
       },
       "SafeIDString": {
-        "pattern": "^[a-zA-Z0-9_.-]{,200}$",
+        "pattern": "^[a-zA-Z0-9_.-]{0,200}$",
         "type": "string"
       },
       "TaalCode3": {
@@ -1372,7 +1372,7 @@
       },
       "VumID": {
         "type": "string",
-        "pattern": "^[a-zA-Z0-9_.-]{,500}$"
+        "pattern": "^[a-zA-Z0-9_.-]{0,500}$"
       },
       "Webadres": {
         "additionalProperties": false,
