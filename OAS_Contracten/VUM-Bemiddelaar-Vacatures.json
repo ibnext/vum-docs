@@ -1553,7 +1553,7 @@
       },
       "URL": {
         "type": "string",
-        "maxlength": 512
+        "maxLength": 512
       },
       "Vacature": {
         "additionalProperties": false,
