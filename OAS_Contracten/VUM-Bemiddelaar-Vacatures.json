@@ -897,7 +897,7 @@
         "type": "object"
       },
       "IDVacature": {
-        "$ref": "#/components/schemas/String200"
+        "$ref": "#/components/schemas/SafeIDString"
       },
       "Indicatie": {
         "enum": [
@@ -1519,6 +1519,10 @@
         "maxLength": 4,
         "type": "string"
       },
+      "SafeIDString": {
+        "pattern": "^[a-zA-Z0-9_.-]{,200}$",
+        "type": "string"
+      },
       "TaalCode3": {
         "pattern": "^[a-z]{3}$",
         "type": "string"
@@ -1548,8 +1552,8 @@
         "$ref": "#/components/schemas/String14"
       },
       "URL": {
-        "format": "uri",
-        "type": "string"
+        "type": "string",
+        "maxlength": 512
       },
       "Vacature": {
         "additionalProperties": false,
@@ -1712,7 +1716,8 @@
         "type": "object"
       },
       "VumID": {
-        "$ref": "#/components/schemas/String500"
+        "type": "string",
+        "pattern": "^[a-zA-Z0-9_.-]{,500}$"
       },
       "Webadres": {
         "additionalProperties": false,

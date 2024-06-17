@@ -896,7 +896,7 @@
         "type": "object"
       },
       "IDVacature": {
-        "$ref": "#/components/schemas/String200"
+        "$ref": "#/components/schemas/SafeIDString"
       },
       "Indicatie": {
         "enum": [
@@ -1458,10 +1458,6 @@
         "maxLength": 16,
         "type": "string"
       },
-      "String200": {
-        "maxLength": 200,
-        "type": "string"
-      },
       "String2000": {
         "maxLength": 2000,
         "type": "string"
@@ -1518,6 +1514,10 @@
         "maxLength": 4,
         "type": "string"
       },
+      "SafeIDString": {
+        "pattern": "^[a-zA-Z0-9_.-]{,200}$",
+        "type": "string"
+      },
       "TaalCode3": {
         "pattern": "^[a-z]{3}$",
         "type": "string"
@@ -1547,8 +1547,8 @@
         "$ref": "#/components/schemas/String14"
       },
       "URL": {
-        "format": "uri",
-        "type": "string"
+        "type": "string",
+        "maxlength": 512
       },
       "Vacature": {
         "additionalProperties": false,
