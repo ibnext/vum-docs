@@ -1,388 +1,81 @@
-# Releasenotes Koppelvlak specificaties VUM v1.1.1
+# Releasenotes VUM Koppelvlak specificaties v2.0.0
 
-**Openstaande punten in deze release (v1.1.1)**
+Deze versie van de VUM Koppelvlak specificaties is gebaseerd op versie 1.4 van de VUM Gegevensstandaard.
 
- - De koppelvlakspecificaties staan lege waardes toe voor attributen. Dit komt niet overeen met de VUM Gegevensstandaard. Dit betreft lege lijsten, lege objecten en lege tekst. 
+Versie 2.0.0 van de VUM Koppelvlak specificaties introduceert twee significante wijzigingen ten opzichte van de voorgaande 1.2.0 release:
 
- - De betekenis van de gebruikte formaat specificatie ‘URL’ voor het attribuut 'url' is niet nader gedefinieerd en heeft daarmee geen beperkende betekenis.
+* De zoekvraag van versie 1.2.0 is vervangen door de selectievraag in versie 2.0.0. De selectievraag neemt het JSON query formaat van MongoDB als kader en maakt gebruik van expliciete operatoren waarmee de gewenste selectie eenduidig uitgedrukt kan worden door de vraagstellende bemiddelaar. 
+* De selectieresultaten worden vanaf versie 2.0.0 opgeleverd in het response bericht van de selectiedialoog. In versie 1.2.0 en daarvoor werden de zoekvraagresultaten asynchroon naar een callback server opgeleverd.
 
- - Een aantal attributen hebben in de koppelvlakspecificaties een ander type dan in de VUM Gegevenstandaard. De implementatie van de VUM Gegevensuitwisseling volgt de koppelvlakspecificaties voor deze attributen.
- 
-- De volgende attributen hebben een string als datatype in de koppelvlakspecificaties maar zijn een integer in de VUM Gegevensstandaard:    
+Daarnaast zijn in versie 2.0.0 de openstaande aandachtspunten opgelost met betrekking tot de weergave van de VUM Gegevensstandaard versie 1.4 in JSON objecten. Dit betreft de volgende punten:
 
-```
-    codeOpleidingsnaam
-    codeGedragscompetentie
-    codeTypeOvereenkomst
-    codeWerkEnDenkniveauMinimaal
-    indicatieBeschikbaarheidContactgegevens
-    datumAanvangAdres
-    datumAanvangBeschikbaarVoorWerk
-    datumAanvangWerkzaamheden
-    datumEindeAdres
-    datumEindeBeschikbaarVoorWerk
-    datumEindeWerkzaamheden
-    sluitingsDatumVacature
-    datumAanvangVolgenCursus
-    datumCertificaat
-    datumEindeVolgenCursus
-    datumAanvangVolgenOpleiding
-    datumDiploma
-    datumEindeVolgenOpleiding
-    idVacature
-    nummerVacature
-```
+* De HTTP-header "API-VERSION" is verplicht in alle berichten en heeft voor deze release de constante waarde "2.0.0"
+* De HTTP-header "X-VUM-ViaParty" is verplicht in alle berichten
+* De naam van het attribuut "mpOpleidingsnaam" in de selectieresultaten voor vacatures is veranderd naar "opleidingsnaam" en is daarmee gelijk gemaakt aan de naam in de detailresultaten voor vacatures
+* De naam van het attribuut "sluitingsDatumVacature" in selectie- en detailresultaten voor vacatures is veranderd in "sluitingsdatumVacature" en voldoet daarmee aan de gehanteerde naamgevingsconventie voor attribuutnamen
+* De waarde van het attribuut "codeBeroepsnaam" is ingeperkt tot een string van 1 tot maximaal 10 numerieke karakters (0-9) in overeenstemming met de externe waardelijst
+* De waarde van het attribuut "codeWebadres" is ingeperkt tot de waardes "1", "2", "3" en "4" in overeenstemming met de VUM Gegevensstandaard
+* De waarde van het attribuut "codeTaal" is beperkt tot een string van 3 alfabetische "lowercase" karakters, in overeenstemming met de externe waardelijst
+* De ongedefinieerde specificatie "URL" voor het attribuut "url" is verwijderd en de lengte van de betreffende waardes is beperkt tot 512 karakters in overeenstemming met de VUM Gegevensstandaard
+* De waardes van de attributen idVacature en idWerkzoekende worden door de VUM Uitwisselingsvoorziening gebruikt in de URL bij het opvragen van detailresultaten. Niet alle karakters kunnen zomaar in URLs worden gebruikt en daarom worden de waardes van idVacatures en idWerkzoekende beperkt tot karakters die zijn toegestaan in URLs. Als een bron in de interne systemen ook andere karakters toepast als identificatie voor detailresultaten, dan moet de bron deze encoderen binnen de aangegeven set van karakters in de selectieresultaten en decoderen bij het ontvangen van de URL voor het opvragen van een detailresultaat.
+* De waarde van het attribuut vumID wordt door bemiddelaars gebruikt in de URL waarmee detailresultaten worden opgevraagd bij de VUM Uitwisselingsvoorziening. De waarde van dit attribuut is daarom ook beperkt tot karakters die in een URL zijn toegestaan.
 
- - Het attribuut ‘indicatieLdrRegistratie’ is een integer in de koppelvlakspecificaties en een boolean in de VUM Gegevensstandaard. 
- - Het attribuut ‘postbusnummerBuitenland’ heeft de maximale lengte van 9 posities in de koppelvlakspecificaties en van maar 7 posities in de VUM Gegevensstandaard, . 
- - Het attribuut 'url' heeft een geen limiet op de lengte in de koppevlakspecificaties maar een maximum lengte van 512 in de VUM Gegevensstandaard. 
- - Het attribuut ‘vakvaardigheid’ is in de koppelvlakspecificaties weergegeven als een object met een ingebed attribuut 'omschrijving'. In de VUM Gegevensstandaard is ‘vakvaardigheid’ een enkel  - attribuut 'omschrijving vakvaardigheid' van type 'string'.
- 
+De nieuwe selectievraag en de synchrone beantwoording van de selectievraag zijn "breaking changes" ten opzichte van de voorgaande versie en leiden tot een ophoging van het major versienummmer. De releasenotes van de voorgaande 1.x.x versies zijn met deze wijzigingen verminderd relevant en zijn daarom niet meer in dit document opgenomen.
+
+## Toelichting bij de selectie op het aantal werkuren per week
+
+De selectie op het aantal werkuren per week bevraagt de gegevenselementen "AantalWerkurenPerWeekMaximaal" en "AantalWerkurenPerWeekMinimaal". Dit vereist dat de selectievraag de juiste condities formuleert voor deze waardes in de resultaten die worden geselecteerd. Deze waardes zijn gebaseerd op het bereik van het aantal werkuren waarmee een overlap moet bestaan in de geselecteerde resultaten. 
+
+Het onderstaande diagram geeft als voorbeeld de selectie op een overlap tussen het gewenste aantal werkuren van een werkzoekende en de werkuren van de aangeboden vacatures:
+
+<img src="./media/werkuren_selectie.png" align="center">
+
+De condities in de selectievraag moeten dan zodanig worden geformuleerd dat de met rood aangegeven vacatures niet worden geselecteerd, en de met blauw aangegeven vacatures wel. 
+
+Dit wordt op de volgende manier bereikt:
+
+* Het maximum van het geboden bereik moet groter of gelijk zijn aan het minimum van een gewenste bereik:
+<br>Als niet aan deze conditie wordt voldaan, dan eindigt het geboden bereik voordat het gewenste bereik begint (Vacature 1 in het diagram). Dit betekent dat elk resultaat waarmee er een overlap is, altijd aan deze conditie voldoet.
+
+* Het minimum van het geboden bereik moet kleiner of gelijk zijn aan het maximum van het gewenste bereik:
+<br>Als niet aan deze conditie wordt voldaan, dan begint het geboden bereik nadat het gewenste bereik eindigt (Vacature 8 in het diagram). Dit betekent dat elk resultaat waarmee er een overlap is, altijd aan deze conditie voldoet.
+
+Merk op dat Vacature 8 in het diagram wel aan de eerste conditie voldoet, maar niet aan de tweede. Voor Vacature 1 is dat net andersom. Samen selecteren deze condities dan enkel de gevallen waarbij er een overlap is.
+
+Er kunnen gevallen zijn waarbij er geen gewenst minimum of maximum is opgegeven. Als er geen gewenst minimum is, dan is er geen begin aan het gewenste bereik en is er altijd een overlap als aan de tweede conditie wordt voldaan (het geboden bereik begint voor het einde van het gewenste bereik). Andersom geldt ook dat als er geen gewenst maximum is, dan is er altijd een overlap als aan de eerste conditie wordt voldaan.
+
+Dit betekent dat bij het selecteren op het gegeven "aantalWerkUrenPerWeekMaximaal" gebruik wordt gemaakt van de $gte operator en dat daarbij de minimale waarde van het gewenste bereik moet worden opgegeven. Voor "aantalWerkUrenPerWeekMinimaal" wordt gebruik gemaakt van de $lte operator en wordt het maximum van het gewenste bereik opgegeven.
+
+## Toekomstige wijzigingen in de VUM Gegevensstandaard
+
+Op het moment van deze release zijn er ontwikkelingen in de VUM Gegevensstandaard die tot versie 1.5 van deze standaard zullen leiden. Hierbij zullen een aantal gegevenselementen naar verwachting verwijderd worden. Nieuwe implementaties van bronnen wordt geadviseerd om deze gegevens niet op te nemen in de uitgaande selectie- en detailresultaten. Ontvangende bemiddelaars moeten deze gegevens echter wel accepteren als deze aanwezig zijn in de ontvangen resultaten. Zij kunnen er wel voor kiezen om deze gegevens bij ontvangst te negeren en niet in achterliggende systemen te verwerken.
+
+De volgende gegevenselementen worden dan als "deprecated" aangemerkt:
+
+* Werkgeveradressen in vacatureresultaten met de functiecodes "B" (briefadres), "W" (woonadres), "L" (loonaaangifteadres) en "A" (Afwijkend adres)
+* Begin- en einddatums voor werkgeveradressen in vacatureresultaten
+* Het gegevenselement "omschrijving gedragscompetentie" in de entiteit "Gedragscompetentie"
+* Het gegevenselement "code beheersing gedragscompetentie" in de entiteit "Gedragscompetentie"
+* Het gegevenselement "omschrijving opleiding" in de entiteit "Opleidingsnaam Ongecodeerd"
+* Het gegevenselement "omschrijving opleidingsnaam" in de entiteit "Opleidingsnaam Gecodeerd"
+* Het gegevenselement "omschrijving beroepsnaam" in de entiteit "Beroepsnaam Gecodeerd"
+
+## Toekomstige wijzigingen in de selectievraag
+
+De specificatie van de selectievraag is zodanig opgesteld dat toekomstige toevoegingen niet worden uitgesloten. Dit is mogelijk omdat JSON schemas zodanig kunnen worden geformuleerd dat niet-benoemde gegevens en operatoren worden toegestaan op het koppelvlak. Bij de verwerking van de selectievraag zullen deze niet-benoemde gegevens en operatoren genegeerd worden. Hiermee wordt het mogelijk om gedurende een overgangsperiode twee verschillende versies van de selectievraag gelijktijdig in de VUM keten te ondersteunen: 
+
+* De koppelvlak specificaties staan toe dat onbenoemde gegevens en operatoren voorkomen in de selectievraag: 
+	* toegevoegde gegevens en operatoren worden dan geaccepteerd op een koppelvlak van de voorgaande versie
+	* verwijderde gegevens en operatoren die toch aanwezig zijn, worden dan niet geweigerd op een koppelvlak van de nieuwe versie
+
+* De ontvangende systemen verwerken de gegevens en operatoren van de ontvangen selectievraag die binnen de door hun ondersteunde versie van de selectievraag vallen. De selectiecriteria in de selectievraag die buiten de ondersteunde versie vallen worden genegeerd.
+
+Gedurende de overgangsperiode tussen twee versies kan het voorkomen dat niet alle selectiecriteria in een specifieke selectievraag door alle bronnen worden gehonoreerd. Bronnen zullen de criteria die buiten de door hun ondersteunde versie van de selectievraag vallen, niet toepassen en dit kan resultaten opleveren die anders door die selectiecriteria uitgesloten zouden worden. Een vraagsteller ontvangt dan mogelijk resultaten die niet aan alle selectiecriteria in de gestelde selectievraag voldoen. Mocht dit ongewenst zijn, dan kan de vraagsteller gedurende de overgangsperiode de ongewenste resultaten uitfilteren door deze selectiecriteria lokaal toe te passen op de ontvangen resultaten.
 
 
-<table>
-<colgroup>
-<col style="width: 10%" />
-<col style="width: 5%" />
-<col style="width: 40%" />
-<col style="width: 43%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th><strong>versie</strong></th>
-<th><strong>nr</strong></th>
-<th><strong>aanpassing</strong></th>
-<th><strong>motivatie</strong></th>
-</tr>
-<tr class="odd">
-<th>1.2.0</th>
-<th>1</th>
-<th>Mobiliteit entiteit toegevoegd aan vacature zoekvraag in koppelvlak</th>
-<th>De entiteit "mobiliteit" is toegevoegd t.b.v. het stellen van een zoekvraag binnen het Vacature koppelvlak. De entiteit is toegevoegd aan "MPVacature" in het bemiddelaar en bron koppelvlak.</th>
-</tr>
-<tr class="odd">
-<th>1.2.0</th>
-<th>2</th>
-<th>Entiteiten bemiddelingspostcode en maximaleReisafstand zijn toegevoegd aan de nieuwe entiteit "Mobiliteit"</th>
-<th>Deze entiteiten zijn toegevoegd t.b.v. het stellen van een zoekvraag binnen het Vacature koppelvlak.</th>
-</tr>
-<tr class="odd">
-<th>1.2.0</th>
-<th>3</th>
-<th>Attribuut "idVacature" is nu verplicht in de antwoorden van een bron.</th>
-<th>Dit attribuut is nodig om detailvragen te kunnen doen, zonder idVacature is dit niet mogelijk.</th>
-</tr>
-<tr class="odd">
-<th>1.1.1</th>
-<th>1</th>
-<th>Callback endpoint callbackExample gescheiden in callbackWP en callbackVacature</th>
-<th>Op de callback ontvangen 'Werkzoekende Profielen' and 'Vacature' matches kunnen nu op een verschillende manier worden verwerkt.</th>
-</tr>
-<tr class="odd">
-<th>1.1.0</th>
-<th>1</th>
-<th>Enums</th>
-<th>Enumeraties vanuit de gegevensstandaard toegevoegd aan de OAS contracten &amp; OneOf notaties kloppend gemaakt door additionalProperties op false te zetten.</th>
-</tr>
-<tr class="header">
-<th>1.0.0</th>
-<th>1</th>
-<th>-</th>
-<th>Publicatie 1.0.0 versie</th>
-</tr>
-<tr class="odd">
-<th>0.99.7</th>
-<th>1</th>
-<th>Postcode en Straal velden verwijderd uit het zoekopdracht voor
-Vacature en WerkzoekendeProfielen.</th>
-<th>Deze velden werden alleen gebruikt door de broker voor geo matching,
-er is voor nu gekozen om dit te laten vervallen voor het Vacature
-endpoint. Voor het werkzoekende endpoint worden nu andere velden
-gebruikt, zodat de bron hier ook op kan filteren.</th>
-</tr>
-<tr class="header">
-<th>0.99.7</th>
-<th>2</th>
-<th>Mobiliteit object en velden bemiddelingspostcode &amp;
-maximaleReisafstand binnen het mobiliteits object verplicht gemaakt
-t.b.v. geomatching op bronnen en filteren van resultaten door
-bronnen.</th>
-<th>Velden moeten verplicht zijn zodat de geo matching kan plaatsvinden
-en de bron zijn resultaten kan filteren.</th>
-</tr>
-<tr class="odd">
-<th>0.99.6</th>
-<th>1</th>
-<th>Beroepsnaam en opleidingsnaam een extra object gegeven</th>
-<th>Voor betere compatibiliteit bij implementaties en voor consistentie
-met de andere plekken waar nu OneOf gebruikt wordt.</th>
-</tr>
-<tr class="header">
-<th>0.99.6</th>
-<th>2</th>
-<th>Integer10 gewijzigd naar Integer10AsString met een Regex</th>
-<th>Voor betere compatibiliteit bij implementaties voldoet dit veld nu
-aan rfc8259. Dit betekend dat getallen boven 2^53 nu geformat worden als
-string.</th>
-</tr>
-<tr class="odd">
-<th>0.99.6</th>
-<th>3</th>
-<th>Straal heeft een hoger maximale waarde</th>
-<th>De oude waarde was te laag.</th>
-</tr>
-<tr class="header">
-<th>0.99.6</th>
-<th>4</th>
-<th>Yaml veld bemiddelingspostcode heeft een example</th>
-<th>De json example binnen swagger plaatste een waarde als ‘string’ in
-dit veld en dit wordt nu ‘1234AB’ anders wordt dit afgekeurd door de
-regex</th>
-</tr>
-<tr class="odd">
-<th>0.99.5</th>
-<th>1</th>
-<th>Integer waarden hadden een 'maxLength' qualifier, dat is aangepast
-naar 'maximum'</th>
-<th>Dit is de correcte wijze van inperken van het Integer datatype.</th>
-</tr>
-<tr class="header">
-<th>0.99.5</th>
-<th>2</th>
-<th>Aanpassing de omvang van het werkzoekende profiel in contract
-VUM-Bron-WerkzoekendeProfielen.</th>
-<th>Contract VUM-Bron-WerkzoekendeProfielen specificeerde in de response
-van de matches endpoint onterecht de structuur van een compleet
-werkzoekende profiel in plaats van een beperkt matchingprofiel</th>
-</tr>
-<tr class="odd">
-<th>0.99.5</th>
-<th>3</th>
-<th>positie antwoordnummer aangepast</th>
-<th>Het antwoordnummer veld bij een antwoordnummeradres stond niet op
-het juiste nivo opgenomen in de vacature contracten.</th>
-</tr>
-<tr class="header">
-<th>0.99.4</th>
-<th>1</th>
-<th>X-VUM-* header parameters toegevoegd aan request specificatie van
-detail-bevraging endpoints</th>
-<th>Deze parameters ontbraken ten onrechte</th>
-</tr>
-<tr class="odd">
-<th>0.99.4</th>
-<th>2</th>
-<th>verruimen van het datatype van een aantal id's: idWerkzoekende,
-idVacature, bronID naar String200</th>
-<th>Flexibiliteit voor implementators van de API</th>
-</tr>
-<tr class="header">
-<th>0.99.4</th>
-<th>3</th>
-<th>Toevoegen van SGR entiteit Adres aan entiteit Werkgever in Vacature
-contracten</th>
-<th>Adres was per abuis weggelaten uit het VUM gegevensmodel 0.8.4, en
-niet opgenomen in de koppelvlakspecificaties</th>
-</tr>
-<tr class="odd">
-<th>0.99.4</th>
-<th>4</th>
-<th>Twee servers (test en acceptatie) toegevoegd aan de bemiddelaars
-contracten</th>
-<th>Ter referentie voor de pilots</th>
-</tr>
-<tr class="header">
-<th>0.99.3</th>
-<th>1</th>
-<th>vumID vervangen door idVacature in contract VUM-Bron-Vacatures</th>
-<th>In contract VUM-Bron-Vacatures werd ten onrechte vumID in plaats van
-idVacature geretourneerd</th>
-</tr>
-<tr class="odd">
-<th>0.99.2</th>
-<th>1</th>
-<th>Header X-VUM-SUWIparty verplicht gemaakt</th>
-<th>n.a.v. review</th>
-</tr>
-<tr class="header">
-<th>0.99.2</th>
-<th>2</th>
-<th>vumID van Integer14 naar String500 veranderd</th>
-<th>In verband met de toe te passen techniek voor het werken met
-vum-ID's binnen de uitwisselingsvoorziening.</th>
-</tr>
-<tr class="odd">
-<th>0.99.2</th>
-<th>3</th>
-<th>idWerkzoekende naar Integer14 aangepast (was String200)</th>
-<th>Om logisch gegevensmodel te volgen</th>
-</tr>
-<tr class="header">
-<th>0.99.1</th>
-<th>1</th>
-<th><p>Toevoeging 2 OAS3 contracten tbv Vacatures, bestanden:<br />
-VUM-Bron-Vacatures-0.99.1.yaml</p>
-<p>VUM-Bemiddelaar-Vacatures-0.99.1.yaml</p></th>
-<th>Qua opzet analoog aan de 2 contracten voor Werkzoekenden, maar dan
-op basis van het gegevensmodel bij de uniforme Vacaturestandaard</th>
-</tr>
-<tr class="odd">
-<th>0.99.1</th>
-<th>2</th>
-<th>codeTypeOvereenkomst was 1 karakter groot, aangepast naar 2 volgens
-het model.</th>
-<th>Correctie</th>
-</tr>
-<tr class="header">
-<th>0.99.1</th>
-<th>3</th>
-<th>Op een aantal plaatsen in de documentatie en bestandsnamen werd nog
-van werkzoekende<strong>n</strong>Profielen vermeld</th>
-<th>vervangen door werkzoekendeProfielen</th>
-</tr>
-<tr class="odd">
-<th>0.99.0</th>
-<th>1</th>
-<th>401 'not authorized' status code toegevoegd</th>
-<th>Om autorisatie fouten op standaardwijze te kunnen terugkoppelen</th>
-</tr>
-<tr class="header">
-<th>0.99.0</th>
-<th>2</th>
-<th>‘default’ sectie bij HTTP status codes in de contracten
-verwijderd</th>
-<th>Alleen de expliciet gedefinieerde response codes worden
-ondersteund</th>
-</tr>
-<tr class="odd">
-<th>0.99.0</th>
-<th>3</th>
-<th>Lijst met VUM error code en messages toegevoegd</th>
-<th>Bij een aantal HTTP status codes kan in de response een VUM error
-worden toegevoegd, bestaande uit een code, message en details. In het
-document is hier een tabel voor opgenomen.</th>
-</tr>
-<tr class="header">
-<th>0.99.0</th>
-<th>4</th>
-<th>maximumAantalResultatenBereikt attribuut toegevoegd</th>
-<th>Om bij een set matchingprofielen aan te geven dat een bron meer
-matches zou kunnen leveren dan de teruggeleverde set. Er is momenteel
-vanuit VUM een maximum gesteld van 100 matches per bron</th>
-</tr>
-<tr class="odd">
-<th>0.99.0</th>
-<th>5</th>
-<th>Document: op verzoek een aantal voorbeelden van restricties en
-limieten toegevoegd</th>
-<th>De restricties en limieten die door VUM zijn gespecificeerd worden
-niet afgedwongen door de contracten omdat deze configureerbaar worden.
-Op verzoek een aantal voorbeelden benoemd.</th>
-</tr>
-<tr class="header">
-<th>0.99.0</th>
-<th>6</th>
-<th>Contracten: consequent gebruik werkzoekendeProfielen ipv
-werkzoekende<strong>n</strong>Profielen</th>
-<th>Uniformeren van deze aanduiding in beschrijving en contract
-elementen</th>
-</tr>
-<tr class="odd">
-<th>0.99.0</th>
-<th>7</th>
-<th>Een aantal relaties met Werkzoekende enkelvoudig gemaakt ipv
-mogelijk meervoudig: Werktijden, Flexibiliteit, Mobiliteit, Eis aan
-werk, Arbeidsmarktkwalificatie</th>
-<th>In het contract was het mogelijk om genoemde elementen meerdere
-keren op te nemen bij een werkzoekende. Dit was niet volgens de
-specificatie van het model.</th>
-</tr>
-<tr class="header">
-<th>0.99.0</th>
-<th>8</th>
-<th>Lijst met VUM Identifiers toegevoegd, aanduiding in contract
-gelijkgetrokken</th>
-<th>De door VUM opgestelde lijst met identifiers is overgenomen in de
-specificaties, en aanduidingen in de contracten zijn zoveel mogelijk
-hierop aangepast. RequestID is bijvoorbeeld aangepast naar VraagID.</th>
-</tr>
-<tr class="odd">
-<th>0.99.0</th>
-<th>9</th>
-<th>bronID toegevoegd in response van endpoint
-/werkzoekendeProfielen/{vumID}</th>
-<th>bronID toegevoegd aan response van /werkzoekendeProfielen/{vumID},
-zodat de bemiddelaar kan verwijzen naar de bron</th>
-</tr>
-<tr class="header">
-<th>0.99.0</th>
-<th>10</th>
-<th>endpoint /werkzoekendeProfielen/zoekMatches hernoemd naar
-/werkzoekendeProfielen/matches ivm API standaard</th>
-<th>In verband met naamgevingconventies in de Logius REST API
-standaarden is /zoekMatches vervangen door /matches</th>
-</tr>
-<tr class="odd">
-<th>0.98.1</th>
-<th>1</th>
-<th>Duidelijker samenhang tussen matchingprofiel en detailprofiel</th>
-<th>Herstel van een onvolkomenheid bij het onderscheid tussen
-matchingprofielen en detailprofielen</th>
-</tr>
-<tr class="header">
-<th>0.98.0</th>
-<th>1</th>
-<th>postcode/straal parameters verplaats van query naar request
-body</th>
-<th>Aansluiting bij de standaard voor POST requests</th>
-</tr>
-<tr class="odd">
-<th>0.98.0</th>
-<th>2</th>
-<th>toevoegen diverse HTTP status codes</th>
-<th>Om te voldoen aan de eisen van de door Logius nog op te leveren
-Digikoppeling REST/JSON standaard: API-47 (API Design Rules): APIs
-should at least support the following HTTP status codes: 200, 201, 204,
-304, 400, 401, 403, 404, 405, 406, 409, 410, 415, 422, 429, 500, and
-503. Relevante codes zijn toegevoegd, sommige codes hebben betrekking op
-PATCH, PUT operaties die geen onderdeel van het contract uitmaken.</th>
-</tr>
-<tr class="header">
-<th>0.98.0</th>
-<th>4</th>
-<th>Header velden toegevoerd voor o.a. routering</th>
-<th>Routering header velden toevoegen ivm ondersteuning SAAS scenario.
-Aangesloten partij acteert voor meedere bemiddelaars/bronnen.Verzoek van
-VUM: ondersteuning van functionaliteit in geval berichtinhoud in de
-toekomst encrypted zou worden.</th>
-</tr>
-<tr class="odd">
-<th>0.98.0</th>
-<th>6</th>
-<th>Nieuw contract toegevoegd tussen Uitwisselingsvoorziening en
-bronnen</th>
-<th>De API tussen bron en uitwisselingsvoorziening hebben grotendeels
-betrekking op dezelfde gegevens, maar met een aantal verschillen die een
-eigen contract nodig maken. Zo is de communicatie synchroon, en zijn er
-een aantal verschillen bij de meta-gegevens die worden
-gecommuniceerd.</th>
-</tr>
-<tr class="header">
-<th>0.97.0</th>
-<th>1</th>
-<th>Datatypes strakker gedefinieerd: beperking op lengte, datum velden
-hebben een Date format gekregen, postcode format toegevoegd</th>
-<th>N.a.v. feedback Herman Miedema</th>
-</tr>
-<tr class="odd">
-<th>0.97.0</th>
-<th>2</th>
-<th>Een inconsistentie gelijkgetrokken: zowel matchID als vumID kwamen
-voor</th>
-<th>overal wordt nu vumID ipv matchID gebruikt, met datatype
-integer14</th>
-</tr>
-</thead>
-<tbody>
-</tbody>
-</table>
+
+
+
+
+
+

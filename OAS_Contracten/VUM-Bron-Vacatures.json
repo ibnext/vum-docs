@@ -1,5 +1,94 @@
 {
   "components": {
+    "headers": {
+      "api_version": {
+        "schema": {
+          "enum": [
+            "2.0.0"
+          ],
+          "type": "string"
+        }
+      },
+      "vum_bericht_versie": {
+        "schema": {
+          "enum": [
+            "2.0.0"
+          ],
+          "type": "string"
+        }
+      },
+      "vum_from_party": {
+        "schema": {
+          "type": "string"
+        }
+      },
+      "vum_to_party": {
+        "schema": {
+          "type": "string"
+        }
+      },
+      "vum_via_party": {
+        "schema": {
+          "type": "string"
+        }
+      }
+    },
+    "parameters": {
+      "api_version": {
+        "in": "header",
+        "name": "API-Version",
+        "required": true,
+        "schema": {
+          "enum": [
+            "2.0.0"
+          ],
+          "type": "string"
+        }
+      },
+      "vum_bericht_versie": {
+        "in": "header",
+        "name": "X-VUM-berichtVersie",
+        "required": true,
+        "schema": {
+          "enum": [
+            "2.0.0"
+          ],
+          "type": "string"
+        }
+      },
+      "vum_from_party": {
+        "in": "header",
+        "name": "X-VUM-fromParty",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "vum_suwi_party": {
+        "in": "header",
+        "name": "X-VUM-SUWIparty",
+        "required": true,
+        "schema": {
+          "type": "boolean"
+        }
+      },
+      "vum_to_party": {
+        "in": "header",
+        "name": "X-VUM-toParty",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "vum_via_party": {
+        "in": "header",
+        "name": "X-VUM-viaParty",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      }
+    },
     "requestBodies": {
       "VacatureMatchesRequest": {
         "content": {
@@ -197,7 +286,7 @@
             "additionalProperties": false,
             "properties": {
               "codeBeroepsnaam": {
-                "$ref": "#/components/schemas/StringCode"
+                "$ref": "#/components/schemas/codeBeroepsnaam"
               },
               "omschrijvingBeroepsnaam": {
                 "$ref": "#/components/schemas/String120"
@@ -248,11 +337,7 @@
         "additionalProperties": false,
         "properties": {
           "codeTypeArbeidscontract": {
-            "enum": [
-              "B",
-              "O"
-            ],
-            "type": "string"
+            "$ref": "#/components/schemas/codeTypeArbeidscontract"
           },
           "codeTypeOvereenkomst": {
             "enum": [
@@ -398,7 +483,7 @@
         "type": "object"
       },
       "IDVacature": {
-        "$ref": "#/components/schemas/String200"
+        "$ref": "#/components/schemas/SafeIDString"
       },
       "Indicatie": {
         "enum": [
@@ -534,7 +619,7 @@
       "MPOpleidingsnaamOngecodeerd": {
         "additionalProperties": false,
         "properties": {
-          "mpOpleidingsnaamOngecodeerd": {
+          "opleidingsnaamOngecodeerd": {
             "additionalProperties": false,
             "properties": {
               "naamOpleidingOngecodeerd": {
@@ -562,115 +647,31 @@
         "type": "object"
       },
       "MPVacature": {
-        "additionalProperties": false,
         "properties": {
-          "arbeidsVoorwaarden": {
-            "$ref": "#/components/schemas/MPArbeidsVoorwaarden"
-          },
-          "beroep": {
-            "$ref": "#/components/schemas/Beroepsnaam"
+          "beroep.beroepsnaamGecodeerd.codeBeroepsnaam": {
+            "$ref": "#/components/schemas/codeBeroepsnaam_selectie"
           },
           "codeWerkEnDenkniveauMinimaal": {
-            "enum": [
-              "0",
-              "1",
-              "2",
-              "3",
-              "4",
-              "5",
-              "6",
-              "7"
-            ],
-            "type": "string"
-          },
-          "contractvorm": {
-            "items": {
-              "$ref": "#/components/schemas/Contractvorm"
-            },
-            "type": "array"
-          },
-          "cursus": {
-            "items": {
-              "$ref": "#/components/schemas/Cursus"
-            },
-            "type": "array"
-          },
-          "flexibiliteit": {
-            "$ref": "#/components/schemas/Flexibiliteit"
-          },
-          "gedragscompetentie": {
-            "items": {
-              "$ref": "#/components/schemas/Gedragscompetentie"
-            },
-            "type": "array"
-          },
-          "indicatieLdrRegistratie": {
-            "enum": [
-              1,
-              2
-            ],
-            "type": "integer"
-          },
-          "mobiliteit": {
-            "$ref": "#/components/schemas/Mobiliteit"
-          },
-          "opleiding": {
-            "items": {
-              "$ref": "#/components/schemas/MPOpleiding"
-            },
-            "type": "array"
+            "$ref": "#/components/schemas/codeWerkEnDenkNiveauMinimaal_selectie"
           },
           "rijbewijs": {
-            "items": {
-              "$ref": "#/components/schemas/Rijbewijs"
-            },
-            "type": "array"
+            "$ref": "#/components/schemas/rijbewijs_selectie"
           },
-          "sector": {
-            "$ref": "#/components/schemas/SectorBeroepsEnBedrijfsleven"
-          },
-          "sluitingsDatumVacature": {
-            "$ref": "#/components/schemas/Date"
-          },
-          "sollicitatiewijze": {
-            "items": {
-              "$ref": "#/components/schemas/MPSollicitatiewijze"
-            },
-            "type": "array"
+          "selectiegebied": {
+            "$ref": "#/components/schemas/selectiegebied_selectie"
           },
           "taalbeheersing": {
-            "items": {
-              "$ref": "#/components/schemas/Taalbeheersing"
-            },
-            "type": "array"
+            "$ref": "#/components/schemas/taalbeheersingen_selectie"
           },
-          "vakvaardigheid": {
-            "items": {
-              "$ref": "#/components/schemas/Vakvaardigheid"
-            },
-            "type": "array"
+          "werktijden.aantalWerkurenPerWeekMaximaal": {
+            "$ref": "#/components/schemas/aantalWerkurenPerWeekMaximaal_selectie"
           },
-          "vervoermiddel": {
-            "items": {
-              "$ref": "#/components/schemas/MPVervoermiddel"
-            },
-            "type": "array"
-          },
-          "werkervaring": {
-            "items": {
-              "$ref": "#/components/schemas/Werkervaring"
-            },
-            "type": "array"
-          },
-          "werkgever": {
-            "$ref": "#/components/schemas/MPWerkgever"
-          },
-          "werktijden": {
-            "$ref": "#/components/schemas/Werktijden"
+          "werktijden.aantalWerkurenPerWeekMinimaal": {
+            "$ref": "#/components/schemas/aantalWerkurenPerWeekMinimaal_selectie"
           }
         },
         "required": [
-          "mobiliteit"
+          "selectiegebied"
         ],
         "type": "object"
       },
@@ -742,7 +743,7 @@
           "sector": {
             "$ref": "#/components/schemas/SectorBeroepsEnBedrijfsleven"
           },
-          "sluitingsDatumVacature": {
+          "sluitingsdatumVacature": {
             "$ref": "#/components/schemas/Date"
           },
           "sollicitatiewijze": {
@@ -815,21 +816,6 @@
             "type": "array"
           }
         },
-        "type": "object"
-      },
-      "Mobiliteit": {
-        "properties": {
-          "bemiddelingspostcode": {
-            "$ref": "#/components/schemas/Postcode"
-          },
-          "maximaleReisafstand": {
-            "$ref": "#/components/schemas/Integer1000"
-          }
-        },
-        "required": [
-          "bemiddelingspostcode",
-          "maximaleReisafstand"
-        ],
         "type": "object"
       },
       "Opleiding": {
@@ -947,28 +933,14 @@
         "additionalProperties": false,
         "properties": {
           "codeSoortRijbewijs": {
-            "enum": [
-              "A",
-              "A1",
-              "A2",
-              "AM",
-              "B",
-              "B+",
-              "C1",
-              "C",
-              "D1",
-              "D",
-              "BE",
-              "C1E",
-              "CE",
-              "D1E",
-              "DE",
-              "T"
-            ],
-            "type": "string"
+            "$ref": "#/components/schemas/codeSoortRijbewijs"
           }
         },
         "type": "object"
+      },
+      "SafeIDString": {
+        "pattern": "^[a-zA-Z0-9_.-]{0,200}$",
+        "type": "string"
       },
       "SectorBeroepsEnBedrijfsleven": {
         "additionalProperties": false,
@@ -1077,10 +1049,6 @@
         "maxLength": 16,
         "type": "string"
       },
-      "String200": {
-        "maxLength": 200,
-        "type": "string"
-      },
       "String2000": {
         "maxLength": 2000,
         "type": "string"
@@ -1133,12 +1101,12 @@
         "maxLength": 2,
         "type": "string"
       },
-      "StringCode3": {
-        "maxLength": 3,
-        "type": "string"
-      },
       "StringCode4": {
         "maxLength": 4,
+        "type": "string"
+      },
+      "TaalCode3": {
+        "pattern": "^[a-z]{3}$",
         "type": "string"
       },
       "Taalbeheersing": {
@@ -1157,7 +1125,7 @@
             "$ref": "#/components/schemas/IntegerTaal"
           },
           "codeTaal": {
-            "$ref": "#/components/schemas/StringCode3"
+            "$ref": "#/components/schemas/TaalCode3"
           }
         },
         "type": "object"
@@ -1166,7 +1134,7 @@
         "$ref": "#/components/schemas/String14"
       },
       "URL": {
-        "format": "URL",
+        "maxLength": 512,
         "type": "string"
       },
       "Vacature": {
@@ -1246,7 +1214,7 @@
           "sector": {
             "$ref": "#/components/schemas/SectorBeroepsEnBedrijfsleven"
           },
-          "sluitingsDatumVacature": {
+          "sluitingsdatumVacature": {
             "$ref": "#/components/schemas/Date"
           },
           "sollicitatiewijze": {
@@ -1333,7 +1301,13 @@
         "additionalProperties": false,
         "properties": {
           "codeWebadres": {
-            "$ref": "#/components/schemas/Integer2"
+            "enum": [
+              1,
+              2,
+              3,
+              4
+            ],
+            "type": "integer"
           },
           "url": {
             "$ref": "#/components/schemas/URL"
@@ -1397,18 +1371,237 @@
           }
         },
         "type": "object"
+      },
+      "aantalWerkuren": {
+        "maximum": 99,
+        "minimum": 1,
+        "type": "integer"
+      },
+      "aantalWerkurenPerWeekMaximaal_selectie": {
+        "properties": {
+          "$gte": {
+            "$ref": "#/components/schemas/aantalWerkuren"
+          }
+        },
+        "type": "object"
+      },
+      "aantalWerkurenPerWeekMinimaal_selectie": {
+        "properties": {
+          "$lte": {
+            "$ref": "#/components/schemas/aantalWerkuren"
+          }
+        },
+        "type": "object"
+      },
+      "codeBeroepsnaam": {
+        "pattern": "^[0-9]{1,10}$",
+        "type": "string"
+      },
+      "codeBeroepsnaam_selectie": {
+        "properties": {
+          "$eq": {
+            "$ref": "#/components/schemas/codeBeroepsnaam"
+          }
+        },
+        "type": "object"
+      },
+      "codeNiveauTaalbeheersing_choice": {
+        "enum": [
+          2,
+          3,
+          4
+        ],
+        "type": "integer"
+      },
+      "codeNiveauTaalbeheersing_selectie": {
+        "properties": {
+          "$gte": {
+            "$ref": "#/components/schemas/codeNiveauTaalbeheersing_choice"
+          }
+        },
+        "type": "object"
+      },
+      "codeSoortRijbewijs": {
+        "enum": [
+          "A",
+          "A1",
+          "A2",
+          "AM",
+          "B",
+          "B+",
+          "C1",
+          "C",
+          "D1",
+          "D",
+          "BE",
+          "C1E",
+          "CE",
+          "D1E",
+          "DE",
+          "T"
+        ],
+        "type": "string"
+      },
+      "codeSoortRijbewijs_match": {
+        "properties": {
+          "$elemMatch": {
+            "properties": {
+              "codeSoortRijbewijs": {
+                "$ref": "#/components/schemas/codeSoortRijbewijs_selectie"
+              }
+            },
+            "type": "object"
+          }
+        },
+        "type": "object"
+      },
+      "codeSoortRijbewijs_selectie": {
+        "properties": {
+          "$eq": {
+            "$ref": "#/components/schemas/codeSoortRijbewijs"
+          }
+        },
+        "type": "object"
+      },
+      "codeTaal_selectie": {
+        "properties": {
+          "$eq": {
+            "$ref": "#/components/schemas/TaalCode3"
+          }
+        },
+        "type": "object"
+      },
+      "codeTypeArbeidscontract": {
+        "enum": [
+          "O",
+          "B"
+        ],
+        "type": "string"
+      },
+      "codeWerkEnDenkNiveauMinimaal_selectie": {
+        "oneOf": [
+          {
+            "additionalProperties": false,
+            "properties": {
+              "$gte": {
+                "$ref": "#/components/schemas/codeWerkEnDenkNiveau_choice"
+              },
+              "$lt": {
+                "enum": [
+                  "7"
+                ],
+                "type": "string"
+              }
+            },
+            "required": [
+              "$lt"
+            ],
+            "type": "object"
+          },
+          {
+            "not": {
+              "required": [
+                "$lt"
+              ]
+            },
+            "properties": {
+              "$eq": {
+                "enum": [
+                  "7"
+                ],
+                "type": "string"
+              }
+            },
+            "type": "object"
+          }
+        ]
+      },
+      "codeWerkEnDenkNiveau_choice": {
+        "enum": [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5",
+          "6"
+        ],
+        "type": "string"
+      },
+      "rijbewijs_selectie": {
+        "properties": {
+          "$all": {
+            "items": {
+              "$ref": "#/components/schemas/codeSoortRijbewijs_match"
+            },
+            "minItems": 1,
+            "type": "array"
+          }
+        },
+        "type": "object"
+      },
+      "selectiegebied_selectie": {
+        "properties": {
+          "afstand": {
+            "$ref": "#/components/schemas/Integer1000"
+          },
+          "postcode": {
+            "$ref": "#/components/schemas/Postcode"
+          }
+        },
+        "required": [
+          "afstand",
+          "postcode"
+        ],
+        "type": "object"
+      },
+      "taalbeheersing_match": {
+        "properties": {
+          "$elemMatch": {
+            "$ref": "#/components/schemas/taalbeheersing_selectie"
+          }
+        },
+        "type": "object"
+      },
+      "taalbeheersing_selectie": {
+        "properties": {
+          "codeNiveauTaalbeheersingMondeling": {
+            "$ref": "#/components/schemas/codeNiveauTaalbeheersing_selectie"
+          },
+          "codeNiveauTaalbeheersingSchriftelijk": {
+            "$ref": "#/components/schemas/codeNiveauTaalbeheersing_selectie"
+          },
+          "codeTaal": {
+            "$ref": "#/components/schemas/codeTaal_selectie"
+          }
+        },
+        "required": [
+          "codeTaal"
+        ],
+        "type": "object"
+      },
+      "taalbeheersingen_selectie": {
+        "properties": {
+          "$all": {
+            "items": {
+              "$ref": "#/components/schemas/taalbeheersing_match"
+            },
+            "minItems": 1,
+            "type": "array"
+          }
+        },
+        "type": "object"
       }
     }
   },
   "info": {
     "contact": {
-      "email": "beheer@twi-programma.nl",
+      "email": "programma-vum@ictu.nl",
       "name": "Helpdesk",
-      "url": "https://www.twi-programma.nl"
+      "url": "https://www.matchingsgegevens.nl"
     },
     "description": "Contract tbv interactie van bronnen met VUM uitwisselingsvoorziening voor Vacatures",
     "title": "VUM API Vacatures tussen VUM-UV en bronnen",
-    "version": "1.0.0"
+    "version": "2.0.0"
   },
   "openapi": "3.0.0",
   "paths": {
@@ -1418,44 +1611,22 @@
         "operationId": "MatchesVacatures",
         "parameters": [
           {
-            "in": "header",
-            "name": "X-VUM-berichtVersie",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "$ref": "#/components/parameters/vum_bericht_versie"
           },
           {
-            "in": "header",
-            "name": "X-VUM-fromParty",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "$ref": "#/components/parameters/vum_from_party"
           },
           {
-            "in": "header",
-            "name": "X-VUM-toParty",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "$ref": "#/components/parameters/vum_to_party"
           },
           {
-            "in": "header",
-            "name": "X-VUM-viaParty",
-            "required": false,
-            "schema": {
-              "type": "string"
-            }
+            "$ref": "#/components/parameters/vum_via_party"
           },
           {
-            "in": "header",
-            "name": "X-VUM-SUWIparty",
-            "required": true,
-            "schema": {
-              "type": "boolean"
-            }
+            "$ref": "#/components/parameters/vum_suwi_party"
+          },
+          {
+            "$ref": "#/components/parameters/api_version"
           }
         ],
         "requestBody": {
@@ -1485,25 +1656,20 @@
             },
             "description": "OK",
             "headers": {
+              "API-Version": {
+                "$ref": "#/components/headers/api_version"
+              },
               "X-VUM-berichtVersie": {
-                "schema": {
-                  "type": "string"
-                }
+                "$ref": "#/components/headers/vum_bericht_versie"
               },
               "X-VUM-fromParty": {
-                "schema": {
-                  "type": "string"
-                }
+                "$ref": "#/components/headers/vum_from_party"
               },
               "X-VUM-toParty": {
-                "schema": {
-                  "type": "string"
-                }
+                "$ref": "#/components/headers/vum_to_party"
               },
               "X-VUM-viaParty": {
-                "schema": {
-                  "type": "string"
-                }
+                "$ref": "#/components/headers/vum_via_party"
               }
             }
           },
@@ -1515,10 +1681,44 @@
                 }
               }
             },
-            "description": "Bad request"
+            "description": "Bad request",
+            "headers": {
+              "API-Version": {
+                "$ref": "#/components/headers/api_version"
+              },
+              "X-VUM-berichtVersie": {
+                "$ref": "#/components/headers/vum_bericht_versie"
+              },
+              "X-VUM-fromParty": {
+                "$ref": "#/components/headers/vum_from_party"
+              },
+              "X-VUM-toParty": {
+                "$ref": "#/components/headers/vum_to_party"
+              },
+              "X-VUM-viaParty": {
+                "$ref": "#/components/headers/vum_via_party"
+              }
+            }
           },
           "401": {
-            "description": "not authorized"
+            "description": "not authorized",
+            "headers": {
+              "API-Version": {
+                "$ref": "#/components/headers/api_version"
+              },
+              "X-VUM-berichtVersie": {
+                "$ref": "#/components/headers/vum_bericht_versie"
+              },
+              "X-VUM-fromParty": {
+                "$ref": "#/components/headers/vum_from_party"
+              },
+              "X-VUM-toParty": {
+                "$ref": "#/components/headers/vum_to_party"
+              },
+              "X-VUM-viaParty": {
+                "$ref": "#/components/headers/vum_via_party"
+              }
+            }
           },
           "429": {
             "content": {
@@ -1528,7 +1728,24 @@
                 }
               }
             },
-            "description": "Too Many Requests"
+            "description": "Too Many Requests",
+            "headers": {
+              "API-Version": {
+                "$ref": "#/components/headers/api_version"
+              },
+              "X-VUM-berichtVersie": {
+                "$ref": "#/components/headers/vum_bericht_versie"
+              },
+              "X-VUM-fromParty": {
+                "$ref": "#/components/headers/vum_from_party"
+              },
+              "X-VUM-toParty": {
+                "$ref": "#/components/headers/vum_to_party"
+              },
+              "X-VUM-viaParty": {
+                "$ref": "#/components/headers/vum_via_party"
+              }
+            }
           },
           "500": {
             "content": {
@@ -1538,7 +1755,24 @@
                 }
               }
             },
-            "description": "Internal Server Error"
+            "description": "Internal Server Error",
+            "headers": {
+              "API-Version": {
+                "$ref": "#/components/headers/api_version"
+              },
+              "X-VUM-berichtVersie": {
+                "$ref": "#/components/headers/vum_bericht_versie"
+              },
+              "X-VUM-fromParty": {
+                "$ref": "#/components/headers/vum_from_party"
+              },
+              "X-VUM-toParty": {
+                "$ref": "#/components/headers/vum_to_party"
+              },
+              "X-VUM-viaParty": {
+                "$ref": "#/components/headers/vum_via_party"
+              }
+            }
           },
           "503": {
             "content": {
@@ -1548,7 +1782,24 @@
                 }
               }
             },
-            "description": "Service Unavailable"
+            "description": "Service Unavailable",
+            "headers": {
+              "API-Version": {
+                "$ref": "#/components/headers/api_version"
+              },
+              "X-VUM-berichtVersie": {
+                "$ref": "#/components/headers/vum_bericht_versie"
+              },
+              "X-VUM-fromParty": {
+                "$ref": "#/components/headers/vum_from_party"
+              },
+              "X-VUM-toParty": {
+                "$ref": "#/components/headers/vum_to_party"
+              },
+              "X-VUM-viaParty": {
+                "$ref": "#/components/headers/vum_via_party"
+              }
+            }
           }
         },
         "summary": "Zoekopdracht voor Vacatures"
@@ -1570,44 +1821,22 @@
             "style": "simple"
           },
           {
-            "in": "header",
-            "name": "X-VUM-berichtVersie",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "$ref": "#/components/parameters/vum_bericht_versie"
           },
           {
-            "in": "header",
-            "name": "X-VUM-fromParty",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "$ref": "#/components/parameters/vum_from_party"
           },
           {
-            "in": "header",
-            "name": "X-VUM-toParty",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "$ref": "#/components/parameters/vum_to_party"
           },
           {
-            "in": "header",
-            "name": "X-VUM-viaParty",
-            "required": false,
-            "schema": {
-              "type": "string"
-            }
+            "$ref": "#/components/parameters/vum_via_party"
           },
           {
-            "in": "header",
-            "name": "X-VUM-SUWIparty",
-            "required": true,
-            "schema": {
-              "type": "boolean"
-            }
+            "$ref": "#/components/parameters/vum_suwi_party"
+          },
+          {
+            "$ref": "#/components/parameters/api_version"
           }
         ],
         "responses": {
@@ -1621,25 +1850,20 @@
             },
             "description": "OK",
             "headers": {
+              "API-Version": {
+                "$ref": "#/components/headers/api_version"
+              },
               "X-VUM-berichtVersie": {
-                "schema": {
-                  "type": "string"
-                }
+                "$ref": "#/components/headers/vum_bericht_versie"
               },
               "X-VUM-fromParty": {
-                "schema": {
-                  "type": "string"
-                }
+                "$ref": "#/components/headers/vum_from_party"
               },
               "X-VUM-toParty": {
-                "schema": {
-                  "type": "string"
-                }
+                "$ref": "#/components/headers/vum_to_party"
               },
               "X-VUM-viaParty": {
-                "schema": {
-                  "type": "string"
-                }
+                "$ref": "#/components/headers/vum_via_party"
               }
             }
           },
@@ -1651,10 +1875,44 @@
                 }
               }
             },
-            "description": "Bad request"
+            "description": "Bad request",
+            "headers": {
+              "API-Version": {
+                "$ref": "#/components/headers/api_version"
+              },
+              "X-VUM-berichtVersie": {
+                "$ref": "#/components/headers/vum_bericht_versie"
+              },
+              "X-VUM-fromParty": {
+                "$ref": "#/components/headers/vum_from_party"
+              },
+              "X-VUM-toParty": {
+                "$ref": "#/components/headers/vum_to_party"
+              },
+              "X-VUM-viaParty": {
+                "$ref": "#/components/headers/vum_via_party"
+              }
+            }
           },
           "401": {
-            "description": "not authorized"
+            "description": "not authorized",
+            "headers": {
+              "API-Version": {
+                "$ref": "#/components/headers/api_version"
+              },
+              "X-VUM-berichtVersie": {
+                "$ref": "#/components/headers/vum_bericht_versie"
+              },
+              "X-VUM-fromParty": {
+                "$ref": "#/components/headers/vum_from_party"
+              },
+              "X-VUM-toParty": {
+                "$ref": "#/components/headers/vum_to_party"
+              },
+              "X-VUM-viaParty": {
+                "$ref": "#/components/headers/vum_via_party"
+              }
+            }
           },
           "429": {
             "content": {
@@ -1664,7 +1922,24 @@
                 }
               }
             },
-            "description": "Too Many Requests, limiet is overschreden voor deze uitvraag"
+            "description": "Too Many Requests, limiet is overschreden voor deze uitvraag",
+            "headers": {
+              "API-Version": {
+                "$ref": "#/components/headers/api_version"
+              },
+              "X-VUM-berichtVersie": {
+                "$ref": "#/components/headers/vum_bericht_versie"
+              },
+              "X-VUM-fromParty": {
+                "$ref": "#/components/headers/vum_from_party"
+              },
+              "X-VUM-toParty": {
+                "$ref": "#/components/headers/vum_to_party"
+              },
+              "X-VUM-viaParty": {
+                "$ref": "#/components/headers/vum_via_party"
+              }
+            }
           },
           "500": {
             "content": {
@@ -1674,7 +1949,24 @@
                 }
               }
             },
-            "description": "Internal Server Error"
+            "description": "Internal Server Error",
+            "headers": {
+              "API-Version": {
+                "$ref": "#/components/headers/api_version"
+              },
+              "X-VUM-berichtVersie": {
+                "$ref": "#/components/headers/vum_bericht_versie"
+              },
+              "X-VUM-fromParty": {
+                "$ref": "#/components/headers/vum_from_party"
+              },
+              "X-VUM-toParty": {
+                "$ref": "#/components/headers/vum_to_party"
+              },
+              "X-VUM-viaParty": {
+                "$ref": "#/components/headers/vum_via_party"
+              }
+            }
           },
           "503": {
             "content": {
@@ -1684,7 +1976,24 @@
                 }
               }
             },
-            "description": "Service Unavailable"
+            "description": "Service Unavailable",
+            "headers": {
+              "API-Version": {
+                "$ref": "#/components/headers/api_version"
+              },
+              "X-VUM-berichtVersie": {
+                "$ref": "#/components/headers/vum_bericht_versie"
+              },
+              "X-VUM-fromParty": {
+                "$ref": "#/components/headers/vum_from_party"
+              },
+              "X-VUM-toParty": {
+                "$ref": "#/components/headers/vum_to_party"
+              },
+              "X-VUM-viaParty": {
+                "$ref": "#/components/headers/vum_via_party"
+              }
+            }
           }
         },
         "summary": "Vraag volledige vacature op bij opgegeven idVacature"
@@ -1693,7 +2002,8 @@
   },
   "servers": [
     {
-      "url": "https://api.example.com/v1"
+      "description": "Testbron",
+      "url": "https://bron.vumdevelopment.nl/api/v2"
     }
   ]
 }

@@ -1,248 +1,3 @@
-openapi: 3.0.0
-info:
-  title: VUM API werkzoekendeProfielen tussen VUM-UV en bemiddelaar
-  description: Contract tbv interactie van bemiddelaars met VUM uitwisselingsvoorziening
-    voor werkzoekendeProfielen
-  contact:
-    name: Helpdesk
-    url: https://www.matchingsgegevens.nl
-    email: programma-vum@ictu.nl
-  version: 2.0.0
-servers:
-- url: https://test.vumdevelopment.nl/api/v2
-  description: staging/test server
-- url: https://accept.vumdevelopment.nl/api/v2
-  description: acceptatie server
-- url: https://prod.vumdevelopment.nl/api/v2
-  description: productie server
-paths:
-  /werkzoekendeProfielen/matches:
-    post:
-      summary: Zoekopdracht voor MatchingProfielen werkzoekende
-      description: Zoekopdracht om matches voor Werkzoekende MatchingProfielen op
-        te vragen
-      operationId: MatcheswerkzoekendeProfielen
-      parameters:
-      - $ref: '#/components/parameters/vum_bericht_versie'
-      - $ref: '#/components/parameters/vum_from_party'
-      - $ref: '#/components/parameters/vum_to_party'
-      - $ref: '#/components/parameters/vum_via_party'
-      - $ref: '#/components/parameters/api_version'
-      requestBody:
-        $ref: '#/components/requestBodies/WerkzoekendeProfielMatchesRequest'
-      responses:
-        '200':
-          description: OK
-          headers:
-            X-VUM-berichtVersie:
-              $ref: '#/components/headers/vum_bericht_versie'
-            X-VUM-fromParty:
-              $ref: '#/components/headers/vum_from_party'
-            X-VUM-toParty:
-              $ref: '#/components/headers/vum_to_party'
-            X-VUM-viaParty:
-              $ref: '#/components/headers/vum_via_party'
-            API-Version:
-              $ref: '#/components/headers/api_version'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/WerkzoekendeProfielMatchesResponse'
-        '400':
-          description: Bad request
-          headers:
-            X-VUM-berichtVersie:
-              $ref: '#/components/headers/vum_bericht_versie'
-            X-VUM-fromParty:
-              $ref: '#/components/headers/vum_from_party'
-            X-VUM-toParty:
-              $ref: '#/components/headers/vum_to_party'
-            X-VUM-viaParty:
-              $ref: '#/components/headers/vum_via_party'
-            API-Version:
-              $ref: '#/components/headers/api_version'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-        '401':
-          description: not authorized
-          headers:
-            X-VUM-berichtVersie:
-              $ref: '#/components/headers/vum_bericht_versie'
-            X-VUM-fromParty:
-              $ref: '#/components/headers/vum_from_party'
-            X-VUM-toParty:
-              $ref: '#/components/headers/vum_to_party'
-            X-VUM-viaParty:
-              $ref: '#/components/headers/vum_via_party'
-            API-Version:
-              $ref: '#/components/headers/api_version'
-        '429':
-          description: Too Many Requests
-          headers:
-            X-VUM-berichtVersie:
-              $ref: '#/components/headers/vum_bericht_versie'
-            X-VUM-fromParty:
-              $ref: '#/components/headers/vum_from_party'
-            X-VUM-toParty:
-              $ref: '#/components/headers/vum_to_party'
-            X-VUM-viaParty:
-              $ref: '#/components/headers/vum_via_party'
-            API-Version:
-              $ref: '#/components/headers/api_version'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-        '500':
-          description: Internal Server Error
-          headers:
-            X-VUM-berichtVersie:
-              $ref: '#/components/headers/vum_bericht_versie'
-            X-VUM-fromParty:
-              $ref: '#/components/headers/vum_from_party'
-            X-VUM-toParty:
-              $ref: '#/components/headers/vum_to_party'
-            X-VUM-viaParty:
-              $ref: '#/components/headers/vum_via_party'
-            API-Version:
-              $ref: '#/components/headers/api_version'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-        '503':
-          description: Service Unavailable
-          headers:
-            X-VUM-berichtVersie:
-              $ref: '#/components/headers/vum_bericht_versie'
-            X-VUM-fromParty:
-              $ref: '#/components/headers/vum_from_party'
-            X-VUM-toParty:
-              $ref: '#/components/headers/vum_to_party'
-            X-VUM-viaParty:
-              $ref: '#/components/headers/vum_via_party'
-            API-Version:
-              $ref: '#/components/headers/api_version'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-  /werkzoekendeProfielen/{vumID}:
-    get:
-      summary: Vraag detailprofielen op bij opgegeven vumID
-      description: Vraag detailprofielen op bij een opgegeven vumID
-      operationId: getWerkzoekendeProfiel
-      parameters:
-      - in: path
-        name: vumID
-        required: true
-        style: simple
-        explode: false
-        schema:
-          $ref: '#/components/schemas/VumID'
-      - $ref: '#/components/parameters/vum_bericht_versie'
-      - $ref: '#/components/parameters/vum_from_party'
-      - $ref: '#/components/parameters/vum_to_party'
-      - $ref: '#/components/parameters/vum_via_party'
-      - $ref: '#/components/parameters/api_version'
-      responses:
-        '200':
-          description: OK
-          headers:
-            X-VUM-berichtVersie:
-              $ref: '#/components/headers/vum_bericht_versie'
-            X-VUM-fromParty:
-              $ref: '#/components/headers/vum_from_party'
-            X-VUM-toParty:
-              $ref: '#/components/headers/vum_to_party'
-            X-VUM-viaParty:
-              $ref: '#/components/headers/vum_via_party'
-            API-Version:
-              $ref: '#/components/headers/api_version'
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  bronID:
-                    $ref: '#/components/schemas/String200'
-                  werkzoekende:
-                    $ref: '#/components/schemas/Werkzoekende'
-        '400':
-          description: Bad request
-          headers:
-            X-VUM-berichtVersie:
-              $ref: '#/components/headers/vum_bericht_versie'
-            X-VUM-fromParty:
-              $ref: '#/components/headers/vum_from_party'
-            X-VUM-toParty:
-              $ref: '#/components/headers/vum_to_party'
-            X-VUM-viaParty:
-              $ref: '#/components/headers/vum_via_party'
-            API-Version:
-              $ref: '#/components/headers/api_version'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-        '401':
-          description: not authorized
-          headers:
-            API-Version:
-              $ref: '#/components/headers/api_version'
-        '429':
-          description: Too Many Requests, limiet is overschreden voor deze uitvraag
-          headers:
-            X-VUM-berichtVersie:
-              $ref: '#/components/headers/vum_bericht_versie'
-            X-VUM-fromParty:
-              $ref: '#/components/headers/vum_from_party'
-            X-VUM-toParty:
-              $ref: '#/components/headers/vum_to_party'
-            X-VUM-viaParty:
-              $ref: '#/components/headers/vum_via_party'
-            API-Version:
-              $ref: '#/components/headers/api_version'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-        '500':
-          description: Internal Server Error
-          headers:
-            X-VUM-berichtVersie:
-              $ref: '#/components/headers/vum_bericht_versie'
-            X-VUM-fromParty:
-              $ref: '#/components/headers/vum_from_party'
-            X-VUM-toParty:
-              $ref: '#/components/headers/vum_to_party'
-            X-VUM-viaParty:
-              $ref: '#/components/headers/vum_via_party'
-            API-Version:
-              $ref: '#/components/headers/api_version'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-        '503':
-          description: Service Unavailable
-          headers:
-            X-VUM-berichtVersie:
-              $ref: '#/components/headers/vum_bericht_versie'
-            X-VUM-fromParty:
-              $ref: '#/components/headers/vum_from_party'
-            X-VUM-toParty:
-              $ref: '#/components/headers/vum_to_party'
-            X-VUM-viaParty:
-              $ref: '#/components/headers/vum_via_party'
-            API-Version:
-              $ref: '#/components/headers/api_version'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
 components:
   headers:
     api_version:
@@ -287,6 +42,12 @@ components:
       required: true
       schema:
         type: string
+    vum_suwi_party:
+      in: header
+      name: X-VUM-SUWIparty
+      required: true
+      schema:
+        type: boolean
     vum_to_party:
       in: header
       name: X-VUM-toParty
@@ -300,6 +61,17 @@ components:
       schema:
         type: string
   requestBodies:
+    VacatureMatchesRequest:
+      content:
+        application/json:
+          schema:
+            properties:
+              vraagObject:
+                $ref: '#/components/schemas/MPVacature'
+            required:
+            - vraagObject
+            type: object
+      required: true
     WerkzoekendeProfielMatchesRequest:
       content:
         application/json:
@@ -313,6 +85,22 @@ components:
             type: object
       required: true
   schemas:
+    VacaturesMatchesResponse:
+      required:
+      - maximumAantalResultatenBereikt
+      - vraagID
+      - matches
+      type: object
+      properties:
+        maximumAantalResultatenBereikt:
+          type: boolean
+          description: Geeft aan of bron meer matches zou kunnen leveren
+            dan de teruggeleverde set. Bronnen mogen per zoekvraag een maximum
+            aantal (standaard 100) resultaten leveren
+        vraagID:
+          $ref: '#/components/schemas/VraagID'
+        matches:
+          $ref: '#/components/schemas/VacatureMatchingProfielen'
     WerkzoekendeProfielMatchesResponse:
       required:
       - maximumAantalResultatenBereikt
@@ -322,9 +110,9 @@ components:
       properties:
         maximumAantalResultatenBereikt:
           type: boolean
-          description: Geeft aan of bron meer matches zou kunnen leveren dan de teruggeleverde
-            set. Bronnen mogen per zoekvraag een maximum aantal (standaard 100) resultaten
-            leveren
+          description: Geeft aan of bron meer matches zou kunnen leveren
+            dan de teruggeleverde set. Bronnen mogen per zoekvraag een maximum
+            aantal (standaard 100) resultaten leveren
         vraagID:
           $ref: '#/components/schemas/VraagID'
         matches:
@@ -332,6 +120,105 @@ components:
     VraagID:
       maxLength: 100
       type: string
+    AdresBuitenland:
+      additionalProperties: false
+      properties:
+        adresBuitenland:
+          additionalProperties: false
+          properties:
+            adresDetailsBuitenland:
+              oneOf:
+              - $ref: '#/components/schemas/StraatadresBuitenland'
+              - $ref: '#/components/schemas/PostbusadresBuitenland'
+            landencodeIso:
+              $ref: '#/components/schemas/StringCode2'
+            landsnaam:
+              $ref: '#/components/schemas/String40'
+            locatieomschrijvingBuitenland:
+              $ref: '#/components/schemas/String70'
+            postcodeBuitenland:
+              $ref: '#/components/schemas/String9'
+            regionaamBuitenland:
+              $ref: '#/components/schemas/String24'
+            woonplaatsnaamBuitenland:
+              $ref: '#/components/schemas/String40'
+          type: object
+      type: object
+    AdresHouding:
+      additionalProperties: false
+      properties:
+        adres:
+          oneOf:
+          - $ref: '#/components/schemas/AdresNederland'
+          - $ref: '#/components/schemas/AdresBuitenland'
+        codeFunctieAdres:
+          enum:
+          - B
+          - W
+          - C
+          - L
+          - A
+          - V
+          - E
+          type: string
+        datumAanvangAdres:
+          $ref: '#/components/schemas/Date'
+        datumEindeAdres:
+          $ref: '#/components/schemas/Date'
+      type: object
+    AdresNederland:
+      additionalProperties: false
+      properties:
+        adresNederland:
+          additionalProperties: false
+          properties:
+            adresDetails:
+              oneOf:
+              - $ref: '#/components/schemas/Straatadres'
+              - $ref: '#/components/schemas/Postbusadres'
+              - $ref: '#/components/schemas/Antwoordnummeradres'
+            codeGemeente:
+              $ref: '#/components/schemas/StringCode4'
+            district:
+              $ref: '#/components/schemas/String24'
+            gemeentedeel:
+              $ref: '#/components/schemas/String24'
+            gemeentenaam:
+              $ref: '#/components/schemas/String40'
+            identificatiecodeNummeraanduiding:
+              $ref: '#/components/schemas/String16'
+            identificatiecodeVerblijfplaats:
+              $ref: '#/components/schemas/String16'
+            locatieomschrijving:
+              $ref: '#/components/schemas/String70'
+            postcode:
+              $ref: '#/components/schemas/Postcode'
+            woonplaatsnaam:
+              $ref: '#/components/schemas/String80'
+          type: object
+      type: object
+    Antwoordnummeradres:
+      additionalProperties: false
+      properties:
+        antwoordnummeradres:
+          additionalProperties: false
+          properties:
+            antwoordnummer:
+              $ref: '#/components/schemas/Integer5'
+          type: object
+      type: object
+    ArbeidsVoorwaarden:
+      additionalProperties: false
+      properties:
+        datumAanvangWerkzaamheden:
+          $ref: '#/components/schemas/Date'
+        datumEindeWerkzaamheden:
+          $ref: '#/components/schemas/Date'
+        omschrijvingArbeidsvoorwaarden:
+          $ref: '#/components/schemas/String2000'
+        salarisIndicatie:
+          $ref: '#/components/schemas/String100'
+      type: object
     Arbeidsmarktkwalificatie:
       additionalProperties: false
       properties:
@@ -408,11 +295,19 @@ components:
     ContactpersoonAfdeling:
       additionalProperties: false
       properties:
+        emailadres_V:
+          items:
+            $ref: '#/components/schemas/Emailadres'
+          type: array
+        emailadres_W:
+          $ref: '#/components/schemas/Emailadres'
         naamContactpersoonAfdeling:
           $ref: '#/components/schemas/String35'
-        emailadres:
-          $ref: '#/components/schemas/Emailadres'
-        telefoonnummer:
+        telefoonnummer_V:
+          items:
+            $ref: '#/components/schemas/Telefoonnummer'
+          type: array
+        telefoonnummer_W:
           $ref: '#/components/schemas/Telefoonnummer'
       type: object
     Contractvorm:
@@ -431,15 +326,15 @@ components:
     Cursus:
       additionalProperties: false
       properties:
+        datumAanvangVolgenCursus_W:
+          $ref: '#/components/schemas/Date'
+        datumCertificaat_W:
+          $ref: '#/components/schemas/Date'
+        datumEindeVolgenCursus_W:
+          $ref: '#/components/schemas/Date'
         naamCursus:
           $ref: '#/components/schemas/String120'
-        datumAanvangVolgenCursus:
-          $ref: '#/components/schemas/Date'
-        datumCertificaat:
-          $ref: '#/components/schemas/Date'
-        datumEindeVolgenCursus:
-          $ref: '#/components/schemas/Date'
-        naamOpleidingsinstituut:
+        naamOpleidingsinstituut_W:
           $ref: '#/components/schemas/String500'
       type: object
     Date:
@@ -552,6 +447,8 @@ components:
           - Bedrijfsmatig handelen
           type: string
       type: object
+    IDVacature:
+      $ref: '#/components/schemas/SafeIDString'
     IDWerkzoekende:
       $ref: '#/components/schemas/SafeIDString'
     Indicatie:
@@ -591,6 +488,42 @@ components:
       properties:
         naamInteresse:
           $ref: '#/components/schemas/String120'
+      type: object
+    MPAdresBuitenland:
+      additionalProperties: false
+      properties:
+        adresBuitenland:
+          additionalProperties: false
+          properties:
+            landencodeIso:
+              $ref: '#/components/schemas/StringCode2'
+          type: object
+      type: object
+    MPAdresHouding:
+      additionalProperties: false
+      properties:
+        adres:
+          $ref: '#/components/schemas/MPAdresBuitenland'
+        codeFunctieAdres:
+          enum:
+          - B
+          - W
+          - C
+          - L
+          - A
+          - V
+          - E
+          type: string
+      type: object
+    MPArbeidsVoorwaarden:
+      additionalProperties: false
+      properties:
+        datumAanvangWerkzaamheden:
+          $ref: '#/components/schemas/Date'
+        datumEindeWerkzaamheden:
+          $ref: '#/components/schemas/Date'
+        salarisIndicatie:
+          $ref: '#/components/schemas/String100'
       type: object
     MPArbeidsmarktkwalificatie:
       additionalProperties: false
@@ -656,6 +589,8 @@ components:
           - 6
           - 9
           type: integer
+        datumDiploma_W:
+          $ref: '#/components/schemas/Date'
         indicatieDiploma:
           enum:
           - 0
@@ -663,10 +598,135 @@ components:
           - 2
           - 8
           type: integer
-        datumDiploma:
-          $ref: '#/components/schemas/Date'
-        opleidingsnaam:
+        opleidingsnaam_V:
+          $ref: '#/components/schemas/MPOpleidingsnaam'
+        opleidingsnaam_W:
           $ref: '#/components/schemas/Opleidingsnaam'
+      type: object
+    MPOpleidingsnaam:
+      oneOf:
+      - $ref: '#/components/schemas/OpleidingsnaamGecodeerd'
+      - $ref: '#/components/schemas/MPOpleidingsnaamOngecodeerd'
+    MPOpleidingsnaamOngecodeerd:
+      additionalProperties: false
+      properties:
+        opleidingsnaamOngecodeerd:
+          additionalProperties: false
+          properties:
+            naamOpleidingOngecodeerd:
+              $ref: '#/components/schemas/String120'
+          type: object
+      type: object
+    MPSollicitatiewijze:
+      additionalProperties: false
+      properties:
+        codeSollicitatiewijze:
+          enum:
+          - '1'
+          - '2'
+          - '3'
+          - '4'
+          type: string
+      type: object
+    MPVacature:
+      properties:
+        beroep.beroepsnaamGecodeerd.codeBeroepsnaam:
+          $ref: '#/components/schemas/codeBeroepsnaam_selectie'
+        codeWerkEnDenkniveauMinimaal:
+          $ref: '#/components/schemas/codeWerkEnDenkNiveauMinimaal_selectie'
+        rijbewijs:
+          $ref: '#/components/schemas/rijbewijs_selectie'
+        selectiegebied:
+          $ref: '#/components/schemas/selectiegebied_selectie'
+        taalbeheersing:
+          $ref: '#/components/schemas/taalbeheersingen_selectie'
+        werktijden.aantalWerkurenPerWeekMaximaal:
+          $ref: '#/components/schemas/aantalWerkurenPerWeekMaximaal_selectie'
+        werktijden.aantalWerkurenPerWeekMinimaal:
+          $ref: '#/components/schemas/aantalWerkurenPerWeekMinimaal_selectie'
+      required:
+      - selectiegebied
+      type: object
+    MPVacatureMatch:
+      additionalProperties: false
+      properties:
+        arbeidsVoorwaarden:
+          $ref: '#/components/schemas/MPArbeidsVoorwaarden'
+        beroep:
+          $ref: '#/components/schemas/Beroepsnaam'
+        codeWerkEnDenkniveauMinimaal:
+          enum:
+          - '0'
+          - '1'
+          - '2'
+          - '3'
+          - '4'
+          - '5'
+          - '6'
+          - '7'
+          type: string
+        contractvorm:
+          items:
+            $ref: '#/components/schemas/Contractvorm'
+          type: array
+        cursus:
+          items:
+            $ref: '#/components/schemas/Cursus'
+          type: array
+        flexibiliteit:
+          $ref: '#/components/schemas/Flexibiliteit'
+        gedragscompetentie:
+          items:
+            $ref: '#/components/schemas/Gedragscompetentie'
+          type: array
+        idVacature_BRN:
+          $ref: '#/components/schemas/IDVacature'
+        indicatieLdrRegistratie:
+          enum:
+          - 1
+          - 2
+          type: integer
+        opleiding:
+          items:
+            $ref: '#/components/schemas/MPOpleiding'
+          type: array
+        rijbewijs:
+          items:
+            $ref: '#/components/schemas/Rijbewijs'
+          type: array
+        sector:
+          $ref: '#/components/schemas/SectorBeroepsEnBedrijfsleven'
+        sluitingsdatumVacature:
+          $ref: '#/components/schemas/Date'
+        sollicitatiewijze:
+          items:
+            $ref: '#/components/schemas/MPSollicitatiewijze'
+          type: array
+        taalbeheersing:
+          items:
+            $ref: '#/components/schemas/Taalbeheersing'
+          type: array
+        vakvaardigheid:
+          items:
+            $ref: '#/components/schemas/Vakvaardigheid'
+          type: array
+        vervoermiddel:
+          items:
+            $ref: '#/components/schemas/MPVervoermiddel'
+          type: array
+        vumID_VUM:
+          $ref: '#/components/schemas/VumID'
+        werkervaring:
+          items:
+            $ref: '#/components/schemas/Werkervaring'
+          type: array
+        werkgever:
+          $ref: '#/components/schemas/MPWerkgever'
+        werktijden:
+          $ref: '#/components/schemas/Werktijden'
+      required:
+      - vumID_VUM
+      - idVacature_BRN
       type: object
     MPVervoermiddel:
       additionalProperties: false
@@ -687,6 +747,18 @@ components:
           $ref: '#/components/schemas/Date'
         naamOrganisatie:
           $ref: '#/components/schemas/String70'
+      type: object
+    MPWerkgever:
+      additionalProperties: false
+      properties:
+        adresHouding:
+          items:
+            $ref: '#/components/schemas/MPAdresHouding'
+          type: array
+        sector:
+          items:
+            $ref: '#/components/schemas/SectorBeroepsEnBedrijfsleven'
+          type: array
       type: object
     MPWerkzoekende:
       properties:
@@ -726,6 +798,8 @@ components:
           type: array
         flexibiliteit:
           $ref: '#/components/schemas/Flexibiliteit'
+        idWerkzoekende_BRN:
+          $ref: '#/components/schemas/IDWerkzoekende'
         indicatieBeschikbaarheidContactgegevens:
           enum:
           - 1
@@ -750,13 +824,14 @@ components:
           items:
             $ref: '#/components/schemas/Voorkeursland'
           type: array
+        vumID_VUM:
+          $ref: '#/components/schemas/VumID'
         werktijden:
           $ref: '#/components/schemas/Werktijden'
-        vumID:
-          $ref: '#/components/schemas/VumID'
       required:
       - mobiliteit
-      - vumID
+      - vumID_VUM
+      - idWerkzoekende_BRN
       type: object
     Mobiliteit:
       additionalProperties: false
@@ -781,6 +856,19 @@ components:
           - 6
           - 9
           type: integer
+        codeStatusOpleiding_W:
+          enum:
+          - 0
+          - 1
+          - 2
+          - 3
+          type: integer
+        datumAanvangVolgenOpleiding_W:
+          $ref: '#/components/schemas/Date'
+        datumDiploma_W:
+          $ref: '#/components/schemas/Date'
+        datumEindeVolgenOpleiding_W:
+          $ref: '#/components/schemas/Date'
         indicatieDiploma:
           enum:
           - 0
@@ -788,23 +876,10 @@ components:
           - 2
           - 8
           type: integer
+        naamOpleidingsinstituut_W:
+          $ref: '#/components/schemas/String500'
         opleidingsnaam:
           $ref: '#/components/schemas/Opleidingsnaam'
-        codeStatusOpleiding:
-          enum:
-          - 0
-          - 1
-          - 2
-          - 3
-          type: integer
-        datumAanvangVolgenOpleiding:
-          $ref: '#/components/schemas/Date'
-        datumDiploma:
-          $ref: '#/components/schemas/Date'
-        datumEindeVolgenOpleiding:
-          $ref: '#/components/schemas/Date'
-        naamOpleidingsinstituut:
-          $ref: '#/components/schemas/String500'
       type: object
     Opleidingsnaam:
       oneOf:
@@ -834,6 +909,26 @@ components:
               $ref: '#/components/schemas/String2000'
           type: object
       type: object
+    Postbusadres:
+      additionalProperties: false
+      properties:
+        postbusadres:
+          additionalProperties: false
+          properties:
+            postbusnummer:
+              $ref: '#/components/schemas/Integer5'
+          type: object
+      type: object
+    PostbusadresBuitenland:
+      additionalProperties: false
+      properties:
+        postbusadresbuitenland:
+          additionalProperties: false
+          properties:
+            postbusnummerBuitenland:
+              $ref: '#/components/schemas/String9'
+          type: object
+      type: object
     Postcode:
       example: 1234AB
       pattern: ^[0-9]{4}[a-zA-Z]{2}$
@@ -850,11 +945,73 @@ components:
         codeSbi:
           $ref: '#/components/schemas/Integer5'
       type: object
+    Sollicitatiewijze:
+      additionalProperties: false
+      properties:
+        codeSollicitatiewijze:
+          enum:
+          - '1'
+          - '2'
+          - '3'
+          - '4'
+          type: string
+        webadres:
+          $ref: '#/components/schemas/Webadres'
+      type: object
+    Straatadres:
+      additionalProperties: false
+      properties:
+        straatadres:
+          additionalProperties: false
+          properties:
+            aanduidingBijHuisnummer:
+              $ref: '#/components/schemas/StringCode2'
+            huisletter:
+              $ref: '#/components/schemas/StringCode1'
+            huisnummer:
+              $ref: '#/components/schemas/Integer5'
+            huisnummertoevoeging:
+              $ref: '#/components/schemas/String6'
+            naamOpenbareRuimte:
+              $ref: '#/components/schemas/String80'
+            straatnaam:
+              $ref: '#/components/schemas/String24'
+            woonbootverwijzing:
+              enum:
+              - AB
+              type: string
+            woonwagenverwijzing:
+              enum:
+              - WW
+              type: string
+          type: object
+      type: object
+    StraatadresBuitenland:
+      additionalProperties: false
+      properties:
+        straatadresbuitenland:
+          additionalProperties: false
+          properties:
+            huisnummerBuitenland:
+              $ref: '#/components/schemas/String9'
+            straatnaamBuitenland:
+              $ref: '#/components/schemas/String24'
+          type: object
+      type: object
+    String100:
+      maxLength: 100
+      type: string
+    String11:
+      maxLength: 11
+      type: string
     String120:
       maxLength: 120
       type: string
     String14:
       maxLength: 14
+      type: string
+    String16:
+      maxLength: 16
       type: string
     String200:
       maxLength: 200
@@ -862,23 +1019,44 @@ components:
     String2000:
       maxLength: 2000
       type: string
+    String24:
+      maxLength: 24
+      type: string
     String320:
       maxLength: 320
       type: string
     String35:
       maxLength: 35
       type: string
+    String40:
+      maxLength: 40
+      type: string
     String500:
       maxLength: 500
+      type: string
+    String6:
+      maxLength: 6
       type: string
     String70:
       maxLength: 70
       type: string
+    String80:
+      maxLength: 80
+      type: string
+    String9:
+      maxLength: 9
+      type: string
     StringCode:
       maxLength: 10
       type: string
+    StringCode1:
+      maxLength: 1
+      type: string
     StringCode2:
       maxLength: 2
+      type: string
+    StringCode4:
+      maxLength: 4
       type: string
     SafeIDString:
       pattern: ^[a-zA-Z0-9_.-]{0,200}$
@@ -905,6 +1083,94 @@ components:
     URL:
       type: string
       maxLength: 512
+    Vacature:
+      additionalProperties: false
+      properties:
+        arbeidsVoorwaarden:
+          $ref: '#/components/schemas/ArbeidsVoorwaarden'
+        beroep:
+          $ref: '#/components/schemas/Beroepsnaam'
+        codeWerkEnDenkniveauMinimaal:
+          enum:
+          - '0'
+          - '1'
+          - '2'
+          - '3'
+          - '4'
+          - '5'
+          - '6'
+          - '7'
+          type: string
+        contractvorm:
+          items:
+            $ref: '#/components/schemas/Contractvorm'
+          type: array
+        cursus:
+          items:
+            $ref: '#/components/schemas/Cursus'
+          type: array
+        flexibiliteit:
+          $ref: '#/components/schemas/Flexibiliteit'
+        gedragscompetentie:
+          items:
+            $ref: '#/components/schemas/Gedragscompetentie'
+          type: array
+        idVacature:
+          $ref: '#/components/schemas/IDVacature'
+        indicatieLdrRegistratie:
+          enum:
+          - 1
+          - 2
+          type: integer
+        naamVacature:
+          $ref: '#/components/schemas/String120'
+        nummerVacature:
+          $ref: '#/components/schemas/String11'
+        omschrijvingVacature:
+          $ref: '#/components/schemas/String2000'
+        opleiding:
+          items:
+            $ref: '#/components/schemas/Opleiding'
+          type: array
+        rijbewijs:
+          items:
+            $ref: '#/components/schemas/Rijbewijs'
+          type: array
+        sector:
+          $ref: '#/components/schemas/SectorBeroepsEnBedrijfsleven'
+        sluitingsdatumVacature:
+          $ref: '#/components/schemas/Date'
+        sollicitatiewijze:
+          items:
+            $ref: '#/components/schemas/Sollicitatiewijze'
+          type: array
+        taalbeheersing:
+          items:
+            $ref: '#/components/schemas/Taalbeheersing'
+          type: array
+        vakvaardigheid:
+          items:
+            $ref: '#/components/schemas/Vakvaardigheid'
+          type: array
+        vervoermiddel:
+          items:
+            $ref: '#/components/schemas/Vervoermiddel'
+          type: array
+        werkervaring:
+          items:
+            $ref: '#/components/schemas/Werkervaring'
+          type: array
+        werkgever:
+          $ref: '#/components/schemas/Werkgever'
+        werktijden:
+          $ref: '#/components/schemas/Werktijden'
+      required:
+      - idVacature
+      type: object
+    VacatureMatchingProfielen:
+      items:
+        $ref: '#/components/schemas/MPVacatureMatch'
+      type: array
     Vakvaardigheid:
       additionalProperties: false
       properties:
@@ -953,16 +1219,40 @@ components:
     Werkervaring:
       additionalProperties: false
       properties:
-        beroep:
+        aantalJarenWerkzaamInBeroep_V:
+          $ref: '#/components/schemas/Integer2'
+        beroep_W:
           $ref: '#/components/schemas/Beroepsnaam'
-        datumAanvangWerkzaamheden:
+        datumAanvangWerkzaamheden_W:
           $ref: '#/components/schemas/Date'
-        datumEindeWerkzaamheden:
+        datumEindeWerkzaamheden_W:
           $ref: '#/components/schemas/Date'
-        naamOrganisatie:
+        naamOrganisatie_W:
           $ref: '#/components/schemas/String70'
-        toelichtingWerkervaring:
+        toelichtingWerkervaring_W:
           $ref: '#/components/schemas/String2000'
+      type: object
+    Werkgever:
+      additionalProperties: false
+      properties:
+        adresHouding:
+          items:
+            $ref: '#/components/schemas/AdresHouding'
+          type: array
+        contactpersoon:
+          items:
+            $ref: '#/components/schemas/ContactpersoonAfdeling'
+          type: array
+        handelsnaamOrganisatie:
+          $ref: '#/components/schemas/String500'
+        sector:
+          items:
+            $ref: '#/components/schemas/SectorBeroepsEnBedrijfsleven'
+          type: array
+        webadres:
+          items:
+            $ref: '#/components/schemas/Webadres'
+          type: array
       type: object
     Werktijden:
       additionalProperties: false
@@ -1066,6 +1356,11 @@ components:
                 $ref: '#/components/schemas/beroepsnaamGecodeerd_selectie'
           type: object
       type: object
+    beroep_selectie:
+      properties:
+        beroepsnaamGecodeerd:
+          $ref: '#/components/schemas/beroepsnaamGecodeerd_selectie'
+      type: object
     beroepsnaamGecodeerd_selectie:
       properties:
         beroepsnaamGecodeerd.codeBeroepsnaam:
@@ -1132,13 +1427,45 @@ components:
       - O
       - B
       type: string
+    codeWerkEnDenkNiveauMinimaal_selectie:
+      oneOf:
+      - additionalProperties: false
+        properties:
+          $gte:
+            $ref: '#/components/schemas/codeWerkEnDenkNiveau_choice'
+          $lt:
+            enum:
+            - '7'
+            type: string
+        required:
+        - $lt
+        type: object
+      - properties:
+          $eq:
+            enum:
+            - '7'
+            type: string
+        not:
+          required:
+          - $lt
+        type: object
+    codeWerkEnDenkNiveau_choice:
+      enum:
+      - '1'
+      - '2'
+      - '3'
+      - '4'
+      - '5'
+      - '6'
+      type: string
+
     contractvorm_selectie:
       properties:
         $elemMatch:
           properties:
             $or:
               type: array
-              items:
+              items: 
                 $ref: '#/components/schemas/codeTypeArbeidscontract_selectie'
               minItems: 1
           type: object
