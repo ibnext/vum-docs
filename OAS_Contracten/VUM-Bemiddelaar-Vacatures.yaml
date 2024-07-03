@@ -589,7 +589,7 @@ components:
           type: string
       type: object
     IDVacature:
-      $ref: '#/components/schemas/String200'
+      $ref: '#/components/schemas/SafeIDString'
     Indicatie:
       enum:
       - 0
@@ -1023,6 +1023,9 @@ components:
     StringCode4:
       maxLength: 4
       type: string
+    SafeIDString:
+      pattern: ^[a-zA-Z0-9_.-]{0,200}$
+      type: string
     TaalCode3:
       pattern: ^[a-z]{3}$
       type: string
@@ -1043,8 +1046,8 @@ components:
     Telefoonnummer:
       $ref: '#/components/schemas/String14'
     URL:
-      format: uri
       type: string
+      maxLength: 512
     Vacature:
       additionalProperties: false
       properties:
@@ -1157,7 +1160,8 @@ components:
           $ref: '#/components/schemas/Indicatie'
       type: object
     VumID:
-      $ref: '#/components/schemas/String500'
+      type: string
+      pattern: ^[a-zA-Z0-9_.-]{0,500}$
     Webadres:
       additionalProperties: false
       properties:

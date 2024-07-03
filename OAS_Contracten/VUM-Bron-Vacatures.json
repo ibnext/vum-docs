@@ -483,7 +483,7 @@
         "type": "object"
       },
       "IDVacature": {
-        "$ref": "#/components/schemas/String200"
+        "$ref": "#/components/schemas/SafeIDString"
       },
       "Indicatie": {
         "enum": [
@@ -938,6 +938,10 @@
         },
         "type": "object"
       },
+      "SafeIDString": {
+        "pattern": "^[a-zA-Z0-9_.-]{0,200}$",
+        "type": "string"
+      },
       "SectorBeroepsEnBedrijfsleven": {
         "additionalProperties": false,
         "properties": {
@@ -1045,10 +1049,6 @@
         "maxLength": 16,
         "type": "string"
       },
-      "String200": {
-        "maxLength": 200,
-        "type": "string"
-      },
       "String2000": {
         "maxLength": 2000,
         "type": "string"
@@ -1134,7 +1134,7 @@
         "$ref": "#/components/schemas/String14"
       },
       "URL": {
-        "format": "uri",
+        "maxLength": 512,
         "type": "string"
       },
       "Vacature": {

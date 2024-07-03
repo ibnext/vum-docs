@@ -552,7 +552,7 @@ components:
           type: string
       type: object
     IDWerkzoekende:
-      $ref: '#/components/schemas/String200'
+      $ref: '#/components/schemas/SafeIDString'
     Indicatie:
       enum:
       - 0
@@ -855,9 +855,6 @@ components:
     String14:
       maxLength: 14
       type: string
-    String200:
-      maxLength: 200
-      type: string
     String2000:
       maxLength: 2000
       type: string
@@ -879,6 +876,9 @@ components:
     StringCode2:
       maxLength: 2
       type: string
+    SafeIDString:
+      pattern: ^[a-zA-Z0-9_.-]{0,200}$
+      type: string
     TaalCode3:
       pattern: ^[a-z]{3}$
       type: string
@@ -899,8 +899,8 @@ components:
     Telefoonnummer:
       $ref: '#/components/schemas/String14'
     URL:
-      format: uri
       type: string
+      maxLength: 512
     Vakvaardigheid:
       additionalProperties: false
       properties:
