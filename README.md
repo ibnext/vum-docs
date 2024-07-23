@@ -149,7 +149,8 @@ Daarnaast kent de VUM Gegevensstandaard een aantal waardelijsten. Sommige waarde
 VUM Gegegevensstandaard worden beheerd. Deze zijn als enumeratie van mogelijke waardes voor het gegeven in het JSON schema opgenomen.
 
 Daarnaast bevat de VUM Gegevensstandaard ook een aantal waardelijsten die door andere organisaties worden beheerd. Dit betreft onder
-andere de lijsten van opleidingen, beroepen, landen en talen. Deze waardelijsten zijn niet opgenomen als enumeratie. Het schema bevat dan wel een restrictie die de vorm van het gegeven beschrijft (bijv. een taalcode bestaat uit drie alfabetische karakters).
+andere de lijsten van opleidingen, beroepen, landen en talen. Deze waardelijsten zijn niet opgenomen als enumeratie. Het schema bevat dan wel een restrictie die de vorm van het gegeven beschrijft (bijv. een taalcode bestaat uit drie alfabetische karakters). Sommige van deze waardelijsten zijn opgenomen in deze repository zodat duidelijk is welke versie van de lijst gehanteerd wordt binnen de uitwisselingsvoorziening. 
+Deze lijsten zijn terug te vinden in de map `waardelijsten`.
 
 Tot slot zijn er, als uitzondering, een aantal extern beheerde waardelijsten met een zeer beperkt aantal keuzes volledig als enumeratie
 opgenomen. Dit betreft bijvoorbeeld de codes voor verschillende soorten rijbewijzen.
