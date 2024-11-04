@@ -17,7 +17,7 @@ stages:
 
 lint:
   stage: validate
-  image: golang:1.20
+  image: golang:1.23
   extends: .go-cache
   script:
     - |
