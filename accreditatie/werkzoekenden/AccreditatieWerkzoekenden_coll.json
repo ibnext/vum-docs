@@ -1,0 +1,1887 @@
+{
+  "_": {
+    "postman_id": "4d60c791-7cf2-4281-929e-ce0ce5198daa"
+  },
+  "item": [
+    {
+      "id": "f0daa391-b032-4b10-88b9-f1b4fd92bc15",
+      "name": "Zoekopdracht voor MatchingProfielen werkzoekende",
+      "request": {
+        "name": "Zoekopdracht voor MatchingProfielen werkzoekende",
+        "description": {
+          "content": "Zoekopdracht om matches voor Werkzoekende MatchingProfielen op te vragen",
+          "type": "text/plain"
+        },
+        "url": {
+          "path": ["werkzoekendeProfielen", "matches"],
+          "host": ["{{baseUrl}}"],
+          "query": [],
+          "variable": []
+        },
+        "header": [
+          {
+            "disabled": false,
+            "description": {
+              "content": "(Required) ",
+              "type": "text/plain"
+            },
+            "key": "X-VUM-berichtVersie",
+            "value": "2.0.0"
+          },
+          {
+            "disabled": false,
+            "description": {
+              "content": "(Required) ",
+              "type": "text/plain"
+            },
+            "key": "X-VUM-fromParty",
+            "value": "{{x-vum-fromparty}}"
+          },
+          {
+            "disabled": false,
+            "description": {
+              "content": "(Required) ",
+              "type": "text/plain"
+            },
+            "key": "X-VUM-toParty",
+            "value": "{{x-vum-toparty}}"
+          },
+          {
+            "disabled": false,
+            "description": {
+              "content": "(Required) ",
+              "type": "text/plain"
+            },
+            "key": "X-VUM-viaParty",
+            "value": "{{x-vum-viaparty}}"
+          },
+          {
+            "disabled": false,
+            "description": {
+              "content": "(Required) ",
+              "type": "text/plain"
+            },
+            "key": "API-Version",
+            "value": "{{api-version}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json"
+          },
+          {
+            "disabled": false,
+            "key": "X-OIN",
+            "value": "{{x-vum-viaparty}}"
+          },
+          {
+            "disabled": false,
+            "key": "X-VUM-SUWIParty",
+            "value": "{{x-vum-suwiparty}}"
+          }
+        ],
+        "method": "POST",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"vraagObject\": {{werkzoekende.zoekvraag}}\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "response": [
+        {
+          "_": {
+            "postman_previewlanguage": "json"
+          },
+          "id": "8f01a8fc-9c8b-44c3-9d80-1349214e2891",
+          "name": "OK",
+          "originalRequest": {
+            "url": {
+              "path": ["werkzoekendeProfielen", "matches"],
+              "host": ["{{baseUrl}}"],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": {
+                  "content": "(Required) ",
+                  "type": "text/plain"
+                },
+                "key": "X-VUM-berichtVersie",
+                "value": "2.0.0"
+              },
+              {
+                "disabled": false,
+                "description": {
+                  "content": "(Required) ",
+                  "type": "text/plain"
+                },
+                "key": "X-VUM-fromParty",
+                "value": "sint in ut cillum Lorem"
+              },
+              {
+                "disabled": false,
+                "description": {
+                  "content": "(Required) ",
+                  "type": "text/plain"
+                },
+                "key": "X-VUM-toParty",
+                "value": "sint in ut cillum Lorem"
+              },
+              {
+                "disabled": false,
+                "description": {
+                  "content": "(Required) ",
+                  "type": "text/plain"
+                },
+                "key": "X-VUM-viaParty",
+                "value": "sint in ut cillum Lorem"
+              },
+              {
+                "disabled": false,
+                "description": {
+                  "content": "(Required) ",
+                  "type": "text/plain"
+                },
+                "key": "API-Version",
+                "value": "2.0.0"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "disabled": true,
+              "description": {
+                "content": "",
+                "type": "text/plain"
+              },
+              "key": "X-VUM-berichtVersie",
+              "value": "2.0.0"
+            },
+            {
+              "disabled": true,
+              "description": {
+                "content": "",
+                "type": "text/plain"
+              },
+              "key": "X-VUM-fromParty",
+              "value": "sint in ut cillum Lorem"
+            },
+            {
+              "disabled": true,
+              "description": {
+                "content": "",
+                "type": "text/plain"
+              },
+              "key": "X-VUM-toParty",
+              "value": "sint in ut cillum Lorem"
+            },
+            {
+              "disabled": true,
+              "description": {
+                "content": "",
+                "type": "text/plain"
+              },
+              "key": "X-VUM-viaParty",
+              "value": "sint in ut cillum Lorem"
+            },
+            {
+              "disabled": true,
+              "description": {
+                "content": "",
+                "type": "text/plain"
+              },
+              "key": "API-Version",
+              "value": "2.0.0"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": {},
+          "cookie": []
+        },
+        {
+          "_": {
+            "postman_previewlanguage": "json"
+          },
+          "id": "3f37d90c-091a-4d3c-8b9c-22ba83512657",
+          "name": "Bad request",
+          "originalRequest": {
+            "url": {
+              "path": ["werkzoekendeProfielen", "matches"],
+              "host": ["{{baseUrl}}"],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": {
+                  "content": "(Required) ",
+                  "type": "text/plain"
+                },
+                "key": "X-VUM-berichtVersie",
+                "value": "2.0.0"
+              },
+              {
+                "disabled": false,
+                "description": {
+                  "content": "(Required) ",
+                  "type": "text/plain"
+                },
+                "key": "X-VUM-fromParty",
+                "value": "sint in ut cillum Lorem"
+              },
+              {
+                "disabled": false,
+                "description": {
+                  "content": "(Required) ",
+                  "type": "text/plain"
+                },
+                "key": "X-VUM-toParty",
+                "value": "sint in ut cillum Lorem"
+              },
+              {
+                "disabled": false,
+                "description": {
+                  "content": "(Required) ",
+                  "type": "text/plain"
+                },
+                "key": "X-VUM-viaParty",
+                "value": "sint in ut cillum Lorem"
+              },
+              {
+                "disabled": false,
+                "description": {
+                  "content": "(Required) ",
+                  "type": "text/plain"
+                },
+                "key": "API-Version",
+                "value": "2.0.0"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Bad Request",
+          "code": 400,
+          "header": [
+            {
+              "disabled": true,
+              "description": {
+                "content": "",
+                "type": "text/plain"
+              },
+              "key": "X-VUM-berichtVersie",
+              "value": "2.0.0"
+            },
+            {
+              "disabled": true,
+              "description": {
+                "content": "",
+                "type": "text/plain"
+              },
+              "key": "X-VUM-fromParty",
+              "value": "sint in ut cillum Lorem"
+            },
+            {
+              "disabled": true,
+              "description": {
+                "content": "",
+                "type": "text/plain"
+              },
+              "key": "X-VUM-toParty",
+              "value": "sint in ut cillum Lorem"
+            },
+            {
+              "disabled": true,
+              "description": {
+                "content": "",
+                "type": "text/plain"
+              },
+              "key": "X-VUM-viaParty",
+              "value": "sint in ut cillum Lorem"
+            },
+            {
+              "disabled": true,
+              "description": {
+                "content": "",
+                "type": "text/plain"
+              },
+              "key": "API-Version",
+              "value": "2.0.0"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": {},
+          "cookie": []
+        },
+        {
+          "_": {
+            "postman_previewlanguage": "text"
+          },
+          "id": "71d78ebf-5e9c-4c6a-90da-69201100177c",
+          "name": "not authorized",
+          "originalRequest": {
+            "url": {
+              "path": ["werkzoekendeProfielen", "matches"],
+              "host": ["{{baseUrl}}"],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": {
+                  "content": "(Required) ",
+                  "type": "text/plain"
+                },
+                "key": "X-VUM-berichtVersie",
+                "value": "2.0.0"
+              },
+              {
+                "disabled": false,
+                "description": {
+                  "content": "(Required) ",
+                  "type": "text/plain"
+                },
+                "key": "X-VUM-fromParty",
+                "value": "sint in ut cillum Lorem"
+              },
+              {
+                "disabled": false,
+                "description": {
+                  "content": "(Required) ",
+                  "type": "text/plain"
+                },
+                "key": "X-VUM-toParty",
+                "value": "sint in ut cillum Lorem"
+              },
+              {
+                "disabled": false,
+                "description": {
+                  "content": "(Required) ",
+                  "type": "text/plain"
+                },
+                "key": "X-VUM-viaParty",
+                "value": "sint in ut cillum Lorem"
+              },
+              {
+                "disabled": false,
+                "description": {
+                  "content": "(Required) ",
+                  "type": "text/plain"
+                },
+                "key": "API-Version",
+                "value": "2.0.0"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Unauthorized",
+          "code": 401,
+          "header": [
+            {
+              "disabled": true,
+              "description": {
+                "content": "",
+                "type": "text/plain"
+              },
+              "key": "X-VUM-berichtVersie",
+              "value": "2.0.0"
+            },
+            {
+              "disabled": true,
+              "description": {
+                "content": "",
+                "type": "text/plain"
+              },
+              "key": "X-VUM-fromParty",
+              "value": "sint in ut cillum Lorem"
+            },
+            {
+              "disabled": true,
+              "description": {
+                "content": "",
+                "type": "text/plain"
+              },
+              "key": "X-VUM-toParty",
+              "value": "sint in ut cillum Lorem"
+            },
+            {
+              "disabled": true,
+              "description": {
+                "content": "",
+                "type": "text/plain"
+              },
+              "key": "X-VUM-viaParty",
+              "value": "sint in ut cillum Lorem"
+            },
+            {
+              "disabled": true,
+              "description": {
+                "content": "",
+                "type": "text/plain"
+              },
+              "key": "API-Version",
+              "value": "2.0.0"
+            },
+            {
+              "key": "Content-Type",
+              "value": "text/plain"
+            }
+          ],
+          "body": {},
+          "cookie": []
+        },
+        {
+          "_": {
+            "postman_previewlanguage": "json"
+          },
+          "id": "ba2d7491-a6e7-48aa-bce9-14b0d125634d",
+          "name": "Too Many Requests",
+          "originalRequest": {
+            "url": {
+              "path": ["werkzoekendeProfielen", "matches"],
+              "host": ["{{baseUrl}}"],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": {
+                  "content": "(Required) ",
+                  "type": "text/plain"
+                },
+                "key": "X-VUM-berichtVersie",
+                "value": "2.0.0"
+              },
+              {
+                "disabled": false,
+                "description": {
+                  "content": "(Required) ",
+                  "type": "text/plain"
+                },
+                "key": "X-VUM-fromParty",
+                "value": "sint in ut cillum Lorem"
+              },
+              {
+                "disabled": false,
+                "description": {
+                  "content": "(Required) ",
+                  "type": "text/plain"
+                },
+                "key": "X-VUM-toParty",
+                "value": "sint in ut cillum Lorem"
+              },
+              {
+                "disabled": false,
+                "description": {
+                  "content": "(Required) ",
+                  "type": "text/plain"
+                },
+                "key": "X-VUM-viaParty",
+                "value": "sint in ut cillum Lorem"
+              },
+              {
+                "disabled": false,
+                "description": {
+                  "content": "(Required) ",
+                  "type": "text/plain"
+                },
+                "key": "API-Version",
+                "value": "2.0.0"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Too Many Requests",
+          "code": 429,
+          "header": [
+            {
+              "disabled": true,
+              "description": {
+                "content": "",
+                "type": "text/plain"
+              },
+              "key": "X-VUM-berichtVersie",
+              "value": "2.0.0"
+            },
+            {
+              "disabled": true,
+              "description": {
+                "content": "",
+                "type": "text/plain"
+              },
+              "key": "X-VUM-fromParty",
+              "value": "sint in ut cillum Lorem"
+            },
+            {
+              "disabled": true,
+              "description": {
+                "content": "",
+                "type": "text/plain"
+              },
+              "key": "X-VUM-toParty",
+              "value": "sint in ut cillum Lorem"
+            },
+            {
+              "disabled": true,
+              "description": {
+                "content": "",
+                "type": "text/plain"
+              },
+              "key": "X-VUM-viaParty",
+              "value": "sint in ut cillum Lorem"
+            },
+            {
+              "disabled": true,
+              "description": {
+                "content": "",
+                "type": "text/plain"
+              },
+              "key": "API-Version",
+              "value": "2.0.0"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": {},
+          "cookie": []
+        },
+        {
+          "_": {
+            "postman_previewlanguage": "json"
+          },
+          "id": "ae4536e8-21e3-47f6-a8f8-de9469e5204d",
+          "name": "Internal Server Error",
+          "originalRequest": {
+            "url": {
+              "path": ["werkzoekendeProfielen", "matches"],
+              "host": ["{{baseUrl}}"],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": {
+                  "content": "(Required) ",
+                  "type": "text/plain"
+                },
+                "key": "X-VUM-berichtVersie",
+                "value": "2.0.0"
+              },
+              {
+                "disabled": false,
+                "description": {
+                  "content": "(Required) ",
+                  "type": "text/plain"
+                },
+                "key": "X-VUM-fromParty",
+                "value": "sint in ut cillum Lorem"
+              },
+              {
+                "disabled": false,
+                "description": {
+                  "content": "(Required) ",
+                  "type": "text/plain"
+                },
+                "key": "X-VUM-toParty",
+                "value": "sint in ut cillum Lorem"
+              },
+              {
+                "disabled": false,
+                "description": {
+                  "content": "(Required) ",
+                  "type": "text/plain"
+                },
+                "key": "X-VUM-viaParty",
+                "value": "sint in ut cillum Lorem"
+              },
+              {
+                "disabled": false,
+                "description": {
+                  "content": "(Required) ",
+                  "type": "text/plain"
+                },
+                "key": "API-Version",
+                "value": "2.0.0"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Internal Server Error",
+          "code": 500,
+          "header": [
+            {
+              "disabled": true,
+              "description": {
+                "content": "",
+                "type": "text/plain"
+              },
+              "key": "X-VUM-berichtVersie",
+              "value": "2.0.0"
+            },
+            {
+              "disabled": true,
+              "description": {
+                "content": "",
+                "type": "text/plain"
+              },
+              "key": "X-VUM-fromParty",
+              "value": "sint in ut cillum Lorem"
+            },
+            {
+              "disabled": true,
+              "description": {
+                "content": "",
+                "type": "text/plain"
+              },
+              "key": "X-VUM-toParty",
+              "value": "sint in ut cillum Lorem"
+            },
+            {
+              "disabled": true,
+              "description": {
+                "content": "",
+                "type": "text/plain"
+              },
+              "key": "X-VUM-viaParty",
+              "value": "sint in ut cillum Lorem"
+            },
+            {
+              "disabled": true,
+              "description": {
+                "content": "",
+                "type": "text/plain"
+              },
+              "key": "API-Version",
+              "value": "2.0.0"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": {},
+          "cookie": []
+        },
+        {
+          "_": {
+            "postman_previewlanguage": "json"
+          },
+          "id": "83baae51-56cb-43e7-ba7c-0bccce077b9f",
+          "name": "Service Unavailable",
+          "originalRequest": {
+            "url": {
+              "path": ["werkzoekendeProfielen", "matches"],
+              "host": ["{{baseUrl}}"],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": {
+                  "content": "(Required) ",
+                  "type": "text/plain"
+                },
+                "key": "X-VUM-berichtVersie",
+                "value": "2.0.0"
+              },
+              {
+                "disabled": false,
+                "description": {
+                  "content": "(Required) ",
+                  "type": "text/plain"
+                },
+                "key": "X-VUM-fromParty",
+                "value": "sint in ut cillum Lorem"
+              },
+              {
+                "disabled": false,
+                "description": {
+                  "content": "(Required) ",
+                  "type": "text/plain"
+                },
+                "key": "X-VUM-toParty",
+                "value": "sint in ut cillum Lorem"
+              },
+              {
+                "disabled": false,
+                "description": {
+                  "content": "(Required) ",
+                  "type": "text/plain"
+                },
+                "key": "X-VUM-viaParty",
+                "value": "sint in ut cillum Lorem"
+              },
+              {
+                "disabled": false,
+                "description": {
+                  "content": "(Required) ",
+                  "type": "text/plain"
+                },
+                "key": "API-Version",
+                "value": "2.0.0"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Service Unavailable",
+          "code": 503,
+          "header": [
+            {
+              "disabled": true,
+              "description": {
+                "content": "",
+                "type": "text/plain"
+              },
+              "key": "X-VUM-berichtVersie",
+              "value": "2.0.0"
+            },
+            {
+              "disabled": true,
+              "description": {
+                "content": "",
+                "type": "text/plain"
+              },
+              "key": "X-VUM-fromParty",
+              "value": "sint in ut cillum Lorem"
+            },
+            {
+              "disabled": true,
+              "description": {
+                "content": "",
+                "type": "text/plain"
+              },
+              "key": "X-VUM-toParty",
+              "value": "sint in ut cillum Lorem"
+            },
+            {
+              "disabled": true,
+              "description": {
+                "content": "",
+                "type": "text/plain"
+              },
+              "key": "X-VUM-viaParty",
+              "value": "sint in ut cillum Lorem"
+            },
+            {
+              "disabled": true,
+              "description": {
+                "content": "",
+                "type": "text/plain"
+              },
+              "key": "API-Version",
+              "value": "2.0.0"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": {},
+          "cookie": []
+        }
+      ],
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "id": "57916e87-8f4b-4c4f-8f6c-efd6606dfeb6",
+            "type": "text/javascript",
+            "exec": [
+              "// Validate status 2xx \npm.test(\"[POST]::/werkzoekendeProfielen/matches - Status code is 2xx\", function () {\n   pm.response.to.be.success;\n});\n",
+              "// Validate if response header has matching content-type\npm.test(\"[POST]::/werkzoekendeProfielen/matches - Content-Type is application/json\", function () {\n   pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");\n});\n",
+              "// Validate if response has JSON Body \npm.test(\"[POST]::/werkzoekendeProfielen/matches - Response has JSON Body\", function () {\n    pm.response.to.have.jsonBody();\n});\n",
+              "function removeEmptyObjectsAndArrays(obj) {",
+              "  if (Array.isArray(obj)) {",
+              "      return obj.map(removeEmptyObjectsAndArrays).filter(item => !(Array.isArray(item) && item.length === 0) && !(typeof item === 'object' && !Array.isArray(item) && Object.keys(item).length === 0));",
+              "  } else if (typeof obj === 'object' && obj !== null) {",
+              "      const newObj = {};",
+              "      for (const key in obj) {",
+              "          const value = removeEmptyObjectsAndArrays(obj[key]);",
+              "          if (!(Array.isArray(value) && value.length === 0) && !(typeof value === 'object' && !Array.isArray(value) && Object.keys(value).length === 0)) {",
+              "              newObj[key] = value;",
+              "          }",
+              "      }",
+              "      return newObj;",
+              "  }",
+              "  return obj;",
+              "}",
+              "// Check that the defined results are returned in the response",
+              "pm.test(\"[GET]::/werkzoekendeProfielen/matches - Expected results are included\", function() {",
+              "    const zoekresultaten = JSON.parse(pm.iterationData.get(\"werkzoekende.zoekresultaten\"))",
+              "    const expected = zoekresultaten.map(function(item) {",
+              "        delete item.idWerkzoekende;",
+              "        item = removeEmptyObjectsAndArrays(item);",
+              "        return item;",
+              "    });",
+              "    const observed = pm.response.json().matches.map(function(item) {",
+              "        delete item.vumID;",
+              "        item = removeEmptyObjectsAndArrays(item);",
+              "        return item;",
+              "    });",
+              "    pm.expect(expected.every(val => _.some(observed, val))).to.eql(true);",
+              "});",
+              "// Set vumID to request the configured details for the match",
+              "let vumid_lookup = new Map();",
+              "pm.collectionVariables.set(\"vumID\", \"\");",
+              "pm.response.json().matches.forEach(function(item) {",
+              "        const vumid = item.vumID;",
+              "        delete item.vumID;",
+              "        item = removeEmptyObjectsAndArrays(item);",
+              "        vumid_lookup.set(vumid, item);",
+              "});",
+              "let match = JSON.parse(pm.iterationData.get(\"werkzoekende.zoekresultaten\"))[0];",
+              "delete match.idWerkzoekende;",
+              "vumid_lookup.forEach(function(val, key) {",
+              "    if (_.isEqual(val, match)) {",
+              "        pm.collectionVariables.set(\"vumID\", key);",
+              "    }",
+              "});"
+            ]
+          }
+        },
+        {
+          "listen": "prerequest",
+          "script": {
+            "id": "6fc63815-e604-406a-99e3-9434e84f12fc",
+            "type": "text/javascript",
+            "exec": [
+              "pm.variables.set('baseUrl', pm.environment.get('baseUrl'))"
+            ]
+          }
+        }
+      ],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      }
+    },
+    {
+      "id": "2d1f1b3e-01f0-4e3e-b270-370aceba3fb3",
+      "name": "Vraag detailprofielen op bij opgegeven vumID",
+      "request": {
+        "name": "Vraag detailprofielen op bij opgegeven vumID",
+        "description": {
+          "content": "Vraag detailprofielen op bij een opgegeven vumID",
+          "type": "text/plain"
+        },
+        "url": {
+          "path": ["werkzoekendeProfielen", ":vumID"],
+          "host": ["{{baseUrl}}"],
+          "query": [],
+          "variable": [
+            {
+              "disabled": false,
+              "description": {
+                "content": "(Required) ",
+                "type": "text/plain"
+              },
+              "type": "string",
+              "value": "{{vumID}}",
+              "key": "vumID"
+            }
+          ]
+        },
+        "header": [
+          {
+            "disabled": false,
+            "description": {
+              "content": "(Required) ",
+              "type": "text/plain"
+            },
+            "key": "X-VUM-berichtVersie",
+            "value": "2.0.0"
+          },
+          {
+            "disabled": false,
+            "description": {
+              "content": "(Required) ",
+              "type": "text/plain"
+            },
+            "key": "X-VUM-fromParty",
+            "value": "{{x-vum-fromparty}}"
+          },
+          {
+            "disabled": false,
+            "description": {
+              "content": "(Required) ",
+              "type": "text/plain"
+            },
+            "key": "X-VUM-toParty",
+            "value": "{{x-vum-toparty}}"
+          },
+          {
+            "disabled": false,
+            "description": {
+              "content": "(Required) ",
+              "type": "text/plain"
+            },
+            "key": "X-VUM-viaParty",
+            "value": "{{x-vum-viaparty}}"
+          },
+          {
+            "disabled": false,
+            "description": {
+              "content": "(Required) ",
+              "type": "text/plain"
+            },
+            "key": "API-Version",
+            "value": "{{api-version}}"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json"
+          },
+          {
+            "disabled": false,
+            "key": "X-OIN",
+            "value": "{{x-vum-viaparty}}"
+          },
+          {
+            "disabled": false,
+            "key": "X-VUM-SUWIParty",
+            "value": "{{x-vum-suwiparty}}"
+          }
+        ],
+        "method": "GET"
+      },
+      "response": [
+        {
+          "_": {
+            "postman_previewlanguage": "json"
+          },
+          "id": "c78e2280-ba22-4d2d-9405-01c3df075cb8",
+          "name": "OK",
+          "originalRequest": {
+            "url": {
+              "path": ["werkzoekendeProfielen", ":vumID"],
+              "host": ["{{baseUrl}}"],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "description": {
+                    "content": "(Required) ",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "plXwKvSTbmZTjNll7JKwyFqj0yzBgFhTJa5W2EQxGqhEnhu-yQTgPIXtpLVrBbyFQGkr9xBCQe.H-ENM4Md5acRHV3qyyBy5YSyEL4nzbRDuEeQXSRyN3fXSTYOmYW6g6HPbZFCx7NvBsZt11oIyCgUVTpnGQg6E4-e_CEEcqMAOo8T7YS0oTLqh_axfcAPBWrM05.rWYzWEw73kdzzjro66BNnDKVG-8-Z.tSDp75HbzNTDKu-4bxenRLADMn",
+                  "key": "vumID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": {
+                  "content": "(Required) ",
+                  "type": "text/plain"
+                },
+                "key": "X-VUM-berichtVersie",
+                "value": "2.0.0"
+              },
+              {
+                "disabled": false,
+                "description": {
+                  "content": "(Required) ",
+                  "type": "text/plain"
+                },
+                "key": "X-VUM-fromParty",
+                "value": "sint in ut cillum Lorem"
+              },
+              {
+                "disabled": false,
+                "description": {
+                  "content": "(Required) ",
+                  "type": "text/plain"
+                },
+                "key": "X-VUM-toParty",
+                "value": "sint in ut cillum Lorem"
+              },
+              {
+                "disabled": false,
+                "description": {
+                  "content": "(Required) ",
+                  "type": "text/plain"
+                },
+                "key": "X-VUM-viaParty",
+                "value": "sint in ut cillum Lorem"
+              },
+              {
+                "disabled": false,
+                "description": {
+                  "content": "(Required) ",
+                  "type": "text/plain"
+                },
+                "key": "API-Version",
+                "value": "2.0.0"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "body": {}
+          },
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "disabled": true,
+              "description": {
+                "content": "",
+                "type": "text/plain"
+              },
+              "key": "X-VUM-berichtVersie",
+              "value": "2.0.0"
+            },
+            {
+              "disabled": true,
+              "description": {
+                "content": "",
+                "type": "text/plain"
+              },
+              "key": "X-VUM-fromParty",
+              "value": "sint in ut cillum Lorem"
+            },
+            {
+              "disabled": true,
+              "description": {
+                "content": "",
+                "type": "text/plain"
+              },
+              "key": "X-VUM-toParty",
+              "value": "sint in ut cillum Lorem"
+            },
+            {
+              "disabled": true,
+              "description": {
+                "content": "",
+                "type": "text/plain"
+              },
+              "key": "X-VUM-viaParty",
+              "value": "sint in ut cillum Lorem"
+            },
+            {
+              "disabled": true,
+              "description": {
+                "content": "",
+                "type": "text/plain"
+              },
+              "key": "API-Version",
+              "value": "2.0.0"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"bronID\": \"ex\",\n  \"werkzoekende\": {\n    \"arbeidsmarktkwalificatie\": {\n      \"codeWerkEnDenkniveauWerkzoekende\": 6,\n      \"cursus\": [\n        {\n          \"naamCursus\": \"m\",\n          \"datumAanvangVolgenCursus\": \"1950-07-21\",\n          \"datumCertificaat\": \"1977-02-24\",\n          \"datumEindeVolgenCursus\": \"1984-08-03\",\n          \"naamOpleidingsinstituut\": \"consectetur ipsum pariatur officia dolor\"\n        },\n        {\n          \"naamCursus\": \"qui labore\",\n          \"datumAanvangVolgenCursus\": \"1979-07-09\",\n          \"datumCertificaat\": \"2007-04-15\",\n          \"datumEindeVolgenCursus\": \"1994-12-31\",\n          \"naamOpleidingsinstituut\": \"non\"\n        }\n      ],\n      \"gedragscompetentie\": [\n        {\n          \"codeBeheersingGedragscompetentie\": 5,\n          \"codeGedragscompetentie\": \"24111\",\n          \"omschrijvingGedragscompetentie\": \"Leren\"\n        },\n        {\n          \"codeBeheersingGedragscompetentie\": 3,\n          \"codeGedragscompetentie\": \"24115\",\n          \"omschrijvingGedragscompetentie\": \"Ethisch en integer handelen\"\n        }\n      ],\n      \"interesse\": [\n        {\n          \"naamInteresse\": \"consectetur nostrud tempor\"\n        },\n        {\n          \"naamInteresse\": \"nulla magna\"\n        }\n      ],\n      \"opleiding\": [\n        {\n          \"codeNiveauOpleiding\": 9,\n          \"indicatieDiploma\": 8,\n          \"opleidingsnaam\": {\n            \"opleidingsnaamGecodeerd\": {\n              \"codeOpleidingsnaam\": \"9999999999\",\n              \"omschrijvingOpleidingsnaam\": \"officia dolor enim quis\"\n            }\n          },\n          \"codeStatusOpleiding\": 3,\n          \"datumAanvangVolgenOpleiding\": \"1989-11-28\",\n          \"datumDiploma\": \"1945-11-30\",\n          \"datumEindeVolgenOpleiding\": \"1989-04-21\",\n          \"naamOpleidingsinstituut\": \"do consequat aliquip commodo\"\n        },\n        {\n          \"codeNiveauOpleiding\": 2,\n          \"indicatieDiploma\": 8,\n          \"opleidingsnaam\": {\n            \"opleidingsnaamGecodeerd\": {\n              \"codeOpleidingsnaam\": \"9999999999\",\n              \"omschrijvingOpleidingsnaam\": \"in ut exercitation nostrud\"\n            }\n          },\n          \"codeStatusOpleiding\": 3,\n          \"datumAanvangVolgenOpleiding\": \"1952-05-22\",\n          \"datumDiploma\": \"1993-02-22\",\n          \"datumEindeVolgenOpleiding\": \"2017-09-02\",\n          \"naamOpleidingsinstituut\": \"id Duis commodo aute\"\n        }\n      ],\n      \"rijbewijs\": [\n        {\n          \"codeSoortRijbewijs\": \"DE\"\n        },\n        {\n          \"codeSoortRijbewijs\": \"C1E\"\n        }\n      ],\n      \"taalbeheersing\": [\n        {\n          \"codeNiveauTaalbeheersingLezen\": 4,\n          \"codeNiveauTaalbeheersingLuisteren\": 3,\n          \"codeNiveauTaalbeheersingMondeling\": 3,\n          \"codeNiveauTaalbeheersingSchriftelijk\": 1,\n          \"codeTaal\": \"zfw\"\n        },\n        {\n          \"codeNiveauTaalbeheersingLezen\": 1,\n          \"codeNiveauTaalbeheersingLuisteren\": 8,\n          \"codeNiveauTaalbeheersingMondeling\": 8,\n          \"codeNiveauTaalbeheersingSchriftelijk\": 2,\n          \"codeTaal\": \"lym\"\n        }\n      ],\n      \"vakvaardigheid\": [\n        {\n          \"omschrijving\": \"ad anim tempor proident\"\n        },\n        {\n          \"omschrijving\": \"exercitation deserunt\"\n        }\n      ],\n      \"werkervaring\": [\n        {\n          \"beroep\": {\n            \"beroepsnaamGecodeerd\": {\n              \"codeBeroepsnaam\": \"01488\",\n              \"omschrijvingBeroepsnaam\": \"irure\"\n            }\n          },\n          \"datumAanvangWerkzaamheden\": \"1997-10-04\",\n          \"datumEindeWerkzaamheden\": \"2012-05-22\",\n          \"naamOrganisatie\": \"eiusmod eu veniam\",\n          \"toelichtingWerkervaring\": \"laboris reprehenderit occaeca\"\n        },\n        {\n          \"beroep\": {\n            \"beroepsnaamGecodeerd\": {\n              \"codeBeroepsnaam\": \"18\",\n              \"omschrijvingBeroepsnaam\": \"laboris sed incididunt\"\n            }\n          },\n          \"datumAanvangWerkzaamheden\": \"2015-06-04\",\n          \"datumEindeWerkzaamheden\": \"1988-11-10\",\n          \"naamOrganisatie\": \"quis ut pariatur\",\n          \"toelichtingWerkervaring\": \"dolore\"\n        }\n      ]\n    },\n    \"bemiddelingsberoep\": [\n      {\n        \"beroepsnaamGecodeerd\": {\n          \"codeBeroepsnaam\": \"3496711806\",\n          \"omschrijvingBeroepsnaam\": \"nulla proident minim dolor aute\"\n        }\n      },\n      {\n        \"beroepsnaamGecodeerd\": {\n          \"codeBeroepsnaam\": \"56129684\",\n          \"omschrijvingBeroepsnaam\": \"nisi deserunt do\"\n        }\n      }\n    ],\n    \"contactpersoon\": [\n      {\n        \"naamContactpersoonAfdeling\": \"nisi esse eiusmod\",\n        \"emailadres\": \"eu\",\n        \"telefoonnummer\": \"par\"\n      },\n      {\n        \"naamContactpersoonAfdeling\": \"anim\",\n        \"emailadres\": \"aliquip\",\n        \"telefoonnummer\": \"commodo volupt\"\n      }\n    ],\n    \"contractvorm\": [\n      {\n        \"codeTypeArbeidscontract\": \"O\",\n        \"codeTypeOvereenkomst\": \"01\"\n      },\n      {\n        \"codeTypeArbeidscontract\": \"B\",\n        \"codeTypeOvereenkomst\": \"02\"\n      }\n    ],\n    \"eisAanWerk\": {\n      \"indicatieAanpassingWerkomgeving\": 2,\n      \"indicatieBegeleiding\": 1,\n      \"indicatieWerkvariatie\": 0\n    },\n    \"emailadres\": [\n      \"sed irure\",\n      \"pariatur consequat dolore aliqua ex\"\n    ],\n    \"flexibiliteit\": {\n      \"codeRegiostraal\": 8,\n      \"datumAanvangBeschikbaarVoorWerk\": \"2022-10-13\",\n      \"datumEindeBeschikbaarVoorWerk\": \"1985-11-11\",\n      \"indicatieOnregelmatigWerkOfPloegendienst\": 0\n    },\n    \"idWerkzoekende\": \"AascrEKrP5ZRfd5wB_uo4zcnj0gQSXxwm_IQ7NwjYckmXTDj_3KbFlPldOJipH1TqfRJqmFVxgn_RDyEAEPggF5bjMGxxiGcvv7V5FV4U8LsQeUHpzvcZS_zzE07NhXV76bdPt2GfzVR.n.M-bYwX_NHfdT9WWHfxrjR6Kae21wbDfqoPwYbKIKuw0NN.3.yzV4ne\",\n    \"indicatieBeschikbaarheidContactgegevens\": 2,\n    \"indicatieLdrRegistratie\": 2,\n    \"mobiliteit\": {\n      \"bemiddelingspostcode\": \"1234AB\",\n      \"maximaleReisafstand\": 260,\n      \"maximaleReistijd\": 889\n    },\n    \"persoonlijkePresentatie\": \"dolor dolor\",\n    \"sector\": [\n      {\n        \"codeSbi\": 16608\n      },\n      {\n        \"codeSbi\": 83074\n      }\n    ],\n    \"telefoonnummer\": [\n      \"dolor\",\n      \"nulla i\"\n    ],\n    \"vervoermiddel\": [\n      {\n        \"codeVervoermiddel\": 4,\n        \"indicatieBeschikbaarVoorUitvoeringWerk\": 1,\n        \"indicatieBeschikbaarVoorWoonWerkverkeer\": 0\n      },\n      {\n        \"codeVervoermiddel\": 9,\n        \"indicatieBeschikbaarVoorUitvoeringWerk\": 2,\n        \"indicatieBeschikbaarVoorWoonWerkverkeer\": 1\n      }\n    ],\n    \"voorkeursland\": [\n      {\n        \"landencodeIso\": \"do\"\n      },\n      {\n        \"landencodeIso\": \"a\"\n      }\n    ],\n    \"webadres\": [\n      {\n        \"codeWebadres\": 1,\n        \"url\": \"est consectetur Excepteur pariatur\"\n      },\n      {\n        \"codeWebadres\": 2,\n        \"url\": \"dolore\"\n      }\n    ],\n    \"werktijden\": {\n      \"aantalWerkurenPerWeekMaximaal\": 43,\n      \"aantalWerkurenPerWeekMinimaal\": 65,\n      \"indicatieKantoortijden\": 2\n    }\n  }\n}",
+          "cookie": []
+        },
+        {
+          "_": {
+            "postman_previewlanguage": "json"
+          },
+          "id": "197f9c2d-fadf-4fef-b18e-50e9df26cd93",
+          "name": "Bad request",
+          "originalRequest": {
+            "url": {
+              "path": ["werkzoekendeProfielen", ":vumID"],
+              "host": ["{{baseUrl}}"],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "description": {
+                    "content": "(Required) ",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "plXwKvSTbmZTjNll7JKwyFqj0yzBgFhTJa5W2EQxGqhEnhu-yQTgPIXtpLVrBbyFQGkr9xBCQe.H-ENM4Md5acRHV3qyyBy5YSyEL4nzbRDuEeQXSRyN3fXSTYOmYW6g6HPbZFCx7NvBsZt11oIyCgUVTpnGQg6E4-e_CEEcqMAOo8T7YS0oTLqh_axfcAPBWrM05.rWYzWEw73kdzzjro66BNnDKVG-8-Z.tSDp75HbzNTDKu-4bxenRLADMn",
+                  "key": "vumID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": {
+                  "content": "(Required) ",
+                  "type": "text/plain"
+                },
+                "key": "X-VUM-berichtVersie",
+                "value": "2.0.0"
+              },
+              {
+                "disabled": false,
+                "description": {
+                  "content": "(Required) ",
+                  "type": "text/plain"
+                },
+                "key": "X-VUM-fromParty",
+                "value": "sint in ut cillum Lorem"
+              },
+              {
+                "disabled": false,
+                "description": {
+                  "content": "(Required) ",
+                  "type": "text/plain"
+                },
+                "key": "X-VUM-toParty",
+                "value": "sint in ut cillum Lorem"
+              },
+              {
+                "disabled": false,
+                "description": {
+                  "content": "(Required) ",
+                  "type": "text/plain"
+                },
+                "key": "X-VUM-viaParty",
+                "value": "sint in ut cillum Lorem"
+              },
+              {
+                "disabled": false,
+                "description": {
+                  "content": "(Required) ",
+                  "type": "text/plain"
+                },
+                "key": "API-Version",
+                "value": "2.0.0"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "body": {}
+          },
+          "status": "Bad Request",
+          "code": 400,
+          "header": [
+            {
+              "disabled": true,
+              "description": {
+                "content": "",
+                "type": "text/plain"
+              },
+              "key": "X-VUM-berichtVersie",
+              "value": "2.0.0"
+            },
+            {
+              "disabled": true,
+              "description": {
+                "content": "",
+                "type": "text/plain"
+              },
+              "key": "X-VUM-fromParty",
+              "value": "sint in ut cillum Lorem"
+            },
+            {
+              "disabled": true,
+              "description": {
+                "content": "",
+                "type": "text/plain"
+              },
+              "key": "X-VUM-toParty",
+              "value": "sint in ut cillum Lorem"
+            },
+            {
+              "disabled": true,
+              "description": {
+                "content": "",
+                "type": "text/plain"
+              },
+              "key": "X-VUM-viaParty",
+              "value": "sint in ut cillum Lorem"
+            },
+            {
+              "disabled": true,
+              "description": {
+                "content": "",
+                "type": "text/plain"
+              },
+              "key": "API-Version",
+              "value": "2.0.0"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"code\": \"e\",\n  \"message\": \"labore Duis non\",\n  \"details\": \"sed non dolore deserunt\"\n}",
+          "cookie": []
+        },
+        {
+          "_": {
+            "postman_previewlanguage": "text"
+          },
+          "id": "27f08906-8e47-43ae-8855-ec366a8b9f04",
+          "name": "not authorized",
+          "originalRequest": {
+            "url": {
+              "path": ["werkzoekendeProfielen", ":vumID"],
+              "host": ["{{baseUrl}}"],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "description": {
+                    "content": "(Required) ",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "plXwKvSTbmZTjNll7JKwyFqj0yzBgFhTJa5W2EQxGqhEnhu-yQTgPIXtpLVrBbyFQGkr9xBCQe.H-ENM4Md5acRHV3qyyBy5YSyEL4nzbRDuEeQXSRyN3fXSTYOmYW6g6HPbZFCx7NvBsZt11oIyCgUVTpnGQg6E4-e_CEEcqMAOo8T7YS0oTLqh_axfcAPBWrM05.rWYzWEw73kdzzjro66BNnDKVG-8-Z.tSDp75HbzNTDKu-4bxenRLADMn",
+                  "key": "vumID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": {
+                  "content": "(Required) ",
+                  "type": "text/plain"
+                },
+                "key": "X-VUM-berichtVersie",
+                "value": "2.0.0"
+              },
+              {
+                "disabled": false,
+                "description": {
+                  "content": "(Required) ",
+                  "type": "text/plain"
+                },
+                "key": "X-VUM-fromParty",
+                "value": "sint in ut cillum Lorem"
+              },
+              {
+                "disabled": false,
+                "description": {
+                  "content": "(Required) ",
+                  "type": "text/plain"
+                },
+                "key": "X-VUM-toParty",
+                "value": "sint in ut cillum Lorem"
+              },
+              {
+                "disabled": false,
+                "description": {
+                  "content": "(Required) ",
+                  "type": "text/plain"
+                },
+                "key": "X-VUM-viaParty",
+                "value": "sint in ut cillum Lorem"
+              },
+              {
+                "disabled": false,
+                "description": {
+                  "content": "(Required) ",
+                  "type": "text/plain"
+                },
+                "key": "API-Version",
+                "value": "2.0.0"
+              }
+            ],
+            "method": "GET",
+            "body": {}
+          },
+          "status": "Unauthorized",
+          "code": 401,
+          "header": [
+            {
+              "disabled": true,
+              "description": {
+                "content": "",
+                "type": "text/plain"
+              },
+              "key": "API-Version",
+              "value": "2.0.0"
+            },
+            {
+              "key": "Content-Type",
+              "value": "text/plain"
+            }
+          ],
+          "body": "",
+          "cookie": []
+        },
+        {
+          "_": {
+            "postman_previewlanguage": "json"
+          },
+          "id": "fad15877-1c79-417d-9960-1c2dadf9d539",
+          "name": "Too Many Requests, limiet is overschreden voor deze uitvraag",
+          "originalRequest": {
+            "url": {
+              "path": ["werkzoekendeProfielen", ":vumID"],
+              "host": ["{{baseUrl}}"],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "description": {
+                    "content": "(Required) ",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "plXwKvSTbmZTjNll7JKwyFqj0yzBgFhTJa5W2EQxGqhEnhu-yQTgPIXtpLVrBbyFQGkr9xBCQe.H-ENM4Md5acRHV3qyyBy5YSyEL4nzbRDuEeQXSRyN3fXSTYOmYW6g6HPbZFCx7NvBsZt11oIyCgUVTpnGQg6E4-e_CEEcqMAOo8T7YS0oTLqh_axfcAPBWrM05.rWYzWEw73kdzzjro66BNnDKVG-8-Z.tSDp75HbzNTDKu-4bxenRLADMn",
+                  "key": "vumID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": {
+                  "content": "(Required) ",
+                  "type": "text/plain"
+                },
+                "key": "X-VUM-berichtVersie",
+                "value": "2.0.0"
+              },
+              {
+                "disabled": false,
+                "description": {
+                  "content": "(Required) ",
+                  "type": "text/plain"
+                },
+                "key": "X-VUM-fromParty",
+                "value": "sint in ut cillum Lorem"
+              },
+              {
+                "disabled": false,
+                "description": {
+                  "content": "(Required) ",
+                  "type": "text/plain"
+                },
+                "key": "X-VUM-toParty",
+                "value": "sint in ut cillum Lorem"
+              },
+              {
+                "disabled": false,
+                "description": {
+                  "content": "(Required) ",
+                  "type": "text/plain"
+                },
+                "key": "X-VUM-viaParty",
+                "value": "sint in ut cillum Lorem"
+              },
+              {
+                "disabled": false,
+                "description": {
+                  "content": "(Required) ",
+                  "type": "text/plain"
+                },
+                "key": "API-Version",
+                "value": "2.0.0"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "body": {}
+          },
+          "status": "Too Many Requests",
+          "code": 429,
+          "header": [
+            {
+              "disabled": true,
+              "description": {
+                "content": "",
+                "type": "text/plain"
+              },
+              "key": "X-VUM-berichtVersie",
+              "value": "2.0.0"
+            },
+            {
+              "disabled": true,
+              "description": {
+                "content": "",
+                "type": "text/plain"
+              },
+              "key": "X-VUM-fromParty",
+              "value": "sint in ut cillum Lorem"
+            },
+            {
+              "disabled": true,
+              "description": {
+                "content": "",
+                "type": "text/plain"
+              },
+              "key": "X-VUM-toParty",
+              "value": "sint in ut cillum Lorem"
+            },
+            {
+              "disabled": true,
+              "description": {
+                "content": "",
+                "type": "text/plain"
+              },
+              "key": "X-VUM-viaParty",
+              "value": "sint in ut cillum Lorem"
+            },
+            {
+              "disabled": true,
+              "description": {
+                "content": "",
+                "type": "text/plain"
+              },
+              "key": "API-Version",
+              "value": "2.0.0"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"code\": \"e\",\n  \"message\": \"labore Duis non\",\n  \"details\": \"sed non dolore deserunt\"\n}",
+          "cookie": []
+        },
+        {
+          "_": {
+            "postman_previewlanguage": "json"
+          },
+          "id": "2685b95e-b450-4470-a3cc-8ea839e0bae7",
+          "name": "Internal Server Error",
+          "originalRequest": {
+            "url": {
+              "path": ["werkzoekendeProfielen", ":vumID"],
+              "host": ["{{baseUrl}}"],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "description": {
+                    "content": "(Required) ",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "plXwKvSTbmZTjNll7JKwyFqj0yzBgFhTJa5W2EQxGqhEnhu-yQTgPIXtpLVrBbyFQGkr9xBCQe.H-ENM4Md5acRHV3qyyBy5YSyEL4nzbRDuEeQXSRyN3fXSTYOmYW6g6HPbZFCx7NvBsZt11oIyCgUVTpnGQg6E4-e_CEEcqMAOo8T7YS0oTLqh_axfcAPBWrM05.rWYzWEw73kdzzjro66BNnDKVG-8-Z.tSDp75HbzNTDKu-4bxenRLADMn",
+                  "key": "vumID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": {
+                  "content": "(Required) ",
+                  "type": "text/plain"
+                },
+                "key": "X-VUM-berichtVersie",
+                "value": "2.0.0"
+              },
+              {
+                "disabled": false,
+                "description": {
+                  "content": "(Required) ",
+                  "type": "text/plain"
+                },
+                "key": "X-VUM-fromParty",
+                "value": "sint in ut cillum Lorem"
+              },
+              {
+                "disabled": false,
+                "description": {
+                  "content": "(Required) ",
+                  "type": "text/plain"
+                },
+                "key": "X-VUM-toParty",
+                "value": "sint in ut cillum Lorem"
+              },
+              {
+                "disabled": false,
+                "description": {
+                  "content": "(Required) ",
+                  "type": "text/plain"
+                },
+                "key": "X-VUM-viaParty",
+                "value": "sint in ut cillum Lorem"
+              },
+              {
+                "disabled": false,
+                "description": {
+                  "content": "(Required) ",
+                  "type": "text/plain"
+                },
+                "key": "API-Version",
+                "value": "2.0.0"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "body": {}
+          },
+          "status": "Internal Server Error",
+          "code": 500,
+          "header": [
+            {
+              "disabled": true,
+              "description": {
+                "content": "",
+                "type": "text/plain"
+              },
+              "key": "X-VUM-berichtVersie",
+              "value": "2.0.0"
+            },
+            {
+              "disabled": true,
+              "description": {
+                "content": "",
+                "type": "text/plain"
+              },
+              "key": "X-VUM-fromParty",
+              "value": "sint in ut cillum Lorem"
+            },
+            {
+              "disabled": true,
+              "description": {
+                "content": "",
+                "type": "text/plain"
+              },
+              "key": "X-VUM-toParty",
+              "value": "sint in ut cillum Lorem"
+            },
+            {
+              "disabled": true,
+              "description": {
+                "content": "",
+                "type": "text/plain"
+              },
+              "key": "X-VUM-viaParty",
+              "value": "sint in ut cillum Lorem"
+            },
+            {
+              "disabled": true,
+              "description": {
+                "content": "",
+                "type": "text/plain"
+              },
+              "key": "API-Version",
+              "value": "2.0.0"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"code\": \"e\",\n  \"message\": \"labore Duis non\",\n  \"details\": \"sed non dolore deserunt\"\n}",
+          "cookie": []
+        },
+        {
+          "_": {
+            "postman_previewlanguage": "json"
+          },
+          "id": "680182a7-eb70-40da-960f-9439a279b4c3",
+          "name": "Service Unavailable",
+          "originalRequest": {
+            "url": {
+              "path": ["werkzoekendeProfielen", ":vumID"],
+              "host": ["{{baseUrl}}"],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "description": {
+                    "content": "(Required) ",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "plXwKvSTbmZTjNll7JKwyFqj0yzBgFhTJa5W2EQxGqhEnhu-yQTgPIXtpLVrBbyFQGkr9xBCQe.H-ENM4Md5acRHV3qyyBy5YSyEL4nzbRDuEeQXSRyN3fXSTYOmYW6g6HPbZFCx7NvBsZt11oIyCgUVTpnGQg6E4-e_CEEcqMAOo8T7YS0oTLqh_axfcAPBWrM05.rWYzWEw73kdzzjro66BNnDKVG-8-Z.tSDp75HbzNTDKu-4bxenRLADMn",
+                  "key": "vumID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": {
+                  "content": "(Required) ",
+                  "type": "text/plain"
+                },
+                "key": "X-VUM-berichtVersie",
+                "value": "2.0.0"
+              },
+              {
+                "disabled": false,
+                "description": {
+                  "content": "(Required) ",
+                  "type": "text/plain"
+                },
+                "key": "X-VUM-fromParty",
+                "value": "sint in ut cillum Lorem"
+              },
+              {
+                "disabled": false,
+                "description": {
+                  "content": "(Required) ",
+                  "type": "text/plain"
+                },
+                "key": "X-VUM-toParty",
+                "value": "sint in ut cillum Lorem"
+              },
+              {
+                "disabled": false,
+                "description": {
+                  "content": "(Required) ",
+                  "type": "text/plain"
+                },
+                "key": "X-VUM-viaParty",
+                "value": "sint in ut cillum Lorem"
+              },
+              {
+                "disabled": false,
+                "description": {
+                  "content": "(Required) ",
+                  "type": "text/plain"
+                },
+                "key": "API-Version",
+                "value": "2.0.0"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "body": {}
+          },
+          "status": "Service Unavailable",
+          "code": 503,
+          "header": [
+            {
+              "disabled": true,
+              "description": {
+                "content": "",
+                "type": "text/plain"
+              },
+              "key": "X-VUM-berichtVersie",
+              "value": "2.0.0"
+            },
+            {
+              "disabled": true,
+              "description": {
+                "content": "",
+                "type": "text/plain"
+              },
+              "key": "X-VUM-fromParty",
+              "value": "sint in ut cillum Lorem"
+            },
+            {
+              "disabled": true,
+              "description": {
+                "content": "",
+                "type": "text/plain"
+              },
+              "key": "X-VUM-toParty",
+              "value": "sint in ut cillum Lorem"
+            },
+            {
+              "disabled": true,
+              "description": {
+                "content": "",
+                "type": "text/plain"
+              },
+              "key": "X-VUM-viaParty",
+              "value": "sint in ut cillum Lorem"
+            },
+            {
+              "disabled": true,
+              "description": {
+                "content": "",
+                "type": "text/plain"
+              },
+              "key": "API-Version",
+              "value": "2.0.0"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"code\": \"e\",\n  \"message\": \"labore Duis non\",\n  \"details\": \"sed non dolore deserunt\"\n}",
+          "cookie": []
+        }
+      ],
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "id": "4586e86a-d6ca-48bc-be94-ecf391f63082",
+            "type": "text/javascript",
+            "exec": [
+              "// Validate status 2xx \npm.test(\"[GET]::/werkzoekendeProfielen/:vumID - Status code is 2xx\", function () {\n   pm.response.to.be.success;\n});\n",
+              "// Validate if response header has matching content-type\npm.test(\"[GET]::/werkzoekendeProfielen/:vumID - Content-Type is application/json\", function () {\n   pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");\n});\n",
+              "// Validate if response has JSON Body \npm.test(\"[GET]::/werkzoekendeProfielen/:vumID - Response has JSON Body\", function () {\n    pm.response.to.have.jsonBody();\n});\n",
+              "// Check that the defined result is returned",
+              "pm.test(\"[GET]::/werkzoekendeProfielen/:idWerkzoekende - Returned result should match defined result\", function() {",
+              "    let expected = JSON.parse(pm.iterationData.get(\"werkzoekende.werkzoekende\"));",
+              "    let observed = pm.response.json().werkzoekende",
+              "    const showDiff = (a, b, path) => {",
+              "       if (typeof a === 'object' && typeof b === 'object') {",
+              "           let keys_expected = Object.keys(a);",
+              "           let keys_observed = Object.keys(b);",
+              "           let diff_a = keys_expected.filter(x => !keys_observed.includes(x));",
+              "           if (diff_a.length > 0) {",
+              "               diff_a.forEach(k => console.log('VUM removed ' + k + '=' + JSON.stringify(a[k]) + ' at ' + path));",
+              "           }",
+              "           let diff_b = keys_observed.filter(x => !keys_expected.includes(x));",
+              "           if (diff_b.length > 0) {",
+              "               diff_b.forEach(k => console.log('VUM added ' + k + '=' + JSON.stringify(b[k]) + ' at ' + path));",
+              "           }",
+              "           if (keys_expected.length !== keys_observed.length) return false;",
+              "           return keys_expected.every(k => {",
+              "             return showDiff(a[k], b[k], path + '.' + k);",
+              "           });",
+              "         };",
+              "      if (a === b) {",
+              "        return true;",
+              "      } else {;",
+              "        console.log('VUM changed ', path);",
+              "        return false;",
+              "      };",
+              "    };",
+              "    showDiff(expected, observed, '');",
+              "    pm.expect(observed).to.eql(expected);",
+              "});"
+            ]
+          }
+        },
+        {
+          "listen": "prerequest",
+          "script": {
+            "id": "cf85daba-51e0-4c7b-af89-4fdd08a57500",
+            "type": "text/javascript",
+            "exec": [
+              "pm.variables.set('baseUrl', pm.environment.get('baseUrl'))"
+            ]
+          }
+        }
+      ],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      }
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://test.vumdevelopment.nl/api/v2",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "4d60c791-7cf2-4281-929e-ce0ce5198daa",
+    "name": "VUM API werkzoekendeProfielen tussen VUM-UV en bemiddelaar",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Contract tbv interactie van bemiddelaars met VUM uitwisselingsvoorziening voor werkzoekendeProfielen\n\nContact Support:\n Name: Helpdesk\n Email: programma-vum@ictu.nl",
+      "type": "text/plain"
+    }
+  }
+}
