@@ -1,0 +1,29 @@
+package_nuget:
+  stage: package
+  image: mcr.microsoft.com/dotnet/sdk:8.0
+  variables:
+    NUGET_SOURCE: "https://gitlab.com/api/v4/projects/$CI_PROJECT_ID/packages/nuget/index.json"
+  script:
+    - echo "Packing files into NuGet package"
+    - VERSION="${CI_COMMIT_TAG#v}"
+    - |
+      cat <<EOF > PackageSpec.csproj
+      <Project Sdk="Microsoft.NET.Sdk">
+        <PropertyGroup>
+          <TargetFramework>netstandard2.0</TargetFramework>
+          <PackageId>IB.Vum.${CI_PROJECT_NAME^}</PackageId>
+          <Version>$VERSION</Version> 
+          <Authors>Stichting Inlichtingenbureau</Authors>
+          <Description>${CI_PROJECT_DESCRIPTION}</Description>  
+          <PackageOutputPath>./out</PackageOutputPath>
+        </PropertyGroup>
+        <ItemGroup>
+          <Content Include="OAS_Contracten/*.yaml" Pack="true" PackagePath="contentFiles/any/any/OAS_Contracten" CopyToOutputDirectory="PreserveNewest" />
+        </ItemGroup>
+      </Project>
+      EOF
+
+    - dotnet pack PackageSpec.csproj -p:Version="$VERSION"
+    - dotnet nuget push out/*.nupkg --source "$NUGET_SOURCE" --api-key "$CI_JOB_TOKEN"
+  rules:
+    - if: '$CI_COMMIT_TAG =~ /^v\d+\.\d+\.\d+$/'  
