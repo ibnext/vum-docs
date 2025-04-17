@@ -3,7 +3,6 @@ package_nuget:
   image: mcr.microsoft.com/dotnet/sdk:8.0
   variables:
     NUGET_SOURCE: "https://gitlab.com/api/v4/projects/$CI_PROJECT_ID/packages/nuget/index.json"
-    NUGET_API_KEY: "$CI_JOB_TOKEN"
   script:
     - echo "Packing files into NuGet package"
     - VERSION="${CI_COMMIT_TAG#v}"
@@ -12,8 +11,8 @@ package_nuget:
       <Project Sdk="Microsoft.NET.Sdk">
         <PropertyGroup>
           <TargetFramework>netstandard2.0</TargetFramework>
-          <PackageId>${CI_PROJECT_NAMESPACE#*/}.${CI_PROJECT_NAME^}</PackageId>
-          <Version>$VERSION</Version>
+          <PackageId>IB.${CI_PROJECT_NAMESPACE^}.${CI_PROJECT_NAME^}</PackageId>
+          <Version>$VERSION</Version> 
           <Authors>Stichting Inlichtingenbureau</Authors>
           <Description>${CI_PROJECT_DESCRIPTION}</Description>  
           <PackageOutputPath>./out</PackageOutputPath>
@@ -24,11 +23,7 @@ package_nuget:
       </Project>
       EOF
 
-    # Pack using dotnet CLI
     - dotnet pack PackageSpec.csproj -p:Version="$VERSION"
-
-    # Add GitLab NuGet source and push
-    - dotnet nuget add source "$NUGET_SOURCE" --name GitLab --username gitlab-ci-token --password "$NUGET_API_KEY" --store-password-in-clear-text
-    - dotnet nuget push out/*.nupkg --source GitLab --api-key "$NUGET_API_KEY"
+    - dotnet nuget push out/*.nupkg --source "$NUGET_SOURCE" --api-key "$CI_JOB_TOKEN"
   rules:
-    - if: '$CI_COMMIT_TAG =~ /^v\d+\.\d+\.\d+$/'
+    - if: '$CI_COMMIT_TAG =~ /^v\d+\.\d+\.\d+$/'  
