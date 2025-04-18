@@ -2,28 +2,60 @@ package_nuget:
   stage: package
   image: mcr.microsoft.com/dotnet/sdk:8.0
   variables:
+    SPEC_FILE_NAME: "PackageSpec.csproj"
+    PACKAGE_ID: "IB.Vum.Koppelvlak"
+    TARGETS_FILE_NAME: "${PACKAGE_ID}.targets"
     NUGET_SOURCE: "https://gitlab.com/api/v4/projects/$CI_PROJECT_ID/packages/nuget/index.json"
+    VERSION: "${CI_COMMIT_TAG#v}"
   script:
     - echo "Packing files into NuGet package"
     - VERSION="${CI_COMMIT_TAG#v}"
+    - echo "Packaging ${PACKAGE_ID} with targets file ${TARGETS_FILE_NAME}"
+    - mkdir -p build
+
+    # Generate .csproj
     - |
-      cat <<EOF > PackageSpec.csproj
+      cat > ${SPEC_FILE_NAME} << EOF
       <Project Sdk="Microsoft.NET.Sdk">
         <PropertyGroup>
           <TargetFramework>netstandard2.0</TargetFramework>
-          <PackageId>IB.${CI_PROJECT_NAMESPACE^}.${CI_PROJECT_NAME^}</PackageId>
-          <Version>$VERSION</Version> 
+          <PackageId>${PACKAGE_ID}</PackageId>
+          <Version>${VERSION}</Version>
           <Authors>Stichting Inlichtingenbureau</Authors>
-          <Description>${CI_PROJECT_DESCRIPTION}</Description>  
+          <Description>${CI_PROJECT_DESCRIPTION}</Description>
           <PackageOutputPath>./out</PackageOutputPath>
+          <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
         </PropertyGroup>
+
         <ItemGroup>
-          <None Include="OAS_Contracten/*.yaml" Pack="true" PackagePath="content/OAS_Contracten" />
+          <None Include="OAS_Contracten/**/*.yaml"
+                Pack="true"
+                PackagePath="contentFiles/any/any/OAS_Contracten" />
+          <None Include="build/${TARGETS_FILE_NAME}"
+                Pack="true"
+                PackagePath="build/${TARGETS_FILE_NAME}" />
         </ItemGroup>
       </Project>
       EOF
 
-    - dotnet pack PackageSpec.csproj -p:Version="$VERSION"
-    - dotnet nuget push out/*.nupkg --source "$NUGET_SOURCE" --api-key "$CI_JOB_TOKEN"
+    # Generate .targets
+    - |
+      cat > build/${TARGETS_FILE_NAME} << EOF
+      <Project>
+        <Target Name="CopyYamlFilesToOutput" BeforeTargets="PrepareForBuild">
+          <ItemGroup>
+            <ContractYamlFiles Include="\$(MSBuildThisFileDirectory)..\contentFiles\any\any\OAS_Contracten\**\*.yaml" />
+          </ItemGroup>
+          <Copy SourceFiles="@(ContractYamlFiles)"
+                DestinationFolder="\$(OutDir)OAS_Contracten\%(RecursiveDir)"
+                SkipUnchangedFiles="true"
+                Condition="Exists('%(ContractYamlFiles.FullPath)')" />
+        </Target>
+      </Project>
+      EOF
+
+    # Pack and push
+    - dotnet pack ${SPEC_FILE_NAME} -p:Version=${VERSION}
+    - dotnet nuget push out/*.nupkg --source "${NUGET_SOURCE}" --api-key "${CI_JOB_TOKEN}"
   rules:
-    - if: '$CI_COMMIT_TAG =~ /^v\d+\.\d+\.\d+$/'  
+    - if: '$CI_COMMIT_TAG =~ /^v\d+\.\d+\.\d+$/'
