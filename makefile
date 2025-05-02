@@ -1,14 +1,22 @@
-YAML2JSON := $(shell command -v yaml2json 2> /dev/null)
+YQ := $(shell command -v yq 2> /dev/null)
 
-
-tojson: OAS_Contracten/*.yaml
-	@if [[ "$(YAML2JSON)" == "" ]]; then\
-		echo 'installing yaml2json'; \
-		go install github.com/mbrukman/yaml2json/cmd/yaml2json@latest; \
+check-dependencies:
+	@if [[ "$(YQ)" == "" ]]; then\
+		echo "Error: yq not found. Please install yq:"; \
+		echo "  macOS:   brew install yq"; \
+		echo "  Ubuntu:  apt-get install yq"; \
+		echo "  Others:  https://github.com/mikefarah/yq#install"; \
+		exit 1; \
 	fi
-	for file in $^ ; do \
-		echo "Generating for $$file"; \
-		echo $$file| sed "s/.yaml/.json/"; \
-		yaml2json $$file > `echo $$file| sed "s/.yaml/.json/"`; \
+
+tojson: check-dependencies
+	@for file in OAS_Contracten/*.yaml; do \
+		echo "Converting $$file"; \
+		json_file=`echo $$file | sed "s/.yaml/.json/"`; \
+		yq -o=json "$$file" > "$$json_file"; \
+		echo "Converted $$file to $$json_file"; \
 	done
+
+clean:
+	@echo "No cleanup needed for yq implementation"
 
