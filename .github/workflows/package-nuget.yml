@@ -14,8 +14,8 @@ jobs:
     
     env:
       SPEC_FILE_NAME: "PackageSpec.csproj"
-      PACKAGE_ID: "IB.Vum.Koppelvlak"
-      TARGETS_FILE_NAME: "IB.Vum.Koppelvlak.targets"
+      PACKAGE_ID: "ibnext.ib.vum.koppelvlak"
+      TARGETS_FILE_NAME: "ibnext.ib.vum.koppelvlak.targets"
     
     steps:
       - name: Checkout code
@@ -46,7 +46,6 @@ jobs:
               <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
               <RepositoryUrl>https://github.com/${{ github.repository }}</RepositoryUrl>
               <!-- Ensure package ID works with GitHub's namespace requirements -->
-              <PackageId>ibnext.${PACKAGE_ID}</PackageId>
             </PropertyGroup>
 
             <ItemGroup>
