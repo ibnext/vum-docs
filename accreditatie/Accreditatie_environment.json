@@ -34,7 +34,7 @@
     },
     {
       "key": "api-version",
-      "value": "2.0",
+      "value": "2.0.0",
       "type": "default",
       "enabled": true
     }
