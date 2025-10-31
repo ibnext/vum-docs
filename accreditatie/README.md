@@ -1,6 +1,6 @@
 # <a name=Accreditatieomgeving>Accreditatieomgeving</a>
 
-De accreditatieomgeving is een omgeving die is gemaakt om de aansluiting met VUM te testen. Deze omgeving kan de werking van VUM worden uitgeprobeerd, ofwel via het bevragen van een bron van BIDN of een eigen aangesloten bron.
+De accreditatieomgeving is een omgeving die is gemaakt om de aansluiting met VUM te testen. In deze omgeving kan de werking van VUM worden uitgeprobeerd, ofwel via het bevragen van een bron van BIDN of een eigen aangesloten bron.
 
 Deze omgeving is afgeschermd, om gebruik te maken van deze omgeving dient u eerst als organisatie geregistreerd en gewhitelist te zijn.
 
