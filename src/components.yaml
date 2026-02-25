@@ -120,93 +120,17 @@ components:
     VraagID:
       maxLength: 100
       type: string
-    AdresBuitenland:
+    Adres:
       additionalProperties: false
       properties:
-        adresBuitenland:
-          additionalProperties: false
-          properties:
-            adresDetailsBuitenland:
-              oneOf:
-              - $ref: '#/components/schemas/StraatadresBuitenland'
-              - $ref: '#/components/schemas/PostbusadresBuitenland'
-            landencodeIso:
-              $ref: '#/components/schemas/StringCode2'
-            landsnaam:
-              $ref: '#/components/schemas/String40'
-            locatieomschrijvingBuitenland:
-              $ref: '#/components/schemas/String70'
-            postcodeBuitenland:
-              $ref: '#/components/schemas/String9'
-            regionaamBuitenland:
-              $ref: '#/components/schemas/String24'
-            woonplaatsnaamBuitenland:
-              $ref: '#/components/schemas/String40'
-          type: object
-      type: object
-    AdresHouding:
-      additionalProperties: false
-      properties:
-        adres:
-          oneOf:
-          - $ref: '#/components/schemas/AdresNederland'
-          - $ref: '#/components/schemas/AdresBuitenland'
-        codeFunctieAdres:
-          enum:
-          - B
-          - W
-          - C
-          - L
-          - A
-          - V
-          - E
-          type: string
-        datumAanvangAdres:
-          $ref: '#/components/schemas/Date'
-        datumEindeAdres:
-          $ref: '#/components/schemas/Date'
-      type: object
-    AdresNederland:
-      additionalProperties: false
-      properties:
-        adresNederland:
-          additionalProperties: false
-          properties:
-            adresDetails:
-              oneOf:
-              - $ref: '#/components/schemas/Straatadres'
-              - $ref: '#/components/schemas/Postbusadres'
-              - $ref: '#/components/schemas/Antwoordnummeradres'
-            codeGemeente:
-              $ref: '#/components/schemas/StringCode4'
-            district:
-              $ref: '#/components/schemas/String24'
-            gemeentedeel:
-              $ref: '#/components/schemas/String24'
-            gemeentenaam:
-              $ref: '#/components/schemas/String40'
-            identificatiecodeNummeraanduiding:
-              $ref: '#/components/schemas/String16'
-            identificatiecodeVerblijfplaats:
-              $ref: '#/components/schemas/String16'
-            locatieomschrijving:
-              $ref: '#/components/schemas/String70'
-            postcode:
-              $ref: '#/components/schemas/Postcode'
-            woonplaatsnaam:
-              $ref: '#/components/schemas/String80'
-          type: object
-      type: object
-    Antwoordnummeradres:
-      additionalProperties: false
-      properties:
-        antwoordnummeradres:
-          additionalProperties: false
-          properties:
-            antwoordnummer:
-              $ref: '#/components/schemas/Integer5'
-          type: object
-      type: object
+        postcode:
+          $ref: '#/components/schemas/Postcode'
+        straatnaam:
+          $ref: '#/components/schemas/String24'
+        huisnummer:
+          $ref: '#/components/schemas/Integer5'
+        huisnummertoevoeging:
+          $ref: '#/components/schemas/String6'      
     ArbeidsVoorwaarden:
       additionalProperties: false
       properties:
@@ -237,9 +161,9 @@ components:
           items:
             $ref: '#/components/schemas/Cursus'
           type: array
-        gedragscompetentie:
+        competentiebeheersing:
           items:
-            $ref: '#/components/schemas/Gedragscompetentie'
+            $ref: '#/components/schemas/Competentiebeheersing'
           type: array
         interesse:
           items:
@@ -292,6 +216,19 @@ components:
               $ref: '#/components/schemas/String120'
           type: object
       type: object
+    Competentiebeheersing:
+      additionalProperties: false
+      properties:
+        codeCompetentie:
+          $ref: '#/components/schemas/StringHex10'
+        codeCompetentieniveau:
+          enum:
+            - 'L1'
+            - 'L2'
+            - 'L3'
+            - 'L4'
+          type: string
+      type: object
     ContactpersoonAfdeling:
       additionalProperties: false
       properties:
@@ -328,6 +265,8 @@ components:
       properties:
         datumAanvangVolgenCursus_W:
           $ref: '#/components/schemas/Date'
+        indicatieCertificaat:
+          $ref: '#/components/schemas/Indicatie'
         datumCertificaat_W:
           $ref: '#/components/schemas/Date'
         datumEindeVolgenCursus_W:
@@ -336,6 +275,8 @@ components:
           $ref: '#/components/schemas/String120'
         naamOpleidingsinstituut_W:
           $ref: '#/components/schemas/String500'
+        toelichtingCursus:
+          $ref: '#/components/schemas/String2000'          
       type: object
     Date:
       format: date
@@ -371,81 +312,12 @@ components:
           maximum: 9
           minimum: 1
           type: integer
-        datumAanvangBeschikbaarVoorWerk:
+        datumAanvangBeschikbaarVoorWerk_W:
           $ref: '#/components/schemas/Date'
         datumEindeBeschikbaarVoorWerk:
           $ref: '#/components/schemas/Date'
         indicatieOnregelmatigWerkOfPloegendienst:
           $ref: '#/components/schemas/Indicatie'
-      type: object
-    Gedragscompetentie:
-      additionalProperties: false
-      properties:
-        codeBeheersingGedragscompetentie:
-          enum:
-          - 1
-          - 2
-          - 3
-          - 4
-          - 5
-          - 9
-          type: integer
-        codeGedragscompetentie:
-          enum:
-          - '24100'
-          - '24101'
-          - '24102'
-          - '24104'
-          - '24105'
-          - '24106'
-          - '24107'
-          - '24108'
-          - '24109'
-          - '24110'
-          - '24111'
-          - '24112'
-          - '24113'
-          - '24114'
-          - '24115'
-          - '24116'
-          - '24118'
-          - '24119'
-          - '24120'
-          - '24121'
-          - '24122'
-          - '24123'
-          - '24124'
-          - '24125'
-          - '24126'
-          type: string
-        omschrijvingGedragscompetentie:
-          enum:
-          - "Beslissen en activiteiten initi\xEBren"
-          - Aansturen
-          - Begeleiden
-          - Aandacht en begrip tonen
-          - Samenwerken en overleggen
-          - Ethisch en integer handelen
-          - Relaties bouwen en netwerken
-          - "Overtuigen en be\xEFnvloeden"
-          - Presenteren
-          - Formuleren en rapporteren
-          - Vakdeskundigheid toepassen
-          - Materialen en middelen inzetten
-          - Analyseren
-          - Onderzoeken
-          - Creeren en innoveren
-          - Leren
-          - Plannen en organiseren
-          - Op de behoeften en verwachtingen van de klant richten
-          - Kwaliteit leveren
-          - Instructies en procedures opvolgen
-          - Omgaan met verandering en aanpassen
-          - Met druk en tegenslag omgaan
-          - Gedrevenheid en ambitie tonen
-          - Ondernemend en commercieel handelen
-          - Bedrijfsmatig handelen
-          type: string
       type: object
     IDVacature:
       $ref: '#/components/schemas/SafeIDString'
@@ -489,32 +361,6 @@ components:
         naamInteresse:
           $ref: '#/components/schemas/String120'
       type: object
-    MPAdresBuitenland:
-      additionalProperties: false
-      properties:
-        adresBuitenland:
-          additionalProperties: false
-          properties:
-            landencodeIso:
-              $ref: '#/components/schemas/StringCode2'
-          type: object
-      type: object
-    MPAdresHouding:
-      additionalProperties: false
-      properties:
-        adres:
-          $ref: '#/components/schemas/MPAdresBuitenland'
-        codeFunctieAdres:
-          enum:
-          - B
-          - W
-          - C
-          - L
-          - A
-          - V
-          - E
-          type: string
-      type: object
     MPArbeidsVoorwaarden:
       additionalProperties: false
       properties:
@@ -539,17 +385,17 @@ components:
           - 6
           - 7
           type: integer
+        competentiebeheersing:
+          items:
+            $ref: '#/components/schemas/Competentiebeheersing'
+          type: array
         cursus:
           items:
-            $ref: '#/components/schemas/MPCursus'
-          type: array
-        gedragscompetentie:
-          items:
-            $ref: '#/components/schemas/Gedragscompetentie'
+            $ref: '#/components/schemas/Cursus'
           type: array
         opleiding:
           items:
-            $ref: '#/components/schemas/MPOpleiding'
+            $ref: '#/components/schemas/Opleiding'
           type: array
         rijbewijs:
           items:
@@ -567,55 +413,6 @@ components:
           items:
             $ref: '#/components/schemas/MPWerkervaring'
           type: array
-      type: object
-    MPCursus:
-      additionalProperties: false
-      properties:
-        datumCertificaat:
-          $ref: '#/components/schemas/Date'
-        naamCursus:
-          $ref: '#/components/schemas/String120'
-      type: object
-    MPOpleiding:
-      additionalProperties: false
-      properties:
-        codeNiveauOpleiding:
-          enum:
-          - 1
-          - 2
-          - 3
-          - 4
-          - 5
-          - 6
-          - 9
-          type: integer
-        datumDiploma_W:
-          $ref: '#/components/schemas/Date'
-        indicatieDiploma:
-          enum:
-          - 0
-          - 1
-          - 2
-          - 8
-          type: integer
-        opleidingsnaam_V:
-          $ref: '#/components/schemas/MPOpleidingsnaam'
-        opleidingsnaam_W:
-          $ref: '#/components/schemas/Opleidingsnaam'
-      type: object
-    MPOpleidingsnaam:
-      oneOf:
-      - $ref: '#/components/schemas/OpleidingsnaamGecodeerd'
-      - $ref: '#/components/schemas/MPOpleidingsnaamOngecodeerd'
-    MPOpleidingsnaamOngecodeerd:
-      additionalProperties: false
-      properties:
-        opleidingsnaamOngecodeerd:
-          additionalProperties: false
-          properties:
-            naamOpleidingOngecodeerd:
-              $ref: '#/components/schemas/String120'
-          type: object
       type: object
     MPSollicitatiewijze:
       additionalProperties: false
@@ -650,10 +447,12 @@ components:
     MPVacatureMatch:
       additionalProperties: false
       properties:
+        adres:
+          $ref: '#/components/schemas/Adres'
         arbeidsVoorwaarden:
           $ref: '#/components/schemas/MPArbeidsVoorwaarden'
         beroep:
-          $ref: '#/components/schemas/Beroepsnaam'
+          $ref: '#/components/schemas/Beroep'
         codeWerkEnDenkniveauMinimaal:
           enum:
           - '0'
@@ -675,9 +474,9 @@ components:
           type: array
         flexibiliteit:
           $ref: '#/components/schemas/Flexibiliteit'
-        gedragscompetentie:
+        competentiebeheersing:
           items:
-            $ref: '#/components/schemas/Gedragscompetentie'
+            $ref: '#/components/schemas/Competentiebeheersing'
           type: array
         idVacature_BRN:
           $ref: '#/components/schemas/IDVacature'
@@ -688,7 +487,7 @@ components:
           type: integer
         opleiding:
           items:
-            $ref: '#/components/schemas/MPOpleiding'
+            $ref: '#/components/schemas/Opleiding'
           type: array
         rijbewijs:
           items:
@@ -751,10 +550,6 @@ components:
     MPWerkgever:
       additionalProperties: false
       properties:
-        adresHouding:
-          items:
-            $ref: '#/components/schemas/MPAdresHouding'
-          type: array
         sector:
           items:
             $ref: '#/components/schemas/SectorBeroepsEnBedrijfsleven'
@@ -842,10 +637,14 @@ components:
           $ref: '#/components/schemas/Integer1000'
         maximaleReistijd:
           $ref: '#/components/schemas/Integer1000'
+      required:
+        - bemiddelingspostcode
       type: object
     Opleiding:
       additionalProperties: false
       properties:
+        codeOpleidingsnaam:
+          $ref: '#/components/schemas/Integer10AsString'
         codeNiveauOpleiding:
           enum:
           - 1
@@ -878,56 +677,8 @@ components:
           type: integer
         naamOpleidingsinstituut_W:
           $ref: '#/components/schemas/String500'
-        opleidingsnaam:
-          $ref: '#/components/schemas/Opleidingsnaam'
-      type: object
-    Opleidingsnaam:
-      oneOf:
-      - $ref: '#/components/schemas/OpleidingsnaamGecodeerd'
-      - $ref: '#/components/schemas/OpleidingsnaamOngecodeerd'
-    OpleidingsnaamGecodeerd:
-      additionalProperties: false
-      properties:
-        opleidingsnaamGecodeerd:
-          additionalProperties: false
-          properties:
-            codeOpleidingsnaam:
-              $ref: '#/components/schemas/Integer10AsString'
-            omschrijvingOpleidingsnaam:
-              $ref: '#/components/schemas/String120'
-          type: object
-      type: object
-    OpleidingsnaamOngecodeerd:
-      additionalProperties: false
-      properties:
-        opleidingsnaamOngecodeerd:
-          additionalProperties: false
-          properties:
-            naamOpleidingOngecodeerd:
-              $ref: '#/components/schemas/String120'
-            omschrijvingOpleiding:
-              $ref: '#/components/schemas/String2000'
-          type: object
-      type: object
-    Postbusadres:
-      additionalProperties: false
-      properties:
-        postbusadres:
-          additionalProperties: false
-          properties:
-            postbusnummer:
-              $ref: '#/components/schemas/Integer5'
-          type: object
-      type: object
-    PostbusadresBuitenland:
-      additionalProperties: false
-      properties:
-        postbusadresbuitenland:
-          additionalProperties: false
-          properties:
-            postbusnummerBuitenland:
-              $ref: '#/components/schemas/String9'
-          type: object
+        toelichtingOpleiding:
+          $ref: '#/components/schemas/String2000'          
       type: object
     Postcode:
       example: 1234AB
@@ -957,46 +708,6 @@ components:
           type: string
         webadres:
           $ref: '#/components/schemas/Webadres'
-      type: object
-    Straatadres:
-      additionalProperties: false
-      properties:
-        straatadres:
-          additionalProperties: false
-          properties:
-            aanduidingBijHuisnummer:
-              $ref: '#/components/schemas/StringCode2'
-            huisletter:
-              $ref: '#/components/schemas/StringCode1'
-            huisnummer:
-              $ref: '#/components/schemas/Integer5'
-            huisnummertoevoeging:
-              $ref: '#/components/schemas/String6'
-            naamOpenbareRuimte:
-              $ref: '#/components/schemas/String80'
-            straatnaam:
-              $ref: '#/components/schemas/String24'
-            woonbootverwijzing:
-              enum:
-              - AB
-              type: string
-            woonwagenverwijzing:
-              enum:
-              - WW
-              type: string
-          type: object
-      type: object
-    StraatadresBuitenland:
-      additionalProperties: false
-      properties:
-        straatadresbuitenland:
-          additionalProperties: false
-          properties:
-            huisnummerBuitenland:
-              $ref: '#/components/schemas/String9'
-            straatnaamBuitenland:
-              $ref: '#/components/schemas/String24'
-          type: object
       type: object
     String100:
       maxLength: 100
@@ -1058,6 +769,9 @@ components:
     StringCode4:
       maxLength: 4
       type: string
+    StringHex10:
+      type: string
+      pattern: "^[0-9A-Fa-f]{10}$"
     SafeIDString:
       pattern: ^[a-zA-Z0-9_.-]{0,200}$
       type: string
@@ -1082,7 +796,7 @@ components:
       $ref: '#/components/schemas/String14'
     URL:
       type: string
-      maxLength: 512
+      maxLength: 1000
     Vacature:
       additionalProperties: false
       properties:
@@ -1111,9 +825,9 @@ components:
           type: array
         flexibiliteit:
           $ref: '#/components/schemas/Flexibiliteit'
-        gedragscompetentie:
+        competentiebeheersing:
           items:
-            $ref: '#/components/schemas/Gedragscompetentie'
+            $ref: '#/components/schemas/Competentiebeheersing'
           type: array
         idVacature:
           $ref: '#/components/schemas/IDVacature'
@@ -1235,10 +949,6 @@ components:
     Werkgever:
       additionalProperties: false
       properties:
-        adresHouding:
-          items:
-            $ref: '#/components/schemas/AdresHouding'
-          type: array
         contactpersoon:
           items:
             $ref: '#/components/schemas/ContactpersoonAfdeling'
@@ -1367,8 +1077,7 @@ components:
           $ref: '#/components/schemas/codeBeroepsnaam_selectie'
       type: object
     codeBeroepsnaam:
-      pattern: ^[0-9]{1,10}$
-      type: string
+      $ref: '#/components/schemas/StringHex10'
     codeBeroepsnaam_selectie:
       properties:
         $eq:
