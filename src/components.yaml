@@ -539,7 +539,7 @@ components:
       additionalProperties: false
       properties:
         beroep:
-          $ref: '#/components/schemas/Beroepsnaam'
+          $ref: '#/components/schemas/Beroep'
         datumAanvangWerkzaamheden:
           $ref: '#/components/schemas/Date'
         datumEindeWerkzaamheden:
@@ -585,7 +585,7 @@ components:
           $ref: '#/components/schemas/MPArbeidsmarktkwalificatie'
         bemiddelingsberoep:
           items:
-            $ref: '#/components/schemas/Beroepsnaam'
+            $ref: '#/components/schemas/Beroep'
           type: array
         contractvorm:
           items:
@@ -803,7 +803,7 @@ components:
         arbeidsVoorwaarden:
           $ref: '#/components/schemas/ArbeidsVoorwaarden'
         beroep:
-          $ref: '#/components/schemas/Beroepsnaam'
+          $ref: '#/components/schemas/Beroeps'
         codeWerkEnDenkniveauMinimaal:
           enum:
           - '0'
@@ -936,7 +936,7 @@ components:
         aantalJarenWerkzaamInBeroep_V:
           $ref: '#/components/schemas/Integer2'
         beroep_W:
-          $ref: '#/components/schemas/Beroepsnaam'
+          $ref: '#/components/schemas/Beroep'
         datumAanvangWerkzaamheden_W:
           $ref: '#/components/schemas/Date'
         datumEindeWerkzaamheden_W:
@@ -981,7 +981,7 @@ components:
           $ref: '#/components/schemas/Arbeidsmarktkwalificatie'
         bemiddelingsberoep:
           items:
-            $ref: '#/components/schemas/Beroepsnaam'
+            $ref: '#/components/schemas/Beroep'
           type: array
         contactpersoon:
           items:

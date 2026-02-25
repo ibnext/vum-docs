@@ -816,7 +816,7 @@ components:
       additionalProperties: false
       properties:
         beroep:
-          $ref: '#/components/schemas/Beroepsnaam'
+          $ref: '#/components/schemas/Beroep'
         datumAanvangWerkzaamheden:
           $ref: '#/components/schemas/Date'
         datumEindeWerkzaamheden:
@@ -843,7 +843,7 @@ components:
           $ref: '#/components/schemas/Arbeidsmarktkwalificatie'
         bemiddelingsberoep:
           items:
-            $ref: '#/components/schemas/Beroepsnaam'
+            $ref: '#/components/schemas/Beroep'
           type: array
         contactpersoon:
           items:
