@@ -380,8 +380,6 @@ components:
       properties:
         codeBeroepsnaam:
           $ref: '#/components/schemas/codeBeroepsnaam'
-        omschrijvingBeroep:
-          $ref: '#/components/schemas/String120'
       type: object
     Competentiebeheersing:
       additionalProperties: false
@@ -390,10 +388,10 @@ components:
           $ref: '#/components/schemas/StringHex10'
         codeCompetentieniveau:
           enum:
-            - 'L1'
-            - 'L2'
-            - 'L3'
-            - 'L4'
+            - L1
+            - L2
+            - L3
+            - L4
           type: string
       type: object
     ContactpersoonAfdeling:
@@ -422,20 +420,20 @@ components:
     Cursus:
       additionalProperties: false
       properties:
-        naamCursus:
-          $ref: '#/components/schemas/String120'
-        datumAanvangVolgenCursus:
-          $ref: '#/components/schemas/Date'
         indicatieCertificaat:
           $ref: '#/components/schemas/Indicatie'
+        naamCursus:
+          $ref: '#/components/schemas/String120'
+        toelichtingCursus:
+          $ref: '#/components/schemas/String2000'
+        datumAanvangVolgenCursus:
+          $ref: '#/components/schemas/Date'
         datumCertificaat:
           $ref: '#/components/schemas/Date'
         datumEindeVolgenCursus:
           $ref: '#/components/schemas/Date'
         naamOpleidingsinstituut:
           $ref: '#/components/schemas/String500'
-        toelichtingCursus:
-          $ref: '#/components/schemas/String2000'
       type: object
     Date:
       format: date
@@ -471,12 +469,12 @@ components:
           maximum: 9
           minimum: 1
           type: integer
-        datumAanvangBeschikbaarVoorWerk:
-          $ref: '#/components/schemas/Date'
         datumEindeBeschikbaarVoorWerk:
           $ref: '#/components/schemas/Date'
         indicatieOnregelmatigWerkOfPloegendienst:
           $ref: '#/components/schemas/Indicatie'
+        datumAanvangBeschikbaarVoorWerk:
+          $ref: '#/components/schemas/Date'
       type: object
     IDWerkzoekende:
       $ref: '#/components/schemas/SafeIDString'
@@ -532,13 +530,13 @@ components:
           - 6
           - 7
           type: integer
-        cursus:
-          items:
-            $ref: '#/components/schemas/Cursus'
-          type: array
         competentiebeheersing:
           items:
             $ref: '#/components/schemas/Competentiebeheersing'
+          type: array
+        cursus:
+          items:
+            $ref: '#/components/schemas/Cursus'
           type: array
         opleiding:
           items:
@@ -556,14 +554,6 @@ components:
           items:
             $ref: '#/components/schemas/MPWerkervaring'
           type: array
-      type: object
-    MPVervoermiddel:
-      additionalProperties: false
-      properties:
-        indicatieBeschikbaarVoorUitvoeringWerk:
-          $ref: '#/components/schemas/Indicatie'
-        indicatieBeschikbaarVoorWoonWerkverkeer:
-          $ref: '#/components/schemas/Indicatie'
       type: object
     MPWerkervaring:
       additionalProperties: false
@@ -633,7 +623,7 @@ components:
           type: array
         vervoermiddel:
           items:
-            $ref: '#/components/schemas/MPVervoermiddel'
+            $ref: '#/components/schemas/Vervoermiddel'
           type: array
         voorkeursland:
           items:
@@ -681,6 +671,8 @@ components:
           - 2
           - 8
           type: integer
+        toelichtingOpleiding:
+          $ref: '#/components/schemas/String2000'          
         codeStatusOpleiding:
           enum:
           - 0
@@ -696,8 +688,6 @@ components:
           $ref: '#/components/schemas/Date'
         naamOpleidingsinstituut:
           $ref: '#/components/schemas/String500'
-        toelichtingOpleiding:
-          $ref: '#/components/schemas/String2000'
       type: object
     Postcode:
       example: 1234AB
@@ -746,7 +736,7 @@ components:
       maxLength: 2
       type: string
     StringHex10:
-      pattern: "^[0-9A-Fa-f]{10}$"
+      pattern: ^[0-9A-Fa-f]{10}$
       type: string
     SafeIDString:
       pattern: ^[a-zA-Z0-9_.-]{0,200}$

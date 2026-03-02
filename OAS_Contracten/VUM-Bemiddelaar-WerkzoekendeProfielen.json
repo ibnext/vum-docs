@@ -591,9 +591,6 @@
         "properties": {
           "codeBeroepsnaam": {
             "$ref": "#/components/schemas/codeBeroepsnaam"
-          },
-          "omschrijvingBeroep": {
-            "$ref": "#/components/schemas/String120"
           }
         },
         "type": "object"
@@ -652,14 +649,17 @@
       "Cursus": {
         "additionalProperties": false,
         "properties": {
+          "indicatieCertificaat": {
+            "$ref": "#/components/schemas/Indicatie"
+          },
           "naamCursus": {
             "$ref": "#/components/schemas/String120"
           },
+          "toelichtingCursus": {
+            "$ref": "#/components/schemas/String2000"
+          },
           "datumAanvangVolgenCursus": {
             "$ref": "#/components/schemas/Date"
-          },
-          "indicatieCertificaat": {
-            "$ref": "#/components/schemas/Indicatie"
           },
           "datumCertificaat": {
             "$ref": "#/components/schemas/Date"
@@ -669,9 +669,6 @@
           },
           "naamOpleidingsinstituut": {
             "$ref": "#/components/schemas/String500"
-          },
-          "toelichtingCursus": {
-            "$ref": "#/components/schemas/String2000"
           }
         },
         "type": "object"
@@ -724,14 +721,14 @@
             "minimum": 1,
             "type": "integer"
           },
-          "datumAanvangBeschikbaarVoorWerk": {
-            "$ref": "#/components/schemas/Date"
-          },
           "datumEindeBeschikbaarVoorWerk": {
             "$ref": "#/components/schemas/Date"
           },
           "indicatieOnregelmatigWerkOfPloegendienst": {
             "$ref": "#/components/schemas/Indicatie"
+          },
+          "datumAanvangBeschikbaarVoorWerk": {
+            "$ref": "#/components/schemas/Date"
           }
         },
         "type": "object"
@@ -804,15 +801,15 @@
             ],
             "type": "integer"
           },
-          "cursus": {
-            "items": {
-              "$ref": "#/components/schemas/Cursus"
-            },
-            "type": "array"
-          },
           "competentiebeheersing": {
             "items": {
               "$ref": "#/components/schemas/Competentiebeheersing"
+            },
+            "type": "array"
+          },
+          "cursus": {
+            "items": {
+              "$ref": "#/components/schemas/Cursus"
             },
             "type": "array"
           },
@@ -839,18 +836,6 @@
               "$ref": "#/components/schemas/MPWerkervaring"
             },
             "type": "array"
-          }
-        },
-        "type": "object"
-      },
-      "MPVervoermiddel": {
-        "additionalProperties": false,
-        "properties": {
-          "indicatieBeschikbaarVoorUitvoeringWerk": {
-            "$ref": "#/components/schemas/Indicatie"
-          },
-          "indicatieBeschikbaarVoorWoonWerkverkeer": {
-            "$ref": "#/components/schemas/Indicatie"
           }
         },
         "type": "object"
@@ -954,7 +939,7 @@
           },
           "vervoermiddel": {
             "items": {
-              "$ref": "#/components/schemas/MPVervoermiddel"
+              "$ref": "#/components/schemas/Vervoermiddel"
             },
             "type": "array"
           },
@@ -1022,6 +1007,9 @@
             ],
             "type": "integer"
           },
+          "toelichtingOpleiding": {
+            "$ref": "#/components/schemas/String2000"
+          },
           "codeStatusOpleiding": {
             "enum": [
               0,
@@ -1042,9 +1030,6 @@
           },
           "naamOpleidingsinstituut": {
             "$ref": "#/components/schemas/String500"
-          },
-          "toelichtingOpleiding": {
-            "$ref": "#/components/schemas/String2000"
           }
         },
         "type": "object"

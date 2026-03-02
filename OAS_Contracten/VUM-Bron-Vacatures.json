@@ -538,7 +538,11 @@
           "huisnummertoevoeging": {
             "$ref": "#/components/schemas/String6"
           }
-        }
+        },
+        "required": [
+          "postcode"
+        ],
+        "type": "object"
       },
       "ArbeidsVoorwaarden": {
         "additionalProperties": false,
@@ -563,9 +567,6 @@
         "properties": {
           "codeBeroepsnaam": {
             "$ref": "#/components/schemas/codeBeroepsnaam"
-          },
-          "omschrijvingBeroep": {
-            "$ref": "#/components/schemas/String120"
           }
         },
         "type": "object"
@@ -727,21 +728,6 @@
         ],
         "type": "integer"
       },
-      "MPArbeidsVoorwaarden": {
-        "additionalProperties": false,
-        "properties": {
-          "datumAanvangWerkzaamheden": {
-            "$ref": "#/components/schemas/Date"
-          },
-          "datumEindeWerkzaamheden": {
-            "$ref": "#/components/schemas/Date"
-          },
-          "salarisIndicatie": {
-            "$ref": "#/components/schemas/String100"
-          }
-        },
-        "type": "object"
-      },
       "MPSollicitatiewijze": {
         "additionalProperties": false,
         "properties": {
@@ -759,7 +745,7 @@
       },
       "MPVacature": {
         "properties": {
-          "beroep.beroepsnaam.codeBeroepsnaam": {
+          "beroep.codeBeroepsnaam": {
             "$ref": "#/components/schemas/codeBeroepsnaam_selectie"
           },
           "codeWerkEnDenkniveauMinimaal": {
@@ -793,7 +779,7 @@
             "$ref": "#/components/schemas/Adres"
           },
           "arbeidsVoorwaarden": {
-            "$ref": "#/components/schemas/MPArbeidsVoorwaarden"
+            "$ref": "#/components/schemas/ArbeidsVoorwaarden"
           },
           "beroep": {
             "$ref": "#/components/schemas/Beroep"
@@ -811,6 +797,12 @@
             ],
             "type": "string"
           },
+          "competentiebeheersing": {
+            "items": {
+              "$ref": "#/components/schemas/Competentiebeheersing"
+            },
+            "type": "array"
+          },
           "contractvorm": {
             "items": {
               "$ref": "#/components/schemas/Contractvorm"
@@ -826,11 +818,8 @@
           "flexibiliteit": {
             "$ref": "#/components/schemas/Flexibiliteit"
           },
-          "competentiebeheersing": {
-            "items": {
-              "$ref": "#/components/schemas/Competentiebeheersing"
-            },
-            "type": "array"
+          "handelsnaamOrganisatie": {
+            "$ref": "#/components/schemas/String500"
           },
           "indicatieLdrRegistratie": {
             "enum": [
@@ -838,6 +827,15 @@
               2
             ],
             "type": "integer"
+          },
+          "naamVacature": {
+            "$ref": "#/components/schemas/String120"
+          },
+          "omschrijvingArbeidsvoorwaarden": {
+            "$ref": "#/components/schemas/String2000"
+          },
+          "omschrijvingVacature": {
+            "$ref": "#/components/schemas/String2000"
           },
           "opleiding": {
             "items": {
@@ -875,6 +873,9 @@
             },
             "type": "array"
           },
+          "webadres": {
+            "$ref": "#/components/schemas/Webadres"
+          },
           "werkervaring": {
             "items": {
               "$ref": "#/components/schemas/Werkervaring"
@@ -892,8 +893,8 @@
           }
         },
         "required": [
-          "idVacature",
-          "adres"
+          "adres",
+          "idVacature"
         ],
         "type": "object"
       },
@@ -1011,10 +1012,6 @@
         "maxLength": 14,
         "type": "string"
       },
-      "String16": {
-        "maxLength": 16,
-        "type": "string"
-      },
       "String2000": {
         "maxLength": 2000,
         "type": "string"
@@ -1031,10 +1028,6 @@
         "maxLength": 35,
         "type": "string"
       },
-      "String40": {
-        "maxLength": 40,
-        "type": "string"
-      },
       "String500": {
         "maxLength": 500,
         "type": "string"
@@ -1043,32 +1036,8 @@
         "maxLength": 6,
         "type": "string"
       },
-      "String70": {
-        "maxLength": 70,
-        "type": "string"
-      },
-      "String80": {
-        "maxLength": 80,
-        "type": "string"
-      },
-      "String9": {
-        "maxLength": 9,
-        "type": "string"
-      },
       "StringCode": {
         "maxLength": 10,
-        "type": "string"
-      },
-      "StringCode1": {
-        "maxLength": 1,
-        "type": "string"
-      },
-      "StringCode2": {
-        "maxLength": 2,
-        "type": "string"
-      },
-      "StringCode4": {
-        "maxLength": 4,
         "type": "string"
       },
       "StringHex10": {
