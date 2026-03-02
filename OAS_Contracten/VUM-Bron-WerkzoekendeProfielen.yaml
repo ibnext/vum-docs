@@ -7,9 +7,9 @@ info:
     name: Helpdesk
     url: https://www.matchingsgegevens.nl
     email: programma-vum@ictu.nl
-  version: 2.0.0
+  version: 3.0.0
 servers:
-- url: https://bron.vumdevelopment.nl/api/v2
+- url: https://bron.vumdevelopment.nl/api/v3
   description: Testbron
 paths:
   /werkzoekendeProfielen/matches:
@@ -260,12 +260,12 @@ components:
     api_version:
       schema:
         enum:
-        - 2.0.0
+        - 3.0.0
         type: string
     vum_bericht_versie:
       schema:
         enum:
-        - 2.0.0
+        - 3.0.0
         type: string
     vum_from_party:
       schema:
@@ -283,7 +283,7 @@ components:
       required: true
       schema:
         enum:
-        - 2.0.0
+        - 3.0.0
         type: string
     vum_bericht_versie:
       in: header
@@ -291,7 +291,7 @@ components:
       required: true
       schema:
         enum:
-        - 2.0.0
+        - 3.0.0
         type: string
     vum_from_party:
       in: header
@@ -349,9 +349,9 @@ components:
           items:
             $ref: '#/components/schemas/Cursus'
           type: array
-        gedragscompetentie:
+        competentiebeheersing:
           items:
-            $ref: '#/components/schemas/Gedragscompetentie'
+            $ref: '#/components/schemas/Competentiebeheersing'
           type: array
         interesse:
           items:
@@ -369,40 +369,29 @@ components:
           items:
             $ref: '#/components/schemas/Taalbeheersing'
           type: array
-        vakvaardigheid:
-          items:
-            $ref: '#/components/schemas/Vakvaardigheid'
-          type: array
         werkervaring:
           items:
             $ref: '#/components/schemas/Werkervaring'
           type: array
       type: object
-    Beroepsnaam:
-      oneOf:
-      - $ref: '#/components/schemas/BeroepsnaamGecodeerd'
-      - $ref: '#/components/schemas/BeroepsnaamOngecodeerd'
-    BeroepsnaamGecodeerd:
+    Beroep:
       additionalProperties: false
       properties:
-        beroepsnaamGecodeerd:
-          additionalProperties: false
-          properties:
-            codeBeroepsnaam:
-              $ref: '#/components/schemas/codeBeroepsnaam'
-            omschrijvingBeroepsnaam:
-              $ref: '#/components/schemas/String120'
-          type: object
+        codeBeroepsnaam:
+          $ref: '#/components/schemas/codeBeroepsnaam'
       type: object
-    BeroepsnaamOngecodeerd:
+    Competentiebeheersing:
       additionalProperties: false
       properties:
-        beroepsnaamOngecodeerd:
-          additionalProperties: false
-          properties:
-            naamBeroepOngecodeerd:
-              $ref: '#/components/schemas/String120'
-          type: object
+        codeCompetentie:
+          $ref: '#/components/schemas/StringHex10'
+        codeCompetentieniveau:
+          enum:
+            - L1
+            - L2
+            - L3
+            - L4
+          type: string
       type: object
     ContactpersoonAfdeling:
       additionalProperties: false
@@ -430,8 +419,12 @@ components:
     Cursus:
       additionalProperties: false
       properties:
+        indicatieCertificaat:
+          $ref: '#/components/schemas/Indicatie'
         naamCursus:
           $ref: '#/components/schemas/String120'
+        toelichtingCursus:
+          $ref: '#/components/schemas/String2000'
         datumAanvangVolgenCursus:
           $ref: '#/components/schemas/Date'
         datumCertificaat:
@@ -475,81 +468,12 @@ components:
           maximum: 9
           minimum: 1
           type: integer
-        datumAanvangBeschikbaarVoorWerk:
-          $ref: '#/components/schemas/Date'
         datumEindeBeschikbaarVoorWerk:
           $ref: '#/components/schemas/Date'
         indicatieOnregelmatigWerkOfPloegendienst:
           $ref: '#/components/schemas/Indicatie'
-      type: object
-    Gedragscompetentie:
-      additionalProperties: false
-      properties:
-        codeBeheersingGedragscompetentie:
-          enum:
-          - 1
-          - 2
-          - 3
-          - 4
-          - 5
-          - 9
-          type: integer
-        codeGedragscompetentie:
-          enum:
-          - '24100'
-          - '24101'
-          - '24102'
-          - '24104'
-          - '24105'
-          - '24106'
-          - '24107'
-          - '24108'
-          - '24109'
-          - '24110'
-          - '24111'
-          - '24112'
-          - '24113'
-          - '24114'
-          - '24115'
-          - '24116'
-          - '24118'
-          - '24119'
-          - '24120'
-          - '24121'
-          - '24122'
-          - '24123'
-          - '24124'
-          - '24125'
-          - '24126'
-          type: string
-        omschrijvingGedragscompetentie:
-          enum:
-          - "Beslissen en activiteiten initi\xEBren"
-          - Aansturen
-          - Begeleiden
-          - Aandacht en begrip tonen
-          - Samenwerken en overleggen
-          - Ethisch en integer handelen
-          - Relaties bouwen en netwerken
-          - "Overtuigen en be\xEFnvloeden"
-          - Presenteren
-          - Formuleren en rapporteren
-          - Vakdeskundigheid toepassen
-          - Materialen en middelen inzetten
-          - Analyseren
-          - Onderzoeken
-          - Creeren en innoveren
-          - Leren
-          - Plannen en organiseren
-          - Op de behoeften en verwachtingen van de klant richten
-          - Kwaliteit leveren
-          - Instructies en procedures opvolgen
-          - Omgaan met verandering en aanpassen
-          - Met druk en tegenslag omgaan
-          - Gedrevenheid en ambitie tonen
-          - Ondernemend en commercieel handelen
-          - Bedrijfsmatig handelen
-          type: string
+        datumAanvangBeschikbaarVoorWerk:
+          $ref: '#/components/schemas/Date'
       type: object
     IDWerkzoekende:
       $ref: '#/components/schemas/SafeIDString'
@@ -605,17 +529,17 @@ components:
           - 6
           - 7
           type: integer
+        competentiebeheersing:
+          items:
+            $ref: '#/components/schemas/Competentiebeheersing'
+          type: array
         cursus:
           items:
-            $ref: '#/components/schemas/MPCursus'
-          type: array
-        gedragscompetentie:
-          items:
-            $ref: '#/components/schemas/Gedragscompetentie'
+            $ref: '#/components/schemas/Cursus'
           type: array
         opleiding:
           items:
-            $ref: '#/components/schemas/MPOpleiding'
+            $ref: '#/components/schemas/Opleiding'
           type: array
         rijbewijs:
           items:
@@ -625,61 +549,16 @@ components:
           items:
             $ref: '#/components/schemas/Taalbeheersing'
           type: array
-        vakvaardigheid:
-          items:
-            $ref: '#/components/schemas/Vakvaardigheid'
-          type: array
         werkervaring:
           items:
             $ref: '#/components/schemas/MPWerkervaring'
           type: array
       type: object
-    MPCursus:
-      additionalProperties: false
-      properties:
-        datumCertificaat:
-          $ref: '#/components/schemas/Date'
-        naamCursus:
-          $ref: '#/components/schemas/String120'
-      type: object
-    MPOpleiding:
-      additionalProperties: false
-      properties:
-        codeNiveauOpleiding:
-          enum:
-          - 1
-          - 2
-          - 3
-          - 4
-          - 5
-          - 6
-          - 9
-          type: integer
-        indicatieDiploma:
-          enum:
-          - 0
-          - 1
-          - 2
-          - 8
-          type: integer
-        datumDiploma:
-          $ref: '#/components/schemas/Date'
-        opleidingsnaam:
-          $ref: '#/components/schemas/Opleidingsnaam'
-      type: object
-    MPVervoermiddel:
-      additionalProperties: false
-      properties:
-        indicatieBeschikbaarVoorUitvoeringWerk:
-          $ref: '#/components/schemas/Indicatie'
-        indicatieBeschikbaarVoorWoonWerkverkeer:
-          $ref: '#/components/schemas/Indicatie'
-      type: object
     MPWerkervaring:
       additionalProperties: false
       properties:
         beroep:
-          $ref: '#/components/schemas/Beroepsnaam'
+          $ref: '#/components/schemas/Beroep'
         datumAanvangWerkzaamheden:
           $ref: '#/components/schemas/Date'
         datumEindeWerkzaamheden:
@@ -717,7 +596,7 @@ components:
           $ref: '#/components/schemas/MPArbeidsmarktkwalificatie'
         bemiddelingsberoep:
           items:
-            $ref: '#/components/schemas/Beroepsnaam'
+            $ref: '#/components/schemas/Beroep'
           type: array
         contractvorm:
           items:
@@ -743,7 +622,7 @@ components:
           type: array
         vervoermiddel:
           items:
-            $ref: '#/components/schemas/MPVervoermiddel'
+            $ref: '#/components/schemas/Vervoermiddel'
           type: array
         voorkeursland:
           items:
@@ -766,10 +645,14 @@ components:
           $ref: '#/components/schemas/Integer1000'
         maximaleReistijd:
           $ref: '#/components/schemas/Integer1000'
+      required:
+        - bemiddelingspostcode
       type: object
     Opleiding:
       additionalProperties: false
       properties:
+        codeOpleidingsnaam:
+          $ref: '#/components/schemas/Integer10AsString'        
         codeNiveauOpleiding:
           enum:
           - 1
@@ -787,8 +670,8 @@ components:
           - 2
           - 8
           type: integer
-        opleidingsnaam:
-          $ref: '#/components/schemas/Opleidingsnaam'
+        toelichtingOpleiding:
+          $ref: '#/components/schemas/String2000'          
         codeStatusOpleiding:
           enum:
           - 0
@@ -804,34 +687,6 @@ components:
           $ref: '#/components/schemas/Date'
         naamOpleidingsinstituut:
           $ref: '#/components/schemas/String500'
-      type: object
-    Opleidingsnaam:
-      oneOf:
-      - $ref: '#/components/schemas/OpleidingsnaamGecodeerd'
-      - $ref: '#/components/schemas/OpleidingsnaamOngecodeerd'
-    OpleidingsnaamGecodeerd:
-      additionalProperties: false
-      properties:
-        opleidingsnaamGecodeerd:
-          additionalProperties: false
-          properties:
-            codeOpleidingsnaam:
-              $ref: '#/components/schemas/Integer10AsString'
-            omschrijvingOpleidingsnaam:
-              $ref: '#/components/schemas/String120'
-          type: object
-      type: object
-    OpleidingsnaamOngecodeerd:
-      additionalProperties: false
-      properties:
-        opleidingsnaamOngecodeerd:
-          additionalProperties: false
-          properties:
-            naamOpleidingOngecodeerd:
-              $ref: '#/components/schemas/String120'
-            omschrijvingOpleiding:
-              $ref: '#/components/schemas/String2000'
-          type: object
       type: object
     Postcode:
       example: 1234AB
@@ -876,6 +731,9 @@ components:
     StringCode2:
       maxLength: 2
       type: string
+    StringHex10:
+      pattern: ^[0-9A-Fa-f]{10}$
+      type: string      
     SafeIDString:
       pattern: ^[a-zA-Z0-9_.-]{0,200}$
       type: string
@@ -900,13 +758,7 @@ components:
       $ref: '#/components/schemas/String14'
     URL:
       type: string
-      maxLength: 512
-    Vakvaardigheid:
-      additionalProperties: false
-      properties:
-        omschrijving:
-          $ref: '#/components/schemas/String120'
-      type: object
+      maxLength: 1000
     Vervoermiddel:
       additionalProperties: false
       properties:
@@ -947,7 +799,7 @@ components:
       additionalProperties: false
       properties:
         beroep:
-          $ref: '#/components/schemas/Beroepsnaam'
+          $ref: '#/components/schemas/Beroep'
         datumAanvangWerkzaamheden:
           $ref: '#/components/schemas/Date'
         datumEindeWerkzaamheden:
@@ -974,7 +826,7 @@ components:
           $ref: '#/components/schemas/Arbeidsmarktkwalificatie'
         bemiddelingsberoep:
           items:
-            $ref: '#/components/schemas/Beroepsnaam'
+            $ref: '#/components/schemas/Beroep'
           type: array
         contactpersoon:
           items:
@@ -1056,17 +908,16 @@ components:
             $or:
               type: array
               items:
-                $ref: '#/components/schemas/beroepsnaamGecodeerd_selectie'
+                $ref: '#/components/schemas/beroepsnaam_selectie'
           type: object
       type: object
-    beroepsnaamGecodeerd_selectie:
+    beroepsnaam_selectie:
       properties:
-        beroepsnaamGecodeerd.codeBeroepsnaam:
+        beroep.codeBeroepsnaam:
           $ref: '#/components/schemas/codeBeroepsnaam_selectie'
       type: object
     codeBeroepsnaam:
-      pattern: ^[0-9]{1,10}$
-      type: string
+      $ref: '#/components/schemas/StringHex10'
     codeBeroepsnaam_selectie:
       properties:
         $eq:

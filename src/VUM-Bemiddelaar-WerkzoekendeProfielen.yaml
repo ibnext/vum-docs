@@ -7,13 +7,13 @@ info:
     name: Helpdesk
     url: https://www.matchingsgegevens.nl
     email: programma-vum@ictu.nl
-  version: 2.0.0
+  version: 3.0.0
 servers:
-- url: https://test.vumdevelopment.nl/api/v2
+- url: https://test.vumdevelopment.nl/api/v3
   description: staging/test server
-- url: https://accept.vumdevelopment.nl/api/v2
+- url: https://accept.vumdevelopment.nl/api/v3
   description: acceptatie server
-- url: https://prod.vumdevelopment.nl/api/v2
+- url: https://prod.vumdevelopment.nl/api/v3
   description: productie server
 paths:
   /werkzoekendeProfielen/matches:
