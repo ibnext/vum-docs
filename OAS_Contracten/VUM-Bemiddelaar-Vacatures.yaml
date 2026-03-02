@@ -574,7 +574,7 @@ components:
           type: array
         vervoermiddel:
           items:
-            $ref: '#/components/schemas/MPVervoermiddel'
+            $ref: '#/components/schemas/Vervoermiddel'
           type: array
         webadres:
           $ref: '#/components/schemas/Webadres'          
@@ -591,14 +591,6 @@ components:
       required:
       - vumID
       - adres
-      type: object
-    MPVervoermiddel:
-      additionalProperties: false
-      properties:
-        indicatieBeschikbaarVoorUitvoeringWerk:
-          $ref: '#/components/schemas/Indicatie'
-        indicatieBeschikbaarVoorWoonWerkverkeer:
-          $ref: '#/components/schemas/Indicatie'
       type: object
     MPWerkgever:
       additionalProperties: false

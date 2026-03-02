@@ -480,7 +480,7 @@ components:
           type: array
         vervoermiddel:
           items:
-            $ref: '#/components/schemas/MPVervoermiddel'
+            $ref: '#/components/schemas/Vervoermiddel'
           type: array
         vumID_VUM:
           $ref: '#/components/schemas/VumID'
@@ -498,14 +498,6 @@ components:
       - vumID_VUM
       - adres_V
       - idVacature_BRN
-      type: object
-    MPVervoermiddel:
-      additionalProperties: false
-      properties:
-        indicatieBeschikbaarVoorUitvoeringWerk:
-          $ref: '#/components/schemas/Indicatie'
-        indicatieBeschikbaarVoorWoonWerkverkeer:
-          $ref: '#/components/schemas/Indicatie'
       type: object
     MPWerkervaring:
       additionalProperties: false
