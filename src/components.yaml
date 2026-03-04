@@ -443,8 +443,6 @@ components:
           type: array
         flexibiliteit:
           $ref: '#/components/schemas/Flexibiliteit'
-        handelsnaamOrganisatie:
-          $ref: '#/components/schemas/String500'
         idVacature_BRN:
           $ref: '#/components/schemas/IDVacature'
         indicatieLdrRegistratie:
@@ -514,6 +512,8 @@ components:
     MPWerkgever:
       additionalProperties: false
       properties:
+        handelsnaamOrganisatie:
+          $ref: '#/components/schemas/String500'
         sector:
           items:
             $ref: '#/components/schemas/SectorBeroepsEnBedrijfsleven'
