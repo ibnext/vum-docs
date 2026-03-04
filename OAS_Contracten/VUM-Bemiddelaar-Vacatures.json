@@ -819,9 +819,6 @@
           "flexibiliteit": {
             "$ref": "#/components/schemas/Flexibiliteit"
           },
-          "handelsnaamOrganisatie": {
-            "$ref": "#/components/schemas/String500"
-          },
           "indicatieLdrRegistratie": {
             "enum": [
               1,
@@ -902,6 +899,9 @@
       "MPWerkgever": {
         "additionalProperties": false,
         "properties": {
+          "handelsnaamOrganisatie": {
+            "$ref": "#/components/schemas/String500"
+          },
           "sector": {
             "items": {
               "$ref": "#/components/schemas/SectorBeroepsEnBedrijfsleven"
