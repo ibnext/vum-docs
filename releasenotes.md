@@ -2,12 +2,55 @@
 
 Deze versie van de VUM Koppelvlak specificaties is gebaseerd op versie 1.5 van de VUM Gegevensstandaard.
 
-Versie 3.0.0 van de VUM Koppelvlak specificaties introduceert een aantal vereenvoudigingen en verbeteringen ten opzichte van de voorgaande 2.0.0 release.:
-Er sprake van zogenaamde breaking changes. Daarom is het major versienummer verhoogd van 2 naar 3.  
+Versie 3.0.0 van de VUM Koppelvlak specificaties introduceert een aantal vereenvoudigingen en verbeteringen ten opzichte van de voorgaande 2.0.0 release.  
+Er is sprake van zogenaamde breaking changes. Daarom is het major versienummer verhoogd van 2 naar 3.  
 
 De belangrijkste wijzigingen zijn:
 
-## Nieuwe, gewijzigde en verwijderde velden
+### Algemeen
+- Binnen de entiteit **Webadres** is attribuut **URL** verlengd van een maximum van 512 naar 1000 posities
+  - URL's kunnen en mogen tegenwoordig langer zijn dan 512 posities. Deze verlenging zorgt ervoor dat ook langere URL's correct kunnen worden verwerkt.
+- Binnen de entiteit **Mobiliteit** is attribuut **Bemiddelingspostcode** verplicht gesteld in het resultaat van een zoekvraag naar werkzoekenden
+- Binnen de entiteit **Adres** is attribuut **Postcode** verplicht gesteld in het resultaat van een zoekvraag naar vacatures
+
+Een aantal velden zijn nu toegevoegd aan het resultaat van een eerste zoekvraag.  
+
+**Voor vacatures:**
+- Werkgever
+  - handelsnaamOrganisatie
+  - webadres
+- ArbeidsVoorwaarden
+  - omschrijvingArbeidsvoorwaarden
+- Opleiding
+  - toelichtingOpleiding
+- Sollicitatiewijze
+  - webadres
+- Vervoermiddel
+  - codeVervoermiddel
+
+**Voor werkzoekenden:**
+- Arbeidsmarktkwalificatie
+    - Opleiding
+        - toelichtingOpleiding
+        - codeStatusOpleiding
+        - datumAanvangVolgenOpleiding
+        - datumEindeVolgenOpleiding
+        - naamOpleidingsinstituut
+
+- Vervoermiddel
+  - codeVervoermiddel
+- Opleiding:
+  - toelichtingOpleiding
+  - codeStatusOpleiding
+  - datumAanvangVolgenOpleiding
+  - datumEindeVolgenOpleiding
+  - naamOpleidingsinstituut
+
+## Nieuwe, gewijzigde en verwijderde entiteiten en attributen
+
+### Verwijderd uit Flexibiliteit
+Binnen de entiteit **Flexibiliteit** (alleen binnen het koppelvlak Vacatures) is attribuut **datumAanvangBeschikbaarVoorWerk** verwijderd.  
+Dit veld is in het verleden foutief overgenomen uit het koppelvlak voor werkzoekenden. Verder heeft dit gegeven dezelfde dekking als datumaanvangWerkzaamheden.
 
 ### Competentiestructuur volledig vernieuwd
 In v2 werd gewerkt met **Gedragscompetentie** met de volgende structuur:
@@ -15,28 +58,24 @@ In v2 werd gewerkt met **Gedragscompetentie** met de volgende structuur:
 - codeGedragscompetentie
 - omschrijvingGedragscompetentie
 
-In v3 is dit vervangen door **Competentiebeheersing**:
-- codeCompetentie (hex)
-- codeCompetentieniveau (L1–L4)
+In v3 is dit vervangen door **Competentiebeheersing** bestaande uit enkel het attribuut:
+- codeCompetentie (URI)
 
-We gaan gebruik maken van de competentie codes van CompetentNL.    
-De omschrijving van de competentie en het competentieniveau is daarmee niet meer opgenomen in de gegevensstandaard, maar kan worden opgehaald via de code.    
-Ook de codes voor competentieniveau zijn gewijzigd naar een meer generieke structuur, zodat deze ook voor andere typen competenties dan gedragscompetenties kunnen worden gebruikt.  
-<TODO: Uitleg wat die L1 t/m L4 inhouden>  
-Vakvaardigheid is komen te vervallen, omdat ........
+We gaan gebruik maken van de competenties van CompetentNL (skills).    
+De entiteit **Gedragscompetentie** is daarmee niet meer opgenomen in de gegevensstandaard, maar kan worden opgehaald via een referentie bij CompetentNL.
 
 ### Beroepsnaam → Beroep
 In v2 bestond het type **Beroepsnaam** (gecodeerd/ongecodeerd).  
 In v3 is dit vervangen door **Beroep** met een eenvoudiger structuur:
-- codeBeroepsnaam
+- codeBeroepsnaam (URI)
 
 Er wordt dus geen onderscheid meer gemaakt tussen gecodeerd en ongecodeerd.  
 Verwijzingen die voorheen werden gedaan naar Beroepsnaam (zoals in Werkervaring) verwijzen nu naar Beroep.
 
 ### Opleiding is gewijzigd    
 In v2 bestond het type **Opleidingsnaam** (gecodeerd/ongecodeerd).    
-In v3 is dit vervangen door **codeOpleidingsnaam**. Het betreft dus alleen een code en het type is gewijzigd naar een hexadecimale waarde van precies 10 posities.    
-Dit is gedaan om straks beter te kunnen aansluiten op de codes van CompetentNL.
+In v3 is dit vervangen door **codeOpleidingsnaam** en verwijst naar een id van het type URI zoals gebruikt in de CompetentNL API.    
+CompetentNL zal hier dus leidend zijn t.a.v. gedefinieerde beroepen.
 
 In v3 is **toelichtingOpleiding** toegevoegd om meer context te kunnen geven bij een opleiding.  
 De volgende objecten zijn dus verwijderd t.b.v. verduidelijking en consistentie:
@@ -44,21 +83,17 @@ De volgende objecten zijn dus verwijderd t.b.v. verduidelijking en consistentie:
 - OpleidingsnaamGecodeerd
 - OpleidingsnaamOngecodeerd
 
-Verder zijn bestaande velden inhoudelijk hetzelfde gebleven.
+Verder zijn bestaande attributen inhoudelijk hetzelfde gebleven.
 
 ### Cursus uitgebreid
-In v3 zijn de volgende velden aan het type Cursus toegevoegd:
+In v3 zijn de volgende attributen aan het type Cursus toegevoegd:
 - indicatieCertificaat
 - toelichtingCursus
 
 Dit is gedaan om meer detail te kunnen geven over een cursus en een mogelijkheid tot toelichting.
 
 ### Mobiliteit aangescherpt
-In v2 was **bemiddelingspostcode** optioneel.  
-In V3 is dit veld verplicht gemaakt.
-
-### URL‑lengte vergroot
-De maximale lengte van type **URL** is gewijzigd van 500 naar 1000.
+In v3 is het veld **bemiddelingspostcode** als antwoord op een eerste zoekvraag voor werkzoekenden verplicht gemaakt.
 
 ### AdresHouding sterk vereenvoudigd
 In V2 was **AdresHouding** een uitgebreid en complex gegevenstype met meerdere subtypes.  
@@ -69,18 +104,45 @@ In V3 is dit vereenvoudigd tot een enkel gegevenstype **Adres** met de volgende 
 - huisnummertoevoeging
 
 Dit **Adres** type is ons inziens voldoende om aan te geven wat het adres van een vacature of werkgever is.    
-VUM beperkt zich tot Nederlandse adressen, een goede reden om buitenlandse adressen niet meer te ondersteunen.
+VUM beperkt zich tot de Nederlandse arbeidsmarkt. Matching o.b.v. buitenlandse adressen wordt niet ondersteund binnen de historische werking van VUM.
 
-## Ondersteuning van oudere API versies
-<TODO: Beter uitleggen wat dit inhoudt en waarom dit mogelijk is, en wat de gevolgen zijn voor vraagstellers en bronnen>
+### Uitbreiding eerste zoekresultaat
+- Binnen de entiteit **Vacature** zijn de attributen **omschrijvingVacature**, **naamVacature** en **Webadres** nu ook beschikbaar in het antwoord op een eerste zoekvraag voor vacatures
+- Binnen de entiteit **Werkgever** is het attribuut **HandelsnaamOrganisatie** nu ook beschikbaar in het antwoord op een eerste zoekvraag voor vacatures
+- Binnen de entiteit **Arbeidsvoorwaarden** is het attribuut **omschrijvingArbeidsvoorwaarden** nu ook beschikbaar in het antwoord op een eerste zoekvraag voor vacatures
+- Alle gegevens uit de entiteit **Opleiding** zijn nu beschikbaar binnen het antwoord van een eerste zoekvraag.
+- Alle gegevens uit de entiteit **Cursus** zijn nu beschikbaar binnen het antwoord van een eerste zoekvraag.
 
-De specificatie van de selectievraag is zodanig opgesteld dat toekomstige toevoegingen niet worden uitgesloten.  
-Dit is mogelijk omdat JSON schemas zodanig kunnen worden geformuleerd dat niet-benoemde gegevens en operatoren worden toegestaan op het koppelvlak. Bij de verwerking van de selectievraag zullen deze niet-benoemde gegevens en operatoren genegeerd worden. Hiermee wordt het mogelijk om gedurende een overgangsperiode twee verschillende versies van de selectievraag gelijktijdig in de VUM keten te ondersteunen: 
+### Voorbereidingen Introductie CompetentNL
+We spraken al eerder over de rol van CompetentNL t.a.v. beroepen en competenties.  
+Hieronder nog een keer een samenvatting van de voorbereidingen daarvoor:
+- Binnen de entiteit **Beroep** is attribuut **codeBeroepsnaam** gewijzigd van een variable alfanumerieke waarde van maximaal 10 posities naar een URI die verwijst naar een Beroep gedefinieerd bij ComponentNL.   
+- Ook binnen de toegevoegde entiteit **Competentiebeheersing** wordt attribuut **codeCompetentie** getypeerd als een URI, zijnde een referentie naar een **Competentie/Skill** bij CompetentNL.  
 
-* De koppelvlak specificaties staan toe dat onbenoemde gegevens en operatoren voorkomen in de selectievraag: 
-	* toegevoegde gegevens en operatoren worden dan geaccepteerd op een koppelvlak van de voorgaande versie
-	* verwijderde gegevens en operatoren die toch aanwezig zijn, worden dan niet geweigerd op een koppelvlak van de nieuwe versie
+## Ondersteuning van oudere API‑versies
+Onze specificatie voor de selectievraag is zo ontworpen dat nieuwe uitbreidingen in toekomstige minor versies geen breuk veroorzaken met bestaande implementaties. Dit betekent dat een bron of vraagsteller tijdelijk met verschillende versies van de selectievraag kan werken zonder dat het koppelvlak direct moet worden aangepast.
 
-* De ontvangende systemen verwerken de gegevens en operatoren van de ontvangen selectievraag die binnen de door hun ondersteunde versie van de selectievraag vallen. De selectiecriteria in de selectievraag die buiten de ondersteunde versie vallen worden genegeerd.
+### Hoe dit technisch mogelijk is
+De JSON‑schemas van het koppelvlak staan toe dat onbekende of niet‑gedefinieerde attributen en operatoren in de selectievraag voorkomen. Deze worden:
+- geaccepteerd door systemen die een oudere versie ondersteunen, en
+- genegeerd bij de verwerking als ze niet binnen de ondersteunde versie vallen.
 
-Gedurende de overgangsperiode tussen twee versies kan het voorkomen dat niet alle selectiecriteria in een specifieke selectievraag door alle bronnen worden gehonoreerd. Bronnen zullen de criteria die buiten de door hun ondersteunde versie van de selectievraag vallen, niet toepassen en dit kan resultaten opleveren die anders door die selectiecriteria uitgesloten zouden worden. Een vraagsteller ontvangt dan mogelijk resultaten die niet aan alle selectiecriteria in de gestelde selectievraag voldoen. Mocht dit ongewenst zijn, dan kan de vraagsteller gedurende de overgangsperiode de ongewenste resultaten uitfilteren door deze selectiecriteria lokaal toe te passen op de ontvangen resultaten.
+Hierdoor ontstaat een soepele overgang tussen versies:
+- Nieuwe attributen/operatoren kunnen al worden meegestuurd, ook als een bron nog een oudere versie ondersteunt.
+- Verwijderde attributen/operatoren veroorzaken geen foutmeldingen bij systemen die al op de nieuwe versie zitten.
+
+### Wat dit betekent voor bronnen
+Een bron verwerkt alleen de selectiecriteria die binnen de door die bron ondersteunde versie vallen.  
+Criteria die horen bij een nieuwere versie worden genegeerd. De bron levert dus resultaten op basis van de subset van criteria die hij begrijpt.
+
+### Wat dit betekent voor vraagstellers
+Tijdens een overgangsperiode kan het voorkomen dat:
+- niet alle bronnen alle selectiecriteria toepassen, en
+- de uiteindelijke resultaten daardoor records bevatten die door nieuwere selectiecriteria eigenlijk uitgesloten zouden worden.
+
+Als een vraagsteller wil voorkomen dat deze “te brede” resultaten worden teruggegeven, kan hij tijdens de overgangsperiode de ontbrekende selectiecriteria lokaal toepassen op de ontvangen resultaten.
+
+### Praktische gevolgen tijdens een versieovergang
+- Gedurende de overgangsperiode kunnen verschillende bronnen verschillende versies ondersteunen.
+- De selectievraag blijft geldig voor alle bronnen, maar niet alle criteria worden overal toegepast.
+- Vraagstellers die volledige consistentie nodig hebben, moeten zelf aanvullende filtering uitvoeren.

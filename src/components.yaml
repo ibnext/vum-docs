@@ -199,14 +199,7 @@ components:
       additionalProperties: false
       properties:
         codeCompetentie:
-          $ref: '#/components/schemas/StringHex10'
-        codeCompetentieniveau:
-          enum:
-            - L1
-            - L2
-            - L3
-            - L4
-          type: string
+          $ref: '#/components/schemas/URI'
       type: object
     ContactpersoonAfdeling:
       additionalProperties: false
@@ -379,17 +372,6 @@ components:
             $ref: '#/components/schemas/MPWerkervaring'
           type: array
       type: object
-    MPSollicitatiewijze:
-      additionalProperties: false
-      properties:
-        codeSollicitatiewijze:
-          enum:
-          - '1'
-          - '2'
-          - '3'
-          - '4'
-          type: string
-      type: object
     MPVacature:
       properties:
         beroep.codeBeroepsnaam:
@@ -452,8 +434,6 @@ components:
           type: integer
         naamVacature:
           $ref: '#/components/schemas/String120'
-        omschrijvingArbeidsvoorwaarden:
-          $ref: '#/components/schemas/String2000'          
         omschrijvingVacature:
           $ref: '#/components/schemas/String2000'          
         opleiding:
@@ -470,7 +450,7 @@ components:
           $ref: '#/components/schemas/Date'
         sollicitatiewijze:
           items:
-            $ref: '#/components/schemas/MPSollicitatiewijze'
+            $ref: '#/components/schemas/Sollicitatiewijze'
           type: array
         taalbeheersing:
           items:
@@ -482,8 +462,6 @@ components:
           type: array
         vumID_VUM:
           $ref: '#/components/schemas/VumID'
-        webadres:
-          $ref: '#/components/schemas/Webadres'          
         werkervaring:
           items:
             $ref: '#/components/schemas/Werkervaring'
@@ -518,6 +496,8 @@ components:
           items:
             $ref: '#/components/schemas/SectorBeroepsEnBedrijfsleven'
           type: array
+        webadres:
+          $ref: '#/components/schemas/Webadres'
       type: object
     MPWerkzoekende:
       properties:
@@ -715,9 +695,6 @@ components:
     StringCode2:
       maxLength: 2
       type: string      
-    StringHex10:
-      pattern: ^[0-9A-Fa-f]{10}$
-      type: string      
     SafeIDString:
       pattern: ^[a-zA-Z0-9_.-]{0,200}$
       type: string
@@ -740,6 +717,9 @@ components:
       type: object
     Telefoonnummer:
       $ref: '#/components/schemas/String14'
+    URI:
+      type: string
+      maxLength: 1000      
     URL:
       type: string
       maxLength: 1000
@@ -1010,7 +990,7 @@ components:
           $ref: '#/components/schemas/codeBeroepsnaam_selectie'
       type: object
     codeBeroepsnaam:
-      $ref: '#/components/schemas/StringHex10'
+      $ref: '#/components/schemas/URI'
     codeBeroepsnaam_selectie:
       properties:
         $eq:
