@@ -333,45 +333,6 @@ components:
         naamInteresse:
           $ref: '#/components/schemas/String120'
       type: object
-    MPArbeidsmarktkwalificatie:
-      additionalProperties: false
-      properties:
-        codeWerkEnDenkniveauWerkzoekende:
-          enum:
-          - 0
-          - 1
-          - 2
-          - 3
-          - 4
-          - 5
-          - 6
-          - 7
-          type: integer
-        competentiebeheersing:
-          items:
-            $ref: '#/components/schemas/Competentiebeheersing'
-          type: array
-        cursus:
-          items:
-            $ref: '#/components/schemas/Cursus'
-          type: array
-        opleiding:
-          items:
-            $ref: '#/components/schemas/Opleiding'
-          type: array
-        rijbewijs:
-          items:
-            $ref: '#/components/schemas/Rijbewijs'
-          type: array
-        taalbeheersing:
-          items:
-            $ref: '#/components/schemas/Taalbeheersing'
-          type: array
-        werkervaring:
-          items:
-            $ref: '#/components/schemas/MPWerkervaring'
-          type: array
-      type: object
     MPVacature:
       properties:
         beroep.codeBeroepsnaam:
@@ -475,18 +436,6 @@ components:
       - adres_V
       - idVacature_BRN
       type: object
-    MPWerkervaring:
-      additionalProperties: false
-      properties:
-        beroep:
-          $ref: '#/components/schemas/Beroep'
-        datumAanvangWerkzaamheden:
-          $ref: '#/components/schemas/Date'
-        datumEindeWerkzaamheden:
-          $ref: '#/components/schemas/Date'
-        naamOrganisatie:
-          $ref: '#/components/schemas/String70'
-      type: object
     MPWerkgever:
       additionalProperties: false
       properties:
@@ -526,7 +475,7 @@ components:
       additionalProperties: false
       properties:
         arbeidsmarktkwalificatie:
-          $ref: '#/components/schemas/MPArbeidsmarktkwalificatie'
+          $ref: '#/components/schemas/Arbeidsmarktkwalificatie'
         bemiddelingsberoep:
           items:
             $ref: '#/components/schemas/Beroep'

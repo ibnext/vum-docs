@@ -30,13 +30,14 @@ Een aantal velden zijn nu toegevoegd aan het resultaat van een eerste zoekvraag.
 
 **Voor werkzoekenden:**
 - Arbeidsmarktkwalificatie
+    - Interesse
+      - naamInteresse
     - Opleiding
         - toelichtingOpleiding
         - codeStatusOpleiding
         - datumAanvangVolgenOpleiding
         - datumEindeVolgenOpleiding
         - naamOpleidingsinstituut
-
 - Vervoermiddel
   - codeVervoermiddel
 - Opleiding:
@@ -45,6 +46,8 @@ Een aantal velden zijn nu toegevoegd aan het resultaat van een eerste zoekvraag.
   - datumAanvangVolgenOpleiding
   - datumEindeVolgenOpleiding
   - naamOpleidingsinstituut
+- Werkervaring:
+  - toelichtingWerkervaring
 
 ## Nieuwe, gewijzigde en verwijderde entiteiten en attributen
 
