@@ -384,14 +384,7 @@ components:
       additionalProperties: false
       properties:
         codeCompetentie:
-          $ref: '#/components/schemas/StringHex10'
-        codeCompetentieniveau:
-          enum:
-            - L1
-            - L2
-            - L3
-            - L4
-          type: string
+          $ref: '#/components/schemas/URI'
       type: object
     ContactpersoonAfdeling:
       additionalProperties: false
@@ -515,57 +508,6 @@ components:
         naamInteresse:
           $ref: '#/components/schemas/String120'
       type: object
-    MPArbeidsmarktkwalificatie:
-      additionalProperties: false
-      properties:
-        codeWerkEnDenkniveauWerkzoekende:
-          enum:
-          - 0
-          - 1
-          - 2
-          - 3
-          - 4
-          - 5
-          - 6
-          - 7
-          type: integer
-        competentiebeheersing:
-          items:
-            $ref: '#/components/schemas/Competentiebeheersing'
-          type: array
-        cursus:
-          items:
-            $ref: '#/components/schemas/Cursus'
-          type: array
-        opleiding:
-          items:
-            $ref: '#/components/schemas/Opleiding'
-          type: array
-        rijbewijs:
-          items:
-            $ref: '#/components/schemas/Rijbewijs'
-          type: array
-        taalbeheersing:
-          items:
-            $ref: '#/components/schemas/Taalbeheersing'
-          type: array
-        werkervaring:
-          items:
-            $ref: '#/components/schemas/MPWerkervaring'
-          type: array
-      type: object
-    MPWerkervaring:
-      additionalProperties: false
-      properties:
-        beroep:
-          $ref: '#/components/schemas/Beroep'
-        datumAanvangWerkzaamheden:
-          $ref: '#/components/schemas/Date'
-        datumEindeWerkzaamheden:
-          $ref: '#/components/schemas/Date'
-        naamOrganisatie:
-          $ref: '#/components/schemas/String70'
-      type: object
     MPWerkzoekende:
       properties:
         bemiddelingsberoep:
@@ -593,7 +535,7 @@ components:
       additionalProperties: false
       properties:
         arbeidsmarktkwalificatie:
-          $ref: '#/components/schemas/MPArbeidsmarktkwalificatie'
+          $ref: '#/components/schemas/Arbeidsmarktkwalificatie'
         bemiddelingsberoep:
           items:
             $ref: '#/components/schemas/Beroep'
@@ -731,9 +673,6 @@ components:
     StringCode2:
       maxLength: 2
       type: string
-    StringHex10:
-      pattern: ^[0-9A-Fa-f]{10}$
-      type: string      
     SafeIDString:
       pattern: ^[a-zA-Z0-9_.-]{0,200}$
       type: string
@@ -756,6 +695,9 @@ components:
       type: object
     Telefoonnummer:
       $ref: '#/components/schemas/String14'
+    URI:
+      type: string
+      maxLength: 1000
     URL:
       type: string
       maxLength: 1000
@@ -917,7 +859,7 @@ components:
           $ref: '#/components/schemas/codeBeroepsnaam_selectie'
       type: object
     codeBeroepsnaam:
-      $ref: '#/components/schemas/StringHex10'
+      $ref: '#/components/schemas/URI'
     codeBeroepsnaam_selectie:
       properties:
         $eq:
