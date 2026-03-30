@@ -795,6 +795,9 @@
           "arbeidsmarktkwalificatie.taalbeheersing": {
             "$ref": "#/components/schemas/taalbeheersingen_selectie"
           },
+          "datumAanvangWerkzaamheden": {
+            "$ref": "#/components/schemas/datumAanvangWerkzaamheden_selectie"
+          },
           "werktijden.indicatieKantoortijden": {
             "$ref": "#/components/schemas/indicatieKantoortijden_selectie"
           },
@@ -1392,6 +1395,17 @@
               }
             },
             "type": "object"
+          }
+        },
+        "type": "object"
+      },
+      "datumAanvangWerkzaamheden_choice": {
+        "$ref": "#/components/schemas/Date"
+      },
+      "datumAanvangWerkzaamheden_selectie": {
+        "properties": {
+          "$gte": {
+            "$ref": "#/components/schemas/datumAanvangWerkzaamheden_choice"
           }
         },
         "type": "object"
