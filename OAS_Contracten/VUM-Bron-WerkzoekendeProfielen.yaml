@@ -522,6 +522,8 @@ components:
           $ref: '#/components/schemas/selectiegebied_selectie'
         arbeidsmarktkwalificatie.taalbeheersing:
           $ref: '#/components/schemas/taalbeheersingen_selectie'
+        datumAanvangWerkzaamheden:
+          $ref: '#/components/schemas/datumAanvangWerkzaamheden_selectie'
         werktijden.indicatieKantoortijden:
           $ref: '#/components/schemas/indicatieKantoortijden_selectie'
         werktijden.aantalWerkurenPerWeekMaximaal:
@@ -936,6 +938,13 @@ components:
             $eq:
               $ref: '#/components/schemas/codeTypeArbeidscontract'
           type: object
+      type: object
+    datumAanvangWerkzaamheden_choice:
+      $ref: '#/components/schemas/Date'
+    datumAanvangWerkzaamheden_selectie:
+      properties:
+        $gte:
+          $ref: '#/components/schemas/datumAanvangWerkzaamheden_choice'
       type: object
     indicatieKantoortijden_choice:
       enum:

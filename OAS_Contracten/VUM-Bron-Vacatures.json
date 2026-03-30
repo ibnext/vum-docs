@@ -727,6 +727,12 @@
           "codeWerkEnDenkniveauMinimaal": {
             "$ref": "#/components/schemas/codeWerkEnDenkNiveauMinimaal_selectie"
           },
+          "datumAanvangWerkzaamheden": {
+            "$ref": "#/components/schemas/datumAanvangWerkzaamheden_selectie"
+          },
+          "flexibiliteit.indicatieOnregelmatigWerkOfPloegendienst": {
+            "$ref": "#/components/schemas/indicatieOnregelmatigWerkOfPloegendienst_selectie"
+          },
           "rijbewijs": {
             "$ref": "#/components/schemas/rijbewijs_selectie"
           },
@@ -1411,6 +1417,32 @@
           "6"
         ],
         "type": "string"
+      },
+      "datumAanvangWerkzaamheden_choice": {
+        "$ref": "#/components/schemas/Date"
+      },
+      "datumAanvangWerkzaamheden_selectie": {
+        "properties": {
+          "$gte": {
+            "$ref": "#/components/schemas/datumAanvangWerkzaamheden_choice"
+          }
+        },
+        "type": "object"
+      },
+      "indicatieOnregelmatigWerkOfPloegendienst_choice": {
+        "enum": [
+          1,
+          2
+        ],
+        "type": "integer"
+      },
+      "indicatieOnregelmatigWerkOfPloegendienst_selectie": {
+        "properties": {
+          "$eq": {
+            "$ref": "#/components/schemas/indicatieOnregelmatigWerkOfPloegendienst_choice"
+          }
+        },
+        "type": "object"
       },
       "rijbewijs_selectie": {
         "properties": {
