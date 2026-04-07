@@ -581,7 +581,9 @@ components:
             $ref: '#/components/schemas/SectorBeroepsEnBedrijfsleven'
           type: array
         webadres:
-          $ref: '#/components/schemas/Webadres'
+          items:
+            $ref: '#/components/schemas/Webadres'
+          type: array
       type: object
     Opleiding:
       additionalProperties: false

@@ -884,7 +884,10 @@
             "type": "array"
           },
           "webadres": {
-            "$ref": "#/components/schemas/Webadres"
+            "items": {
+              "$ref": "#/components/schemas/Webadres"
+            },
+            "type": "array"
           }
         },
         "type": "object"
