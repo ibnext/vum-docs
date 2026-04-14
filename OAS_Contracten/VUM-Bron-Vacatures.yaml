@@ -424,10 +424,6 @@ components:
     Flexibiliteit:
       additionalProperties: false
       properties:
-        codeRegiostraal:
-          maximum: 9
-          minimum: 1
-          type: integer
         datumEindeBeschikbaarVoorWerk:
           $ref: '#/components/schemas/Date'
         indicatieOnregelmatigWerkOfPloegendienst:
@@ -696,7 +692,7 @@ components:
       $ref: '#/components/schemas/String14'
     URI:
       type: string
-      maxLength: 1000      
+      maxLength: 200      
     URL:
       type: string
       maxLength: 1000
