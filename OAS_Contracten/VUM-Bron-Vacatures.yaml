@@ -398,7 +398,7 @@ components:
       additionalProperties: false
       properties:
         indicatieCertificaat:
-          $ref: '#/components/schemas/Indicatie'
+          $ref: '#/components/schemas/IndicatieDiploma'
         naamCursus:
           $ref: '#/components/schemas/String120'
         toelichtingCursus:
@@ -437,6 +437,13 @@ components:
       - 1
       - 2
       type: integer
+    IndicatieDiploma:
+      enum:
+        - 0
+        - 1
+        - 2
+        - 8
+      type: integer      
     Integer1000:
       maximum: 999
       minimum: 0
@@ -597,12 +604,7 @@ components:
           - 9
           type: integer
         indicatieDiploma:
-          enum:
-          - 0
-          - 1
-          - 2
-          - 8
-          type: integer
+          $ref: '#/components/schemas/IndicatieDiploma'
         toelichtingOpleiding:
           $ref: '#/components/schemas/String2000'
       type: object

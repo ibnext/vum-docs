@@ -624,7 +624,7 @@
         "additionalProperties": false,
         "properties": {
           "indicatieCertificaat": {
-            "$ref": "#/components/schemas/Indicatie"
+            "$ref": "#/components/schemas/IndicatieDiploma"
           },
           "naamCursus": {
             "$ref": "#/components/schemas/String120"
@@ -680,6 +680,15 @@
           0,
           1,
           2
+        ],
+        "type": "integer"
+      },
+      "IndicatieDiploma": {
+        "enum": [
+          0,
+          1,
+          2,
+          8
         ],
         "type": "integer"
       },
@@ -907,13 +916,7 @@
             "type": "integer"
           },
           "indicatieDiploma": {
-            "enum": [
-              0,
-              1,
-              2,
-              8
-            ],
-            "type": "integer"
+            "$ref": "#/components/schemas/IndicatieDiploma"
           },
           "toelichtingOpleiding": {
             "$ref": "#/components/schemas/String2000"

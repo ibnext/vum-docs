@@ -641,7 +641,7 @@
         "additionalProperties": false,
         "properties": {
           "indicatieCertificaat": {
-            "$ref": "#/components/schemas/Indicatie"
+            "$ref": "#/components/schemas/IndicatieDiploma"
           },
           "naamCursus": {
             "$ref": "#/components/schemas/String120"
@@ -730,6 +730,15 @@
         ],
         "type": "integer"
       },
+      "IndicatieDiploma": {
+        "enum": [
+          0,
+          1,
+          2,
+          8
+        ],
+        "type": "integer"
+      },
       "Integer1000": {
         "maximum": 999,
         "minimum": 0,
@@ -791,8 +800,8 @@
           "arbeidsmarktkwalificatie.taalbeheersing": {
             "$ref": "#/components/schemas/taalbeheersingen_selectie"
           },
-          "datumAanvangWerkzaamheden": {
-            "$ref": "#/components/schemas/datumAanvangWerkzaamheden_selectie"
+          "datumAanvangBeschikbaarVoorWerk": {
+            "$ref": "#/components/schemas/datumAanvangBeschikbaarVoorWerk_selectie"
           },
           "werktijden.indicatieKantoortijden": {
             "$ref": "#/components/schemas/indicatieKantoortijden_selectie"
@@ -859,12 +868,6 @@
             },
             "type": "array"
           },
-          "voorkeursland": {
-            "items": {
-              "$ref": "#/components/schemas/Voorkeursland"
-            },
-            "type": "array"
-          },
           "werktijden": {
             "$ref": "#/components/schemas/Werktijden"
           },
@@ -915,13 +918,7 @@
             "type": "integer"
           },
           "indicatieDiploma": {
-            "enum": [
-              0,
-              1,
-              2,
-              8
-            ],
-            "type": "integer"
+            "$ref": "#/components/schemas/IndicatieDiploma"
           },
           "toelichtingOpleiding": {
             "$ref": "#/components/schemas/String2000"
@@ -1009,10 +1006,6 @@
         "maxLength": 10,
         "type": "string"
       },
-      "StringCode2": {
-        "maxLength": 2,
-        "type": "string"
-      },
       "SafeIDString": {
         "pattern": "^[a-zA-Z0-9_.-]{0,200}$",
         "type": "string"
@@ -1072,15 +1065,6 @@
           },
           "indicatieBeschikbaarVoorWoonWerkverkeer": {
             "$ref": "#/components/schemas/Indicatie"
-          }
-        },
-        "type": "object"
-      },
-      "Voorkeursland": {
-        "additionalProperties": false,
-        "properties": {
-          "landencodeIso": {
-            "$ref": "#/components/schemas/StringCode2"
           }
         },
         "type": "object"
@@ -1217,12 +1201,6 @@
           "vervoermiddel": {
             "items": {
               "$ref": "#/components/schemas/Vervoermiddel"
-            },
-            "type": "array"
-          },
-          "voorkeursland": {
-            "items": {
-              "$ref": "#/components/schemas/Voorkeursland"
             },
             "type": "array"
           },
@@ -1403,13 +1381,13 @@
         },
         "type": "object"
       },
-      "datumAanvangWerkzaamheden_choice": {
+      "datumAanvangBeschikbaarVoorWerk_choice": {
         "$ref": "#/components/schemas/Date"
       },
-      "datumAanvangWerkzaamheden_selectie": {
+      "datumAanvangBeschikbaarVoorWerk_selectie": {
         "properties": {
-          "$gte": {
-            "$ref": "#/components/schemas/datumAanvangWerkzaamheden_choice"
+          "$lte": {
+            "$ref": "#/components/schemas/datumAanvangBeschikbaarVoorWerk_choice"
           }
         },
         "type": "object"
