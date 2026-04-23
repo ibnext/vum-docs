@@ -640,7 +640,7 @@
         "additionalProperties": false,
         "properties": {
           "indicatieCertificaat": {
-            "$ref": "#/components/schemas/Indicatie"
+            "$ref": "#/components/schemas/IndicatieDiploma"
           },
           "naamCursus": {
             "$ref": "#/components/schemas/String120"
@@ -726,6 +726,15 @@
           0,
           1,
           2
+        ],
+        "type": "integer"
+      },
+      "IndicatieDiploma": {
+        "enum": [
+          0,
+          1,
+          2,
+          8
         ],
         "type": "integer"
       },
@@ -858,12 +867,6 @@
             },
             "type": "array"
           },
-          "voorkeursland": {
-            "items": {
-              "$ref": "#/components/schemas/Voorkeursland"
-            },
-            "type": "array"
-          },
           "werktijden": {
             "$ref": "#/components/schemas/Werktijden"
           },
@@ -914,13 +917,7 @@
             "type": "integer"
           },
           "indicatieDiploma": {
-            "enum": [
-              0,
-              1,
-              2,
-              8
-            ],
-            "type": "integer"
+            "$ref": "#/components/schemas/IndicatieDiploma"
           },
           "toelichtingOpleiding": {
             "$ref": "#/components/schemas/String2000"
@@ -1004,10 +1001,6 @@
         "maxLength": 10,
         "type": "string"
       },
-      "StringCode2": {
-        "maxLength": 2,
-        "type": "string"
-      },
       "SafeIDString": {
         "pattern": "^[a-zA-Z0-9_.-]{0,200}$",
         "type": "string"
@@ -1067,15 +1060,6 @@
           },
           "indicatieBeschikbaarVoorWoonWerkverkeer": {
             "$ref": "#/components/schemas/Indicatie"
-          }
-        },
-        "type": "object"
-      },
-      "Voorkeursland": {
-        "additionalProperties": false,
-        "properties": {
-          "landencodeIso": {
-            "$ref": "#/components/schemas/StringCode2"
           }
         },
         "type": "object"
@@ -1208,12 +1192,6 @@
           "vervoermiddel": {
             "items": {
               "$ref": "#/components/schemas/Vervoermiddel"
-            },
-            "type": "array"
-          },
-          "voorkeursland": {
-            "items": {
-              "$ref": "#/components/schemas/Voorkeursland"
             },
             "type": "array"
           },
