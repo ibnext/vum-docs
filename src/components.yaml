@@ -1041,7 +1041,7 @@ components:
       $ref: '#/components/schemas/Date'
     datumAanvangBeschikbaarVoorWerk_selectie:
       properties:
-        $gte:
+        $lte:
           $ref: '#/components/schemas/datumAanvangBeschikbaarVoorWerk_choice'
       type: object 
     indicatieKantoortijden_choice:
