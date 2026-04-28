@@ -846,13 +846,6 @@
             ],
             "type": "integer"
           },
-          "indicatieLdrRegistratie": {
-            "enum": [
-              1,
-              2
-            ],
-            "type": "integer"
-          },
           "mobiliteit": {
             "$ref": "#/components/schemas/Mobiliteit"
           },

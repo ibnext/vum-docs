@@ -528,11 +528,6 @@ components:
           type: array
         flexibiliteit:
           $ref: '#/components/schemas/Flexibiliteit'
-        indicatieLdrRegistratie:
-          enum:
-          - 1
-          - 2
-          type: integer
         naamVacature:
           $ref: '#/components/schemas/String120'
         omschrijvingVacature:
@@ -738,11 +733,6 @@ components:
           type: array
         idVacature:
           $ref: '#/components/schemas/IDVacature'
-        indicatieLdrRegistratie:
-          enum:
-          - 1
-          - 2
-          type: integer
         naamVacature:
           $ref: '#/components/schemas/String120'
         nummerVacature:
