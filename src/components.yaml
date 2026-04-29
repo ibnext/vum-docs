@@ -395,11 +395,6 @@ components:
           $ref: '#/components/schemas/Flexibiliteit'
         idVacature_BRN:
           $ref: '#/components/schemas/IDVacature'
-        indicatieLdrRegistratie:
-          enum:
-          - 1
-          - 2
-          type: integer
         naamVacature:
           $ref: '#/components/schemas/String120'
         omschrijvingVacature:
@@ -500,11 +495,6 @@ components:
         idWerkzoekende_BRN:
           $ref: '#/components/schemas/IDWerkzoekende'
         indicatieBeschikbaarheidContactgegevens:
-          enum:
-          - 1
-          - 2
-          type: integer
-        indicatieLdrRegistratie:
           enum:
           - 1
           - 2
@@ -707,11 +697,6 @@ components:
           type: array
         idVacature:
           $ref: '#/components/schemas/IDVacature'
-        indicatieLdrRegistratie:
-          enum:
-          - 1
-          - 2
-          type: integer
         naamVacature:
           $ref: '#/components/schemas/String120'
         nummerVacature:
@@ -1054,6 +1039,13 @@ components:
         $eq:
           $ref: '#/components/schemas/indicatieKantoortijden_choice'
       type: object
+    datumAanvangWerkzaamheden_choice:
+      $ref: '#/components/schemas/Date'
+    datumAanvangWerkzaamheden_selectie:
+      properties:
+        $gte:
+          $ref: '#/components/schemas/datumAanvangWerkzaamheden_choice'
+      type: object      
     indicatieOnregelmatigWerkOfPloegendienst_choice:
       enum:
       - 1

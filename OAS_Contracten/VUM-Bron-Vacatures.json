@@ -804,13 +804,6 @@
           "flexibiliteit": {
             "$ref": "#/components/schemas/Flexibiliteit"
           },
-          "indicatieLdrRegistratie": {
-            "enum": [
-              1,
-              2
-            ],
-            "type": "integer"
-          },
           "naamVacature": {
             "$ref": "#/components/schemas/String120"
           },
@@ -1096,13 +1089,6 @@
           },
           "idVacature": {
             "$ref": "#/components/schemas/IDVacature"
-          },
-          "indicatieLdrRegistratie": {
-            "enum": [
-              1,
-              2
-            ],
-            "type": "integer"
           },
           "naamVacature": {
             "$ref": "#/components/schemas/String120"
