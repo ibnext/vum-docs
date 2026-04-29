@@ -1,10 +1,10 @@
 {
     "_": {
-        "postman_id": "fe6f4a3d-a8e9-4da5-bf79-4eb1abcefd7b"
+        "postman_id": "bfd39a2e-0089-403d-a045-2a80ad9fa236"
     },
     "item": [
         {
-            "id": "ea06c781-046a-4e86-a7f2-347ee7304f9d",
+            "id": "e3726657-bfed-4094-a5f2-7022c7163f45",
             "name": "Zoekopdracht voor Vacatures",
             "request": {
                 "name": "Zoekopdracht voor Vacatures",
@@ -31,7 +31,7 @@
                             "type": "text/plain"
                         },
                         "key": "X-VUM-berichtVersie",
-                        "value": "2.0.0"
+                        "value": "3.0.0"
                     },
                     {
                         "disabled": false,
@@ -67,7 +67,7 @@
                             "type": "text/plain"
                         },
                         "key": "API-Version",
-                        "value": "2.0.0"
+                        "value": "3.0.0"
                     },
                     {
                         "key": "Content-Type",
@@ -104,7 +104,7 @@
                     "_": {
                         "postman_previewlanguage": "json"
                     },
-                    "id": "dfb79b0f-f7de-4d17-8329-3a87f12a40a9",
+                    "id": "48391660-8ba9-4093-a65c-44001020ef28",
                     "name": "OK",
                     "originalRequest": {
                         "url": {
@@ -126,7 +126,7 @@
                                     "type": "text/plain"
                                 },
                                 "key": "X-VUM-berichtVersie",
-                                "value": "2.0.0"
+                                "value": "3.0.0"
                             },
                             {
                                 "disabled": false,
@@ -135,7 +135,7 @@
                                     "type": "text/plain"
                                 },
                                 "key": "X-VUM-fromParty",
-                                "value": "Ut nisi"
+                                "value": "occaecat ad"
                             },
                             {
                                 "disabled": false,
@@ -144,7 +144,7 @@
                                     "type": "text/plain"
                                 },
                                 "key": "X-VUM-toParty",
-                                "value": "Ut nisi"
+                                "value": "occaecat ad"
                             },
                             {
                                 "disabled": false,
@@ -153,7 +153,7 @@
                                     "type": "text/plain"
                                 },
                                 "key": "X-VUM-viaParty",
-                                "value": "Ut nisi"
+                                "value": "occaecat ad"
                             },
                             {
                                 "disabled": false,
@@ -162,7 +162,7 @@
                                     "type": "text/plain"
                                 },
                                 "key": "API-Version",
-                                "value": "2.0.0"
+                                "value": "3.0.0"
                             },
                             {
                                 "key": "Accept",
@@ -189,17 +189,8 @@
                                 "content": "",
                                 "type": "text/plain"
                             },
-                            "key": "API-Version",
-                            "value": "2.0.0"
-                        },
-                        {
-                            "disabled": true,
-                            "description": {
-                                "content": "",
-                                "type": "text/plain"
-                            },
                             "key": "X-VUM-berichtVersie",
-                            "value": "2.0.0"
+                            "value": "3.0.0"
                         },
                         {
                             "disabled": true,
@@ -208,7 +199,7 @@
                                 "type": "text/plain"
                             },
                             "key": "X-VUM-fromParty",
-                            "value": "Ut nisi"
+                            "value": "occaecat ad"
                         },
                         {
                             "disabled": true,
@@ -217,7 +208,7 @@
                                 "type": "text/plain"
                             },
                             "key": "X-VUM-toParty",
-                            "value": "Ut nisi"
+                            "value": "occaecat ad"
                         },
                         {
                             "disabled": true,
@@ -226,7 +217,16 @@
                                 "type": "text/plain"
                             },
                             "key": "X-VUM-viaParty",
-                            "value": "Ut nisi"
+                            "value": "occaecat ad"
+                        },
+                        {
+                            "disabled": true,
+                            "description": {
+                                "content": "",
+                                "type": "text/plain"
+                            },
+                            "key": "API-Version",
+                            "value": "3.0.0"
                         },
                         {
                             "key": "Content-Type",
@@ -240,7 +240,7 @@
                     "_": {
                         "postman_previewlanguage": "json"
                     },
-                    "id": "041817e6-b2f8-4463-b60f-4ad6e9f2fa0f",
+                    "id": "9b4ce33a-c001-4ca4-a60b-4eb31c50ab65",
                     "name": "Bad request",
                     "originalRequest": {
                         "url": {
@@ -262,7 +262,7 @@
                                     "type": "text/plain"
                                 },
                                 "key": "X-VUM-berichtVersie",
-                                "value": "2.0.0"
+                                "value": "3.0.0"
                             },
                             {
                                 "disabled": false,
@@ -271,7 +271,7 @@
                                     "type": "text/plain"
                                 },
                                 "key": "X-VUM-fromParty",
-                                "value": "Ut nisi"
+                                "value": "occaecat ad"
                             },
                             {
                                 "disabled": false,
@@ -280,7 +280,7 @@
                                     "type": "text/plain"
                                 },
                                 "key": "X-VUM-toParty",
-                                "value": "Ut nisi"
+                                "value": "occaecat ad"
                             },
                             {
                                 "disabled": false,
@@ -289,7 +289,7 @@
                                     "type": "text/plain"
                                 },
                                 "key": "X-VUM-viaParty",
-                                "value": "Ut nisi"
+                                "value": "occaecat ad"
                             },
                             {
                                 "disabled": false,
@@ -298,7 +298,7 @@
                                     "type": "text/plain"
                                 },
                                 "key": "API-Version",
-                                "value": "2.0.0"
+                                "value": "3.0.0"
                             },
                             {
                                 "key": "Accept",
@@ -325,17 +325,8 @@
                                 "content": "",
                                 "type": "text/plain"
                             },
-                            "key": "API-Version",
-                            "value": "2.0.0"
-                        },
-                        {
-                            "disabled": true,
-                            "description": {
-                                "content": "",
-                                "type": "text/plain"
-                            },
                             "key": "X-VUM-berichtVersie",
-                            "value": "2.0.0"
+                            "value": "3.0.0"
                         },
                         {
                             "disabled": true,
@@ -344,7 +335,7 @@
                                 "type": "text/plain"
                             },
                             "key": "X-VUM-fromParty",
-                            "value": "Ut nisi"
+                            "value": "occaecat ad"
                         },
                         {
                             "disabled": true,
@@ -353,7 +344,7 @@
                                 "type": "text/plain"
                             },
                             "key": "X-VUM-toParty",
-                            "value": "Ut nisi"
+                            "value": "occaecat ad"
                         },
                         {
                             "disabled": true,
@@ -362,7 +353,16 @@
                                 "type": "text/plain"
                             },
                             "key": "X-VUM-viaParty",
-                            "value": "Ut nisi"
+                            "value": "occaecat ad"
+                        },
+                        {
+                            "disabled": true,
+                            "description": {
+                                "content": "",
+                                "type": "text/plain"
+                            },
+                            "key": "API-Version",
+                            "value": "3.0.0"
                         },
                         {
                             "key": "Content-Type",
@@ -376,7 +376,7 @@
                     "_": {
                         "postman_previewlanguage": "text"
                     },
-                    "id": "f4082a3e-6656-4166-853a-0338c423dd75",
+                    "id": "8cf25b43-cde6-4eeb-88db-59d1c0810654",
                     "name": "not authorized",
                     "originalRequest": {
                         "url": {
@@ -398,7 +398,7 @@
                                     "type": "text/plain"
                                 },
                                 "key": "X-VUM-berichtVersie",
-                                "value": "2.0.0"
+                                "value": "3.0.0"
                             },
                             {
                                 "disabled": false,
@@ -407,7 +407,7 @@
                                     "type": "text/plain"
                                 },
                                 "key": "X-VUM-fromParty",
-                                "value": "Ut nisi"
+                                "value": "occaecat ad"
                             },
                             {
                                 "disabled": false,
@@ -416,7 +416,7 @@
                                     "type": "text/plain"
                                 },
                                 "key": "X-VUM-toParty",
-                                "value": "Ut nisi"
+                                "value": "occaecat ad"
                             },
                             {
                                 "disabled": false,
@@ -425,7 +425,7 @@
                                     "type": "text/plain"
                                 },
                                 "key": "X-VUM-viaParty",
-                                "value": "Ut nisi"
+                                "value": "occaecat ad"
                             },
                             {
                                 "disabled": false,
@@ -434,7 +434,7 @@
                                     "type": "text/plain"
                                 },
                                 "key": "API-Version",
-                                "value": "2.0.0"
+                                "value": "3.0.0"
                             }
                         ],
                         "method": "POST",
@@ -457,17 +457,8 @@
                                 "content": "",
                                 "type": "text/plain"
                             },
-                            "key": "API-Version",
-                            "value": "2.0.0"
-                        },
-                        {
-                            "disabled": true,
-                            "description": {
-                                "content": "",
-                                "type": "text/plain"
-                            },
                             "key": "X-VUM-berichtVersie",
-                            "value": "2.0.0"
+                            "value": "3.0.0"
                         },
                         {
                             "disabled": true,
@@ -476,7 +467,7 @@
                                 "type": "text/plain"
                             },
                             "key": "X-VUM-fromParty",
-                            "value": "Ut nisi"
+                            "value": "occaecat ad"
                         },
                         {
                             "disabled": true,
@@ -485,7 +476,7 @@
                                 "type": "text/plain"
                             },
                             "key": "X-VUM-toParty",
-                            "value": "Ut nisi"
+                            "value": "occaecat ad"
                         },
                         {
                             "disabled": true,
@@ -494,7 +485,16 @@
                                 "type": "text/plain"
                             },
                             "key": "X-VUM-viaParty",
-                            "value": "Ut nisi"
+                            "value": "occaecat ad"
+                        },
+                        {
+                            "disabled": true,
+                            "description": {
+                                "content": "",
+                                "type": "text/plain"
+                            },
+                            "key": "API-Version",
+                            "value": "3.0.0"
                         },
                         {
                             "key": "Content-Type",
@@ -508,7 +508,7 @@
                     "_": {
                         "postman_previewlanguage": "json"
                     },
-                    "id": "0ebda5e6-e98b-4bc6-a8ae-31a58330e75b",
+                    "id": "b389769b-0ed1-4227-943d-19b820906da5",
                     "name": "Too Many Requests",
                     "originalRequest": {
                         "url": {
@@ -530,7 +530,7 @@
                                     "type": "text/plain"
                                 },
                                 "key": "X-VUM-berichtVersie",
-                                "value": "2.0.0"
+                                "value": "3.0.0"
                             },
                             {
                                 "disabled": false,
@@ -539,7 +539,7 @@
                                     "type": "text/plain"
                                 },
                                 "key": "X-VUM-fromParty",
-                                "value": "Ut nisi"
+                                "value": "occaecat ad"
                             },
                             {
                                 "disabled": false,
@@ -548,7 +548,7 @@
                                     "type": "text/plain"
                                 },
                                 "key": "X-VUM-toParty",
-                                "value": "Ut nisi"
+                                "value": "occaecat ad"
                             },
                             {
                                 "disabled": false,
@@ -557,7 +557,7 @@
                                     "type": "text/plain"
                                 },
                                 "key": "X-VUM-viaParty",
-                                "value": "Ut nisi"
+                                "value": "occaecat ad"
                             },
                             {
                                 "disabled": false,
@@ -566,7 +566,7 @@
                                     "type": "text/plain"
                                 },
                                 "key": "API-Version",
-                                "value": "2.0.0"
+                                "value": "3.0.0"
                             },
                             {
                                 "key": "Accept",
@@ -593,17 +593,8 @@
                                 "content": "",
                                 "type": "text/plain"
                             },
-                            "key": "API-Version",
-                            "value": "2.0.0"
-                        },
-                        {
-                            "disabled": true,
-                            "description": {
-                                "content": "",
-                                "type": "text/plain"
-                            },
                             "key": "X-VUM-berichtVersie",
-                            "value": "2.0.0"
+                            "value": "3.0.0"
                         },
                         {
                             "disabled": true,
@@ -612,7 +603,7 @@
                                 "type": "text/plain"
                             },
                             "key": "X-VUM-fromParty",
-                            "value": "Ut nisi"
+                            "value": "occaecat ad"
                         },
                         {
                             "disabled": true,
@@ -621,7 +612,7 @@
                                 "type": "text/plain"
                             },
                             "key": "X-VUM-toParty",
-                            "value": "Ut nisi"
+                            "value": "occaecat ad"
                         },
                         {
                             "disabled": true,
@@ -630,7 +621,16 @@
                                 "type": "text/plain"
                             },
                             "key": "X-VUM-viaParty",
-                            "value": "Ut nisi"
+                            "value": "occaecat ad"
+                        },
+                        {
+                            "disabled": true,
+                            "description": {
+                                "content": "",
+                                "type": "text/plain"
+                            },
+                            "key": "API-Version",
+                            "value": "3.0.0"
                         },
                         {
                             "key": "Content-Type",
@@ -644,7 +644,7 @@
                     "_": {
                         "postman_previewlanguage": "json"
                     },
-                    "id": "bce091ce-d584-4c80-9991-f7ec590e9518",
+                    "id": "ab97e4e6-1f6d-4337-a336-93e26ec8858c",
                     "name": "Internal Server Error",
                     "originalRequest": {
                         "url": {
@@ -666,7 +666,7 @@
                                     "type": "text/plain"
                                 },
                                 "key": "X-VUM-berichtVersie",
-                                "value": "2.0.0"
+                                "value": "3.0.0"
                             },
                             {
                                 "disabled": false,
@@ -675,7 +675,7 @@
                                     "type": "text/plain"
                                 },
                                 "key": "X-VUM-fromParty",
-                                "value": "Ut nisi"
+                                "value": "occaecat ad"
                             },
                             {
                                 "disabled": false,
@@ -684,7 +684,7 @@
                                     "type": "text/plain"
                                 },
                                 "key": "X-VUM-toParty",
-                                "value": "Ut nisi"
+                                "value": "occaecat ad"
                             },
                             {
                                 "disabled": false,
@@ -693,7 +693,7 @@
                                     "type": "text/plain"
                                 },
                                 "key": "X-VUM-viaParty",
-                                "value": "Ut nisi"
+                                "value": "occaecat ad"
                             },
                             {
                                 "disabled": false,
@@ -702,7 +702,7 @@
                                     "type": "text/plain"
                                 },
                                 "key": "API-Version",
-                                "value": "2.0.0"
+                                "value": "3.0.0"
                             },
                             {
                                 "key": "Accept",
@@ -729,17 +729,8 @@
                                 "content": "",
                                 "type": "text/plain"
                             },
-                            "key": "API-Version",
-                            "value": "2.0.0"
-                        },
-                        {
-                            "disabled": true,
-                            "description": {
-                                "content": "",
-                                "type": "text/plain"
-                            },
                             "key": "X-VUM-berichtVersie",
-                            "value": "2.0.0"
+                            "value": "3.0.0"
                         },
                         {
                             "disabled": true,
@@ -748,7 +739,7 @@
                                 "type": "text/plain"
                             },
                             "key": "X-VUM-fromParty",
-                            "value": "Ut nisi"
+                            "value": "occaecat ad"
                         },
                         {
                             "disabled": true,
@@ -757,7 +748,7 @@
                                 "type": "text/plain"
                             },
                             "key": "X-VUM-toParty",
-                            "value": "Ut nisi"
+                            "value": "occaecat ad"
                         },
                         {
                             "disabled": true,
@@ -766,7 +757,16 @@
                                 "type": "text/plain"
                             },
                             "key": "X-VUM-viaParty",
-                            "value": "Ut nisi"
+                            "value": "occaecat ad"
+                        },
+                        {
+                            "disabled": true,
+                            "description": {
+                                "content": "",
+                                "type": "text/plain"
+                            },
+                            "key": "API-Version",
+                            "value": "3.0.0"
                         },
                         {
                             "key": "Content-Type",
@@ -780,7 +780,7 @@
                     "_": {
                         "postman_previewlanguage": "json"
                     },
-                    "id": "522740b9-e58d-4d61-9d67-a3867485c479",
+                    "id": "c1fe38c8-95e1-4302-a696-d25f4c211131",
                     "name": "Service Unavailable",
                     "originalRequest": {
                         "url": {
@@ -802,7 +802,7 @@
                                     "type": "text/plain"
                                 },
                                 "key": "X-VUM-berichtVersie",
-                                "value": "2.0.0"
+                                "value": "3.0.0"
                             },
                             {
                                 "disabled": false,
@@ -811,7 +811,7 @@
                                     "type": "text/plain"
                                 },
                                 "key": "X-VUM-fromParty",
-                                "value": "Ut nisi"
+                                "value": "occaecat ad"
                             },
                             {
                                 "disabled": false,
@@ -820,7 +820,7 @@
                                     "type": "text/plain"
                                 },
                                 "key": "X-VUM-toParty",
-                                "value": "Ut nisi"
+                                "value": "occaecat ad"
                             },
                             {
                                 "disabled": false,
@@ -829,7 +829,7 @@
                                     "type": "text/plain"
                                 },
                                 "key": "X-VUM-viaParty",
-                                "value": "Ut nisi"
+                                "value": "occaecat ad"
                             },
                             {
                                 "disabled": false,
@@ -838,7 +838,7 @@
                                     "type": "text/plain"
                                 },
                                 "key": "API-Version",
-                                "value": "2.0.0"
+                                "value": "3.0.0"
                             },
                             {
                                 "key": "Accept",
@@ -865,17 +865,8 @@
                                 "content": "",
                                 "type": "text/plain"
                             },
-                            "key": "API-Version",
-                            "value": "2.0.0"
-                        },
-                        {
-                            "disabled": true,
-                            "description": {
-                                "content": "",
-                                "type": "text/plain"
-                            },
                             "key": "X-VUM-berichtVersie",
-                            "value": "2.0.0"
+                            "value": "3.0.0"
                         },
                         {
                             "disabled": true,
@@ -884,7 +875,7 @@
                                 "type": "text/plain"
                             },
                             "key": "X-VUM-fromParty",
-                            "value": "Ut nisi"
+                            "value": "occaecat ad"
                         },
                         {
                             "disabled": true,
@@ -893,7 +884,7 @@
                                 "type": "text/plain"
                             },
                             "key": "X-VUM-toParty",
-                            "value": "Ut nisi"
+                            "value": "occaecat ad"
                         },
                         {
                             "disabled": true,
@@ -902,7 +893,16 @@
                                 "type": "text/plain"
                             },
                             "key": "X-VUM-viaParty",
-                            "value": "Ut nisi"
+                            "value": "occaecat ad"
+                        },
+                        {
+                            "disabled": true,
+                            "description": {
+                                "content": "",
+                                "type": "text/plain"
+                            },
+                            "key": "API-Version",
+                            "value": "3.0.0"
                         },
                         {
                             "key": "Content-Type",
@@ -917,7 +917,7 @@
                 {
                     "listen": "test",
                     "script": {
-                        "id": "6c9eb4b8-ea12-4e56-b779-2a64d08a5b41",
+                        "id": "4fb0db5a-5cd8-4bbd-bd33-059dae8dd873",
                         "type": "text/javascript",
                         "exec": [
                             "// Validate status 2xx \npm.test(\"[POST]::/vacatures/matches - Status code is 2xx\", function () {\n   pm.response.to.be.success;\n});\n",
@@ -931,7 +931,7 @@
                 {
                     "listen": "prerequest",
                     "script": {
-                        "id": "c3e432be-dec0-4632-80b8-b3d813c20cd0",
+                        "id": "e2c3b1f3-7f88-410d-be6e-b60bf78f3aa2",
                         "type": "text/javascript",
                         "exec": [
                             "pm.variables.set('baseUrl', pm.environment.get('baseUrl'))"
@@ -944,7 +944,7 @@
             }
         },
         {
-            "id": "d0d8341c-0420-4c62-abbd-8e894e9d607c",
+            "id": "59ef0926-3cc0-41cd-97a4-6c36ec5c5e80",
             "name": "Vraag volledige vacature op bij opgegeven vumID",
             "request": {
                 "name": "Vraag volledige vacature op bij opgegeven vumID",
@@ -982,7 +982,7 @@
                             "type": "text/plain"
                         },
                         "key": "X-VUM-berichtVersie",
-                        "value": "2.0.0"
+                        "value": "3.0.0"
                     },
                     {
                         "disabled": false,
@@ -1018,7 +1018,7 @@
                             "type": "text/plain"
                         },
                         "key": "API-Version",
-                        "value": "2.0.0"
+                        "value": "3.0.0"
                     },
                     {
                         "key": "Accept",
@@ -1042,7 +1042,7 @@
                     "_": {
                         "postman_previewlanguage": "json"
                     },
-                    "id": "06db857b-bcd8-4423-8995-99e0c0d89d7c",
+                    "id": "7246670c-49ab-400a-96be-046a8c55dc5b",
                     "name": "OK",
                     "originalRequest": {
                         "url": {
@@ -1062,7 +1062,7 @@
                                         "type": "text/plain"
                                     },
                                     "type": "any",
-                                    "value": "VL2r1udaEpzEW4FxonSaZhUk-JKz3sUjaVoQTUuhoWLfprI14MdrQVWIusp7eUh9OabXuRl2Ey59DdufHXxJCtULey0TWPGEA0fYv4XHDg.tzCc5Gt",
+                                    "value": "F2MmgvVXbPsTrznGh4Rh9gnY467EUfJ_4i3UE3B-TEUXAYTH7J_YzNi6cJT40H8m3SXMgLtCiedQfBMqYviY5hpVaN.Znvr-zdLdZA9u69lUdIUNGxhVFntRkkMg0snjdNFC7KYQwT5ES20BFMUlht86kKCktdA46twkfvP4lQ_6THZCMvdFfze5EMRxwCWyfhbkLEpaK4xL1QKBLnYr6W3NKJ9.3CJ.ZwWm.CIWFbaS4M4YdzVqHSncQjl-ogI5A8qbx6JBrezfnE1LTC1DBXr8Iw7nVrt64v8lGfc6-tPUDO55_VZ2EbI8hHj_WQZ7odfViH_yZxZZ6nhJrKWNbjBX.4bJe.ECI3G6H5oV9IzUL_-dgcqpRetc5BU4O_bDnaj7aNonkDQzrVsBwmu-7D.WS6s4.bV.bFYv03A2aPkVjyptSXjRgJP6AUR7JBwYu-3r9ij",
                                     "key": "vumID"
                                 }
                             ]
@@ -1075,7 +1075,7 @@
                                     "type": "text/plain"
                                 },
                                 "key": "X-VUM-berichtVersie",
-                                "value": "2.0.0"
+                                "value": "3.0.0"
                             },
                             {
                                 "disabled": false,
@@ -1084,7 +1084,7 @@
                                     "type": "text/plain"
                                 },
                                 "key": "X-VUM-fromParty",
-                                "value": "Ut nisi"
+                                "value": "occaecat ad"
                             },
                             {
                                 "disabled": false,
@@ -1093,7 +1093,7 @@
                                     "type": "text/plain"
                                 },
                                 "key": "X-VUM-toParty",
-                                "value": "Ut nisi"
+                                "value": "occaecat ad"
                             },
                             {
                                 "disabled": false,
@@ -1102,7 +1102,7 @@
                                     "type": "text/plain"
                                 },
                                 "key": "X-VUM-viaParty",
-                                "value": "Ut nisi"
+                                "value": "occaecat ad"
                             },
                             {
                                 "disabled": false,
@@ -1111,7 +1111,7 @@
                                     "type": "text/plain"
                                 },
                                 "key": "API-Version",
-                                "value": "2.0.0"
+                                "value": "3.0.0"
                             },
                             {
                                 "key": "Accept",
@@ -1130,17 +1130,8 @@
                                 "content": "",
                                 "type": "text/plain"
                             },
-                            "key": "API-Version",
-                            "value": "2.0.0"
-                        },
-                        {
-                            "disabled": true,
-                            "description": {
-                                "content": "",
-                                "type": "text/plain"
-                            },
                             "key": "X-VUM-berichtVersie",
-                            "value": "2.0.0"
+                            "value": "3.0.0"
                         },
                         {
                             "disabled": true,
@@ -1149,7 +1140,7 @@
                                 "type": "text/plain"
                             },
                             "key": "X-VUM-fromParty",
-                            "value": "Ut nisi"
+                            "value": "occaecat ad"
                         },
                         {
                             "disabled": true,
@@ -1158,7 +1149,7 @@
                                 "type": "text/plain"
                             },
                             "key": "X-VUM-toParty",
-                            "value": "Ut nisi"
+                            "value": "occaecat ad"
                         },
                         {
                             "disabled": true,
@@ -1167,21 +1158,30 @@
                                 "type": "text/plain"
                             },
                             "key": "X-VUM-viaParty",
-                            "value": "Ut nisi"
+                            "value": "occaecat ad"
+                        },
+                        {
+                            "disabled": true,
+                            "description": {
+                                "content": "",
+                                "type": "text/plain"
+                            },
+                            "key": "API-Version",
+                            "value": "3.0.0"
                         },
                         {
                             "key": "Content-Type",
                             "value": "application/json"
                         }
                     ],
-                    "body": "{\n  \"bronID\": \"officia incididunt reprehenderit velit\",\n  \"vacature\": {\n    \"idVacature\": \"mINfrzzxNnAU2AjPgZm.K1mU1kt3u7btlWN47fM9y8emQY5en7Ldi4kp98zPpw.AjJ_8ZkRm_NWY67B3mQxNvnGDt0fvPT\",\n    \"arbeidsVoorwaarden\": {\n      \"datumAanvangWerkzaamheden\": \"2009-09-09\",\n      \"datumEindeWerkzaamheden\": \"2005-05-09\",\n      \"omschrijvingArbeidsvoorwaarden\": \"commodo\",\n      \"salarisIndicatie\": \"voluptate pariatur id\"\n    },\n    \"beroep\": {\n      \"beroepsnaamGecodeerd\": {\n        \"codeBeroepsnaam\": \"4619139257\",\n        \"omschrijvingBeroepsnaam\": \"non et aute Duis ut\"\n      }\n    },\n    \"codeWerkEnDenkniveauMinimaal\": \"3\",\n    \"contractvorm\": [\n      {\n        \"codeTypeArbeidscontract\": \"B\",\n        \"codeTypeOvereenkomst\": \"02\"\n      },\n      {\n        \"codeTypeArbeidscontract\": \"O\",\n        \"codeTypeOvereenkomst\": \"01\"\n      }\n    ],\n    \"cursus\": [\n      {\n        \"naamCursus\": \"et aliqua\"\n      },\n      {\n        \"naamCursus\": \"proiden\"\n      }\n    ],\n    \"flexibiliteit\": {\n      \"codeRegiostraal\": 4,\n      \"datumAanvangBeschikbaarVoorWerk\": \"2021-02-26\",\n      \"datumEindeBeschikbaarVoorWerk\": \"1953-08-19\",\n      \"indicatieOnregelmatigWerkOfPloegendienst\": 0\n    },\n    \"gedragscompetentie\": [\n      {\n        \"codeBeheersingGedragscompetentie\": 9,\n        \"codeGedragscompetentie\": \"24106\",\n        \"omschrijvingGedragscompetentie\": \"Met druk en tegenslag omgaan\"\n      },\n      {\n        \"codeBeheersingGedragscompetentie\": 1,\n        \"codeGedragscompetentie\": \"24125\",\n        \"omschrijvingGedragscompetentie\": \"Omgaan met verandering en aanpassen\"\n      }\n    ],\n    \"indicatieLdrRegistratie\": 2,\n    \"naamVacature\": \"adipisicing nisi dolor enim\",\n    \"nummerVacature\": \"no\",\n    \"omschrijvingVacature\": \"dolor reprehenderit consequat\",\n    \"opleiding\": [\n      {\n        \"codeNiveauOpleiding\": 3,\n        \"indicatieDiploma\": 2,\n        \"opleidingsnaam\": {\n          \"opleidingsnaamGecodeerd\": {\n            \"codeOpleidingsnaam\": \"9999999999\",\n            \"omschrijvingOpleidingsnaam\": \"in officia sed\"\n          }\n        }\n      },\n      {\n        \"codeNiveauOpleiding\": 9,\n        \"indicatieDiploma\": 2,\n        \"opleidingsnaam\": {\n          \"opleidingsnaamGecodeerd\": {\n            \"codeOpleidingsnaam\": \"9999999999\",\n            \"omschrijvingOpleidingsnaam\": \"qui\"\n          }\n        }\n      }\n    ],\n    \"rijbewijs\": [\n      {\n        \"codeSoortRijbewijs\": \"D\"\n      },\n      {\n        \"codeSoortRijbewijs\": \"T\"\n      }\n    ],\n    \"sector\": {\n      \"codeSbi\": 48941\n    },\n    \"sluitingsdatumVacature\": \"1981-03-30\",\n    \"sollicitatiewijze\": [\n      {\n        \"codeSollicitatiewijze\": \"4\",\n        \"webadres\": {\n          \"codeWebadres\": 3,\n          \"url\": \"culpa non\"\n        }\n      },\n      {\n        \"codeSollicitatiewijze\": \"1\",\n        \"webadres\": {\n          \"codeWebadres\": 2,\n          \"url\": \"in minim deserunt\"\n        }\n      }\n    ],\n    \"taalbeheersing\": [\n      {\n        \"codeNiveauTaalbeheersingLezen\": 2,\n        \"codeNiveauTaalbeheersingLuisteren\": 0,\n        \"codeNiveauTaalbeheersingMondeling\": 2,\n        \"codeNiveauTaalbeheersingSchriftelijk\": 0,\n        \"codeTaal\": \"rbc\"\n      },\n      {\n        \"codeNiveauTaalbeheersingLezen\": 2,\n        \"codeNiveauTaalbeheersingLuisteren\": 3,\n        \"codeNiveauTaalbeheersingMondeling\": 8,\n        \"codeNiveauTaalbeheersingSchriftelijk\": 0,\n        \"codeTaal\": \"fyy\"\n      }\n    ],\n    \"vakvaardigheid\": [\n      {\n        \"omschrijving\": \"in\"\n      },\n      {\n        \"omschrijving\": \"in ex eu minim\"\n      }\n    ],\n    \"vervoermiddel\": [\n      {\n        \"codeVervoermiddel\": 4,\n        \"indicatieBeschikbaarVoorUitvoeringWerk\": 0,\n        \"indicatieBeschikbaarVoorWoonWerkverkeer\": 2\n      },\n      {\n        \"codeVervoermiddel\": 9,\n        \"indicatieBeschikbaarVoorUitvoeringWerk\": 0,\n        \"indicatieBeschikbaarVoorWoonWerkverkeer\": 2\n      }\n    ],\n    \"werkervaring\": [\n      {\n        \"aantalJarenWerkzaamInBeroep\": 13\n      },\n      {\n        \"aantalJarenWerkzaamInBeroep\": 60\n      }\n    ],\n    \"werkgever\": {\n      \"adresHouding\": [\n        {\n          \"adres\": {\n            \"adresNederland\": {\n              \"adresDetails\": {\n                \"straatadres\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              },\n              \"codeGemeente\": \"cul\",\n              \"district\": \"ei\",\n              \"gemeentedeel\": \"ad reprehen\",\n              \"gemeentenaam\": \"fugiat\",\n              \"identificatiecodeNummeraanduiding\": \"velit\",\n              \"identificatiecodeVerblijfplaats\": \"aliqua sit \",\n              \"locatieomschrijving\": \"Du\",\n              \"postcode\": \"1234AB\",\n              \"woonplaatsnaam\": \"dolor qui exercitation\"\n            }\n          },\n          \"codeFunctieAdres\": \"A\",\n          \"datumAanvangAdres\": \"1998-03-02\",\n          \"datumEindeAdres\": \"1968-08-26\"\n        },\n        {\n          \"adres\": {\n            \"adresNederland\": {\n              \"adresDetails\": {\n                \"straatadres\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              },\n              \"codeGemeente\": \"cu\",\n              \"district\": \"i\",\n              \"gemeentedeel\": \"nisi veniam\",\n              \"gemeentenaam\": \"ipsum fu\",\n              \"identificatiecodeNummeraanduiding\": \"laboris pari\",\n              \"identificatiecodeVerblijfplaats\": \"d\",\n              \"locatieomschrijving\": \"consectetur ex Ut esse exe\",\n              \"postcode\": \"1234AB\",\n              \"woonplaatsnaam\": \"cupidatat dolore in exercitation\"\n            }\n          },\n          \"codeFunctieAdres\": \"V\",\n          \"datumAanvangAdres\": \"1952-05-27\",\n          \"datumEindeAdres\": \"1963-01-26\"\n        }\n      ],\n      \"contactpersoon\": [\n        {\n          \"emailadres\": [\n            \"Duis eu ut\",\n            \"nisi sunt commodo\"\n          ],\n          \"naamContactpersoonAfdeling\": \"sint\",\n          \"telefoonnummer\": [\n            \"aute Excepteur\",\n            \"co\"\n          ]\n        },\n        {\n          \"emailadres\": [\n            \"adipisicing et\",\n            \"velit pariatur adipisicing elit\"\n          ],\n          \"naamContactpersoonAfdeling\": \"elit magna id\",\n          \"telefoonnummer\": [\n            \"fugiat inc\",\n            \"fugiat\"\n          ]\n        }\n      ],\n      \"handelsnaamOrganisatie\": \"eu proident in velit Excepteur\",\n      \"sector\": [\n        {\n          \"codeSbi\": 90382\n        },\n        {\n          \"codeSbi\": 96395\n        }\n      ],\n      \"webadres\": [\n        {\n          \"codeWebadres\": 4,\n          \"url\": \"consequat et labore enim\"\n        },\n        {\n          \"codeWebadres\": 1,\n          \"url\": \"incididunt ullamco\"\n        }\n      ]\n    },\n    \"werktijden\": {\n      \"aantalWerkurenPerWeekMaximaal\": 76,\n      \"aantalWerkurenPerWeekMinimaal\": 76,\n      \"indicatieKantoortijden\": 1\n    }\n  }\n}",
+                    "body": "{\n  \"bronID\": \"dolor cupidatat\",\n  \"vacature\": {\n    \"idVacature\": \"JMWXPo1LYSQySOpJrWxx18Kl3j8Jns8MlTJB2NOrnijYMj0D0KJ5gbuT9kAceolJ8h3Vp5g32_GCj3gXdE7184zaXW42bEj.CQhUllECbgTYSvgmIFi\",\n    \"adres\": {\n      \"postcode\": \"1234AB\",\n      \"straatnaam\": \"proident non eiusmod\",\n      \"huisnummer\": 52113,\n      \"huisnummertoevoeging\": \"com\"\n    },\n    \"arbeidsVoorwaarden\": {\n      \"datumAanvangWerkzaamheden\": \"2006-03-29\",\n      \"datumEindeWerkzaamheden\": \"1962-02-25\",\n      \"omschrijvingArbeidsvoorwaarden\": \"tempor adipisicing in nostrud proident\",\n      \"salarisIndicatie\": \"ut proident\"\n    },\n    \"beroep\": {\n      \"codeBeroepsnaam\": \"enim\"\n    },\n    \"codeWerkEnDenkniveauMinimaal\": \"6\",\n    \"contractvorm\": [\n      {\n        \"codeTypeArbeidscontract\": \"B\",\n        \"codeTypeOvereenkomst\": \"03\"\n      },\n      {\n        \"codeTypeArbeidscontract\": \"B\",\n        \"codeTypeOvereenkomst\": \"02\"\n      }\n    ],\n    \"cursus\": [\n      {\n        \"indicatieCertificaat\": 1,\n        \"naamCursus\": \"aute\",\n        \"toelichtingCursus\": \"veniam laboris mollit\"\n      },\n      {\n        \"indicatieCertificaat\": 1,\n        \"naamCursus\": \"tempor sint eius\",\n        \"toelichtingCursus\": \"ea ad officia\"\n      }\n    ],\n    \"flexibiliteit\": {\n      \"datumEindeBeschikbaarVoorWerk\": \"2020-04-22\",\n      \"indicatieOnregelmatigWerkOfPloegendienst\": 1\n    },\n    \"competentiebeheersing\": [\n      {\n        \"codeCompetentie\": \"elit amet Ut ut eu\"\n      },\n      {\n        \"codeCompetentie\": \"aliquip\"\n      }\n    ],\n    \"naamVacature\": \"do anim officia esse fugiat\",\n    \"nummerVacature\": \"e\",\n    \"omschrijvingVacature\": \"nisi quis esse\",\n    \"opleiding\": [\n      {\n        \"codeOpleidingsnaam\": \"9999999999\",\n        \"codeNiveauOpleiding\": 2,\n        \"indicatieDiploma\": 8,\n        \"toelichtingOpleiding\": \"et nisi fugiat\"\n      },\n      {\n        \"codeOpleidingsnaam\": \"9999999999\",\n        \"codeNiveauOpleiding\": 4,\n        \"indicatieDiploma\": 0,\n        \"toelichtingOpleiding\": \"ullamco Excepteur\"\n      }\n    ],\n    \"rijbewijs\": [\n      {\n        \"codeSoortRijbewijs\": \"C\"\n      },\n      {\n        \"codeSoortRijbewijs\": \"BE\"\n      }\n    ],\n    \"sector\": {\n      \"codeSbi\": 69878\n    },\n    \"sluitingsdatumVacature\": \"2016-10-15\",\n    \"sollicitatiewijze\": [\n      {\n        \"codeSollicitatiewijze\": \"3\",\n        \"webadres\": {\n          \"codeWebadres\": 2,\n          \"url\": \"eu adipisicing cupidatat\"\n        }\n      },\n      {\n        \"codeSollicitatiewijze\": \"4\",\n        \"webadres\": {\n          \"codeWebadres\": 2,\n          \"url\": \"nulla id\"\n        }\n      }\n    ],\n    \"taalbeheersing\": [\n      {\n        \"codeNiveauTaalbeheersingLezen\": 0,\n        \"codeNiveauTaalbeheersingLuisteren\": 2,\n        \"codeNiveauTaalbeheersingMondeling\": 1,\n        \"codeNiveauTaalbeheersingSchriftelijk\": 2,\n        \"codeTaal\": \"bch\"\n      },\n      {\n        \"codeNiveauTaalbeheersingLezen\": 2,\n        \"codeNiveauTaalbeheersingLuisteren\": 8,\n        \"codeNiveauTaalbeheersingMondeling\": 1,\n        \"codeNiveauTaalbeheersingSchriftelijk\": 2,\n        \"codeTaal\": \"xqw\"\n      }\n    ],\n    \"vervoermiddel\": [\n      {\n        \"codeVervoermiddel\": 3,\n        \"indicatieBeschikbaarVoorUitvoeringWerk\": 0,\n        \"indicatieBeschikbaarVoorWoonWerkverkeer\": 0\n      },\n      {\n        \"codeVervoermiddel\": 5,\n        \"indicatieBeschikbaarVoorUitvoeringWerk\": 1,\n        \"indicatieBeschikbaarVoorWoonWerkverkeer\": 0\n      }\n    ],\n    \"werkervaring\": [\n      {\n        \"aantalJarenWerkzaamInBeroep\": 75\n      },\n      {\n        \"aantalJarenWerkzaamInBeroep\": 11\n      }\n    ],\n    \"werkgever\": {\n      \"contactpersoon\": [\n        {\n          \"naamContactpersoonAfdeling\": \"cupidatat dolore elit\",\n          \"emailadres\": [\n            \"aliquip non anim minim cupidatat\",\n            \"sit commod\"\n          ],\n          \"telefoonnummer\": [\n            \"eiusmod\",\n            \"fugiat\"\n          ]\n        },\n        {\n          \"naamContactpersoonAfdeling\": \"mollit proident do l\",\n          \"emailadres\": [\n            \"velit cupidatat \",\n            \"voluptate ex est\"\n          ],\n          \"telefoonnummer\": [\n            \"cupidata\",\n            \"cillum c\"\n          ]\n        }\n      ],\n      \"handelsnaamOrganisatie\": \"voluptate in ut ad\",\n      \"sector\": [\n        {\n          \"codeSbi\": 19335\n        },\n        {\n          \"codeSbi\": 88746\n        }\n      ],\n      \"webadres\": [\n        {\n          \"codeWebadres\": 1,\n          \"url\": \"qui magna eu\"\n        },\n        {\n          \"codeWebadres\": 2,\n          \"url\": \"culpa est anim sit tempor\"\n        }\n      ]\n    },\n    \"werktijden\": {\n      \"aantalWerkurenPerWeekMaximaal\": 93,\n      \"aantalWerkurenPerWeekMinimaal\": 73,\n      \"indicatieKantoortijden\": 2\n    }\n  }\n}",
                     "cookie": []
                 },
                 {
                     "_": {
                         "postman_previewlanguage": "json"
                     },
-                    "id": "70baaf1c-6d4a-454d-b761-6629dd8cc22f",
+                    "id": "08cd8876-1b3e-4e34-8596-e3e37ce60aee",
                     "name": "Bad request",
                     "originalRequest": {
                         "url": {
@@ -1201,7 +1201,7 @@
                                         "type": "text/plain"
                                     },
                                     "type": "any",
-                                    "value": "VL2r1udaEpzEW4FxonSaZhUk-JKz3sUjaVoQTUuhoWLfprI14MdrQVWIusp7eUh9OabXuRl2Ey59DdufHXxJCtULey0TWPGEA0fYv4XHDg.tzCc5Gt",
+                                    "value": "F2MmgvVXbPsTrznGh4Rh9gnY467EUfJ_4i3UE3B-TEUXAYTH7J_YzNi6cJT40H8m3SXMgLtCiedQfBMqYviY5hpVaN.Znvr-zdLdZA9u69lUdIUNGxhVFntRkkMg0snjdNFC7KYQwT5ES20BFMUlht86kKCktdA46twkfvP4lQ_6THZCMvdFfze5EMRxwCWyfhbkLEpaK4xL1QKBLnYr6W3NKJ9.3CJ.ZwWm.CIWFbaS4M4YdzVqHSncQjl-ogI5A8qbx6JBrezfnE1LTC1DBXr8Iw7nVrt64v8lGfc6-tPUDO55_VZ2EbI8hHj_WQZ7odfViH_yZxZZ6nhJrKWNbjBX.4bJe.ECI3G6H5oV9IzUL_-dgcqpRetc5BU4O_bDnaj7aNonkDQzrVsBwmu-7D.WS6s4.bV.bFYv03A2aPkVjyptSXjRgJP6AUR7JBwYu-3r9ij",
                                     "key": "vumID"
                                 }
                             ]
@@ -1214,7 +1214,7 @@
                                     "type": "text/plain"
                                 },
                                 "key": "X-VUM-berichtVersie",
-                                "value": "2.0.0"
+                                "value": "3.0.0"
                             },
                             {
                                 "disabled": false,
@@ -1223,7 +1223,7 @@
                                     "type": "text/plain"
                                 },
                                 "key": "X-VUM-fromParty",
-                                "value": "Ut nisi"
+                                "value": "occaecat ad"
                             },
                             {
                                 "disabled": false,
@@ -1232,7 +1232,7 @@
                                     "type": "text/plain"
                                 },
                                 "key": "X-VUM-toParty",
-                                "value": "Ut nisi"
+                                "value": "occaecat ad"
                             },
                             {
                                 "disabled": false,
@@ -1241,7 +1241,7 @@
                                     "type": "text/plain"
                                 },
                                 "key": "X-VUM-viaParty",
-                                "value": "Ut nisi"
+                                "value": "occaecat ad"
                             },
                             {
                                 "disabled": false,
@@ -1250,7 +1250,7 @@
                                     "type": "text/plain"
                                 },
                                 "key": "API-Version",
-                                "value": "2.0.0"
+                                "value": "3.0.0"
                             },
                             {
                                 "key": "Accept",
@@ -1269,17 +1269,8 @@
                                 "content": "",
                                 "type": "text/plain"
                             },
-                            "key": "API-Version",
-                            "value": "2.0.0"
-                        },
-                        {
-                            "disabled": true,
-                            "description": {
-                                "content": "",
-                                "type": "text/plain"
-                            },
                             "key": "X-VUM-berichtVersie",
-                            "value": "2.0.0"
+                            "value": "3.0.0"
                         },
                         {
                             "disabled": true,
@@ -1288,7 +1279,7 @@
                                 "type": "text/plain"
                             },
                             "key": "X-VUM-fromParty",
-                            "value": "Ut nisi"
+                            "value": "occaecat ad"
                         },
                         {
                             "disabled": true,
@@ -1297,7 +1288,7 @@
                                 "type": "text/plain"
                             },
                             "key": "X-VUM-toParty",
-                            "value": "Ut nisi"
+                            "value": "occaecat ad"
                         },
                         {
                             "disabled": true,
@@ -1306,21 +1297,30 @@
                                 "type": "text/plain"
                             },
                             "key": "X-VUM-viaParty",
-                            "value": "Ut nisi"
+                            "value": "occaecat ad"
+                        },
+                        {
+                            "disabled": true,
+                            "description": {
+                                "content": "",
+                                "type": "text/plain"
+                            },
+                            "key": "API-Version",
+                            "value": "3.0.0"
                         },
                         {
                             "key": "Content-Type",
                             "value": "application/json"
                         }
                     ],
-                    "body": "{\n  \"code\": \"sit\",\n  \"message\": \"Ut culpa\",\n  \"details\": \"aliquip mollit anim amet minim\"\n}",
+                    "body": "{\n  \"code\": \"do es\",\n  \"message\": \"elit minim nostrud aliqua culpa\",\n  \"details\": \"minim nulla\"\n}",
                     "cookie": []
                 },
                 {
                     "_": {
                         "postman_previewlanguage": "text"
                     },
-                    "id": "5f2c30b9-4db9-4639-8251-8180fa543311",
+                    "id": "6dace798-ca92-4942-b0f7-ff978d2c5a46",
                     "name": "not authorized",
                     "originalRequest": {
                         "url": {
@@ -1340,7 +1340,7 @@
                                         "type": "text/plain"
                                     },
                                     "type": "any",
-                                    "value": "VL2r1udaEpzEW4FxonSaZhUk-JKz3sUjaVoQTUuhoWLfprI14MdrQVWIusp7eUh9OabXuRl2Ey59DdufHXxJCtULey0TWPGEA0fYv4XHDg.tzCc5Gt",
+                                    "value": "F2MmgvVXbPsTrznGh4Rh9gnY467EUfJ_4i3UE3B-TEUXAYTH7J_YzNi6cJT40H8m3SXMgLtCiedQfBMqYviY5hpVaN.Znvr-zdLdZA9u69lUdIUNGxhVFntRkkMg0snjdNFC7KYQwT5ES20BFMUlht86kKCktdA46twkfvP4lQ_6THZCMvdFfze5EMRxwCWyfhbkLEpaK4xL1QKBLnYr6W3NKJ9.3CJ.ZwWm.CIWFbaS4M4YdzVqHSncQjl-ogI5A8qbx6JBrezfnE1LTC1DBXr8Iw7nVrt64v8lGfc6-tPUDO55_VZ2EbI8hHj_WQZ7odfViH_yZxZZ6nhJrKWNbjBX.4bJe.ECI3G6H5oV9IzUL_-dgcqpRetc5BU4O_bDnaj7aNonkDQzrVsBwmu-7D.WS6s4.bV.bFYv03A2aPkVjyptSXjRgJP6AUR7JBwYu-3r9ij",
                                     "key": "vumID"
                                 }
                             ]
@@ -1353,7 +1353,7 @@
                                     "type": "text/plain"
                                 },
                                 "key": "X-VUM-berichtVersie",
-                                "value": "2.0.0"
+                                "value": "3.0.0"
                             },
                             {
                                 "disabled": false,
@@ -1362,7 +1362,7 @@
                                     "type": "text/plain"
                                 },
                                 "key": "X-VUM-fromParty",
-                                "value": "Ut nisi"
+                                "value": "occaecat ad"
                             },
                             {
                                 "disabled": false,
@@ -1371,7 +1371,7 @@
                                     "type": "text/plain"
                                 },
                                 "key": "X-VUM-toParty",
-                                "value": "Ut nisi"
+                                "value": "occaecat ad"
                             },
                             {
                                 "disabled": false,
@@ -1380,7 +1380,7 @@
                                     "type": "text/plain"
                                 },
                                 "key": "X-VUM-viaParty",
-                                "value": "Ut nisi"
+                                "value": "occaecat ad"
                             },
                             {
                                 "disabled": false,
@@ -1389,7 +1389,7 @@
                                     "type": "text/plain"
                                 },
                                 "key": "API-Version",
-                                "value": "2.0.0"
+                                "value": "3.0.0"
                             }
                         ],
                         "method": "GET",
@@ -1405,7 +1405,7 @@
                                 "type": "text/plain"
                             },
                             "key": "API-Version",
-                            "value": "2.0.0"
+                            "value": "3.0.0"
                         },
                         {
                             "key": "Content-Type",
@@ -1419,7 +1419,7 @@
                     "_": {
                         "postman_previewlanguage": "json"
                     },
-                    "id": "44e0df2f-c2ac-47dc-a174-cd0e7b4606e0",
+                    "id": "bd27ae45-0f1d-44d3-95bc-962fed73c809",
                     "name": "Too Many Requests, limiet is overschreden voor deze uitvraag",
                     "originalRequest": {
                         "url": {
@@ -1439,7 +1439,7 @@
                                         "type": "text/plain"
                                     },
                                     "type": "any",
-                                    "value": "VL2r1udaEpzEW4FxonSaZhUk-JKz3sUjaVoQTUuhoWLfprI14MdrQVWIusp7eUh9OabXuRl2Ey59DdufHXxJCtULey0TWPGEA0fYv4XHDg.tzCc5Gt",
+                                    "value": "F2MmgvVXbPsTrznGh4Rh9gnY467EUfJ_4i3UE3B-TEUXAYTH7J_YzNi6cJT40H8m3SXMgLtCiedQfBMqYviY5hpVaN.Znvr-zdLdZA9u69lUdIUNGxhVFntRkkMg0snjdNFC7KYQwT5ES20BFMUlht86kKCktdA46twkfvP4lQ_6THZCMvdFfze5EMRxwCWyfhbkLEpaK4xL1QKBLnYr6W3NKJ9.3CJ.ZwWm.CIWFbaS4M4YdzVqHSncQjl-ogI5A8qbx6JBrezfnE1LTC1DBXr8Iw7nVrt64v8lGfc6-tPUDO55_VZ2EbI8hHj_WQZ7odfViH_yZxZZ6nhJrKWNbjBX.4bJe.ECI3G6H5oV9IzUL_-dgcqpRetc5BU4O_bDnaj7aNonkDQzrVsBwmu-7D.WS6s4.bV.bFYv03A2aPkVjyptSXjRgJP6AUR7JBwYu-3r9ij",
                                     "key": "vumID"
                                 }
                             ]
@@ -1452,7 +1452,7 @@
                                     "type": "text/plain"
                                 },
                                 "key": "X-VUM-berichtVersie",
-                                "value": "2.0.0"
+                                "value": "3.0.0"
                             },
                             {
                                 "disabled": false,
@@ -1461,7 +1461,7 @@
                                     "type": "text/plain"
                                 },
                                 "key": "X-VUM-fromParty",
-                                "value": "Ut nisi"
+                                "value": "occaecat ad"
                             },
                             {
                                 "disabled": false,
@@ -1470,7 +1470,7 @@
                                     "type": "text/plain"
                                 },
                                 "key": "X-VUM-toParty",
-                                "value": "Ut nisi"
+                                "value": "occaecat ad"
                             },
                             {
                                 "disabled": false,
@@ -1479,7 +1479,7 @@
                                     "type": "text/plain"
                                 },
                                 "key": "X-VUM-viaParty",
-                                "value": "Ut nisi"
+                                "value": "occaecat ad"
                             },
                             {
                                 "disabled": false,
@@ -1488,7 +1488,7 @@
                                     "type": "text/plain"
                                 },
                                 "key": "API-Version",
-                                "value": "2.0.0"
+                                "value": "3.0.0"
                             },
                             {
                                 "key": "Accept",
@@ -1507,17 +1507,8 @@
                                 "content": "",
                                 "type": "text/plain"
                             },
-                            "key": "API-Version",
-                            "value": "2.0.0"
-                        },
-                        {
-                            "disabled": true,
-                            "description": {
-                                "content": "",
-                                "type": "text/plain"
-                            },
                             "key": "X-VUM-berichtVersie",
-                            "value": "2.0.0"
+                            "value": "3.0.0"
                         },
                         {
                             "disabled": true,
@@ -1526,7 +1517,7 @@
                                 "type": "text/plain"
                             },
                             "key": "X-VUM-fromParty",
-                            "value": "Ut nisi"
+                            "value": "occaecat ad"
                         },
                         {
                             "disabled": true,
@@ -1535,7 +1526,7 @@
                                 "type": "text/plain"
                             },
                             "key": "X-VUM-toParty",
-                            "value": "Ut nisi"
+                            "value": "occaecat ad"
                         },
                         {
                             "disabled": true,
@@ -1544,21 +1535,30 @@
                                 "type": "text/plain"
                             },
                             "key": "X-VUM-viaParty",
-                            "value": "Ut nisi"
+                            "value": "occaecat ad"
+                        },
+                        {
+                            "disabled": true,
+                            "description": {
+                                "content": "",
+                                "type": "text/plain"
+                            },
+                            "key": "API-Version",
+                            "value": "3.0.0"
                         },
                         {
                             "key": "Content-Type",
                             "value": "application/json"
                         }
                     ],
-                    "body": "{\n  \"code\": \"sit\",\n  \"message\": \"Ut culpa\",\n  \"details\": \"aliquip mollit anim amet minim\"\n}",
+                    "body": "{\n  \"code\": \"do es\",\n  \"message\": \"elit minim nostrud aliqua culpa\",\n  \"details\": \"minim nulla\"\n}",
                     "cookie": []
                 },
                 {
                     "_": {
                         "postman_previewlanguage": "json"
                     },
-                    "id": "c5ae27d9-c8ec-4c74-b33e-da3055f434a7",
+                    "id": "3a63fde6-671a-40b7-96d2-29a0fe06c9e0",
                     "name": "Internal Server Error",
                     "originalRequest": {
                         "url": {
@@ -1578,7 +1578,7 @@
                                         "type": "text/plain"
                                     },
                                     "type": "any",
-                                    "value": "VL2r1udaEpzEW4FxonSaZhUk-JKz3sUjaVoQTUuhoWLfprI14MdrQVWIusp7eUh9OabXuRl2Ey59DdufHXxJCtULey0TWPGEA0fYv4XHDg.tzCc5Gt",
+                                    "value": "F2MmgvVXbPsTrznGh4Rh9gnY467EUfJ_4i3UE3B-TEUXAYTH7J_YzNi6cJT40H8m3SXMgLtCiedQfBMqYviY5hpVaN.Znvr-zdLdZA9u69lUdIUNGxhVFntRkkMg0snjdNFC7KYQwT5ES20BFMUlht86kKCktdA46twkfvP4lQ_6THZCMvdFfze5EMRxwCWyfhbkLEpaK4xL1QKBLnYr6W3NKJ9.3CJ.ZwWm.CIWFbaS4M4YdzVqHSncQjl-ogI5A8qbx6JBrezfnE1LTC1DBXr8Iw7nVrt64v8lGfc6-tPUDO55_VZ2EbI8hHj_WQZ7odfViH_yZxZZ6nhJrKWNbjBX.4bJe.ECI3G6H5oV9IzUL_-dgcqpRetc5BU4O_bDnaj7aNonkDQzrVsBwmu-7D.WS6s4.bV.bFYv03A2aPkVjyptSXjRgJP6AUR7JBwYu-3r9ij",
                                     "key": "vumID"
                                 }
                             ]
@@ -1591,7 +1591,7 @@
                                     "type": "text/plain"
                                 },
                                 "key": "X-VUM-berichtVersie",
-                                "value": "2.0.0"
+                                "value": "3.0.0"
                             },
                             {
                                 "disabled": false,
@@ -1600,7 +1600,7 @@
                                     "type": "text/plain"
                                 },
                                 "key": "X-VUM-fromParty",
-                                "value": "Ut nisi"
+                                "value": "occaecat ad"
                             },
                             {
                                 "disabled": false,
@@ -1609,7 +1609,7 @@
                                     "type": "text/plain"
                                 },
                                 "key": "X-VUM-toParty",
-                                "value": "Ut nisi"
+                                "value": "occaecat ad"
                             },
                             {
                                 "disabled": false,
@@ -1618,7 +1618,7 @@
                                     "type": "text/plain"
                                 },
                                 "key": "X-VUM-viaParty",
-                                "value": "Ut nisi"
+                                "value": "occaecat ad"
                             },
                             {
                                 "disabled": false,
@@ -1627,7 +1627,7 @@
                                     "type": "text/plain"
                                 },
                                 "key": "API-Version",
-                                "value": "2.0.0"
+                                "value": "3.0.0"
                             },
                             {
                                 "key": "Accept",
@@ -1646,17 +1646,8 @@
                                 "content": "",
                                 "type": "text/plain"
                             },
-                            "key": "API-Version",
-                            "value": "2.0.0"
-                        },
-                        {
-                            "disabled": true,
-                            "description": {
-                                "content": "",
-                                "type": "text/plain"
-                            },
                             "key": "X-VUM-berichtVersie",
-                            "value": "2.0.0"
+                            "value": "3.0.0"
                         },
                         {
                             "disabled": true,
@@ -1665,7 +1656,7 @@
                                 "type": "text/plain"
                             },
                             "key": "X-VUM-fromParty",
-                            "value": "Ut nisi"
+                            "value": "occaecat ad"
                         },
                         {
                             "disabled": true,
@@ -1674,7 +1665,7 @@
                                 "type": "text/plain"
                             },
                             "key": "X-VUM-toParty",
-                            "value": "Ut nisi"
+                            "value": "occaecat ad"
                         },
                         {
                             "disabled": true,
@@ -1683,21 +1674,30 @@
                                 "type": "text/plain"
                             },
                             "key": "X-VUM-viaParty",
-                            "value": "Ut nisi"
+                            "value": "occaecat ad"
+                        },
+                        {
+                            "disabled": true,
+                            "description": {
+                                "content": "",
+                                "type": "text/plain"
+                            },
+                            "key": "API-Version",
+                            "value": "3.0.0"
                         },
                         {
                             "key": "Content-Type",
                             "value": "application/json"
                         }
                     ],
-                    "body": "{\n  \"code\": \"sit\",\n  \"message\": \"Ut culpa\",\n  \"details\": \"aliquip mollit anim amet minim\"\n}",
+                    "body": "{\n  \"code\": \"do es\",\n  \"message\": \"elit minim nostrud aliqua culpa\",\n  \"details\": \"minim nulla\"\n}",
                     "cookie": []
                 },
                 {
                     "_": {
                         "postman_previewlanguage": "json"
                     },
-                    "id": "0a5cf272-36b5-4253-bee0-21e3d8242d4e",
+                    "id": "02aaa1dc-0504-40bb-83e1-fe986fd112b5",
                     "name": "Service Unavailable",
                     "originalRequest": {
                         "url": {
@@ -1717,7 +1717,7 @@
                                         "type": "text/plain"
                                     },
                                     "type": "any",
-                                    "value": "VL2r1udaEpzEW4FxonSaZhUk-JKz3sUjaVoQTUuhoWLfprI14MdrQVWIusp7eUh9OabXuRl2Ey59DdufHXxJCtULey0TWPGEA0fYv4XHDg.tzCc5Gt",
+                                    "value": "F2MmgvVXbPsTrznGh4Rh9gnY467EUfJ_4i3UE3B-TEUXAYTH7J_YzNi6cJT40H8m3SXMgLtCiedQfBMqYviY5hpVaN.Znvr-zdLdZA9u69lUdIUNGxhVFntRkkMg0snjdNFC7KYQwT5ES20BFMUlht86kKCktdA46twkfvP4lQ_6THZCMvdFfze5EMRxwCWyfhbkLEpaK4xL1QKBLnYr6W3NKJ9.3CJ.ZwWm.CIWFbaS4M4YdzVqHSncQjl-ogI5A8qbx6JBrezfnE1LTC1DBXr8Iw7nVrt64v8lGfc6-tPUDO55_VZ2EbI8hHj_WQZ7odfViH_yZxZZ6nhJrKWNbjBX.4bJe.ECI3G6H5oV9IzUL_-dgcqpRetc5BU4O_bDnaj7aNonkDQzrVsBwmu-7D.WS6s4.bV.bFYv03A2aPkVjyptSXjRgJP6AUR7JBwYu-3r9ij",
                                     "key": "vumID"
                                 }
                             ]
@@ -1730,7 +1730,7 @@
                                     "type": "text/plain"
                                 },
                                 "key": "X-VUM-berichtVersie",
-                                "value": "2.0.0"
+                                "value": "3.0.0"
                             },
                             {
                                 "disabled": false,
@@ -1739,7 +1739,7 @@
                                     "type": "text/plain"
                                 },
                                 "key": "X-VUM-fromParty",
-                                "value": "Ut nisi"
+                                "value": "occaecat ad"
                             },
                             {
                                 "disabled": false,
@@ -1748,7 +1748,7 @@
                                     "type": "text/plain"
                                 },
                                 "key": "X-VUM-toParty",
-                                "value": "Ut nisi"
+                                "value": "occaecat ad"
                             },
                             {
                                 "disabled": false,
@@ -1757,7 +1757,7 @@
                                     "type": "text/plain"
                                 },
                                 "key": "X-VUM-viaParty",
-                                "value": "Ut nisi"
+                                "value": "occaecat ad"
                             },
                             {
                                 "disabled": false,
@@ -1766,7 +1766,7 @@
                                     "type": "text/plain"
                                 },
                                 "key": "API-Version",
-                                "value": "2.0.0"
+                                "value": "3.0.0"
                             },
                             {
                                 "key": "Accept",
@@ -1785,17 +1785,8 @@
                                 "content": "",
                                 "type": "text/plain"
                             },
-                            "key": "API-Version",
-                            "value": "2.0.0"
-                        },
-                        {
-                            "disabled": true,
-                            "description": {
-                                "content": "",
-                                "type": "text/plain"
-                            },
                             "key": "X-VUM-berichtVersie",
-                            "value": "2.0.0"
+                            "value": "3.0.0"
                         },
                         {
                             "disabled": true,
@@ -1804,7 +1795,7 @@
                                 "type": "text/plain"
                             },
                             "key": "X-VUM-fromParty",
-                            "value": "Ut nisi"
+                            "value": "occaecat ad"
                         },
                         {
                             "disabled": true,
@@ -1813,7 +1804,7 @@
                                 "type": "text/plain"
                             },
                             "key": "X-VUM-toParty",
-                            "value": "Ut nisi"
+                            "value": "occaecat ad"
                         },
                         {
                             "disabled": true,
@@ -1822,14 +1813,23 @@
                                 "type": "text/plain"
                             },
                             "key": "X-VUM-viaParty",
-                            "value": "Ut nisi"
+                            "value": "occaecat ad"
+                        },
+                        {
+                            "disabled": true,
+                            "description": {
+                                "content": "",
+                                "type": "text/plain"
+                            },
+                            "key": "API-Version",
+                            "value": "3.0.0"
                         },
                         {
                             "key": "Content-Type",
                             "value": "application/json"
                         }
                     ],
-                    "body": "{\n  \"code\": \"sit\",\n  \"message\": \"Ut culpa\",\n  \"details\": \"aliquip mollit anim amet minim\"\n}",
+                    "body": "{\n  \"code\": \"do es\",\n  \"message\": \"elit minim nostrud aliqua culpa\",\n  \"details\": \"minim nulla\"\n}",
                     "cookie": []
                 }
             ],
@@ -1837,7 +1837,7 @@
                 {
                     "listen": "test",
                     "script": {
-                        "id": "87954def-5b9d-4096-979e-aeae54c85e09",
+                        "id": "a1a1d3f6-a054-4ed4-b540-84c4c136664f",
                         "type": "text/javascript",
                         "exec": [
                             "// Validate status 2xx \npm.test(\"[GET]::/vacatures/:vumID - Status code is 2xx\", function () {\n   pm.response.to.be.success;\n});\n",
@@ -1882,7 +1882,7 @@
                 {
                     "listen": "prerequest",
                     "script": {
-                        "id": "32fd3790-196c-4198-bf51-7e2c68cfacd6",
+                        "id": "505def5d-f0ec-4744-9147-9105f34ad0e2",
                         "type": "text/javascript",
                         "exec": [
                             "pm.variables.set('baseUrl', pm.environment.get('baseUrl'))"
@@ -1899,12 +1899,12 @@
     "variable": [
         {
             "type": "string",
-            "value": "https://test.vumdevelopment.nl/api/v2",
+            "value": "https://test.vumdevelopment.nl/api/v3",
             "key": "baseUrl"
         }
     ],
     "info": {
-        "_postman_id": "fe6f4a3d-a8e9-4da5-bf79-4eb1abcefd7b",
+        "_postman_id": "bfd39a2e-0089-403d-a045-2a80ad9fa236",
         "name": "VUM API Vacatures tussen VUM-UV en bemiddelaar",
         "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
         "description": {
