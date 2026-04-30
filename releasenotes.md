@@ -107,7 +107,15 @@ In V3 is dit vereenvoudigd tot een enkel gegevenstype **Adres** met de volgende 
 - huisnummertoevoeging
 
 Dit **Adres** type is ons inziens voldoende om aan te geven wat het adres van een vacature of werkgever is.    
-VUM beperkt zich tot de Nederlandse arbeidsmarkt. Matching o.b.v. buitenlandse adressen wordt niet ondersteund binnen de historische werking van VUM.
+VUM beperkt zich tot de Nederlandse arbeidsmarkt. Matching o.b.v. buitenlandse adressen wordt niet ondersteund binnen de historische werking van VUM.  
+Om die reden is ook **Voorkeursland** verwijderd.
+
+### Indicatie LDR registratie alleen nog beschikbaar in detail resultaten werkzoeken  
+**indicatieLdrRegistratie** is overal verwijderd, behalve uit de detail resultaten van werkzoekenden. 
+Dit veld is privacygevoelig en daarom alleen nog maar te zien in de details.
+
+### Uitbreiding zoekselecties
+- Bij het zoeken naar werkzoekende profielen is het nu mogelijk om te zoeken op **datumAanvangBeschikbaarVoorWerk**.
 
 ### Uitbreiding eerste zoekresultaat
 - Binnen de entiteit **Vacature** zijn de attributen **omschrijvingVacature**, **naamVacature** en **Webadres** nu ook beschikbaar in het antwoord op een eerste zoekvraag voor vacatures
