@@ -1,0 +1,95 @@
+name: Package NuGet
+
+on:
+  push:
+    tags:
+      - 'v[0-9]+.[0-9]+.[0-9]+'
+
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    
+    env:
+      SPEC_FILE_NAME: "PackageSpec.csproj"
+      PACKAGE_ID: "ibnext.ib.vum.koppelvlak"
+      TARGETS_FILE_NAME: "ibnext.ib.vum.koppelvlak.targets"
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '8.0.x'
+          
+      - name: Set version from tag
+        run: echo "VERSION=${GITHUB_REF#refs/tags/v}" >> $GITHUB_ENV
+        
+      - name: Create build directory
+        run: mkdir -p build
+        
+      - name: Generate .csproj file
+        run: |
+          cat > ${SPEC_FILE_NAME} << EOF
+          <Project Sdk="Microsoft.NET.Sdk">
+            <PropertyGroup>
+              <TargetFramework>netstandard2.0</TargetFramework>
+              <PackageId>${PACKAGE_ID}</PackageId>
+              <Version>${VERSION}</Version>
+              <Authors>Stichting Inlichtingenbureau</Authors>
+              <Description>${{ github.event.repository.description }}</Description>
+              <PackageOutputPath>./out</PackageOutputPath>
+              <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+              <RepositoryUrl>https://github.com/${{ github.repository }}</RepositoryUrl>
+              <!-- Ensure package ID works with GitHub's namespace requirements -->
+            </PropertyGroup>
+
+            <ItemGroup>
+              <None Include="OAS_Contracten/**/*.yaml"
+                    Pack="true"
+                    PackagePath="contentFiles/any/any/OAS_Contracten" />
+              <None Include="build/${TARGETS_FILE_NAME}"
+                    Pack="true"
+                    PackagePath="build/${TARGETS_FILE_NAME}" />
+            </ItemGroup>
+          </Project>
+          EOF
+          
+      - name: Generate .targets file
+        run: |
+          cat > build/${TARGETS_FILE_NAME} << EOF
+          <Project>
+            <Target Name="CopyYamlFilesToOutput" BeforeTargets="PrepareForBuild">
+              <ItemGroup>
+                <ContractYamlFiles Include="\$(MSBuildThisFileDirectory)..\contentFiles\any\any\OAS_Contracten\**\*.yaml" />
+              </ItemGroup>
+              <Copy SourceFiles="@(ContractYamlFiles)"
+                    DestinationFolder="\$(OutDir)OAS_Contracten\%(RecursiveDir)"
+                    SkipUnchangedFiles="true"
+                    Condition="Exists('%(ContractYamlFiles.FullPath)')" />
+            </Target>
+          </Project>
+          EOF
+          
+      - name: Pack NuGet package
+        run: dotnet pack ${SPEC_FILE_NAME} -p:Version=${VERSION}
+      
+      - name: Setup NuGet credentials
+        run: |
+          echo "Configuring NuGet source..."
+          dotnet nuget add source https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json \
+            --name github \
+            --username ${{ github.repository_owner }} \
+            --password ${{ secrets.GITHUB_TOKEN }} \
+            --store-password-in-clear-text
+        
+      - name: Publish NuGet package to GitHub Packages
+        run: |
+          echo "Publishing package to GitHub Packages..."
+          dotnet nuget push out/*.nupkg \
+            --source github \
+            --api-key ${{ secrets.GITHUB_TOKEN }} 

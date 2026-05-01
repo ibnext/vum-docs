@@ -7,9 +7,9 @@ info:
     name: Helpdesk
     url: https://www.matchingsgegevens.nl
     email: programma-vum@ictu.nl
-  version: 2.0.0
+  version: 3.0.0
 servers:
-- url: https://bron.vumdevelopment.nl/api/v2
+- url: https://bron.vumdevelopment.nl/api/v3
   description: Testbron
 paths:
   /vacatures/matches:

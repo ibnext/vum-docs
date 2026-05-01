@@ -4,7 +4,7 @@
   "values": [
     {
       "key": "baseUrl",
-      "value": "https://ib-api.acc.diginetwerk.inlichtingenbureau.nl/vum-acd/v2",
+      "value": "https://ib-api.acc.diginetwerk.inlichtingenbureau.nl/vum-acd/v3",
       "type": "default",
       "enabled": true
     },
@@ -34,7 +34,7 @@
     },
     {
       "key": "api-version",
-      "value": "2.0",
+      "value": "3.0.0",
       "type": "default",
       "enabled": true
     }
