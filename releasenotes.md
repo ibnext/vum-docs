@@ -77,8 +77,7 @@ Verwijzingen die voorheen werden gedaan naar Beroepsnaam (zoals in Werkervaring)
 
 ### Opleiding is gewijzigd    
 In v2 bestond het type **Opleidingsnaam** (gecodeerd/ongecodeerd).    
-In v3 is dit vervangen door **codeOpleidingsnaam** en verwijst naar een id van het type URI zoals gebruikt in de CompetentNL API.    
-CompetentNL zal hier dus leidend zijn t.a.v. gedefinieerde beroepen.
+In v3 is dit vervangen door **codeOpleidingsnaam** en verwijst naar een code in het deelbestand **SUWIML LIJSTEN EN CODES**, hier te vinden:  [SuwiML deelbestanden](https://sgr.bkwi.nl/sgr/index.html).
 
 In v3 is **toelichtingOpleiding** toegevoegd om meer context te kunnen geven bij een opleiding.  
 De volgende objecten zijn dus verwijderd t.b.v. verduidelijking en consistentie:
