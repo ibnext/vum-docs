@@ -715,10 +715,9 @@
         "type": "integer"
       },
       "NummerKvk": {
-        "example": 12345678,
-        "minimum": 10000000,
-        "maximum": 99999999,
-        "type": "integer"
+        "example": "12345678",
+        "pattern": "^[0-9]{8}$",
+        "type": "string"
       },
       "IDWerkgeverscontactmoment": {
         "$ref": "#/components/schemas/SafeIDString"
