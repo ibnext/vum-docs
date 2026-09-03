@@ -162,30 +162,6 @@ components:
       additionalProperties: false
       type: object
       properties:
-        idWerkgeverscontactmoment_BRN:
-          $ref: '#/components/schemas/IDWerkgeverscontactmoment'
-        vumID_VUM:
-          $ref: '#/components/schemas/VumID'
-        datum:
-          $ref: '#/components/schemas/Date'
-        codeOnderwerp:
-          $ref: '#/components/schemas/codeOnderwerp'
-        codeSoort:
-          $ref: '#/components/schemas/codeSoort'
-        accountmanager:
-          $ref: '#/components/schemas/Accountmanager'
-        werkgever:
-          $ref: '#/components/schemas/WerkgeverWerkgeverscontactmoment'
-      required:
-      - vumID_VUM
-      - idWerkgeverscontactmoment_BRN
-      - datum
-    Werkgeverscontactmoment:
-      additionalProperties: false
-      type: object
-      properties:
-        idWerkgeverscontactmoment:
-          $ref: '#/components/schemas/IDWerkgeverscontactmoment'
         datum:
           $ref: '#/components/schemas/Date'
         codeOnderwerp:
@@ -198,7 +174,6 @@ components:
           $ref: '#/components/schemas/WerkgeverWerkgeverscontactmoment'
       required:
       - datum
-      - werkgever
     Accountmanager:
       additionalProperties: false
       type: object
@@ -285,18 +260,12 @@ components:
       example: '12345678'
       pattern: ^[0-9]{8}$
       type: string
-    IDWerkgeverscontactmoment:
-      $ref: '#/components/schemas/SafeIDString'
     datum_choice:
       $ref: '#/components/schemas/Date'
     datum_selectie:
       type: object
       properties:
-        $eq:
-          $ref: '#/components/schemas/datum_choice'
         $gte:
-          $ref: '#/components/schemas/datum_choice'
-        $lte:
           $ref: '#/components/schemas/datum_choice'
     nummerKvk_choice:
       $ref: '#/components/schemas/NummerKvk'
