@@ -95,6 +95,10 @@ in de vorm van de JSON property `vumID`. Met deze identificatie kunnen, voor de 
 Het opvragen van de detailgegevens bestaat uit een GET request waarbij de `vumID` uit het betreffende selectieresultaat in de URL wordt vermeld. De
 response bevat als inhoud de JSON weergave van het detailprofiel of de vacature.
 
+Het koppelvlak voor Werkgeverscontactmomenten wijkt hiervan af: dit kent uitsluitend een selectievraag (POST) en geen aparte detailopvraag. De
+selectieresultaten bevatten direct de volledige gegevens van de werkgeverscontactmomenten, zodat er geen `vumID` en geen GET request voor
+detailgegevens nodig zijn. De selectievraag bevat altijd een KvK-nummer en optioneel een datum.
+
 <img src="./media/dialogen.png" align="center">
 
 De berichtuitwisseling vindt altijd plaats over een HTTPS verbinding waarbij de server en de client elkaar wederzijds met een PKI Overheid certificaat authenticeren.
