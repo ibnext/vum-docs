@@ -127,6 +127,8 @@ De invulling van deze velden is als volgt:
 |                     |             | X-VUM-fromParty | OIN van de beantwoordende<br>verwerkingsverantwoordelijke                |
 |                     |             | X-VUM-viaParty  | OIN van de vraagstellende verwerker                                   |
 
+> Voor Werkgeverscontactmomenten verloopt ook de bron-bevraging via een `POST /werkgeverscontactmomenten/matches` (er is geen GET-detailopvraag); de berichtuitwisseling loopt nog steeds via VUM en de OIN-headers worden op dezelfde wijze ingevuld als in bovenstaande tabel.
+
 
 ## <a name=berichtinhoud>Berichtinhoud</a>
 
