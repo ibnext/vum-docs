@@ -9,12 +9,10 @@ info:
     email: programma-vum@ictu.nl
   version: 3.0.0
 servers:
-- url: https://test.vumdevelopment.nl/api/v3
-  description: staging/test server
-- url: https://accept.vumdevelopment.nl/api/v3
-  description: acceptatie server
-- url: https://prod.vumdevelopment.nl/api/v3
-  description: productie server
+- url: https://ib-api.acc.inlichtingenbureau.nl/vum-acd/v3
+  description: Accreditatie Server
+- url: https://ib-api.inlichtingenbureau.nl/vum/v3
+  description: Productie Server
 paths:
   /vacatures/matches:
     post:
@@ -359,15 +357,15 @@ components:
     Beroep:
       additionalProperties: false
       properties:
-          codeBeroepsnaam:
-            $ref: '#/components/schemas/codeBeroepsnaam'
+        codeBeroepsnaam:
+          $ref: '#/components/schemas/codeBeroepsnaam'
       type: object
     Competentiebeheersing:
-        additionalProperties: false
-        properties:
-            codeCompetentie:
-              $ref: '#/components/schemas/URI'
-        type: object
+      additionalProperties: false
+      properties:
+        codeCompetentie:
+          $ref: '#/components/schemas/URI'
+      type: object
     ContactpersoonAfdeling:
       additionalProperties: false
       properties:
@@ -440,11 +438,11 @@ components:
       type: integer
     IndicatieDiploma:
       enum:
-        - 0
-        - 1
-        - 2
-        - 8
-      type: integer      
+      - 0
+      - 1
+      - 2
+      - 8
+      type: integer
     Integer1000:
       maximum: 999
       minimum: 0
@@ -531,7 +529,7 @@ components:
         naamVacature:
           $ref: '#/components/schemas/String120'
         omschrijvingVacature:
-          $ref: '#/components/schemas/String2000'          
+          $ref: '#/components/schemas/String2000'
         opleiding:
           items:
             $ref: '#/components/schemas/Opleiding'
@@ -588,7 +586,7 @@ components:
       additionalProperties: false
       properties:
         codeOpleidingsnaam:
-          $ref: '#/components/schemas/Integer10AsString'        
+          $ref: '#/components/schemas/Integer10AsString'
         codeNiveauOpleiding:
           enum:
           - 1
@@ -959,8 +957,8 @@ components:
       type: object
     indicatieOnregelmatigWerkOfPloegendienst_choice:
       enum:
-        - 1
-        - 2
+      - 1
+      - 2
       type: integer
     indicatieOnregelmatigWerkOfPloegendienst_selectie:
       properties:

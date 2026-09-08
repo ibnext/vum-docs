@@ -9,8 +9,10 @@ info:
     email: programma-vum@ictu.nl
   version: 3.0.0
 servers:
-- url: https://bron.vumdevelopment.nl/api/v3
-  description: Testbron
+- url: https://ib-api.acc.inlichtingenbureau.nl/vum-acd/v3
+  description: Accreditatie Server
+- url: https://ib-api.inlichtingenbureau.nl/vum/v3
+  description: Productie Server
 paths:
   /werkzoekendeProfielen/matches:
     post:

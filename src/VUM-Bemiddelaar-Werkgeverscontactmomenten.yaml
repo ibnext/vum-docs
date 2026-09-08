@@ -9,12 +9,10 @@ info:
     email: programma-vum@ictu.nl
   version: 3.0.0
 servers:
-- url: https://test.vumdevelopment.nl/api/v3
-  description: staging/test server
-- url: https://accept.vumdevelopment.nl/api/v3
-  description: acceptatie server
-- url: https://prod.vumdevelopment.nl/api/v3
-  description: productie server
+- url: https://ib-api.acc.inlichtingenbureau.nl/vum-acd/v3
+  description: Accreditatie Server
+- url: https://ib-api.inlichtingenbureau.nl/vum/v3
+  description: Productie Server
 paths:
   /werkgeverscontactmomenten/matches:
     post:

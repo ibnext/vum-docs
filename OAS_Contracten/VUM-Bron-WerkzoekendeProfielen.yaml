@@ -9,8 +9,10 @@ info:
     email: programma-vum@ictu.nl
   version: 3.0.0
 servers:
-- url: https://bron.vumdevelopment.nl/api/v3
-  description: Testbron
+- url: https://ib-api.acc.inlichtingenbureau.nl/vum-acd/v3
+  description: Accreditatie Server
+- url: https://ib-api.inlichtingenbureau.nl/vum/v3
+  description: Productie Server
 paths:
   /werkzoekendeProfielen/matches:
     post:
@@ -474,10 +476,10 @@ components:
       type: integer
     IndicatieDiploma:
       enum:
-        - 0
-        - 1
-        - 2
-        - 8
+      - 0
+      - 1
+      - 2
+      - 8
       type: integer
     Integer1000:
       maximum: 999
@@ -584,13 +586,13 @@ components:
         maximaleReistijd:
           $ref: '#/components/schemas/Integer1000'
       required:
-        - bemiddelingspostcode
+      - bemiddelingspostcode
       type: object
     Opleiding:
       additionalProperties: false
       properties:
         codeOpleidingsnaam:
-          $ref: '#/components/schemas/Integer10AsString'        
+          $ref: '#/components/schemas/Integer10AsString'
         codeNiveauOpleiding:
           enum:
           - 1
@@ -604,7 +606,7 @@ components:
         indicatieDiploma:
           $ref: '#/components/schemas/IndicatieDiploma'
         toelichtingOpleiding:
-          $ref: '#/components/schemas/String2000'          
+          $ref: '#/components/schemas/String2000'
         codeStatusOpleiding:
           enum:
           - 0
@@ -688,7 +690,7 @@ components:
       maxLength: 200
     URL:
       type: string
-      maxLength: 1000      
+      maxLength: 1000
     Vervoermiddel:
       additionalProperties: false
       properties:
@@ -799,7 +801,7 @@ components:
         webadres:
           items:
             $ref: '#/components/schemas/Webadres'
-          type: array          
+          type: array
         werktijden:
           $ref: '#/components/schemas/Werktijden'
       type: object
