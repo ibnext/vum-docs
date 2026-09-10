@@ -84,6 +84,18 @@ components:
             - vraagObject
             type: object
       required: true
+    WerkgeverscontactmomentMatchesRequest:
+      content:
+        application/json:
+          schema:
+            additionalProperties: false
+            properties:
+              vraagObject:
+                $ref: '#/components/schemas/MPWerkgeverscontactmoment'
+            required:
+            - vraagObject
+            type: object
+      required: true
   schemas:
     VacaturesMatchesResponse:
       required:
@@ -117,6 +129,151 @@ components:
           $ref: '#/components/schemas/VraagID'
         matches:
           $ref: '#/components/schemas/WerkzoekendeMatchingProfielen'
+    WerkgeverscontactmomentMatchesResponse:
+      required:
+      - maximumAantalResultatenBereikt
+      - vraagID
+      - matches
+      type: object
+      properties:
+        maximumAantalResultatenBereikt:
+          type: boolean
+          description: Geeft aan of bron meer matches zou kunnen leveren
+            dan de teruggeleverde set. Bronnen mogen per zoekvraag een maximum
+            aantal (standaard 100) resultaten leveren
+        vraagID:
+          $ref: '#/components/schemas/VraagID'
+        matches:
+          $ref: '#/components/schemas/WerkgeverscontactmomentMatchingProfielen'
+    WerkgeverscontactmomentMatchingProfielen:
+      items:
+        $ref: '#/components/schemas/MPWerkgeverscontactmomentMatch'
+      type: array
+    MPWerkgeverscontactmoment:
+      type: object
+      properties:
+        datum:
+          $ref: '#/components/schemas/datum_selectie'
+        werkgever.nummerKvk:
+          $ref: '#/components/schemas/nummerKvk_selectie'
+      required:
+      - werkgever.nummerKvk
+    MPWerkgeverscontactmomentMatch:
+      additionalProperties: false
+      type: object
+      properties:
+        datum:
+          $ref: '#/components/schemas/Date'
+        codeOnderwerp:
+          $ref: '#/components/schemas/codeOnderwerp'
+        codeSoort:
+          $ref: '#/components/schemas/codeSoort'
+        accountmanager:
+          $ref: '#/components/schemas/Accountmanager'
+        werkgever:
+          $ref: '#/components/schemas/WerkgeverWerkgeverscontactmoment'
+      required:
+      - datum
+    Accountmanager:
+      additionalProperties: false
+      type: object
+      properties:
+        naam:
+          $ref: '#/components/schemas/String70'
+        naamOrganisatie:
+          $ref: '#/components/schemas/String70'
+        emailadres:
+          $ref: '#/components/schemas/Emailadres'
+        telefoonnummer:
+          $ref: '#/components/schemas/Telefoonnummer'
+    WerkgeverWerkgeverscontactmoment:
+      additionalProperties: false
+      type: object
+      properties:
+        handelsnaamOrganisatie:
+          $ref: '#/components/schemas/String500'
+        nummerKvk:
+          $ref: '#/components/schemas/NummerKvk'
+        codeSbi:
+          $ref: '#/components/schemas/Integer5'
+        codeSoortAfspraken:
+          $ref: '#/components/schemas/codeSoortAfspraken'
+        erkendSbbLeerbedrijf:
+          type: boolean
+        vestigingsadres:
+          $ref: '#/components/schemas/Vestigingsadres'
+      required:
+      - nummerKvk
+    Vestigingsadres:
+      additionalProperties: false
+      type: object
+      properties:
+        straatnaam:
+          $ref: '#/components/schemas/String70'
+        huisnummer:
+          $ref: '#/components/schemas/Integer5'
+        huisnummertoevoeging:
+          $ref: '#/components/schemas/String6'
+        woonplaatsnaam:
+          $ref: '#/components/schemas/String70'
+        postcode:
+          $ref: '#/components/schemas/Postcode'
+        contactpersoonAfdeling:
+          $ref: '#/components/schemas/ContactpersoonAfdelingWerkgeverscontactmoment'
+    ContactpersoonAfdelingWerkgeverscontactmoment:
+      additionalProperties: false
+      type: object
+      properties:
+        naam:
+          $ref: '#/components/schemas/String70'
+        functie:
+          $ref: '#/components/schemas/String70'
+        emailadres:
+          $ref: '#/components/schemas/Emailadres'
+        telefoonnummer:
+          $ref: '#/components/schemas/Telefoonnummer'
+    codeOnderwerp:
+      enum:
+      - 1
+      - 2
+      - 3
+      - 4
+      - 5
+      - 6
+      type: integer
+    codeSoort:
+      enum:
+      - 1
+      - 2
+      - 3
+      - 4
+      - 5
+      - 6
+      type: integer
+    codeSoortAfspraken:
+      enum:
+      - 1
+      - 2
+      - 3
+      type: integer
+    NummerKvk:
+      example: '12345678'
+      pattern: ^[0-9]{8}$
+      type: string
+    datum_choice:
+      $ref: '#/components/schemas/Date'
+    datum_selectie:
+      type: object
+      properties:
+        $gte:
+          $ref: '#/components/schemas/datum_choice'
+    nummerKvk_choice:
+      $ref: '#/components/schemas/NummerKvk'
+    nummerKvk_selectie:
+      type: object
+      properties:
+        $eq:
+          $ref: '#/components/schemas/nummerKvk_choice'
     VraagID:
       maxLength: 100
       type: string

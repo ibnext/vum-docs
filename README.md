@@ -26,7 +26,7 @@
 
 # <a name=inleiding>Inleiding</a>
 
-Dit document bevat een toelichting op de VUM Koppelvlak specificaties. De VUM Koppelvlak specificaties zijn vastgelegd in vier OpenAPI 3.0.0 documenten. Elk van deze documenten beschrijft twee koppelvlakken.
+Dit document bevat een toelichting op de VUM Koppelvlak specificaties. De VUM Koppelvlak specificaties zijn vastgelegd in zes OpenAPI 3.0.0 documenten. De meeste van deze documenten beschrijven twee koppelvlakken; de Werkgeverscontactmomenten-documenten beschrijven er elk één.
 
 *  VUM-Bemiddelaar-WerkzoekendeProfielen:
 	*  Koppelvlak met de VUM Uitwisselingsvoorziening voor selecteren van werkzoekendenprofielen
@@ -40,6 +40,10 @@ Dit document bevat een toelichting op de VUM Koppelvlak specificaties. De VUM Ko
 * VUM-Bron-Vacatures:
 	* Koppelvlak met een VUM bron voor het selecteren van vacatures
 	* Koppelvlak met een VUM bron voor het opvragen van een detail weergave van een vacature
+*  VUM-Bemiddelaar-Werkgeverscontactmomenten:
+	*  Koppelvlak met de VUM Uitwisselingsvoorziening voor het opvragen van werkgeverscontactmomenten op basis van een KvK-nummer en optioneel een datum
+* VUM-Bron-Werkgeverscontactmomenten:
+	* Koppelvlak met een VUM bron voor het opvragen van werkgeverscontactmomenten op basis van een KvK-nummer en optioneel een datum
 
 Deze bestanden zijn in YAML en in JSON formaat beschikbaar en specificeren enkel de technische invulling van de VUM koppelvlakken als web-services. De procesmatige voorwaarden voor het aansluiten op en het gebruik van deze koppelvlakken worden binnen het VUM Afsprakenstelsel met deelnemers overeengekomen. Dit betreft ook de geldende limieten zoals het maximum aantal selectieresultaten en het maximum aantal detailvragen per selectievraag.
 
@@ -91,6 +95,10 @@ in de vorm van de JSON property `vumID`. Met deze identificatie kunnen, voor de 
 Het opvragen van de detailgegevens bestaat uit een GET request waarbij de `vumID` uit het betreffende selectieresultaat in de URL wordt vermeld. De
 response bevat als inhoud de JSON weergave van het detailprofiel of de vacature.
 
+Het koppelvlak voor Werkgeverscontactmomenten wijkt hiervan af: dit kent uitsluitend een selectievraag (POST) en geen aparte detailopvraag. De
+selectieresultaten bevatten direct de volledige gegevens van de werkgeverscontactmomenten, zodat er geen `vumID` en geen GET request voor
+detailgegevens nodig zijn. De selectievraag bevat altijd een KvK-nummer en optioneel een datum.
+
 <img src="./media/dialogen.png" align="center">
 
 De berichtuitwisseling vindt altijd plaats over een HTTPS verbinding waarbij de server en de client elkaar wederzijds met een PKI Overheid certificaat authenticeren.
@@ -118,6 +126,8 @@ De invulling van deze velden is als volgt:
 | VUM &#8592; Bron         | response    | X-VUM-toParty   | OIN van de vraagstellende<br>verwerkingsverantwoordelijke                |
 |                     |             | X-VUM-fromParty | OIN van de beantwoordende<br>verwerkingsverantwoordelijke                |
 |                     |             | X-VUM-viaParty  | OIN van de vraagstellende verwerker                                   |
+
+> Voor Werkgeverscontactmomenten verloopt ook de bron-bevraging via een `POST /werkgeverscontactmomenten/matches` (er is geen GET-detailopvraag); de berichtuitwisseling loopt nog steeds via VUM en de OIN-headers worden op dezelfde wijze ingevuld als in bovenstaande tabel.
 
 
 ## <a name=berichtinhoud>Berichtinhoud</a>
