@@ -12,11 +12,11 @@
   },
   "servers": [
     {
-      "url": "https://ib-api.acc.inlichtingenbureau.nl/vum-acd/v3",
+      "url": "https://ib-api.acc.diginetwerk.inlichtingenbureau.nl/vum-acd/v3",
       "description": "Accreditatie Server"
     },
     {
-      "url": "https://ib-api.inlichtingenbureau.nl/vum/v3",
+      "url": "https://ib-api.diginetwerk.inlichtingenbureau.nl/vum/v3",
       "description": "Productie Server"
     }
   ],
