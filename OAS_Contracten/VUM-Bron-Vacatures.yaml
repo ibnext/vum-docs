@@ -9,8 +9,10 @@ info:
     email: programma-vum@ictu.nl
   version: 3.0.0
 servers:
-- url: https://bron.vumdevelopment.nl/api/v3
-  description: Testbron
+- url: https://ib-api.acc.diginetwerk.inlichtingenbureau.nl/vum-acd/v3
+  description: Accreditatie Server
+- url: https://ib-api.diginetwerk.inlichtingenbureau.nl/vum/v3
+  description: Productie Server
 paths:
   /vacatures/matches:
     post:
@@ -341,7 +343,7 @@ components:
         huisnummertoevoeging:
           $ref: '#/components/schemas/String6'
       required:
-        - postcode
+      - postcode
       type: object
     ArbeidsVoorwaarden:
       additionalProperties: false
@@ -439,11 +441,11 @@ components:
       type: integer
     IndicatieDiploma:
       enum:
-        - 0
-        - 1
-        - 2
-        - 8
-      type: integer      
+      - 0
+      - 1
+      - 2
+      - 8
+      type: integer
     Integer1000:
       maximum: 999
       minimum: 0
@@ -479,7 +481,7 @@ components:
         datumAanvangWerkzaamheden:
           $ref: '#/components/schemas/datumAanvangWerkzaamheden_selectie'
         flexibiliteit.indicatieOnregelmatigWerkOfPloegendienst:
-          $ref: '#/components/schemas/indicatieOnregelmatigWerkOfPloegendienst_selectie'          
+          $ref: '#/components/schemas/indicatieOnregelmatigWerkOfPloegendienst_selectie'
         rijbewijs:
           $ref: '#/components/schemas/rijbewijs_selectie'
         selectiegebied:
@@ -530,7 +532,7 @@ components:
         naamVacature:
           $ref: '#/components/schemas/String120'
         omschrijvingVacature:
-          $ref: '#/components/schemas/String2000'          
+          $ref: '#/components/schemas/String2000'
         opleiding:
           items:
             $ref: '#/components/schemas/Opleiding'
@@ -587,7 +589,7 @@ components:
       additionalProperties: false
       properties:
         codeOpleidingsnaam:
-          $ref: '#/components/schemas/Integer10AsString'        
+          $ref: '#/components/schemas/Integer10AsString'
         codeNiveauOpleiding:
           enum:
           - 1
@@ -689,7 +691,7 @@ components:
       $ref: '#/components/schemas/String14'
     URI:
       type: string
-      maxLength: 200      
+      maxLength: 200
     URL:
       type: string
       maxLength: 1000
@@ -947,13 +949,13 @@ components:
       $ref: '#/components/schemas/Date'
     datumAanvangWerkzaamheden_selectie:
       properties:
-        $gte:      
+        $gte:
           $ref: '#/components/schemas/datumAanvangWerkzaamheden_choice'
-      type: object   
+      type: object
     indicatieOnregelmatigWerkOfPloegendienst_choice:
       enum:
-        - 1
-        - 2
+      - 1
+      - 2
       type: integer
     indicatieOnregelmatigWerkOfPloegendienst_selectie:
       properties:
