@@ -1,3 +1,52 @@
+# Releasenotes VUM Koppelvlak specificaties v3.1.0
+
+Versie 3.1.0 van de VUM Koppelvlak specificaties voegt een nieuw koppelvlak toe voor **Werkgeverscontactmomenten** en werkt de servergegevens van alle koppelvlakken bij.
+
+Deze release is backwards compatible met de voorgaande 3.0.0 release voor de bestaande koppelvlakken (Vacatures en WerkzoekendeProfielen). Daarom is enkel het minor versienummer verhoogd van 3.0.0 naar 3.1.0.
+
+De belangrijkste wijzigingen zijn:
+
+### Nieuw koppelvlak: Werkgeverscontactmomenten
+- Er zijn twee nieuwe OpenAPI 3.0 documenten toegevoegd: **VUM-Bron-Werkgeverscontactmomenten** en **VUM-Bemiddelaar-Werkgeverscontactmomenten**.
+- In tegenstelling tot de koppelvlakken voor Vacatures en WerkzoekendeProfielen kent dit koppelvlak uitsluitend een selectievraag (`POST /werkgeverscontactmomenten/matches`) en geen aparte detailopvraag. De selectieresultaten bevatten direct de volledige gegevens van de werkgeverscontactmomenten, zodat er geen `vumID` en geen GET request voor detailgegevens nodig zijn.
+- De selectievraag bevat altijd een KvK-nummer (`werkgever.nummerKvk`, verplicht) en optioneel een datum (`datum`). Wordt alleen een KvK-nummer meegegeven, dan worden alle werkgeverscontactmomenten voor dat KvK-nummer teruggegeven. Wordt daarnaast een datum meegegeven, dan worden enkel de werkgeverscontactmomenten vanaf die datum teruggegeven (operator `$gte`). De datum wordt uitsluitend op formaat (`YYYY-MM-DD`) gecontroleerd.
+
+De volgende gegevens zijn opgenomen in een werkgeverscontactmoment:
+- **Contactmoment**
+  - datum
+  - codeOnderwerp
+  - codeSoort
+  - accountmanager
+  - werkgever
+- **Accountmanager**
+  - naam
+  - naamOrganisatie
+  - emailadres
+  - telefoonnummer
+- **Werkgever**
+  - handelsnaamOrganisatie
+  - nummerKvk
+  - codeSbi
+  - codeSoortAfspraken
+  - erkendSbbLeerbedrijf
+  - vestigingsadres
+- **Vestigingsadres**
+  - straatnaam
+  - huisnummer
+  - huisnummertoevoeging
+  - woonplaatsnaam
+  - postcode
+  - contactpersoonAfdeling
+- **ContactpersoonAfdeling**
+  - naam
+  - functie
+  - emailadres
+  - telefoonnummer
+
+### Algemeen
+- De servergegevens (`servers`) van alle koppelvlakken zijn bijgewerkt. De niet langer gebruikte omgevingen zijn verwijderd. Voortaan zijn enkel de Accreditatie Server (`https://ib-api.acc.diginetwerk.inlichtingenbureau.nl/vum-acd/v3`) en de Productie Server (`https://ib-api.diginetwerk.inlichtingenbureau.nl/vum/v3`) opgenomen.
+- Het attribuut **NummerKvK** wordt weergegeven als een string van precies acht cijfers (`^[0-9]{8}$`). Hierdoor blijven KvK-nummers die met een nul beginnen correct behouden.
+
 # Releasenotes VUM Koppelvlak specificaties v3.0.0
 
 Deze versie van de VUM Koppelvlak specificaties is gebaseerd op versie 1.5 van de VUM Gegevensstandaard.
