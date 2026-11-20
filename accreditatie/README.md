@@ -36,6 +36,8 @@ Om VUM puur als bemiddelaar te testen, zonder een eigen bron aan te sluiten, kan
 
 Door requests te versturen met deze headers, wordt de door BIDN beschikbaar gestelde testdata bevraagd. Het kan zijn dat er geen resultaten worden teruggegeven indien de zoekvraag te specifiek is. In de JSON bestanden aangemerkt met "\_upload" staan de profielen die beschikbaar zijn in de BIDN bron.
 
+Beroepen (`codeBeroepsnaam`) worden aangeduid met de URI zoals CompetentNL die publiceert: `https://linkeddata.competentnl.nl/id/uwv/occupation/{code}`. De oudere vorm `https://linkeddata.competentnl.nl/uwv/id/occupation/{code}` wordt nog geaccepteerd, maar is niet meer op te vragen bij CompetentNL en wordt in de testsets niet meer gebruikt.
+
 Bij ieder request wordt verwacht dat een PKI overheid certificaat wordt meegegeven.
 
 # <a name=eigen_bron>Eigen bron testen</a>
